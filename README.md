@@ -18,12 +18,8 @@ To install clone from the repo and when it's done downloading run composer insta
 Setup your server to look at the public folder and you should be good to go.
 
 ### Built with
-* [Slim] (https://www.slimframework.com/) - Slim framework
-* [Slim JWT Auth] (https://github.com/tuupola/slim-jwt-auth) - JWT Auth for Slim framework
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* [Slim](https://www.slimframework.com/) - Slim framework
+* [Slim JWT Auth](https://github.com/tuupola/slim-jwt-auth) - JWT Auth for Slim framework
 
 ## Versioning
 
@@ -33,7 +29,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Ian Ford** aka(Sidious)- *Initial work* - [SidiousRNDS](https://github.com/SidiousRNDS)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/SidiousRNDS/SWGRO-AccountSystem/contributors) who participated in this project.
 
 ## License
 
