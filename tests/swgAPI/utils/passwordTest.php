@@ -69,7 +69,7 @@ class passwordTest extends TestCase
 		$args = ['password'=>'123456'];
 		$passArr = $this->password->generateEncryptedPassword($args);
 
-		$args['pwHash'] = $passArr['passwordHash'];
+		$args['passwordHash'] = $passArr['passwordHash'];
 		$args['salt'] = $passArr['salt'];
 
 		$output = validation::validateEncryptedPassword($args);
