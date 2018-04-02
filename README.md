@@ -16,7 +16,9 @@ The only requirements for the front end if you choose not to use the default fro
 
 ### Install
 Clone the repository
-
+``` bash
+$ git clone https://github.com/SidiousRNDS/SWGRO-AccountSystem.git
+```
 Run composer install
 ``` bash
 $ composer install
