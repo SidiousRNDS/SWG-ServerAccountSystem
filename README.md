@@ -15,8 +15,12 @@ The only requirements for the front end if you choose not to use the default fro
 [SWGRO Account System](http://clientaccess.swgrogueone.com)
 
 ### Install
-To install clone from the repo and when it's done downloading run composer install that will install all the required modules that the API needs to use.
-Setup your server to look at the public folder and you should be good to go.
+Clone the repository
+
+Run composer install
+``` bash
+$ composer install
+```
 
 ### Built with
 * [Slim](https://www.slimframework.com/) - Slim framework
