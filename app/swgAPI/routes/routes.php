@@ -13,10 +13,6 @@ $swgapi->group('/v1', function() use ($swgapi) {
 
 	$swgapi->post('/token', \swgAPI\controllers\tokenController::class . ':getToken');
 
-	$swgapi->get('/info', function($request, $response, $args) {
-		phpinfo();
-	});
-
 	$swgapi->get('/test', function($request, $response, $args) {
 		$decode = $this->JwToken;
 		print_r($decode);
