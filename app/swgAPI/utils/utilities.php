@@ -60,7 +60,7 @@ class utilities
 	 * @param string $replaceWith 
 	 * @return mixed
 	 */
-	public function replaceStatusMsg(string $msg, string $lookFor, string $replaceWith) : string
+	public static function replaceStatusMsg(string $msg, string $lookFor, string $replaceWith) : string
 	{
 		return preg_replace('/'.$lookFor.'/', $replaceWith, $msg);
 	}

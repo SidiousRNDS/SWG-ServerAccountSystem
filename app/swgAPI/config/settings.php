@@ -64,6 +64,9 @@ class settings
 	 * @var bool USE_SECONDARY - Tells use if we should use the secondary length or not
 	 * @var string CODE_CHARS - The characters that will make up the primary and secondary sections of the auth code (0,I,i,O,o have been removed from the defaults)
 	 * @var bool DIVIDERS - If set to true it will add three - to the authcode
+	 * @var bool AUTHCODE_GENERATE - Should we allow the generation of authcodes
+	 * @var string AUTHCODE_GENERATE_USER - Name that is allowed to generate authcodes (this is passed in the post request)
+	 * @var string AUTHCODE_GENERATE_SALE - Salt to encode the user
 	 */
 	const MAIN_CODE_PREFIX = "RNDS1";
 	const EXTENDED_CODE_PREFIX = "RNDS2";
@@ -72,6 +75,9 @@ class settings
 	const USE_SECONDARY = true;
 	const CODE_CHARS = "23456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 	const DIVIDERS = true;
+	const AUTHCODE_GENERATE = true;
+	const AUTHCODE_GENERATE_USER = "DarthVaderIsTheTrueSithLord";
+	const AUTHCODE_GENERATE_SALT = "$17hRul37h3Galaxy";
 
 
 

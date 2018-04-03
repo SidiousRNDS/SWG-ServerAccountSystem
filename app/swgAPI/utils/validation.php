@@ -199,6 +199,7 @@ class validation
 	 */
 	public function validateAuthCodeLength($authCode)
 	{
+		$totalLength = 0;
 		$mainPrefixLen = strlen(settings::MAIN_CODE_PREFIX);
 		$extendPrefixLen = strlen(settings::EXTENDED_CODE_PREFIX);
 		$primarySectionLen = settings::CODE_LENGTH_PRIMARY;
@@ -208,90 +209,57 @@ class validation
 
 		if(settings::USE_SECONDARY)
 		{
+			if(settings::DIVIDERS)
+			{
+				$totalLength = 2;
+			}
+
 			if(preg_match("/".settings::MAIN_CODE_PREFIX."/",$authCode))
 			{
-				$totalLength = $mainPrefixLen + $primarySectionLen + $secondarySectionLen;
-
-				if(settings::DIVIDERS)
-				{
-					$totalLength = $totalLength + 2;
-				}
-
-				print"Total Length: " . $totalLength . "\n";
-				print"AuthCode Length: " . $authCodeLen . "\n";
+				$totalLength = $totalLength + $mainPrefixLen + $primarySectionLen + $secondarySectionLen;
 
 				if($authCodeLen === $totalLength)
 				{
 					return true;
-				}
-				else {
-					return false;
 				}
 			}
 			else
 			{
-				$totalLength = $extendPrefixLen + $primarySectionLen + $secondarySectionLen;
-
-				if(settings::DIVIDERS)
-				{
-					$totalLength = $totalLength + 2;
-				}
-
-				print"Total Length2: " . $totalLength . "\n";
-				print"AuthCode Length2: " . $authCodeLen . "\n";
+				$totalLength = $totalLength + $extendPrefixLen + $primarySectionLen + $secondarySectionLen;
 
 				if($authCodeLen === $totalLength)
 				{
 					return true;
-				}
-				else {
-					return false;
 				}
 			}
 		}
 		else
 		{
+			if(settings::DIVIDERS)
+			{
+				$totalLength = 1;
+			}
+
 			if(preg_match("/".settings::MAIN_CODE_PREFIX."/",$authCode))
 			{
-				$totalLength = $mainPrefixLen + $primarySectionLen;
-
-				if(settings::DIVIDERS)
-				{
-					$totalLength = $totalLength + 1;
-				}
-
-				print"Total Length: " . $totalLength . "\n";
-				print"AuthCode Length: " . $authCodeLen . "\n";
+				$totalLength = $totalLength + $mainPrefixLen + $primarySectionLen;
 
 				if($authCodeLen === $totalLength)
 				{
 					return true;
-				}
-				else {
-					return false;
 				}
 			}
 			else
 			{
-				$totalLength = $extendPrefixLen + $primarySectionLen;
-
-				if(settings::DIVIDERS)
-				{
-					$totalLength = $totalLength + 1;
-				}
-
-				print"Total Length2: " . $totalLength . "\n";
-				print"AuthCode Length2: " . $authCodeLen . "\n";
+				$totalLength = $totalLength + $extendPrefixLen + $primarySectionLen;
 
 				if($authCodeLen === $totalLength)
 				{
 					return true;
 				}
-				else {
-					return false;
-				}
 			}
 		}
+		return false;
 	}
 }
 
