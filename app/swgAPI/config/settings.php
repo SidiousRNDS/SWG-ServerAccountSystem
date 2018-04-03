@@ -8,6 +8,12 @@ namespace swgAPI\config;
 class settings
 {
 	/**
+	* ipInfoDB
+	* @var string IP_INFO_DB_KEY
+	*/
+	const IP_INFO_DB_KEY = "683864c8e14039b85e0235ffb7ce2c6fc26f5fd1d74f82f48e84e1bef2cf9d78";
+
+	/**
 	 * Database vars
 	 * @var string DBUSER
 	 * @var string DBPASS
