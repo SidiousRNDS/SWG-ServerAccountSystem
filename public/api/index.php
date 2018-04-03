@@ -4,7 +4,7 @@
 use Tuupola\Middleware\JwtAuthentication;
 
 // swgAPI Use
-use swgAPI\config\settings;
+use config\settings;
 
 
 require '../../vendor/autoload.php';
