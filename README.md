@@ -26,8 +26,8 @@ $ composer install
 Make sure to set the permissions for storage/logs to your webserver's user (www-data) and make sure they are chmod to 755 as well.
 ``` bash
 $ sudo chwon -R www-data:www-data storage/
-$ sudo chmod x+ storage/
-$ sudo chmod x+ storage/logs
+$ sudo chmod 755 storage/
+$ sudo chmod 755 storage/logs
 ```
 
 ### Built with
