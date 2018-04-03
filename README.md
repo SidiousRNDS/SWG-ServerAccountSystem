@@ -25,6 +25,7 @@ $ composer install
 ```
 
 ### Built with
+* [PHP 7.1](http://php.net) - PHP 7.1 => is required
 * [Slim](https://www.slimframework.com/) - Slim framework
 * [Slim JWT Auth](https://github.com/tuupola/slim-jwt-auth) - JWT Auth for Slim framework
 * [IP Info DB](http://ipinfodb.com/) - IP Info DB - Geolocation based on IP Address

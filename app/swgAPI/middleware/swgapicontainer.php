@@ -4,9 +4,9 @@
 use \Slim\Container as Container;
 use \Tuupola\Middleware\CorsMiddleware;
 use \Monolog\Logger;
+use \config\settings;
 
 // swgAPI Use
-use swgAPI\config\settings;
 
 $ci = new Container();
 

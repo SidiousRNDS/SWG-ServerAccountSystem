@@ -19,9 +19,9 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Tuupola\Base62;
 use \Firebase\JWT\JWT;
+use \config\settings;
 
 // Use swgAPI
-use swgAPI\config\settings;
 use swgAPI\utils\utilities as Utils;
 
 /**
@@ -31,9 +31,9 @@ class tokenModel extends Model
 {
 	/**
 	 * Summary of genToken
-	 * @param ServerRequestInterface $request 
-	 * @param ResponseInterface $response 
-	 * @param array $args 
+	 * @param ServerRequestInterface $request
+	 * @param ResponseInterface $response
+	 * @param array $args
 	 * @return array
 	 */
 	public static function genToken(ServerRequestInterface $request, ResponseInterface $response, array $args)
