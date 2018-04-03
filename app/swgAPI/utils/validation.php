@@ -13,7 +13,9 @@ namespace swgAPI\utils;
  ******************************************************************/
 
 // Use
-use \config\settings;
+
+// swgAS Use
+use swgAS\config\settings;
 
 // swgAPI Use
 use swgAPI\models\authcodeModel as authcode;

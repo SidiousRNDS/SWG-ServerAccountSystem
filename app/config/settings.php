@@ -1,6 +1,6 @@
 <?php
 
-namespace config;
+namespace swgAS\config;
 
 /*****************************************************************
  * RNDS SWG Account System

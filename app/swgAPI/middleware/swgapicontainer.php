@@ -4,23 +4,24 @@
 use \Slim\Container as Container;
 use \Tuupola\Middleware\CorsMiddleware;
 use \Monolog\Logger;
-use \config\settings;
+
+// swgAS Use
+use swgAS\config\settings;
 
 // swgAPI Use
 
 $ci = new Container();
-
 
 // DB
 $capsule = new \Illuminate\Database\Capsule\Manager;
 $capsule->addConnection([
 	"driver"		=> "mysql",
 	"host"			=> settings::DBHOST,
-	"database"		=> settings::DBNAME,
-	"username"		=> settings::DBUSER,
-	"password"		=> settings::DBPASS,
+	"database"	=> settings::DBNAME,
+	"username"	=> settings::DBUSER,
+	"password"	=> settings::DBPASS,
 	"charset"		=> "utf8",
-	"collation"		=> "utf8_general_ci",
+	"collation"	=> "utf8_general_ci",
 	"prefix"		=> ""
 ]);
 $capsule->setAsGlobal();

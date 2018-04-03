@@ -15,7 +15,9 @@ namespace swgAPI\models;
 
 // Use
 use \Illuminate\Database\Eloquent\Model as Model;
-use \config\settings;
+
+// swgAS Use
+use swgAS\config\settings;
 
 // swgAPI Use
 use swgAPI\utils\errormsg;

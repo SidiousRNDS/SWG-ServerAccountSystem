@@ -14,7 +14,9 @@ namespace swgAPI\models;
  ******************************************************************/
 
 // Use
-use \config\settings;
+
+// swgAS Use
+use swgAS\config\settings;
 
 // swgAPI Use
 use swgAPI\utils\validation;
