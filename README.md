@@ -27,7 +27,7 @@ $ composer install
 ### Built with
 * [Slim](https://www.slimframework.com/) - Slim framework
 * [Slim JWT Auth](https://github.com/tuupola/slim-jwt-auth) - JWT Auth for Slim framework
-* [IPINFODB](http://ipinfodb.com/) - IP Info DB - Geolocation based on IP Address
+* [IP Info DB](http://ipinfodb.com/) - IP Info DB - Geolocation based on IP Address
 
 ## Versioning
 
