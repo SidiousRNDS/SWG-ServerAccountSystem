@@ -23,6 +23,12 @@ Run composer install
 ``` bash
 $ composer install
 ```
+Make sure to set the permissions for storage/logs to your webserver's user (www-data) and make sure they are chmod to 755 as well.
+``` bash
+$ sudo chwon -R www-data:www-data storage/
+$ sudo chmod x+ storage/
+$ sudo chmod x+ storage/logs
+```
 
 ### Built with
 * [PHP 7.1](http://php.net) - PHP 7.1 => is required

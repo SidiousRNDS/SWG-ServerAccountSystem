@@ -19,7 +19,9 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Tuupola\Base62;
 use \Firebase\JWT\JWT;
-use \config\settings;
+
+// swgAS Use
+use swgAS\config\settings;
 
 // Use swgAPI
 use swgAPI\utils\utilities as Utils;

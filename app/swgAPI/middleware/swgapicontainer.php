@@ -94,22 +94,6 @@ $ci[\swgAPI\controllers\authcodeController::class] = function(Container $ci) {
 	return new \swgAPI\controllers\authcodeController($ci);
 };
 
-$ci[\swgAPI\controllers\characterController::class] = function(Container $ci) {
-	return new \swgAPI\controllers\characterController($ci);
-};
-
-$ci[\swgAPI\controllers\galaxybanController::class] = function(Container $ci) {
-	return new \swgAPI\controllers\galaxybanController($ci);
-};
-
-$ci[\swgAPI\controllers\userbanController::class] = function(Container $ci) {
-	return new \swgAPI\controllers\userbanController($ci);
-};
-
-$ci[\swgAPI\controllers\statusController::class] = function(Container $ci) {
-	return new \swgAPI\controllers\statusController($ci);
-};
-
 $ci[\swgAPI\controllers\tokenController::class] = function(Container $ci) {
 	return new \swgAPI\controllers\tokenController($ci);
 };

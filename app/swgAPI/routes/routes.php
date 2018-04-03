@@ -11,7 +11,7 @@
 
 $swgapi->group('/v1', function() use ($swgapi) {
 
-	$swgapi->post('/token', \swgAPI\controllers\tokenController::class . ':getToken');
+	$swgapi->get('/token', \swgAPI\controllers\tokenController::class . ':getToken');
 
 	$swgapi->get('/test', function($request, $response, $args) {
 		$decode = $this->JwToken;
