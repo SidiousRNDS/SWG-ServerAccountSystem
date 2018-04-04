@@ -6,3 +6,4 @@ tests/
 *.phpproj
 swgemudump.sql
 .env
+composer.lock
