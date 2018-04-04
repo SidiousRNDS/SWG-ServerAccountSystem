@@ -18,6 +18,14 @@ namespace swgAS\config;
  */
  class settings
  {
+     /**
+      * Template location
+      * @var string TEMPLATES - This is the active templates directory you want to use for both admin and client
+      * if you want to add your own templates you can just add them to the views directory in the client and admin section
+      * and change the templates var below to reflect the new folder location. (the directory must be named the same for both locations)
+      */
+     const TEMPLATES = "default";
+
  	/**
  	* ipInfoDB
  	* @var string IP_INFO_DB_KEY - You must set up your own account to use this functionality
