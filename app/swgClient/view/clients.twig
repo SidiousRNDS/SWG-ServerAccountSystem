@@ -1,0 +1,87 @@
+{% extends "base.twig" %}
+{% block title %}SWG RO - Client Access System {% endblock %}
+{% block topnav %}
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-globe" aria-hidden="true"></i> Rogue One Main <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://swgrogueone.com" title="SWG Rogue One" alt="SWG Rogue One" target="blank"><i class="fa fa-home" aria-hidden="true"></i> Rogue One</a></li>
+                        <li><a href="http://swgrogueone.com/forums" title="SWG Rogue One - Forums" alt="SWG Rogue One - Forums" target="blank"><i class="fa fa-commenting" aria-hidden="true"></i> Rogue One Forums</a></li>
+                        <li><a href="ts3server://ts.swgrogueone.com?port=9987" title="SWG Rogue One - TeamSpeak" alt="SWG Rogue One - TeamSpeak" target="blank"><i class="fa fa-microphone" aria-hidden="true"></i> Rogue One TeamSpeak</a></li>
+                        <li><a href="https://discordapp.com/invite/ZR4bnTN" title="SWG Rogue One - Discord" alt="SWG Rogue One - Discord" target="blank"><i class="fa fa-microphone" aria-hidden="true"></i> Rogue One Discord</a></li>
+                    </ul>
+                </li>
+                <li >
+                    <a href="http://swgrogueone.com/pages/launcher" target="blank"><i class="fa fa-cloud-download" aria-hidden="true"></i> Downloads</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="main">
+        <div id="newAccount">
+            <h2><i class="fa fa-user" aria-hidden="true"></i> Create New Game Account</h2>
+            <hr class="hspacer">
+            <div class="msg"></div>
+            <form id="nAccount" name="newAccount">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="usernamelabel" for="usernameInput">Username</label>
+                            <input type="text" class="form-control" id="usernameInput"  aria-describedby="usernameHelp" placeholder="LordVader"/>
+                            <small id="usernameHelp" class="form-text text-muted">*Only use Alpha/Numeric and special characters (@.)</small>
+                        </div>
+                        <div class="col-xs-6">
+                            <label id="emaillabel" for="emailInput">Email</label>
+                            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="vader@empire.org"/>
+                            <small id="emailHelp" class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sgroup">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="passwordlabel" for="passwordInput">Password</label>
+                            <input type="password" class="form-control" id="passwordInput"  aria-describedby="passwordHelp" placeholder="vaderistheman"/>
+                            <small id="passwordHelp" class="form-text text-muted">*Only use Alpha/Numeric and special characters (!@$*-:_)</small>
+                        </div>
+                        <div class="col-xs-6">
+                            <label id="password2label" for="password2Input">Re-Enter Password</label>
+                            <input type="password" class="form-control" id="password2Input" aria-describedby="password2Help" placeholder="vaderistheman"/>
+                            <small id="password2Help" class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="authcodelabel" for="authcodeInput">Authorization Code : <a href="http://rogueone.freshdesk.com" target="blank"><i class="fa fa-barcode" aria-hidden="true"></i> Get an authcode</span></a></label>
+                            <input type="text" class="form-control" id="authcodeInput" arai-describedby="authcodeHelp" placeholder=""/>
+                            <small id="authcodeHelp" class="form-text text-muted">*Only Use this if you have been give an authorization code</small>
+                        </div>
+                        <div class="col-xs-6">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="row sgroup gcap">
+                    <div class="g-recaptcha" data-sitekey="6Le4iSQTAAAAAJg5IbvWjQOVbru4LDZPI3cB5CO2" data-callback="captchaSubmitEnabled" data-expired-callback="captchaSubmitDisabled"></div>
+                </div>
+                <div class="row sgroup">
+                    <button type="submit" class="btn btn-default" id="accCreate"><i class="fa fa-user-plus" aria-hidden="true"></i> Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -50,7 +50,7 @@ namespace swgAS\config;
  	*	@var string PASSRESETLOG - Password Reset Log Filename
  	*	@var string MULTIPLEATTEMPTSLOG - Multiple attempts to create an account log
  	*/
- 	const LOGPATH = "../../storage/logs/";
+ 	const LOGPATH = "../storage/logs/";
  	const APILOG = "swgAPILog";
  	const USERSLOG = "swgUsersLog";
  	const ERRORLOG = "swgErrorLog";
