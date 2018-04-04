@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAPI\controllers;
+namespace swgAS\swgAPI\controllers;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -9,7 +9,7 @@ namespace swgAPI\controllers;
  * @link
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAPI\controllers
+ * NAMESPACE: swgAS\swgAPI\controllers
  * CLASS: accountController
  ******************************************************************/
 
@@ -17,8 +17,8 @@ namespace swgAPI\controllers;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 
-// swgAPI Use
-use \swgAPI\models\accountModel;
+// Use swgAS
+use swgAS\swgAPI\models\accountModel;
 
 class accountController extends baseController
 {
@@ -30,9 +30,14 @@ class accountController extends baseController
 	 * @param array $args
 	 * @return mixed
 	 */
-	public function getAccount(ServerRequestInterface $request, ResponseInterface $response, array $args)
+	public function getAccount(ServerRequestInterface $request, ResponseInterface $response)
 	{
-		$account = accountModel::getAccounts(array("db"=>$this->getCIElement('db'),"errorlogger"=>$this->getCIElement('swgErrorLog'),"apiLogger"=>$this->getCIElement('swgAPILog'),"userLogger"=>$this->getCIElement('swgUsersLog')));
+		$account = accountModel::getAccounts(array(
+		    "db"=>$this->getCIElement('db'),
+            "errorlogger"=>$this->getCIElement('swgErrorLog'),
+            "apiLogger"=>$this->getCIElement('swgAPILog'),
+            "userLogger"=>$this->getCIElement('swgUsersLog'))
+        );
 
 		return $response->withJson($account,200);
 	}
@@ -44,7 +49,7 @@ class accountController extends baseController
 	 * @param array $args
 	 * @return mixed
 	 */
-	public function checkAccount(ServerRequestInterface $request, ResponseInterface $response, array $args)
+	public function checkAccount(ServerRequestInterface $request, ResponseInterface $response)
 	{
 		$accounts = accountModel::getAccount(array (
 				"username"=>$request->getParam('username'),
@@ -59,7 +64,7 @@ class accountController extends baseController
 		return $response->withJson($accounts,200);
 	}
 
-	public function addAccount(ServerRequestInterface $request, ResponseInterface $response, array $args)
+	public function addAccount(ServerRequestInterface $request, ResponseInterface $response)
 	{
 		$newaccount = accountModel::addAccount(array(
 				"username"=>$request->getParam('username'),

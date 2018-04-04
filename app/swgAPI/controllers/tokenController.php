@@ -1,5 +1,5 @@
 <?php
-namespace swgAPI\controllers;
+namespace swgAS\swgAPI\controllers;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -14,7 +14,9 @@ namespace swgAPI\controllers;
 
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
-use \swgAPI\models\tokenModel;
+
+// Use SWGAS
+use swgAS\swgAPI\models\tokenModel;
 
 class tokenController extends baseController
 {

@@ -1,5 +1,5 @@
 <?php
-namespace swgAPI\utils;
+namespace swgAS\swgAPI\utils;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -16,10 +16,8 @@ namespace swgAPI\utils;
 
 // swgAS Use
 use swgAS\config\settings;
-
-// swgAPI Use
-use swgAPI\models\authcodeModel as authcode;
-use swgAPI\models\accountModel as account;
+use swgAS\swgAPI\models\authcodeModel as authcode;
+use swgAS\swgAPI\models\accountModel as account;
 
 class validation
 {

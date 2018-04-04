@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAPI\utils;
+namespace swgAS\swgAPI\utils;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -17,9 +17,7 @@ namespace swgAPI\utils;
 
 // swgAS Use
 use swgAS\config\settings;
-
-// swgAPI Use
-use swgAPI\models\accountModel;
+use swgAS\swgAPI\models\accountModel;
 
 class station
 {

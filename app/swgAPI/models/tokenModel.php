@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAPI\models;
+namespace swgAS\swgAPI\models;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -22,9 +22,7 @@ use \Firebase\JWT\JWT;
 
 // swgAS Use
 use swgAS\config\settings;
-
-// Use swgAPI
-use swgAPI\utils\utilities as Utils;
+use swgAS\swgAPI\utils\utilities as Utils;
 
 /**
  * Summary of tokenModel

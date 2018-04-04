@@ -1,5 +1,5 @@
 <?php
-namespace swgAPI\models;
+namespace swgAS\swgAPI\models;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -8,12 +8,12 @@ namespace swgAPI\models;
  * @link
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAPI\models
+ * NAMESPACE: swgAS\swgAPI\models
  * CLASS: characterbansModel
  ******************************************************************/
 
 // Use
-use \swgAPI\utils\errorcodes;
+use swgAS\swgAPI\utils\errorcodes;
 
 /**
  * Summary of characterbansModel

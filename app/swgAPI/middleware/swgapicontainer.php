@@ -8,8 +8,6 @@ use \Monolog\Logger;
 // swgAS Use
 use swgAS\config\settings;
 
-// swgAPI Use
-
 $ci = new Container();
 
 // DB
@@ -86,16 +84,16 @@ $ci["CorsMiddleware"] = function ($ci) {
 };
 
 // Controllers
-$ci[\swgAPI\controllers\accountController::class] = function(Container $ci) {
-	return new \swgAPI\controllers\accountController($ci);
+$ci[\swgAS\swgAPI\controllers\accountController::class] = function(Container $ci) {
+	return new \swgAS\swgAPI\controllers\accountController($ci);
 };
 
-$ci[\swgAPI\controllers\authcodeController::class] = function(Container $ci) {
-	return new \swgAPI\controllers\authcodeController($ci);
+$ci[\swgAS\swgAPI\controllers\authcodeController::class] = function(Container $ci) {
+	return new \swgAS\swgAPI\controllers\authcodeController($ci);
 };
 
-$ci[\swgAPI\controllers\tokenController::class] = function(Container $ci) {
-	return new \swgAPI\controllers\tokenController($ci);
+$ci[\swgAS\swgAPI\controllers\tokenController::class] = function(Container $ci) {
+	return new \swgAS\swgAPI\controllers\tokenController($ci);
 };
 
 ?>

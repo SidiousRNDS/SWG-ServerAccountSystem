@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAPI\controllers;
+namespace swgAS\swgAPI\controllers;
 
 /*****************************************************************
  * RNDS SWG Account System

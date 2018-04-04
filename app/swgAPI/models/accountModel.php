@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAPI\models;
+namespace swgAS\swgAPI\models;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -18,15 +18,12 @@ use \Illuminate\Database\Eloquent\Model as Model;
 
 // swgAS Use
 use swgAS\config\settings;
-
-// swgAPI Use
-use swgAPI\utils\errormsg;
-use swgAPI\utils\statusmsg;
-use swgAPI\utils\validation;
-use swgAPI\utils\password;
-use swgAPI\utils\station;
-use swgAPI\utils\utilities;
-use swgAPI\models\authcodeModel;
+use swgAS\swgAPI\utils\errormsg;
+use swgAS\swgAPI\utils\statusmsg;
+use swgAS\swgAPI\utils\validation;
+use swgAS\swgAPI\utils\password;
+use swgAS\swgAPI\utils\station;
+use swgAS\swgAPI\utils\utilities;
 
 /**
  * Summary of accountModel
@@ -118,7 +115,7 @@ class accountModel extends Model
 	 * @throws \Error
 	 * @return mixed
 	 */
-	public function getAccounts(array $args)
+	public static function getAccounts(array $args)
 	{
 		try {
 
@@ -145,7 +142,7 @@ class accountModel extends Model
 	 * @param array $args
 	 * @return \array|boolean|null|string
 	 */
-	public function addAccount(array $args)
+	public static function addAccount(array $args)
 	{
 		$validate = validation::validateAccount($args);
 

@@ -11,7 +11,7 @@
 
 $swgapi->group('/v1', function() use ($swgapi) {
 
-	$swgapi->post('/token', \swgAPI\controllers\tokenController::class . ':getToken');
+	$swgapi->post('/token', \swgAS\swgAPI\controllers\tokenController::class . ':getToken');
 
 	$swgapi->get('/test', function($request, $response, $args) {
 		$decode = $this->JwToken;
@@ -21,13 +21,13 @@ $swgapi->group('/v1', function() use ($swgapi) {
 	$swgapi->group('/account', function() use ($swgapi) {
 
 		// GET - Get Accounts
-		$swgapi->post('/getaccount', \swgAPI\controllers\accountController::class . ':getAccount');
+		$swgapi->post('/getaccount', \swgAS\swgAPI\controllers\accountController::class . ':getAccount');
 
 		// POST - Check Account
-		$swgapi->post('/checkaccount', \swgAPI\controllers\accountController::class . ':checkAccount');
+		$swgapi->post('/checkaccount', \swgAS\swgAPI\controllers\accountController::class . ':checkAccount');
 
 		// POST - Create Account
-		$swgapi->post('/addaccount', \swgAPI\controllers\accountController::class . ':addAccount');
+		$swgapi->post('/addaccount', \swgAS\swgAPI\controllers\accountController::class . ':addAccount');
 
 	});
 

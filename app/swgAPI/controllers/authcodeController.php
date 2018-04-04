@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAPI\controllers;
+namespace swgAS\swgAPI\controllers;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -9,7 +9,7 @@ namespace swgAPI\controllers;
  * @link
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAPI\controllers
+ * NAMESPACE: swgAS\swgAPI\controllers
  * CLASS: authcodeController
  ******************************************************************/
 

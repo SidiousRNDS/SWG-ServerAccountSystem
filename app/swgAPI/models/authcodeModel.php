@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAPI\models;
+namespace swgAS\swgAPI\models;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -9,7 +9,7 @@ namespace swgAPI\models;
  * @link
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAPI\models
+ * NAMESPACE: swgAS\swgAPI\models
  * CLASS: authcodeModel
  ******************************************************************/
 
@@ -17,10 +17,8 @@ namespace swgAPI\models;
 
 // swgAS Use
 use swgAS\config\settings;
-
-// swgAPI Use
-use swgAPI\utils\validation;
-use swgAPI\utils\errormsg;
+use swgAS\swgAPI\utils\validation;
+use swgAS\swgAPI\utils\errormsg;
 
 /**
  * Summary of authcodeModel

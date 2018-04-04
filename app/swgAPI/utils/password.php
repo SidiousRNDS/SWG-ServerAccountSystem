@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAPI\utils;
+namespace swgAS\swgAPI\utils;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -9,7 +9,7 @@ namespace swgAPI\utils;
  * @link
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAPI\utils
+ * NAMESPACE: swgAS\swgAPI\utils
  * CLASS: password
  ******************************************************************/
 
@@ -17,9 +17,7 @@ namespace swgAPI\utils;
 
 // swgAS Use
 use swgAS\config\settings;
-
-// swgAPI Use
-use swgAPI\utils\errormsg;
+use swgAS\swgAPI\utils\errormsg;
 
 class password
 {
