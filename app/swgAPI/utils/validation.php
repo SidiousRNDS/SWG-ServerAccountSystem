@@ -197,7 +197,7 @@ class validation
 	 * @param mixed $authCode
 	 * @return boolean
 	 */
-	public function validateAuthCodeLength($authCode)
+	public static function validateAuthCodeLength($authCode)
 	{
 		$totalLength = 0;
 		$mainPrefixLen = strlen(settings::MAIN_CODE_PREFIX);
