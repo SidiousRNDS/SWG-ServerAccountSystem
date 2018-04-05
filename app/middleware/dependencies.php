@@ -8,6 +8,7 @@ use \Monolog\Logger;
 // swgAS Use
 use swgAS\config\settings;
 
+
 $ci = new Container();
 
 // DB
@@ -29,6 +30,11 @@ $ci['db'] = function($ci) use ($capsule) {
     return $capsule;
 };
 
+
+// User IP
+$ci['userIP'] = function($ci) {
+    return \swgAS\swgAPI\utils\utilities::getClientIp();
+};
 
 // Views
 // Client Views

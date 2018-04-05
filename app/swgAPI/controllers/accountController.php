@@ -54,7 +54,7 @@ class accountController extends baseController
 		$accounts = accountModel::getAccount(array (
 				"username"=>$request->getParam('username'),
 				"email"=>$request->getParam('email'),
-				"ip"=>$request->getParam('ip'),
+				"ip"=>$request->getParam('uip'),
 				"db"=>$this->getCIElement('db'),
 				"errorLogger"=>$this->getCIElement('swgErrorLog'),
 				"apiLogger"=>$this->getCIElement('swgAPILog'),
@@ -72,7 +72,7 @@ class accountController extends baseController
 				"password"=>$request->getParam('password'),
 				"repassword"=>$request->getParam('repassword'),
 				"authcode"=>$request->getParam('authcode'),
-				"ip"=>$request->getParam('ip'),
+				"ip"=>$request->getParam('uip'),
 				"db"=>$this->getCIElement('db'),
 				"errorLogger"=>$this->getCIElement('swgErrorLog'),
 				"apiLogger"=>$this->getCIElement('swgAPILog'),

@@ -50,7 +50,7 @@ class utilities
 			$ipaddress = 'UNKNOWN';
 		}
 
-		return $ipaddress;
+		return self::obscureData($ipaddress);
 	}
 
 	/**
@@ -64,6 +64,20 @@ class utilities
 	{
 		return preg_replace('/'.$lookFor.'/', $replaceWith, $msg);
 	}
+
+    /**
+     * @param string $data
+     * @return string
+     */
+	public static function obscureData(string $data) : string
+    {
+        return base64_encode($data);
+    }
+
+    public static function unobscureData(string $data) : string
+    {
+        return base64_decode($data);
+    }
 }
 
 ?>

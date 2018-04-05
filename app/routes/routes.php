@@ -7,8 +7,8 @@
  * @version 1.0.0
  * ****************************************************************/
 
-$swgAS->get('/', function ($request, $response, $args) {
-   return $this->clientViews->render($response, 'clients.twig');
+$swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
+   return $this->clientViews->render($response, 'clients.twig',['uIP'=>$this->get('userIP')]);
 })->setName('home');
 
 
