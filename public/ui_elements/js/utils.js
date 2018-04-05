@@ -302,7 +302,7 @@ function unlockCaptcha(formname) {
 
     if (formname.name == 'newAccount') {
         // If the required Fields are filled in then we can display the captcha
-        if (validation.username === true &&  validation.email === true &&  validation.password === true &&  validation.password2 === true) {
+        if (validation.username === true &&  validation.email === true &&  validation.password === true &&  validation.password2 === true && validation.authcode === true) {
             $('.g-recaptcha').css('display','block');
         }
     }
