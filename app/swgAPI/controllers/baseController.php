@@ -6,7 +6,7 @@ namespace swgAS\swgAPI\controllers;
  * RNDS SWG Account System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
- * @link
+ * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
  * @version 1.0.0
  * ****************************************************************
  * NAMESPACE: swgAPI\controllers
@@ -21,7 +21,7 @@ class baseController
 
 	/**
 	 * Summary of __construct
-	 * @param Container $ci 
+	 * @param Container $ci
 	 */
 	public function __construct(Container $ci)
 	{
@@ -39,7 +39,7 @@ class baseController
 
 	/**
 	 * Summary of getCIElement
-	 * @param mixed $name 
+	 * @param mixed $name
 	 * @return mixed
 	 */
 	public function getCIElement($name)
@@ -49,8 +49,8 @@ class baseController
 
 	/**
 	 * Summary of setCIElement
-	 * @param mixed $name 
-	 * @param mixed $value 
+	 * @param mixed $name
+	 * @param mixed $value
 	 */
 	public function setCIElement($name, $value)
 	{

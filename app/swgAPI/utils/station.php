@@ -6,10 +6,10 @@ namespace swgAS\swgAPI\utils;
  * RNDS SWG Account System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
- * @link
+ * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAPI\utils
+ * NAMESPACE: swgAS\swgAPI\utils
  * CLASS: station
  ******************************************************************/
 
