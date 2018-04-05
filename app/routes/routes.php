@@ -18,12 +18,17 @@ $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
 });*/
 
 $swgAS->group('/admin', function() use($swgAS){
+
     $adminBaseRoutes = ["", "/"];
     foreach($adminBaseRoutes as $adminRoutes) {
         $swgAS->get($adminRoutes, function ($request, $response, $args) use ($swgAS) {
-            return $this->views>render($response, 'adminlogin.twig',['captchakey'=>settings::G_CAPTCHA_KEY]);
+            return $this->views->render($response, 'adminlogin.twig',['captchakey'=>settings::G_CAPTCHA_KEY]);
         });
     }
+
+    // Login
+    $swgAS->post('/admin/login', \swgAS\swgAdmin\controllers\adminloginController::class . ':login');
+
 });
 
 

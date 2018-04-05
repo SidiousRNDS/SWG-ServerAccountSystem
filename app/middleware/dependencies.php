@@ -6,7 +6,7 @@
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
  * @version 1.0.0
  * ****************************************************************/
- 
+
 // Use
 use \Slim\Container as Container;
 use \Tuupola\Middleware\CorsMiddleware;
@@ -45,8 +45,8 @@ $ci['userIP'] = function($ci) {
 
 // Views
 // Client Views
-$ci['views] = function($ci) {
-    $clientViews = new \Slim\Views\Twig('../app/view/'.settings::TEMPLATES, ['cache' => false]);
+$ci['views'] = function($ci) {
+    $clientViews = new \Slim\Views\Twig('../app/views/'.settings::TEMPLATES, ['cache' => false]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');
     $clientViews->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
