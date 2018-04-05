@@ -26,6 +26,11 @@ namespace swgAS\config;
       */
      const TEMPLATES = "default";
 
+     /**
+      *  Google Captcha Key
+	  * @var string G_CAPTCHA_KEY - Google Captcha Key if you are using it
+      */
+     const G_CAPTCHA_KEY = "6Le4iSQTAAAAAJg5IbvWjQOVbru4LDZPI3cB5CO2";
  	/**
  	* ipInfoDB
  	* @var string IP_INFO_DB_KEY - You must set up your own account to use this functionality

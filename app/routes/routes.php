@@ -7,9 +7,24 @@
  * @version 1.0.0
  * ****************************************************************/
 
+use swgAS\config\settings;
+
 $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
-   return $this->clientViews->render($response, 'clients.twig',['uIP'=>$this->get('userIP')]);
+    return $this->clientViews->render($response, 'clients.twig',['uIP'=>$this->get('userIP'),'captchakey'=>settings::G_CAPTCHA_KEY]);
 })->setName('home');
+
+/*$swgAS->get('/info', function($request, $responce, $args) use ($swgAS) {
+    echo phpInfo();
+});*/
+
+$swgAS->group('/admin', function() use($swgAS){
+    $adminBaseRoutes = ["", "/"];
+    foreach($adminBaseRoutes as $adminRoutes) {
+        $swgAS->get($adminRoutes, function ($request, $response, $args) use ($swgAS) {
+            return $this->adminViews->render($response, 'adminlogin.twig',['captchakey'=>settings::G_CAPTCHA_KEY]);
+        });
+    }
+});
 
 
 $swgAS->group('/api', function() use ($swgAS) {
