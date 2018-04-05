@@ -18,19 +18,21 @@ namespace swgAS\config;
  */
  class settings
  {
-     /**
-      * Template location
-      * @var string TEMPLATES - This is the active templates directory you want to use for both admin and client
-      * if you want to add your own templates you can just add them to the views directory in the client and admin section
-      * and change the templates var below to reflect the new folder location. (the directory must be named the same for both locations)
-      */
-     const TEMPLATES = "default";
 
-     /**
-      *  Google Captcha Key
-	  * @var string G_CAPTCHA_KEY - Google Captcha Key if you are using it
-      */
-     const G_CAPTCHA_KEY = "6Le4iSQTAAAAAJg5IbvWjQOVbru4LDZPI3cB5CO2";
+  /**
+  * Template location
+  * @var string TEMPLATES - This is the active templates directory you want to use for both admin and client
+  * if you want to add your own templates you can just add them to the views directory in the client and admin section
+  * and change the templates var below to reflect the new folder location. (the directory must be named the same for both locations)
+  */
+  const TEMPLATES = "default";
+
+  /**
+  *  Google Captcha Key
+	* @var string G_CAPTCHA_KEY - Google Captcha Key if you are using it
+  */
+  const G_CAPTCHA_KEY = "6Le4iSQTAAAAAJg5IbvWjQOVbru4LDZPI3cB5CO2";
+
  	/**
  	* ipInfoDB
  	* @var string IP_INFO_DB_KEY - You must set up your own account to use this functionality
@@ -38,14 +40,14 @@ namespace swgAS\config;
  	const IP_INFO_DB_KEY = "683864c8e14039b85e0235ffb7ce2c6fc26f5fd1d74f82f48e84e1bef2cf9d78";
 
  	/**
- 	 * Database vars
- 	 * @var string DBUSER
- 	 * @var string DBPASS
- 	 * @var string DBNAME
- 	 * @var string DBHOST
- 	 * @var string MONGO_STATUS - This is the status database that holds the status database
- 	 * @var string MONGO_ADMIN - This is the database that holds all the admin data (TODO make a better description)
- 	 */
+ 	* Database vars
+ 	* @var string DBUSER
+ 	* @var string DBPASS
+ 	* @var string DBNAME
+ 	* @var string DBHOST
+ 	* @var string MONGO_STATUS - This is the status database that holds the status database
+ 	* @var string MONGO_ADMIN - This is the database that holds all the admin data (TODO make a better description)
+ 	*/
  	const DBUSER = "swgemu";
  	const DBPASS = "123456";
  	const DBNAME = "swgemu";
@@ -62,6 +64,7 @@ namespace swgAS\config;
  	*	@var string ERRORLOG - Error Log Filename
  	*	@var string PASSRESETLOG - Password Reset Log Filename
  	*	@var string MULTIPLEATTEMPTSLOG - Multiple attempts to create an account log
+  * @var string ADMINLOG - Admin log logs actions for the admin section
  	*/
  	const LOGPATH = "../storage/logs/";
  	const APILOG = "swgAPILog";
@@ -69,18 +72,19 @@ namespace swgAS\config;
  	const ERRORLOG = "swgErrorLog";
  	const PASS_RESET_LOG = "swgPassResetLog";
  	const MULTIPLE_ATTEMPTS_LOG = "swgMultipleAttemptsLog";
+  const ADMINLOG = "adminLog";
 
  	/**
- 	 * Account settings
- 	 * @var int NUMBEROFACCOUNTSALLOWED - Set the total number of accounts a user can have on the server with out a special authcode
- 	 * @var bool CHECKEMAIL	- Should we validate account count against email address
- 	 * @var bool CHECKIP - Should we validate account count against ip
- 	 * @var string PWSECRET - Password seceret for the password
- 	 * @var string CRYPTHASH - Crytpo that the EMU project uses (if you change this you will need to change the C++ code on your game server)
- 	 * @var int OPENSSLBYTES_LENGTH - Length of the string that will be generated
- 	 * @var int STATIONID_START - Starting number for your station IDs - You should set this above what your last station ID in  your accounts table is current the value should be good
- 	 * @var int STATIONID_END - Ending number for your station IDs - This gives you a large range for station id's so you should not have to change this but double check your accounts table to be sure
- 	 */
+ 	* Account settings
+ 	* @var int NUMBEROFACCOUNTSALLOWED - Set the total number of accounts a user can have on the server with out a special authcode
+ 	* @var bool CHECKEMAIL	- Should we validate account count against email address
+ 	* @var bool CHECKIP - Should we validate account count against ip
+ 	* @var string PWSECRET - Password seceret for the password
+ 	* @var string CRYPTHASH - Crytpo that the EMU project uses (if you change this you will need to change the C++ code on your game server)
+ 	* @var int OPENSSLBYTES_LENGTH - Length of the string that will be generated
+ 	* @var int STATIONID_START - Starting number for your station IDs - You should set this above what your last station ID in  your accounts table is current the value should be good
+ 	* @var int STATIONID_END - Ending number for your station IDs - This gives you a large range for station id's so you should not have to change this but double check your accounts table to be sure
+ 	*/
  	const NUMBER_OF_ACCOUNTS_ALLOWED = 2;
  	const CHECKEMAIL = true;
  	const CHECKIP = true;
