@@ -30,8 +30,27 @@ $ sudo chmod 755 storage/
 $ sudo chmod 755 storage/logs
 ```
 
+Install MongoDb
+``` bash
+$sudo apt-get install mongodb
+$sudo apt-get install php-pear
+$sudo pecl install mongodb
+```
+
+If you are running apache
+``` bash
+$sudo vi /etc/php/7.1/apache2/php.ini
+```
+Add extension=mongodb.so in the extension section of the ini file and restart apache.
+
+``` bash
+$sudo serivce apache2 restart
+```
+
+
 ### Built with
 * [PHP 7.1](http://php.net) - PHP ^7.1 is required
+* [MongoDB](https://www.mongodb.com/) - MongoDB
 * [Slim](https://www.slimframework.com/) - Slim framework
 * [Slim JWT Auth](https://github.com/tuupola/slim-jwt-auth) - JWT Auth for Slim framework
 * [Mono Log](https://github.com/Seldaek/monolog) - Mono Log logger
