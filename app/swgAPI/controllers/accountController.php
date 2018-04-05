@@ -18,6 +18,7 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 
 // Use swgAS
+use swgAS\controllers\baseController;
 use swgAS\swgAPI\utils\utilities;
 use swgAS\swgAPI\models\accountModel;
 

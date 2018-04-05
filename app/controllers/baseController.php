@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAS\swgAPI\controllers;
+namespace swgAS\controllers;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -9,7 +9,7 @@ namespace swgAS\swgAPI\controllers;
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAPI\controllers
+ * NAMESPACE: swgAS\controllers
  * CLASS: baseController
  ******************************************************************/
 

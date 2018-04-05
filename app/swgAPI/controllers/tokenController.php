@@ -16,6 +16,7 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 
 // Use SWGAS
+use swgAS\controllers\baseController;
 use swgAS\swgAPI\models\tokenModel;
 
 class tokenController extends baseController

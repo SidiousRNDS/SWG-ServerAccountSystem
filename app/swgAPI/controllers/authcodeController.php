@@ -13,18 +13,17 @@ namespace swgAS\swgAPI\controllers;
  * CLASS: authcodeController
  ******************************************************************/
 
+// Use
 use Interop\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class authcodeController
-{
-	protected $ci;
+// Use swgAS
+use swgAS\controllers\baseController;
 
-	public function __construct(ContainerInterface $ci)
-	{
-		$this->ci = $ci;
-	}
+class authcodeController extends baseController
+{
+	
 }
 
 ?>
