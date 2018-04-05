@@ -38,23 +38,13 @@ $ci['userIP'] = function($ci) {
 
 // Views
 // Client Views
-$ci['clientViews'] = function($ci) {
-    $clientViews = new \Slim\Views\Twig('../app/swgClient/view/'.settings::TEMPLATES, ['cache' => false]);
+$ci['views] = function($ci) {
+    $clientViews = new \Slim\Views\Twig('../app/view/'.settings::TEMPLATES, ['cache' => false]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');
     $clientViews->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
 
     return $clientViews;
-};
-
-// Admin Views
-$ci['adminViews'] = function($ci) {
-    $adminViews = new \Slim\Views\Twig('../app/swgAdmin/view/'.settings::TEMPLATES, ['cache' => false]);
-
-    $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');
-    $adminViews->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
-
-    return $adminViews;
 };
 
 // Logs
