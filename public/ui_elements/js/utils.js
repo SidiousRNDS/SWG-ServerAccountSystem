@@ -318,16 +318,3 @@ function captchaSubmitDisabled() {
     // Hide captcha till the require fields are all filled in
     $('.g-recaptcha').css('display','none');
 }
-
-function getToken() {
-    $.ajax({
-        url: tokenURL,
-        type: 'POST'
-    })
-        .done(function(data) {
-            if (data.status === "ok") {
-                token = data.token;
-                $('#nAccount').append('<input type="hidden" name="token" id="token" value="'+token+'">');
-            }
-    });
-}
