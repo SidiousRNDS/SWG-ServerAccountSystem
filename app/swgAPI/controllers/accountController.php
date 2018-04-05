@@ -18,6 +18,7 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 
 // Use swgAS
+use swgAS\swgAPI\utils\utilities;
 use swgAS\swgAPI\models\accountModel;
 
 class accountController extends baseController
@@ -50,11 +51,11 @@ class accountController extends baseController
 	 * @return mixed
 	 */
 	public function checkAccount(ServerRequestInterface $request, ResponseInterface $response)
-	{
+    {
 		$accounts = accountModel::getAccount(array (
 				"username"=>$request->getParam('username'),
 				"email"=>$request->getParam('email'),
-				"ip"=>$request->getParam('uip'),
+				"ip"=>utilities::unobscureData($request->getParam('uip')),
 				"db"=>$this->getCIElement('db'),
 				"errorLogger"=>$this->getCIElement('swgErrorLog'),
 				"apiLogger"=>$this->getCIElement('swgAPILog'),
@@ -72,7 +73,7 @@ class accountController extends baseController
 				"password"=>$request->getParam('password'),
 				"repassword"=>$request->getParam('repassword'),
 				"authcode"=>$request->getParam('authcode'),
-				"ip"=>$request->getParam('uip'),
+				"ip"=>utilities::unobscureData($request->getParam('uip')),
 				"db"=>$this->getCIElement('db'),
 				"errorLogger"=>$this->getCIElement('swgErrorLog'),
 				"apiLogger"=>$this->getCIElement('swgAPILog'),

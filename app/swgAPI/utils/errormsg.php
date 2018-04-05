@@ -20,7 +20,7 @@ class errormsg
 	 * @var mixed
 	 */
 	protected static $accountErrorMsg = [
-		"unamelong" => "Username length is greater then the max length",
+		"unamelong" => "Username is greater then the max length",
 		"unameshort" => "Username is shorter then required length",
 		"badusername" => "The username you have provided contains illegal characters",
 		"authusernomatch" => "Username does not match authorization code username",

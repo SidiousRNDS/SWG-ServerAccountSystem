@@ -36,18 +36,18 @@
             <h2><i class="fa fa-user" aria-hidden="true"></i> Create New Game Account</h2>
             <hr class="hspacer">
             <div class="msg"></div>
-            <form id="nAccount" name="newAccount">
+            <form id="nAccount" name="newAccount" method="post">
                 <input type="hidden" name="uip" value="{{ uIP }}" id="uip"/>
                 <div class="row">
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label id="usernamelabel" for="usernameInput">Username</label>
-                            <input type="text" class="form-control" id="usernameInput"  aria-describedby="usernameHelp" placeholder="LordVader"/>
+                            <input type="text" class="form-control" id="usernameInput" name="username" aria-describedby="usernameHelp" placeholder="LordVader"/>
                             <small id="usernameHelp" class="form-text text-muted">*Only use Alpha/Numeric and special characters (@.)</small>
                         </div>
                         <div class="col-xs-6">
                             <label id="emaillabel" for="emailInput">Email</label>
-                            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="vader@empire.org"/>
+                            <input type="email" class="form-control" id="emailInput" name="email" aria-describedby="emailHelp" placeholder="vader@empire.org"/>
                             <small id="emailHelp" class="form-text text-muted"></small>
                         </div>
                     </div>
@@ -56,12 +56,12 @@
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label id="passwordlabel" for="passwordInput">Password</label>
-                            <input type="password" class="form-control" id="passwordInput"  aria-describedby="passwordHelp" placeholder="vaderistheman"/>
+                            <input type="password" class="form-control" id="passwordInput" name="password" aria-describedby="passwordHelp" placeholder="vaderistheman"/>
                             <small id="passwordHelp" class="form-text text-muted">*Only use Alpha/Numeric and special characters (!@$*-:_)</small>
                         </div>
                         <div class="col-xs-6">
                             <label id="password2label" for="password2Input">Confirm Password</label>
-                            <input type="password" class="form-control" id="password2Input" aria-describedby="password2Help" placeholder="vaderistheman"/>
+                            <input type="password" class="form-control" id="password2Input" name="repassword" aria-describedby="password2Help" placeholder="vaderistheman"/>
                             <small id="password2Help" class="form-text text-muted"></small>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label id="authcodelabel" for="authcodeInput">Authorization Code</label>
-                            <input type="text" class="form-control" id="authcodeInput" arai-describedby="authcodeHelp" placeholder=""/>
+                            <input type="text" class="form-control" id="authcodeInput" name="authcode" arai-describedby="authcodeHelp" placeholder=""/>
                             <small id="authcodeHelp" class="form-text text-muted">*Only Use this if you have been give an authorization code</small>
                         </div>
                         <div class="col-xs-6">&nbsp;</div>

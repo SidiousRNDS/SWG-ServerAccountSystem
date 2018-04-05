@@ -192,7 +192,7 @@ class accountModel extends Model
 					"admin_level" => 0,
 					"salt" => $passData["salt"],
 					"email" => $args["email"],
-					"create_ip" => $args["ip"],
+					"create_ip" => $args['ip'],
 					"admin_auth" => 1
 				]);
 

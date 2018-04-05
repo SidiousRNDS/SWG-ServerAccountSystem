@@ -8,8 +8,11 @@ var validationParams = {usernameMinLength : 4, usernameMaxLength : 32, passwordM
 var validation = {username : false, email : false, password : false, password2 : false, authcode : false};
 
 // TODO Have to rewrite this part to use tokens and point to the correct location
+var tokenURL = "http://swgusers.rnds.io/api/token";
 var stats = "http://status.swgrogueone.com/api/sp/d0535411a3448051be1b4d91b52b55db/swgrogueone";
-var account = "http://api.swgrogueone.com/";
+var newaccountURL = "http://swgusers.rnds.io/api/v1/account/addaccount";
+
+var token;
 var uIP;
 
 var cdate = new Date();
@@ -27,7 +30,6 @@ var monthNames = [
 var isMobile = window.matchMedia("only screen and (max-width: 700px)");
 
 if (isMobile.matches) {
-//Conditional script here
     $('#main').html("<div class='moduleHeader' style='text-align:center;'><p><strong>Required to play here, a pc is</strong></p></div><div class='module'>");
     $('.module').append("<div class='moduleMSG'><p><i class='fa fa-minus-circle moduleError' aria-hidden='true'></i> You can only sign up for a new account with a desktop or laptop seeing you can not play SWG on a mobile device.</p></div>");
     $('.module').append("</div></div><div id='yoda'><img src='ui_elements/img/yoda-error3.png' class='yimg'/></div>");
@@ -42,47 +44,54 @@ $(document).ready(function(){
     // Disable submit
     captchaSubmitDisabled();
 
-    // Translate the page to galatic basic
+    // Translate the page to galactic basic
     translate();
 
     // Validate Form
     validateForms();
 
+    console.dir("Token: " + token);
+
     $('#accCreate').on('click',function(e) {
 
         e.preventDefault();
 
-        //$.getJSON('//freegeoip.net/json/?callback=?', function(data) {
-        //    var ip = data.ip;
-        // Build URL
-        var username = $('#usernameInput').val();
-        var password = $('#passwordInput').val();
-        var email = $('#emailInput').val();
-        var authcode = $('#authcodeInput').val();
-        var ip = $('#up').val();
+        // Get Auth Token from the API
+        $.ajax({
+            url: tokenURL,
+            type: 'POST'
+        }).done(function(data) {
+            if (data.status === "ok") {
+                token = data.token;
 
-        apiURL = account + 'nu/ak/' + username + '/' + password + '/' + email + '/' + ip + '/' + authcode;
-
-        $.getJSON(apiURL, function(data) {
-            //console.dir(data);
-            // Error
-            if (data.indexOf("Error") != -1) {
-                $('.msg').html("<span class='error-msg'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> " + data + "</span>");
-                $('#nAccount')[0].reset();
-                grecaptcha.reset();
-                captchaSubmitDisabled();
-            }
-            else {
-                // success
-                $('.msg').html("<span class='success'><i class='fa fa-info-circle' aria-hidden='true'></i> Your Account has been created.</span>");
-                $('#nAccount')[0].reset();
-                grecaptcha.reset();
-                captchaSubmitDisabled();
+                $.ajax({
+                    url: newaccountURL,
+                    type: 'POST',
+                    data: $('#nAccount').serialize(),
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + data.token);
+                    },
+                    success: function(data) {
+                        console.dir(data);
+                        // Error
+                        if (data !== "Account for " + username + " has been created.") {
+                            $('.msg').html("<span class='error-msg'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> " + data + "</span>");
+                            $('#nAccount')[0].reset();
+                            grecaptcha.reset();
+                            captchaSubmitDisabled();
+                        }
+                        else {
+                            // success
+                            $('.msg').html("<span class='success'><i class='fa fa-info-circle' aria-hidden='true'></i> Your Account has been created.</span>");
+                            $('#nAccount')[0].reset();
+                            grecaptcha.reset();
+                            captchaSubmitDisabled();
+                        }
+                    }
+                });
             }
         });
-        //});
     });
-
 });
 
 
@@ -308,4 +317,17 @@ function captchaSubmitDisabled() {
     $('#accCreate').prop('disabled',true);
     // Hide captcha till the require fields are all filled in
     $('.g-recaptcha').css('display','none');
+}
+
+function getToken() {
+    $.ajax({
+        url: tokenURL,
+        type: 'POST'
+    })
+        .done(function(data) {
+            if (data.status === "ok") {
+                token = data.token;
+                $('#nAccount').append('<input type="hidden" name="token" id="token" value="'+token+'">');
+            }
+    });
 }
