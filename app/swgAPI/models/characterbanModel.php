@@ -13,7 +13,7 @@ namespace swgAS\swgAPI\models;
  ******************************************************************/
 
 // Use
-use swgAS\swgAPI\utils\errorcodes;
+use swgAS\utils\errorcodes;
 
 /**
  * Summary of characterbansModel

@@ -1,5 +1,6 @@
 <?php
-namepace swgAS\swgAdmin\controllers;
+
+namespace swgAS\swgAdmin\controllers;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -17,26 +18,29 @@ namepace swgAS\swgAdmin\controllers;
 
  // Use swgAS
  use swgAS\controllers\baseController;
- use swgAS\swgAdmin\loginModel;
+ use swgAS\swgAdmin\models\adminloginModel;
 
 class adminloginController extends baseController
 {
   public function login(ServerRequestInterface $request, ResponseInterface $response)
   {
-    $login = loginModel::authLogin(array(
-		        "db"=>$this->getCIElement('db'),
-            "errorlogger"=>$this->getCIElement('swgErrorLog'),
-            "adminlogger"=>$this->getCIElement('adminLog'),
-            "username"=>$request->getParam('username'),
-    				"password"=>$request->getParam('password'))
+      $adminLogin = new adminloginModel();
+
+    $login = $adminLogin->authLogin(array(
+                "mongodb"=>$this->getCIElement('mongodb'),
+                "errorlogger"=>$this->getCIElement('swgErrorLog'),
+                "adminlogger"=>$this->getCIElement('adminLog'),
+                "username"=>$request->getParam('username'),
+                "password"=>$request->getParam('password'))
     );
 
-    if ($login != "Authorized")
+    if ($login != true)
     {
       return $response->withJson($login,401);
     }
 
     // Redirect to Admin Dashboard
+      return $response->withJson("Authorized", 200);
   }
 }
 

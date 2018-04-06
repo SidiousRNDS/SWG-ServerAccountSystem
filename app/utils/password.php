@@ -54,10 +54,10 @@ class password
 	 */
 	public function generateEncryptedPassword($args) : array
 	{
-		$salt = $this->generateSalt();
-		$passHash = hash(settings::CRYPTHASH, settings::PWSECRET.$args['password'].$salt);
+		//$salt = $this->generateSalt();
+		$passHash = hash(settings::CRYPTHASH, settings::PWSECRET.$args['password'].$args['salt']);
 
-		return array('passwordHash'=>$passHash,'salt'=>$salt);
+		return array('passwordHash'=>$passHash,'salt'=>$args['salt']);
 	}
 }
 

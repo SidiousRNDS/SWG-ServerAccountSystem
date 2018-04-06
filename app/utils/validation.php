@@ -9,7 +9,7 @@ namespace swgAS\utils;
  * @version 1.0.0
  * ****************************************************************
  * NAMESPACE: swgAPI\utils
- * CLASS: errormsg
+ * CLASS: validation
  ******************************************************************/
 
 // Use

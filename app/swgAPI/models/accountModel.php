@@ -18,12 +18,12 @@ use \Illuminate\Database\Eloquent\Model as Model;
 
 // swgAS Use
 use swgAS\config\settings;
-use swgAS\swgAPI\utils\errormsg;
-use swgAS\swgAPI\utils\statusmsg;
-use swgAS\swgAPI\utils\validation;
-use swgAS\swgAPI\utils\password;
-use swgAS\swgAPI\utils\station;
-use swgAS\swgAPI\utils\utilities;
+use swgAS\utils\errormsg;
+use swgAS\utils\statusmsg;
+use swgAS\utils\validation;
+use swgAS\utils\password;
+use swgAS\utils\station;
+use swgAS\utils\utilities;
 
 /**
  * Summary of accountModel
@@ -171,7 +171,11 @@ class accountModel extends Model
 
 				// Generate Encrypted Password and Salt
 				$password = new password();
+
+				$args['salt'] = $password->getSalt();
+
 				$passData = $password->generateEncryptedPassword($args);
+
 				$args['passwordHash'] = $passData['passwordHash'];
 				$args['salt'] = $passData['salt'];
 

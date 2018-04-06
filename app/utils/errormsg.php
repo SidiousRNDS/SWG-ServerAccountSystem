@@ -15,6 +15,10 @@ namespace swgAS\utils;
 
 class errormsg
 {
+    protected static $adminLoginErrorMsg = [
+    	"notauthorized" => "Access Denied"
+	];
+
 	/**
 	 * Summary of $accountErrorMsg
 	 * @var mixed
@@ -120,6 +124,9 @@ class errormsg
 					break;
 				case "password":
 					$error = self::$passwordErrorMsg[$code];
+					break;
+				case "adminloginModel":
+					$error = self::$adminLoginErrorMsg[$code];
 					break;
 			}
 		}

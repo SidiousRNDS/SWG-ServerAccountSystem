@@ -33,38 +33,40 @@ namespace swgAS\config;
   */
   const G_CAPTCHA_KEY = "6Le4iSQTAAAAAJg5IbvWjQOVbru4LDZPI3cB5CO2";
 
- 	/**
- 	* ipInfoDB
- 	* @var string IP_INFO_DB_KEY - You must set up your own account to use this functionality
- 	*/
- 	const IP_INFO_DB_KEY = "683864c8e14039b85e0235ffb7ce2c6fc26f5fd1d74f82f48e84e1bef2cf9d78";
+  /**
+   * ipInfoDB
+   * @var string IP_INFO_DB_KEY - You must set up your own account to use this functionality
+   */
+  const IP_INFO_DB_KEY = "683864c8e14039b85e0235ffb7ce2c6fc26f5fd1d74f82f48e84e1bef2cf9d78";
 
- 	/**
- 	* Database vars
- 	* @var string DBUSER
- 	* @var string DBPASS
- 	* @var string DBNAME
- 	* @var string DBHOST
- 	* @var string MONGO_STATUS - This is the status database that holds the status database
- 	* @var string MONGO_ADMIN - This is the database that holds all the admin data (TODO make a better description)
- 	*/
- 	const DBUSER = "swgemu";
- 	const DBPASS = "123456";
- 	const DBNAME = "swgemu";
- 	const DBHOST = "localhost";
+  /**
+   * Database vars
+   * @var string DBUSER
+   * @var string DBPASS
+   * @var string DBNAME
+   * @var string DBHOST
+   * @var string MONGO_STATUS - This is the status database that holds the status database
+   * @var string MONGO_ADMIN - This is the database that holds all the admin data (TODO make a better description)
+   * @var string ADMIN_PASSWORD_SALT - This is the salt that encrypts password for the admin section (you can change it to what ever you want)
+   */
+   const DBUSER = "swgemu";
+   const DBPASS = "123456";
+   const DBNAME = "swgemu";
+   const DBHOST = "localhost";
 
- 	const MONGO_STATUS = "swgStatus";
- 	const MONGO_ADMIN = "swgAdmin";
+   const MONGO_STATUS = "swgStatus";
+   const MONGO_ADMIN = "swgAdmin";
+   const ADMIN_PASSWORD_SALT = "eYXdQT7B32xWHSNvbeGx";
 
- 	/**
- 	*	Logging vars
- 	*	@var string LOGPATH - Path to the log files
+   /**
+	*	Logging vars
+	*	@var string LOGPATH - Path to the log files
  	*	@var string APILOG - API Log Filename
  	*	@var string USERSLOG - User Log Filename
  	*	@var string ERRORLOG - Error Log Filename
  	*	@var string PASSRESETLOG - Password Reset Log Filename
  	*	@var string MULTIPLEATTEMPTSLOG - Multiple attempts to create an account log
-  * @var string ADMINLOG - Admin log logs actions for the admin section
+    * @var string ADMINLOG - Admin log logs actions for the admin section
  	*/
  	const LOGPATH = "../storage/logs/";
  	const APILOG = "swgAPILog";
@@ -72,7 +74,7 @@ namespace swgAS\config;
  	const ERRORLOG = "swgErrorLog";
  	const PASS_RESET_LOG = "swgPassResetLog";
  	const MULTIPLE_ATTEMPTS_LOG = "swgMultipleAttemptsLog";
-  const ADMINLOG = "adminLog";
+    const ADMINLOG = "adminLog";
 
  	/**
  	* Account settings
@@ -95,7 +97,7 @@ namespace swgAS\config;
  	const STATIONID_END = 6999999999;
 
  	/**
- 	 * Auth Code Settings
+	 * Auth Code Settings
  	 * @var string MAIN_CODE_PREFIX - This is the primary code that will force the checks to see if the user has more then 2 acounts
  	 * @var string EXTENDED_CODE_PREFIX - This is the code that will bypass all checks for users that are allowed to have multiple household accounts (family accounts)
  	 * @var int CODE_LENGTH_PRIMARY - Number of characters that the primary code should be

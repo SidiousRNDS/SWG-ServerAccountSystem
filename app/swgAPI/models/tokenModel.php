@@ -22,7 +22,7 @@ use \Firebase\JWT\JWT;
 
 // swgAS Use
 use swgAS\config\settings;
-use swgAS\swgAPI\utils\utilities as Utils;
+use swgAS\utils\utilities as Utils;
 
 /**
  * Summary of tokenModel

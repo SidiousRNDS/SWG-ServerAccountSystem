@@ -37,10 +37,14 @@ $ci['db'] = function($ci) use ($capsule) {
     return $capsule;
 };
 
+// MongoDB
+$ci['mongodb'] = function($ci) {
+    return new \MongoDB\Driver\Manager("mongodb://127.0.0.1");
+};
 
 // User IP
 $ci['userIP'] = function($ci) {
-    return \swgAS\swgAPI\utils\utilities::getClientIp();
+    return \swgAS\utils\utilities::getClientIp();
 };
 
 // Views
@@ -90,6 +94,13 @@ $ci['swgMultipleAttemptsLog'] = function($ci) {
     return $attemptsLogger;
 };
 
+$ci['adminLog'] = function($ci) {
+    $adminLogger = new Logger('adminLogger');
+    $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::ADMINLOG);
+    $adminLogger->pushHandler($file_handler);
+    return $adminLogger;
+};
+
 // JWT
 $ci["JwToken"] = function($ci) {
     return new stdClass;
@@ -109,6 +120,10 @@ $ci["CorsMiddleware"] = function ($ci) {
 };
 
 // Controllers
+$ci[\swgAS\swgAdmin\controllers\adminloginController::class] = function(Container $ci) {
+    return new \swgAS\swgAdmin\controllers\adminloginController($ci);
+};
+
 $ci[\swgAS\swgAPI\controllers\accountController::class] = function(Container $ci) {
     return new \swgAS\swgAPI\controllers\accountController($ci);
 };

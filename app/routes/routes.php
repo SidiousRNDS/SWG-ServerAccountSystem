@@ -27,7 +27,7 @@ $swgAS->group('/admin', function() use($swgAS){
     }
 
     // Login
-    $swgAS->post('/admin/login', \swgAS\swgAdmin\controllers\adminloginController::class . ':login');
+    $swgAS->post('/login', \swgAS\swgAdmin\controllers\adminloginController::class . ':login');
 
 });
 
