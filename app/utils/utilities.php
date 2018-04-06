@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAS\swgAPI\utils;
+namespace swgAS\utils;
 
 
 /*****************************************************************

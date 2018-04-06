@@ -1,5 +1,5 @@
 <?php
-namespace swgAS\swgAPI\utils;
+namespace swgAS\utils;
 
 /*****************************************************************
  * RNDS SWG Account System

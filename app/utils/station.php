@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAS\swgAPI\utils;
+namespace swgAS\utils;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -9,7 +9,7 @@ namespace swgAS\swgAPI\utils;
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAS\swgAPI\utils
+ * NAMESPACE: swgAS\utils
  * CLASS: station
  ******************************************************************/
 
