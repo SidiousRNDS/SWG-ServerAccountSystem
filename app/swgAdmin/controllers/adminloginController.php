@@ -28,8 +28,8 @@ class adminloginController extends baseController
 
     $login = $adminLogin->authLogin(array(
                 "mongodb"=>$this->getCIElement('mongodb'),
-                "errorlogger"=>$this->getCIElement('swgErrorLog'),
-                "adminlogger"=>$this->getCIElement('adminLog'),
+                "errorLogger"=>$this->getCIElement('swgErrorLog'),
+                "adminLogger"=>$this->getCIElement('adminLog'),
                 "username"=>$request->getParam('username'),
                 "password"=>$request->getParam('password'))
     );

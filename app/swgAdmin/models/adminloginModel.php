@@ -21,6 +21,7 @@ use \MongoDB\Driver\Query as Query;
 use swgAS\config\settings;
 use swgAS\utils\errormsg;
 use swgAS\utils\password;
+use swgAS\utils\usersessions;
 
 class adminloginModel extends Model
 {
@@ -49,6 +50,10 @@ class adminloginModel extends Model
         {
             return errormsg::getErrorMsg("notauthorized", (new \ReflectionClass(self::class))->getShortName());
         }
+
+        // Add User to the user_session collection
+        $userSession = new usersessions();
+        $userSession->setUserSession($args);
 
         return true;
     }

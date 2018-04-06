@@ -1,0 +1,154 @@
+<?php
+/*****************************************************************
+ * RNDS SWG Account System
+ * @author: Sidious <sidious@rnds.io>
+ * @since: 06 April 2018
+ * @link: https://github.com/SidiousRNDS/SWGRO-AccountSystem
+ * @version: 1.0.0
+ ******************************************************************
+ * NAMESPACE: swgAS\utils
+ * CLASS: usersessions
+ ******************************************************************/
+
+namespace swgAS\utils;
+
+// Use
+use \MongoDB\Driver\Query as MongoQuery;
+use \MongoDB\Driver\BulkWrite;
+use \MongoDB\Driver\Exception\Exception as MongoExpception;
+use \MongoDB\BSON\ObjectId as MongoID;
+
+class usersessions
+{
+    private $sessionLength = 15;
+    private $mongoDB = "swgASAdmin";
+    private $sessionsCollection = "users_sessions";
+
+    /**
+     * Summary setUserSession
+     * @param $args
+     * @throws \Exception
+     */
+    public function setUserSession($args)
+    {
+        return $this->generateUserSession($args);
+    }
+
+    /**
+     * Summary generateUserSession - Check for current session or generate a new one if there is not one or its expired
+     * @param $args
+     * @throws \Exception
+     */
+    private function generateUserSession($args)
+    {
+        if($_SESSION['swgASA'])
+        {
+            $args['sessionID'] = $_SESSION['swgASA'];
+
+            $sessionData = $this->checkUserSession($args);
+
+            $args['sessiontimestamp'] = $sessionData->expire;
+
+            $sessionExpired = $this->checkSessionIsExpired($args);
+
+            if($sessionExpired === true) {
+                // Remove entry from the db
+                $this->removeSession($args);
+                // Unset the session
+                unset($_SESSION['swgASA']);
+                // Generate new session
+                $this->generateUserSession($args);
+            }
+        }
+        else
+        {
+            // Add mew session to the DB
+            $sessionID = $this->generateSessionID();
+            $sessionExpire = time() + 60*60;    // Expire in 1 hour
+
+            $session = ['_id' => new MongoID, 'sessionID' => $sessionID, 'username'=>$args['username'], 'expire'=>$sessionExpire];
+
+            $createSession = new BulkWrite;
+            $createSession->insert($session);
+            $args['mongodb']->executeBulkWrite($this->mongoDB.".".$this->sessionsCollection, $createSession);
+
+            $_SESSION['swgASA'] = $sessionID;
+        }
+    }
+
+    /**
+     * Summary checkUserSession - Check to see if the user has a session stored and if so return the data
+     * if the user does not return null
+     * @param $args
+     * @return mixed
+     */
+    private function checkUserSession($args)
+    {
+
+        $sessionFilter = ['sessionID'=>$args['sessionID']];
+
+        $query = new MongoQuery($sessionFilter);
+        $res = $args['mongodb']->executeQuery($this->mongoDB.".".$this->sessionsCollection,$query);
+        $sessionData = current($res->toArray());
+
+        return $sessionData;
+    }
+
+    /**
+     * Summary checkSessionIsExpired - Check to see if the session timestamp that was passed in is behind the current timestamp
+     * if so then the session is expired and return true else return false
+     * @param $args
+     * @return bool
+     */
+    private function checkSessionIsExpired($args)
+    {
+        $cDate = new \DateTime();
+        $currentTimeStamp = $cDate->getTimestamp();
+
+        if($args['sessiontimestamp'] <= $currentTimeStamp)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Summary removeSession - Remove the existing session from the db
+     * @param $args
+     */
+    private function removeSession($args)
+    {
+        try {
+            $delSession = new BulkWrite;
+            $delSession->delete(['sessionID' => $args['sessionID'], ['limit' => 1]]);
+            $args['mongodb']->executeBulkWrite($this->mongoDB.".".$this->sessionsCollection, $delSession);
+        } catch (MongoExpception $e){
+            throw new MongoException($e->getMessage());
+        }
+    }
+
+    /**
+     * Summary generateSessionID - Genereate a random session ID
+     * @return bool|string
+     * @throws \Exception
+     */
+    private function generateSessionID()
+    {
+        $sessionID = 0;
+
+        if (function_exists("random_bytes")) {
+            $sessionID = random_bytes(ceil($this->sessionLength / 2));
+        }
+        elseif (function_exists("openssl_random_pseudo_bytes"))
+        {
+            $sessionID = openssl_random_pseudo_bytes($this->sessionLength / 2);
+        }
+        else
+        {
+            throw new \Exception("No crypto secure random method found");
+        }
+
+        return substr(bin2hex($sessionID), 0, $this->sessionLength);
+    }
+}
