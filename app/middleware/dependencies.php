@@ -50,12 +50,21 @@ $ci['userIP'] = function($ci) {
 // Views
 // Client Views
 $ci['views'] = function($ci) {
-    $clientViews = new \Slim\Views\Twig('../app/views/'.settings::TEMPLATES, ['cache' => false]);
+    $views = new \Slim\Views\Twig('../app/views/'.settings::TEMPLATES, ['cache' => false]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');
-    $clientViews->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
+    $views->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
 
-    return $clientViews;
+    return $views;
+};
+
+$ci['adminviews'] = function($ci) {
+    $adminViews = new \Slim\Views\Twig('../app/views/'.settings::TEMPLATES.'/admin', ['cache' => false]);
+
+    $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');
+    $adminViews->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
+
+    return $adminViews;
 };
 
 // Logs

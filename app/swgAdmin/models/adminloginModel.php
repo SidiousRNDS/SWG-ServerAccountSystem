@@ -26,7 +26,7 @@ class adminloginModel extends Model
 {
 
     /**
-     * Summary authLogin
+     * Summary authLogin - Admin login check
      * @param $args
      * @return bool|string
      * @throws \ReflectionException
@@ -50,9 +50,6 @@ class adminloginModel extends Model
             return errormsg::getErrorMsg("notauthorized", (new \ReflectionClass(self::class))->getShortName());
         }
 
-        //$args['mongodb']->close();
-
         return true;
-
     }
 }
