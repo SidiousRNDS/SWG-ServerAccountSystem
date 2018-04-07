@@ -51,7 +51,7 @@ class usersessions
      */
     private function generateUserSession($args)
     {
-        if($_SESSION['swgASA'])
+        if(isset($_SESSION['swgASA']))
         {
             $args['sessionID'] = $_SESSION['swgASA'];
 

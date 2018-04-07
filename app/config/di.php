@@ -11,7 +11,6 @@
 use \Slim\Container as Container;
 use \Tuupola\Middleware\CorsMiddleware;
 use \Monolog\Logger;
-use \Slim\Flash\Messages;
 
 // swgAS Use
 use swgAS\config\settings;
@@ -51,21 +50,16 @@ $ci['userIP'] = function($ci) {
 // Views
 // Client Views
 $ci['views'] = function($ci) {
-    $views = new \Slim\Views\Twig('../app/views/'.settings::TEMPLATES, ['cache' => false]);
+    $views = new \Slim\Views\Twig([
+        '../app/views/'.settings::TEMPLATES."/client",
+        '../app/views/'.settings::TEMPLATES."/admin",
+        '../app/views/'.settings::TEMPLATES."/admin/components"
+    ], ['cache' => false]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');
     $views->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
 
     return $views;
-};
-
-$ci['adminviews'] = function($ci) {
-    $adminViews = new \Slim\Views\Twig('../app/views/'.settings::TEMPLATES.'/admin', ['cache' => false]);
-
-    $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');
-    $adminViews->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
-
-    return $adminViews;
 };
 
 // Flash messages

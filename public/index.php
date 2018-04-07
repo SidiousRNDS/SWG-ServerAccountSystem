@@ -17,7 +17,9 @@
     // swgAS Use
     use swgAS\config\settings;
 
-    require '../app/middleware/dependencies.php';
+    require '../app/config/di.php';
+
+    session_start();
 
     $swgAS = new \Slim\App($ci);
 

@@ -25,7 +25,7 @@ $swgAS->group('/admin', function() use($swgAS){
     $adminBaseRoutes = ["", "/"];
     foreach($adminBaseRoutes as $adminRoutes) {
         $swgAS->get($adminRoutes, function ($request, $response, $args) use ($swgAS) {
-            return $this->adminviews->render($response, 'adminlogin.twig',['captchakey'=>settings::G_CAPTCHA_KEY, 'flash' => $this->flash]);
+            return $this->views->render($response, 'adminlogin.twig',['captchakey'=>settings::G_CAPTCHA_KEY, 'flash' => $this->flash]);
         })->setName('adminlogin');
     }
 
@@ -34,7 +34,7 @@ $swgAS->group('/admin', function() use($swgAS){
 
     // Dashboard
     $swgAS->get('/dashboard', function($request, $response, $args) use ($swgAS) {
-       return $this->adminviews->render($response, 'dashboard.twig');
+       return $this->views->render($response, 'dashboard.twig');
     })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('dashboard');
 
 });

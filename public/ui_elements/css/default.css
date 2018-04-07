@@ -36,6 +36,7 @@ body {background-color:#EDE8E6;}
 .adminLoginWrapper {position:absolute; left:50%; top:50%; transform: translate(-50%, -50%); width:75%;}
 #adminLogin {border-left:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333; padding:3%; background-color:#ffffff; width:50%; margin:0 auto;}
 #adminLoginHeader {padding:0.6% 0.6% 0.6% 3%; font-size:1.5em; color:#EE5828; margin:0 auto; height:40px; width:50%; background-image: linear-gradient( to bottom, #3c3c3c 0, #222 100%); -webkit-border-radius: 20px 20px 0px 0px;-moz-border-radius: 20px 20px 0px 0px;border-radius: 20px 20px 0px 0px;}
+.errmsg {font-weight:800; padding:0 0 10px 0; color:#ff0000;}
 
 @font-face {
     font-family: 'galbasic';
