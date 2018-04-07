@@ -9,7 +9,7 @@ namespace swgAS\swgAdmin\controllers;
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
  * @version 1.0.0
  * ****************************************************************
- * NAMESPACE: swgAS\swgAPI\controllers
+ * NAMESPACE: swgAS\swgAdmin\controllers
  * CLASS: adminloginController
  ******************************************************************/
  // Use
@@ -34,13 +34,16 @@ class adminloginController extends baseController
                 "password"=>$request->getParam('password'))
     );
 
-    if ($login != true)
-    {
-      return $response->withJson($login,401);
-    }
 
-    // Redirect to Admin Dashboard
-      return $response->withJson("Authorized", 200);
+
+    if ($login === "Access Denied")
+    {
+        $this->getCIElement('flash')->addMessage("error",$login);
+        return $response->withRedirect('/admin');
+    }
+    else {
+        return $response->withRedirect('/admin/dashboard');
+    }
   }
 }
 

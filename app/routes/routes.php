@@ -8,6 +8,8 @@
  * ****************************************************************/
 
 use swgAS\config\settings;
+use swgAS\swgAdmin\middelware\adminauthmiddleware;
+
 
 $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
     return $this->views->render($response, 'clients.twig',['uIP'=>$this->get('userIP'),'captchakey'=>settings::G_CAPTCHA_KEY]);
@@ -19,15 +21,21 @@ $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
 
 $swgAS->group('/admin', function() use($swgAS){
 
+    // Admin Base
     $adminBaseRoutes = ["", "/"];
     foreach($adminBaseRoutes as $adminRoutes) {
         $swgAS->get($adminRoutes, function ($request, $response, $args) use ($swgAS) {
-            return $this->adminviews->render($response, 'adminlogin.twig',['captchakey'=>settings::G_CAPTCHA_KEY]);
-        });
+            return $this->adminviews->render($response, 'adminlogin.twig',['captchakey'=>settings::G_CAPTCHA_KEY, 'flash' => $this->flash]);
+        })->setName('adminlogin');
     }
 
     // Login
     $swgAS->post('/login', \swgAS\swgAdmin\controllers\adminloginController::class . ':login');
+
+    // Dashboard
+    $swgAS->get('/dashboard', function($request, $response, $args) use ($swgAS) {
+       return $this->adminviews->render($response, 'dashboard.twig');
+    })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('dashboard');
 
 });
 

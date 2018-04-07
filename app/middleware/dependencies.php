@@ -11,6 +11,7 @@
 use \Slim\Container as Container;
 use \Tuupola\Middleware\CorsMiddleware;
 use \Monolog\Logger;
+use \Slim\Flash\Messages;
 
 // swgAS Use
 use swgAS\config\settings;
@@ -65,6 +66,11 @@ $ci['adminviews'] = function($ci) {
     $adminViews->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
 
     return $adminViews;
+};
+
+// Flash messages
+$ci['flash'] = function($ci) {
+    return new \Slim\Flash\Messages();
 };
 
 // Logs

@@ -9,6 +9,11 @@
         </div>
 
         <div id="adminLogin">
+                {% if flash.getMessage('error')[0] %}
+                    <div class="errmsg">
+                            <i class="fas fa-exclamation-circle"></i> {{ flash.getMessage('error')[0] }}
+                    </div>
+                {% endif %}
             <div id="login">
                 <form id="alogin" name="adminlogin" method="POST" action="/admin/login">
                     <div class="row">

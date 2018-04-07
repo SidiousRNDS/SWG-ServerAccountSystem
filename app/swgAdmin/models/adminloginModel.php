@@ -57,4 +57,14 @@ class adminloginModel extends Model
 
         return true;
     }
+
+    public function checkAuthorization($args)
+    {
+        $sessionData = $_SESSION['swgASA'];
+
+        if($sessionData)
+        {
+
+        }
+    }
 }

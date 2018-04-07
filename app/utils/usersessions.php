@@ -24,6 +24,16 @@ class usersessions
     private $mongoDB = "swgASAdmin";
     private $sessionsCollection = "users_sessions";
 
+    public function checkValidUserSession($args)
+    {
+        $sessionData = $this->checkUserSession($args);
+        $args['sessiontimestamp'] = $sessionData->expire;
+
+        $sessionExpired = $this->checkSessionIsExpired($args);
+
+        return $sessionExpired;
+    }
+
     /**
      * Summary setUserSession
      * @param $args
@@ -53,7 +63,7 @@ class usersessions
 
             if($sessionExpired === true) {
                 // Remove entry from the db
-                $this->removeSession($args);
+                $this->removeSessionById($args);
                 // Unset the session
                 unset($_SESSION['swgASA']);
                 // Generate new session
@@ -62,11 +72,14 @@ class usersessions
         }
         else
         {
+            // Remove Old Session if there are any in the DB
+            $this->removeSessionByUser($args);
+
             // Add mew session to the DB
             $sessionID = $this->generateSessionID();
             $sessionExpire = time() + 60*60;    // Expire in 1 hour
 
-            $session = ['_id' => new MongoID, 'sessionID' => $sessionID, 'username'=>$args['username'], 'expire'=>$sessionExpire];
+            $session = ['_id' => new MongoID, 'sessionID' => $sessionID, 'username'=>$args['username'], 'expire'=>$sessionExpire, 'created_at'=>date('Y-m-d H:i:s')];
 
             $createSession = new BulkWrite;
             $createSession->insert($session);
@@ -114,14 +127,29 @@ class usersessions
     }
 
     /**
-     * Summary removeSession - Remove the existing session from the db
+     * Summary removeSessionById - Remove the existing session from the db
      * @param $args
      */
-    private function removeSession($args)
+    private function removeSessionById($args)
     {
         try {
             $delSession = new BulkWrite;
             $delSession->delete(['sessionID' => $args['sessionID'], ['limit' => 1]]);
+            $args['mongodb']->executeBulkWrite($this->mongoDB.".".$this->sessionsCollection, $delSession);
+        } catch (MongoExpception $e){
+            throw new MongoException($e->getMessage());
+        }
+    }
+
+    /**
+     * Summary removeSessionByUsername - Remove the existing session from the db
+     * @param $args
+     */
+    private function removeSessionByUser($args)
+    {
+        try {
+            $delSession = new BulkWrite;
+            $delSession->delete(['username' => $args['username']]);
             $args['mongodb']->executeBulkWrite($this->mongoDB.".".$this->sessionsCollection, $delSession);
         } catch (MongoExpception $e){
             throw new MongoException($e->getMessage());
