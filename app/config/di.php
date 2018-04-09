@@ -52,7 +52,11 @@ $ci['views'] = function($ci) {
     $views = new \Slim\Views\Twig([
         '../app/views/'.settings::TEMPLATES."/client",
         '../app/views/'.settings::TEMPLATES."/admin",
-        '../app/views/'.settings::TEMPLATES."/admin/components"
+        '../app/views/'.settings::TEMPLATES."/admin/components",
+        '../app/views/'.settings::TEMPLATES."/admin/authcodes",
+        '../app/views/'.settings::TEMPLATES."/admin/players",
+        '../app/views/'.settings::TEMPLATES."/admin/reports",
+        '../app/views/'.settings::TEMPLATES."/admin/users"
     ], ['cache' => false]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');

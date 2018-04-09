@@ -58,6 +58,7 @@ $sudo serivce apache2 restart
 * [IP Info DB](http://ipinfodb.com/) - IP Info DB - Geolocation based on IP Address
 * [Twig](https://twig.symfony.com) - Twig Templates
 * [Twig-View](https://github.com/slimphp/Twig-View) - Slim Twig View
+* [Google Charts](https://developers.google.com/chart/) - Google Charts
 
 ## Versioning
 

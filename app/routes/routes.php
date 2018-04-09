@@ -35,11 +35,11 @@ $swgAS->group('/admin', function() use($swgAS){
 
         // Dashboard Base
         $swgAS->get('', function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'admindashboard.twig');
+            return $this->views->render($response, 'admindashboard.twig',['title' => 'Dashboard']);
         })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('dashboard');
 
         $swgAS->get('/overview', function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'admindashboard.twig');
+            return $this->views->render($response, 'adminoverview.twig',['title' => 'Overview']);
         })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('overview');
     });
 
