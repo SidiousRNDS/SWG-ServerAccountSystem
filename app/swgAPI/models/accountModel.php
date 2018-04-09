@@ -18,8 +18,8 @@ use \Illuminate\Database\Eloquent\Model as Model;
 
 // swgAS Use
 use swgAS\config\settings;
-use swgAS\utils\errormsg;
-use swgAS\utils\statusmsg;
+use swgAS\utils\messaging\errormsg;
+use swgAS\utils\messaging\statusmsg;
 use swgAS\utils\validation;
 use swgAS\utils\password;
 use swgAS\utils\station;

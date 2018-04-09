@@ -235,3 +235,32 @@ function captchaSubmitDisabled() {
     // Hide captcha till the require fields are all filled in
     $('.g-recaptcha').css('display','none');
 }
+
+/**
+ * checkMobile
+ *
+ */
+// Check if they are using a mobile device
+var checkMobile = {
+    Android: function () {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function () {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function () {
+        return navigator.userAgent.match(/iPhone|iPod/i);
+    },
+    iPAD: function () {
+        return navigator.userAgent.match(/iPad/i);
+    },
+    Opera: function () {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function () {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function () {
+        return (checkMobile.Android() || checkMobile.BlackBerry() || checkMobile.iOS() || checkMobile.iPAD()|| checkMobile.Opera() || checkMobile.Windows());
+    }
+};

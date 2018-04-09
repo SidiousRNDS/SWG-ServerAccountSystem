@@ -15,16 +15,18 @@ namespace swgAS\swgAdmin\models;
 
 // Use
 use \Illuminate\Database\Eloquent\Model as Model;
-use \MongoDB\Driver\Query as Query;
+use \MongoDB\Driver\Query as MongoQuery;
 
 // Use swgAS
 use swgAS\config\settings;
-use swgAS\utils\errormsg;
+use swgAS\utils\messaging\errormsg;
 use swgAS\utils\password;
-use swgAS\utils\usersessions;
+use swgAS\utils\security;
+use swgAS\utils\sessions;
 
 class adminloginModel extends Model
 {
+    private $usersCollection = "users";
 
     /**
      * Summary authLogin - Admin login check
@@ -34,37 +36,37 @@ class adminloginModel extends Model
      */
     public function authLogin($args)
     {
-        $pass = new password();
-        $args['salt'] = settings::ADMIN_PASSWORD_SALT;
+        // Check if there is a lock on the account
+        $security = new security();
+        $lock = $security->checkLocks($args);
 
-        $encryptedPassword = $pass->generateEncryptedPassword($args);
+        if(empty($lock)) {
+            // Check User information
+            $pass = new password();
+            $args['salt'] = settings::ADMIN_PASSWORD_SALT;
 
-        $loginFilter = ['username' => $args['username'], 'password' => $encryptedPassword['passwordHash']];
+            $encryptedPassword = $pass->generateEncryptedPassword($args);
 
-        $query = new Query($loginFilter);
+            $loginFilter = ['username' => $args['username'], 'password' => $encryptedPassword['passwordHash'], 'ip' => $args['userIP']];
 
-        $res = $args['mongodb']->executeQuery("swgASAdmin.users",$query);
-        $user = current($res->toArray());
+            $query = new MongoQuery($loginFilter);
 
-        if(empty($user))
-        {
-            return errormsg::getErrorMsg("notauthorized", (new \ReflectionClass(self::class))->getShortName());
+            $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN . "." . $this->usersCollection, $query);
+            $user = current($res->toArray());
+
+            if (empty($user)) {
+                // Add Login Attempts
+                $security->loginAttempts($args);
+                return errormsg::getErrorMsg("notauthorized", (new \ReflectionClass(self::class))->getShortName());
+            }
+
+            // Add User to the user_session collection
+            $userSession = new sessions();
+            $userSession->setUserSession($args);
+
+            return true;
         }
 
-        // Add User to the user_session collection
-        $userSession = new usersessions();
-        $userSession->setUserSession($args);
-
-        return true;
-    }
-
-    public function checkAuthorization($args)
-    {
-        $sessionData = $_SESSION['swgASA'];
-
-        if($sessionData)
-        {
-
-        }
+        return $lock;
     }
 }

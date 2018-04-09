@@ -55,7 +55,7 @@ namespace swgAS\config;
    const DBHOST = "localhost";
 
    const MONGO_STATUS = "swgStatus";
-   const MONGO_ADMIN = "swgAdmin";
+   const MONGO_ADMIN = "swgASAdmin";
    const ADMIN_PASSWORD_SALT = "eYXdQT7B32xWHSNvbeGx";
 
    /**
@@ -75,6 +75,7 @@ namespace swgAS\config;
  	const PASS_RESET_LOG = "swgPassResetLog";
  	const MULTIPLE_ATTEMPTS_LOG = "swgMultipleAttemptsLog";
     const ADMINLOG = "adminLog";
+    const ADMINLOCKLOG = "adminLockLog";
 
  	/**
  	* Account settings

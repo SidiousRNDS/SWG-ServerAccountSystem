@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAS\utils;
+namespace swgAS\utils\messaging;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -21,9 +21,11 @@ class statusmsg
 	 */
 	protected static $accountStatus = [
 		"created" =>  "Account for ::USERNAME:: has been created.",
-		//"updated" => ["statuscode" =>201, "statusmsg"=>"Account {$username} has been updated."],
-		//"preset"  => ["statuscode" =>201, "statusmsg"=>"Password for account {$username} has been reset."],
 		"checkspassed" => "All checks passed"
+	];
+
+	protected static $security = [
+		"lremoved" => "Lock has been removed"
 	];
 
 	/**
@@ -42,6 +44,9 @@ class statusmsg
 				case "accountModel":
 					$status = self::$accountStatus[$code];
 					break;
+                case "security":
+                    $status = self::$security[$code];
+                    break;
 			}
 		}
 

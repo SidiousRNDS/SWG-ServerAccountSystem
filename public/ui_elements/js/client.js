@@ -12,12 +12,9 @@ var tokenURL = "http://swgusers.rnds.io/api/token";
 var stats = "http://status.swgrogueone.com/api/sp/d0535411a3448051be1b4d91b52b55db/swgrogueone";
 var newaccountURL = "http://swgusers.rnds.io/api/v1/account/addaccount";
 
-// Mobile Check
-var isMobile = window.matchMedia("only screen and (max-width: 700px)");
-
-if (isMobile.matches) {
+if (checkMobile.any()) {
     $('#main').html("<div class='moduleHeader' style='text-align:center;'><p><strong>Required to play here, a pc is</strong></p></div><div class='module'>");
-    $('.module').append("<div class='moduleMSG'><p><i class='faf fa-minus-circle moduleError' aria-hidden='true'></i> You can only sign up for a new account with a desktop or laptop seeing you can not play SWG on a mobile device.</p></div>");
+    $('.module').append("<div class='moduleMSG'><p><i class='fas fa-minus-circle moduleError' aria-hidden='true'></i> You can only sign up for a new account with a desktop or laptop seeing you can not play SWG on a mobile device.</p></div>");
     $('.module').append("</div></div><div id='yoda'><img src='ui_elements/img/yoda-error3.png' class='yimg'/></div>");
     $('#newAccount').remove();
 }

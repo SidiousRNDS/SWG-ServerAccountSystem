@@ -1,4 +1,5 @@
-body {background-color:#EDE8E6;}
+body {background-color:#EDE8E6; font-size:1.12em;}
+#navbar {font-size:1.5em;}
 .navbar-inverse .navbar-nav>li>a {color:#EE5828;}
 .navbar-inverse .navbar-toggle .icon-bar {background-color:#EE5828;}
 .dropdown-menu {background:#000000;}
@@ -13,18 +14,19 @@ body {background-color:#EDE8E6;}
 :-ms-input-placeholder {  color: red;  font-family:'galbasic';}
 .sgroup {margin:15px -15px 0 -15px;}
 .twitter, .misc, .news {border:1px solid #333; padding:2%; background-color:#ffffff; margin:1% 0 1% 0;}
-.foot {color:#EE5828; padding:1.2% 0 1% 0; font-size:0.85em; font-family:'galbasic';}
+.foot {color:#EE5828; padding:1.2% 0 1% 0; font-family:'galbasic';}
 .btn-default {margin-left:14px; background-image: linear-gradient(#EE5828, #EE5828); background:#ee5828; color:#000;}
 .credits {font-family: 'galbasic';}
 .translation {float:right;}
 .translation a {text-decoration: none; color: #EE5828;}
-#newAccount h2 {color:#EE5828; margin-top:0;}
+#newAccount h2 {color:#EE5828; margin-top:0; font-size:2.0em;}
 .gcap {margin:15px 0 0 1px; }
 #status {margin:0 2% 0 2%; height:40px; width:96%; background-image: linear-gradient( to bottom, #3c3c3c 0, #222 100%); -webkit-border-radius: 20px 20px 0px 0px;-moz-border-radius: 20px 20px 0px 0px;border-radius: 20px 20px 0px 0px;}
 #status .left {float:left; margin:0 2% 0 2%; color:#EE5828; height:30px; padding:0.7% 0 0 0; font-weight:bold; display:block; overflow:hidden;}
 #status .right {color:lime; padding:0.7% 0 0 0; height:30px; margin-left:10px; display:block; overflow:hidden; width:25%;}
 #authcodelabel {padding:10px 0 0 0; }
-
+.form-control {font-size:1.12em;}
+.btn {font-size:1.12em;}
 /* Form validation CSS */
 .error {padding:0 0 0 16px; color:#ff0000; font-weight:bold;}
 .error-msg {color:#ff0000; font-weight:bold;}

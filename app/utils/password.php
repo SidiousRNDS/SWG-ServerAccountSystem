@@ -17,7 +17,7 @@ namespace swgAS\utils;
 
 // swgAS Use
 use swgAS\config\settings;
-use swgAS\utils\errormsg;
+use swgAS\utils\messaging\errormsg;
 
 class password
 {
@@ -40,7 +40,7 @@ class password
 		$salt = base64_encode(openssl_random_pseudo_bytes(settings::OPENSSLBYTES_LENGTH));
 		if(!$salt)
 		{
-			return errormsg::getErrorMsg("salt",(new \ReflectionClass(self::class))->getShortName());
+			return messaging\errormsg::getErrorMsg("salt",(new \ReflectionClass(self::class))->getShortName());
 		}
 
 		return $salt;

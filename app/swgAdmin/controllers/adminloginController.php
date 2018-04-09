@@ -19,6 +19,7 @@ namespace swgAS\swgAdmin\controllers;
  // Use swgAS
  use swgAS\controllers\baseController;
  use swgAS\swgAdmin\models\adminloginModel;
+ use swgAS\utils\security;
 
 class adminloginController extends baseController
 {
@@ -26,24 +27,22 @@ class adminloginController extends baseController
   {
       $adminLogin = new adminloginModel();
 
-    $login = $adminLogin->authLogin(array(
-                "mongodb"=>$this->getCIElement('mongodb'),
-                "errorLogger"=>$this->getCIElement('swgErrorLog'),
-                "adminLogger"=>$this->getCIElement('adminLog'),
-                "username"=>$request->getParam('username'),
-                "password"=>$request->getParam('password'))
-    );
+      $login = $adminLogin->authLogin(array(
+                  "mongodb" => $this->getCIElement('mongodb'),
+                  "errorLogger" => $this->getCIElement('swgErrorLog'),
+                  "adminLogger" => $this->getCIElement('adminLog'),
+                  "adminLockLog" => $this->getCIElement('adminLockLog'),
+                  "userIP" => $this->getCIElement('userIP'),
+                  "username" => $request->getParam('username'),
+                  "password" => $request->getParam('password'))
+      );
 
-
-
-    if ($login === "Access Denied")
-    {
-        $this->getCIElement('flash')->addMessage("error",$login);
-        return $response->withRedirect('/admin');
-    }
-    else {
-        return $response->withRedirect('/admin/dashboard');
-    }
+      if ($login === "Access Denied") {
+          $this->getCIElement('flash')->addMessage("error", $login);
+          return $response->withRedirect('/admin');
+      } else {
+          return $response->withRedirect('/admin/dashboard');
+      }
   }
 }
 

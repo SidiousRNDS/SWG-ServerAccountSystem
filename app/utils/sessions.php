@@ -7,7 +7,7 @@
  * @version: 1.0.0
  ******************************************************************
  * NAMESPACE: swgAS\utils
- * CLASS: usersessions
+ * CLASS: sessions
  ******************************************************************/
 
 namespace swgAS\utils;
@@ -18,10 +18,12 @@ use \MongoDB\Driver\BulkWrite;
 use \MongoDB\Driver\Exception\Exception as MongoExpception;
 use \MongoDB\BSON\ObjectId as MongoID;
 
-class usersessions
+// Use swgAS
+use swgAS\config\settings;
+
+class sessions
 {
     private $sessionLength = 15;
-    private $mongoDB = "swgASAdmin";
     private $sessionsCollection = "users_sessions";
 
     public function checkValidUserSession($args)
@@ -83,7 +85,7 @@ class usersessions
 
             $createSession = new BulkWrite;
             $createSession->insert($session);
-            $args['mongodb']->executeBulkWrite($this->mongoDB.".".$this->sessionsCollection, $createSession);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".$this->sessionsCollection, $createSession);
 
             $_SESSION['swgASA'] = $sessionID;
         }
@@ -101,7 +103,7 @@ class usersessions
         $sessionFilter = ['sessionID'=>$args['sessionID']];
 
         $query = new MongoQuery($sessionFilter);
-        $res = $args['mongodb']->executeQuery($this->mongoDB.".".$this->sessionsCollection,$query);
+        $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->sessionsCollection,$query);
         $sessionData = current($res->toArray());
 
         return $sessionData;
@@ -135,7 +137,7 @@ class usersessions
         try {
             $delSession = new BulkWrite;
             $delSession->delete(['sessionID' => $args['sessionID'], ['limit' => 1]]);
-            $args['mongodb']->executeBulkWrite($this->mongoDB.".".$this->sessionsCollection, $delSession);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".$this->sessionsCollection, $delSession);
         } catch (MongoExpception $e){
             throw new MongoException($e->getMessage());
         }
@@ -150,7 +152,7 @@ class usersessions
         try {
             $delSession = new BulkWrite;
             $delSession->delete(['username' => $args['username']]);
-            $args['mongodb']->executeBulkWrite($this->mongoDB.".".$this->sessionsCollection, $delSession);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".$this->sessionsCollection, $delSession);
         } catch (MongoExpception $e){
             throw new MongoException($e->getMessage());
         }
@@ -178,5 +180,45 @@ class usersessions
         }
 
         return substr(bin2hex($sessionID), 0, $this->sessionLength);
+    }
+
+    /**
+     * Summary setLoginAttempts - This sets a session var to track the number of times a user has tried to login and failed
+     * @param $args
+     */
+    public function setLoginAttempts($attempts)
+    {
+        if($attempts === "") {
+            // Tracking failed login attempts
+            $_SESSION['flatt'] = 1;
+        }
+        else {
+            $_SESSION['flatt'] = $attempts;
+        }
+    }
+
+    /**
+     * Summary getLoginAttempts - This gets the data in the Session for the number of times a user has tried to login and failed
+     * @return mixed
+     */
+    public function getLoginAttempts()
+    {
+        return $_SESSION['flatt'];
+    }
+
+    /**
+     * Summary increaseLoginAttempts - This increments the number of failed attempts in the Session var
+     */
+    public function increaseLoginAttempts($attempts)
+    {
+        return $attempts + 1;
+    }
+
+    /**
+     * Summary setSessionLocked - This adds the session that we check for to see if the user is locked out
+     */
+    public function setSessionLocked()
+    {
+        $_SESSION['aslockat'] = time();
     }
 }

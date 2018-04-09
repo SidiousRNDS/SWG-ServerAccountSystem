@@ -18,7 +18,7 @@ namespace swgAS\swgAPI\models;
 // swgAS Use
 use swgAS\config\settings;
 use swgAS\utils\validation;
-use swgAS\utils\errormsg;
+use swgAS\utils\messaging\errormsg;
 
 /**
  * Summary of authcodeModel

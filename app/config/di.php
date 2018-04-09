@@ -48,7 +48,6 @@ $ci['userIP'] = function($ci) {
 };
 
 // Views
-// Client Views
 $ci['views'] = function($ci) {
     $views = new \Slim\Views\Twig([
         '../app/views/'.settings::TEMPLATES."/client",
@@ -108,6 +107,13 @@ $ci['adminLog'] = function($ci) {
     $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::ADMINLOG);
     $adminLogger->pushHandler($file_handler);
     return $adminLogger;
+};
+
+$ci['adminLockLog'] = function($ci) {
+    $adminLockLogger = new Logger('adminLockLogger');
+    $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::ADMINLOCKLOG);
+    $adminLockLogger->pushHandler($file_handler);
+    return $adminLockLogger;
 };
 
 // JWT

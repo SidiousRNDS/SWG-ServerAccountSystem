@@ -1,6 +1,6 @@
 <?php
 
-namespace swgAS\utils;
+namespace swgAS\utils\messaging;
 
 /*****************************************************************
  * RNDS SWG Account System
@@ -16,7 +16,9 @@ namespace swgAS\utils;
 class errormsg
 {
     protected static $adminLoginErrorMsg = [
-    	"notauthorized" => "Access Denied"
+    	"notauthorized" => "Access Denied",
+		"tomanyattempts" => "IP ::IP:: has been blocked for ::LIMIT:: minutes",
+		"invalidsession" => "Invalid Session - Please login"
 	];
 
 	/**
@@ -82,11 +84,6 @@ class errormsg
 	 */
 	protected static $galaxybanErrorMsg = [];
 
-
-	protected static $sanitizeErrorMsg = [
-		"checkconfig" => "Arguments passed and FieldSanitize arrays do not match in size please check the config to make sure you have everything set correctly."
-	];
-
 	protected static $passwordErrorMsg = [
 		"salt" => "No salt was generated"
 	];
@@ -119,13 +116,11 @@ class errormsg
 				case "galaxybanModel":
 					$error = self::$galaxybanErrorMsg[$code];
 					break;
-				case "sanitizer":
-					$error = self::$sanitizeErrorMsg[$code];
-					break;
 				case "password":
 					$error = self::$passwordErrorMsg[$code];
 					break;
 				case "adminloginModel":
+				case "adminauthmiddleware":
 					$error = self::$adminLoginErrorMsg[$code];
 					break;
 			}
