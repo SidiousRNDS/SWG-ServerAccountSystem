@@ -35,12 +35,21 @@ $swgAS->group('/admin', function() use($swgAS){
 
         // Dashboard Base
         $swgAS->get('', function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'admindashboard.twig',['title' => 'Dashboard']);
+            return $this->views->render($response, 'admindashboard.twig',['title' => 'Dashboard','route' => $request->getUri()->getPath()]);
         })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('dashboard');
 
+        // Overview
         $swgAS->get('/overview', function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'adminoverview.twig',['title' => 'Overview']);
+            return $this->views->render($response, 'adminoverview.twig',['title' => 'Overview','route' => $request->getUri()->getPath()]);
         })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('overview');
+
+        // Create authcode form
+        $swgAS->get('/authcodes/createauth', function ($request, $response, $args) use ($swgAS) {
+            return $this->views->render($response, 'admincreateauthcodes.twig',['title' => 'Create Authcode','route' => $request->getUri()->getPath()]);
+        })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('createauth');
+
+        // Generate an authcode
+        //$swgAS->post('/authcodes/genauthcode', \swgAS\swgAPI\controllers\authcodeController::class . ':adminGenerateAuthCode')->add(new adminauthmiddleware($swgAS->getContainer()))->setName('genauthcode');
     });
 
 });

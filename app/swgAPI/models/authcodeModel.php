@@ -19,6 +19,7 @@ namespace swgAS\swgAPI\models;
 use swgAS\config\settings;
 use swgAS\utils\validation;
 use swgAS\utils\messaging\errormsg;
+use swgAS\swgAPI\models\accountModel;
 
 /**
  * Summary of authcodeModel
@@ -154,7 +155,16 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	 */
 	public static function createAuthCode($args)
 	{
-		return self::buildAuthCode($args);
+		$user = accountModel::getAccount($args);
+		if($user == errormsg::getErrorMsg("noaccount",(new \ReflectionClass(self::class))->getShortName()))
+		{
+			$authCode = self::buildAuthCode($args);
+			// Add Authcode to the DB
+
+			print"Authcode: " . $authCode ."<br>";
+			die();
+
+		}
 	}
 
 	/**
