@@ -1,1 +1,30 @@
-{% extends "../admindashboard.twig" %}
+{% extends "admindashboard.twig" %}
+
+{% block content %}
+<div id="main">
+    <div id="newAuthcode">
+        <h2><i class="fas fa-user" aria-hidden="true"></i> Create New Authcode</h2>
+        <hr class="hspacer">
+        <div class="msg"></div>
+        <form id="nAuthcode" name="newAuthcode" method="post" action={{path_for('genauthcode')}}>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label id="usernamelabel" for="usernameInput">Username</label>
+                        <input type="text" class="form-control" id="usernameInput" name="username" aria-describedby="usernameHelp" placeholder="LordVader"/>
+                        <small id="usernameHelp" class="form-text text-muted">*Only use Alpha/Numeric and special characters (@.)</small>
+                    </div>
+                    <div class="col-xs-6">
+                        <label id="emaillabel" for="emailInput">Email</label>
+                        <input type="email" class="form-control" id="emailInput" name="email" aria-describedby="emailHelp" placeholder="vader@empire.org"/>
+                        <small id="emailHelp" class="form-text text-muted"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row sgroup">
+                <button type="submit" class="btn btn-default" id="accCreate"><i class="fas fa-user-plus" aria-hidden="true"></i> Create Authcode</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
