@@ -39,7 +39,7 @@ class adminloginModel extends Model
     {
         // Check if there is a lock on the account
         $security = new security();
-        $lock = ""; //$security->checkLocks($args);
+        $lock = $security->checkLocks($args);
 
         if(empty($lock)) {
             // Check User information
@@ -67,6 +67,12 @@ class adminloginModel extends Model
 
             return true;
         }
+
+        $lockMsg = errormsg::getErrorMsg("tomanyattempts", (new \ReflectionClass(self::class))->getShortName());
+        $lockMsg = utilities::replaceStatusMsg( $lockMsg, "::LIMIT::",$lock->currentLockTimer);
+        $lockMsg = utilities::replaceStatusMsg( $lockMsg, "::IP::",$lock->ip);
+
+        $security->addLockMessage($args, $lockMsg);
 
         return $lock;
     }

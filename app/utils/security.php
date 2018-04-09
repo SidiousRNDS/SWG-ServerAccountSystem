@@ -52,7 +52,7 @@ class security
     private function lockAccount($args)
     {
         $checkLocks = $this->checkLocks($args);
-
+      
         if(empty($checkLocks))
         {
             // Create a new lock

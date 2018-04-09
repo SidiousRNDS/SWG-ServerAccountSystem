@@ -32,6 +32,7 @@ class adminloginController extends baseController
                   "errorLogger" => $this->getCIElement('swgErrorLog'),
                   "adminLogger" => $this->getCIElement('adminLog'),
                   "adminLockLog" => $this->getCIElement('adminLockLog'),
+                  "flash" => $this->getCIElement('flash'),
                   "userIP" => $this->getCIElement('userIP'),
                   "username" => $request->getParam('username'),
                   "password" => $request->getParam('password'))
@@ -40,7 +41,11 @@ class adminloginController extends baseController
       if ($login === "Access Denied") {
           $this->getCIElement('flash')->addMessage("error", $login);
           return $response->withRedirect('/admin');
-      } else {
+      }
+      elseif ($this->getCIElement("flash")->getMessage("islocked")){
+        return $response->withRedirect('/admin');
+      }
+      else {
           return $response->withRedirect('/admin/dashboard');
       }
   }

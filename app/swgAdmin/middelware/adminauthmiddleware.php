@@ -58,7 +58,7 @@ class adminauthmiddleware
         // Check if there is a lock on the account
         $security = new security();
         $lock = $security->checkLocks($this->args);
-
+        
         //$lock !== statusmsg::getStatusMsg("lremoved", "security") ||
 
         if($lock != "")
