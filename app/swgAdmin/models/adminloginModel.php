@@ -23,6 +23,7 @@ use swgAS\utils\messaging\errormsg;
 use swgAS\utils\password;
 use swgAS\utils\security;
 use swgAS\utils\sessions;
+use swgAS\utils\utilities;
 
 class adminloginModel extends Model
 {
@@ -38,7 +39,7 @@ class adminloginModel extends Model
     {
         // Check if there is a lock on the account
         $security = new security();
-        $lock = $security->checkLocks($args);
+        $lock = ""; //$security->checkLocks($args);
 
         if(empty($lock)) {
             // Check User information
@@ -46,8 +47,8 @@ class adminloginModel extends Model
             $args['salt'] = settings::ADMIN_PASSWORD_SALT;
 
             $encryptedPassword = $pass->generateEncryptedPassword($args);
+            $loginFilter = ['username' => $args['username'], 'password' => $encryptedPassword['passwordHash']];
 
-            $loginFilter = ['username' => $args['username'], 'password' => $encryptedPassword['passwordHash'], 'ip' => $args['userIP']];
 
             $query = new MongoQuery($loginFilter);
 

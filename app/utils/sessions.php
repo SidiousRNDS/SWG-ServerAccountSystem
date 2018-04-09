@@ -81,7 +81,7 @@ class sessions
             $sessionID = $this->generateSessionID();
             $sessionExpire = time() + 60*60;    // Expire in 1 hour
 
-            $session = ['_id' => new MongoID, 'sessionID' => $sessionID, 'username'=>$args['username'], 'expire'=>$sessionExpire, 'created_at'=>date('Y-m-d H:i:s')];
+            $session = ['_id' => new MongoID, 'sessionID' => $sessionID, 'username'=>$args['username'], 'expire'=>$sessionExpire, 'setat'=>time(), 'created_at'=>date('Y-m-d H:i:s')];
 
             $createSession = new BulkWrite;
             $createSession->insert($session);
@@ -122,6 +122,7 @@ class sessions
 
         if($args['sessiontimestamp'] <= $currentTimeStamp)
         {
+            unset($_SESSION['swgASA']);
             return true;
         }
 

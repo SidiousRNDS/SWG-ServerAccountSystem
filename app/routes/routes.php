@@ -16,6 +16,7 @@ $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
 })->setName('home');
 
 
+// Admin Group
 $swgAS->group('/admin', function() use($swgAS){
 
     // Admin Base
@@ -29,14 +30,23 @@ $swgAS->group('/admin', function() use($swgAS){
     // Login
     $swgAS->post('/login', \swgAS\swgAdmin\controllers\adminloginController::class . ':login');
 
-    // Dashboard Base
-    $swgAS->get('/dashboard', function($request, $response, $args) use ($swgAS) {
-       return $this->views->render($response, 'admindashboard.twig');
-    })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('dashboard');
+    // Dashboard Group
+    $swgAS->group('/dashboard', function() use($swgAS) {
+
+        // Dashboard Base
+        $swgAS->get('', function ($request, $response, $args) use ($swgAS) {
+            return $this->views->render($response, 'admindashboard.twig');
+        })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('dashboard');
+
+        $swgAS->get('/overview', function ($request, $response, $args) use ($swgAS) {
+            return $this->views->render($response, 'admindashboard.twig');
+        })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('overview');
+    });
 
 });
 
 
+// API Group
 $swgAS->group('/api', function() use ($swgAS) {
 
     $swgAS->post('/token', \swgAS\swgAPI\controllers\tokenController::class . ':getToken');
