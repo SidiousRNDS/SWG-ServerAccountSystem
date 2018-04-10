@@ -28,10 +28,7 @@ class serverstatusModel
 
     public function getLastSevenDays($args)
     {
-        $cols = [];
-        $rows = [];
         $days = [];
-        $hours = [];
 
         $currentTime = time();
         $sevenDaysAgo = time() - 7 * 24 * 60 * 60;
@@ -44,30 +41,30 @@ class serverstatusModel
 
         foreach($res as $r)
         {
-            $ftime = date('mdy H', $r->last_check);
+
             $timeDays = date('mdY', $r->last_check);
             $timeHours = date('H',$r->last_check);
 
-            $day = date('d', $r->last_check);
+            $days[$timeDays]['population_high'] = 0;
+            $days[$timeDays]['population_low'] = 0;
 
-            $days[$timeDays]->server = $r->server_name;
+            $days[$timeDays]['server'] = $r->server_name;
 
-            $population = $r->population;
-            print"FTIME: " . $ftime ." :: population: " . $population . "\n";
 
             // Add To Days Objects
-            if($days[$timeDays]->population_high < $population)
+            if($days[$timeDays]['population_high'] < $r->population)
             {
-                if($days[$timeDays]->population_low == "" || $days[$$timeDays]->population_low > $population)
+                if($days[$timeDays]['population_low'] == "" || $days[$timeDays]['population_low'] > $r->population)
                 {
-                    $days[$timeDays]->population_low = $population;
+                    $days[$timeDays]['population_low'] = $r->population;
                 }
 
-                $days[$timeDays]->population_high = $population;
+                $days[$timeDays]['population_high'] = $r->population;
             }
 
-            $days[$timeDays]->byHour->$timeHours->population = $population;
-            $days[$timeDays]->byHour->$timeHours->status = $r->server_status;
+
+            $days[$timeDays]['byHour'][$timeHours]['population'] = $r->population;
+            $days[$timeDays]['byHour'][$timeHours]['status'] = $r->server_status;
 
         }
 

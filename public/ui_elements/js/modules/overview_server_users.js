@@ -1,9 +1,8 @@
 
 var tokenURL = "http://swgusers.rnds.io/api/token";
-var statusURL = "https://swgusers.rnds.io/api/status/lastseven";
+var statusURL = "http://swgusers.rnds.io/api/v1/status/lastseven";
 
 $(document).ready(function(){
-
     $.ajax({
         url: tokenURL,
         type: 'POST'
@@ -18,6 +17,7 @@ $(document).ready(function(){
                     xhr.setRequestHeader('Authorization', 'Bearer ' + data.token);
                 },
                 success: function (data) {
+                    console.dir(data);
 
                 }
             });
