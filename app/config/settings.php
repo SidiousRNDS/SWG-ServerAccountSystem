@@ -40,6 +40,15 @@ namespace swgAS\config;
   const IP_INFO_DB_KEY = "683864c8e14039b85e0235ffb7ce2c6fc26f5fd1d74f82f48e84e1bef2cf9d78";
 
   /**
+   * Game Server Info
+   * @var string LIVE_GAME_SERVER - the URI or IP of your live game server
+   * @var string TEST_GAME_SERVER - the URI or IP of you test game server (leave empty if you don't have one)
+   * @var int STATUS_PORT - The Game Server Status Port
+   */
+  const LIVE_GAME_SERVER = "live.swgrogueone.com";
+  const TEST_GAME_SERVER = "test.swgrogueone.com";
+  const STATUS_PORT = 44455;
+  /**
    * Database vars
    * @var string DBUSER
    * @var string DBPASS

@@ -46,7 +46,7 @@ class adminloginController extends baseController
         return $response->withRedirect('/admin');
       }
       else {
-          return $response->withRedirect('/admin/dashboard');
+          return $response->withRedirect('/admin/dashboard/overview');
       }
   }
 }

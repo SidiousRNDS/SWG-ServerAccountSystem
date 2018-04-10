@@ -32,6 +32,10 @@ class statusModel
 {
     private $serverStatusCollection = "server_status";
 
+    /**
+     * Summary getServerStatus - Get the status of the game servers listed in settings
+     * @param $args
+     */
     public static function getServerStatus($args)
     {
         $liveServer = settings::LIVE_GAME_SERVER;
@@ -43,18 +47,14 @@ class statusModel
             $liveStatus = self::pollServer(['server'=>$liveServer,'port'=>$statusPort]);
             $liveStatus->name = "Live";
 
-            /*
-             *  $session = ['_id' => new MongoID, 'sessionID' => $sessionID, 'username'=>$args['username'], 'expire'=>$sessionExpire, 'setat'=>time(), 'created_at'=>date('Y-m-d H:i:s')];
-             *  $createSession = new BulkWrite;
-             *  $createSession->insert($session);
-             */
-
             $live = ['_id' => new MongoID, 'server_name' => $liveStatus->name, 'server_status' => $liveStatus->server_status,
                      'popluation' => $liveStatus->users_conneted, 'popluation_since_last_restart' => $liveStatus->users_connected_since_last_restart,
                      'uptime_days' => $liveStatus->up_time->days, 'uptime_hours' => $liveStatus->up_time->hours,
                      'uptime_minutes' => $liveStatus->up_time->minutes, 'uptime_seconds' => $liveStatus->up_time->seconds,
                      'last_check' => $liveStatus->last_check
             ];
+            $createLiveStatus = new BulkWrite;
+            $createLiveStatus->insert($live);
         }
 
         if($testServer)
@@ -68,9 +68,9 @@ class statusModel
                 'uptime_minutes' => $testStatus->up_time->minutes, 'uptime_seconds' => $testStatus->up_time->seconds,
                 'last_check' => $testStatus->last_check
             ];
+            $createTestStatus = new BulkWrite;
+            $createTestStatus->insert($test);
         }
-
-
     }
 
 

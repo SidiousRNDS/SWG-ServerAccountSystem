@@ -45,7 +45,6 @@ $(document).ready(function(){
                         xhr.setRequestHeader('Authorization', 'Bearer ' + data.token);
                     },
                     success: function(data) {
-                        console.dir(data);
                         // Error
                         if (data !== "Account for " + username + " has been created.") {
                             $('.msg').html("<span class='error-msg'><i class='fas fa-exclamation-triangle' aria-hidden='true'></i> " + data + "</span>");

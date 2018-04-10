@@ -53,6 +53,7 @@ $ci['views'] = function($ci) {
         '../app/views/'.settings::TEMPLATES."/client",
         '../app/views/'.settings::TEMPLATES."/admin",
         '../app/views/'.settings::TEMPLATES."/admin/components",
+        '../app/views/'.settings::TEMPLATES."/admin/components/overview_modules",
         '../app/views/'.settings::TEMPLATES."/admin/authcodes",
         '../app/views/'.settings::TEMPLATES."/admin/players",
         '../app/views/'.settings::TEMPLATES."/admin/reports",
@@ -143,6 +144,7 @@ $ci[\swgAS\swgAdmin\controllers\adminloginController::class] = function(Containe
     return new \swgAS\swgAdmin\controllers\adminloginController($ci);
 };
 
+// API
 $ci[\swgAS\swgAPI\controllers\accountController::class] = function(Container $ci) {
     return new \swgAS\swgAPI\controllers\accountController($ci);
 };
@@ -153,6 +155,11 @@ $ci[\swgAS\swgAPI\controllers\authcodeController::class] = function(Container $c
 
 $ci[\swgAS\swgAPI\controllers\tokenController::class] = function(Container $ci) {
     return new \swgAS\swgAPI\controllers\tokenController($ci);
+};
+
+// API Server Status
+$ci[\swgAS\swgAPI\controllers\serverstatusController::class] = function(Container $ci) {
+    return new \swgAS\swgAPI\controllers\serverstatusController($ci);
 };
 
 ?>

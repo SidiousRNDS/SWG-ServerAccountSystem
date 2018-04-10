@@ -35,7 +35,7 @@ $swgAS->group('/admin', function() use($swgAS){
 
         // Dashboard Base
         $swgAS->get('', function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'admindashboard.twig',['title' => 'Dashboard','route' => $request->getUri()->getPath()]);
+            return $this->views->render($response, 'adminoverview.twig',['title' => 'Dashboard','route' => $request->getUri()->getPath()]);
         })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('dashboard');
 
         // Overview
@@ -78,7 +78,12 @@ $swgAS->group('/api', function() use ($swgAS) {
 
             // POST - Create Account
             $swgAS->post('/addaccount', \swgAS\swgAPI\controllers\accountController::class . ':addAccount');
+        });
 
+        $swgAS->group('/status', function() use($swgAS) {
+
+            // POST - Server Status Last 7 Days
+            $swgAS->post('/lastseven', \swgAS\swgAPI\controllers\serverstatusController::class . ':lastSevenDays');
         });
 
     });
