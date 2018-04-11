@@ -30,7 +30,7 @@ use swgAS\utils\utilities;
 
 class statusModel
 {
-    private $serverStatusCollection = "server_status";
+    private static $serverStatusCollection = "server_status";
 
     /**
      * Summary getServerStatus - Get the status of the game servers listed in settings
@@ -48,13 +48,14 @@ class statusModel
             $liveStatus->name = "Live";
 
             $live = ['_id' => new MongoID, 'server_name' => $liveStatus->name, 'server_status' => $liveStatus->server_status,
-                     'popluation' => $liveStatus->users_conneted, 'popluation_since_last_restart' => $liveStatus->users_connected_since_last_restart,
+                     'popluation' => $liveStatus->users_connected, 'popluation_since_last_restart' => $liveStatus->users_connected_since_last_restart,
                      'uptime_days' => $liveStatus->up_time->days, 'uptime_hours' => $liveStatus->up_time->hours,
                      'uptime_minutes' => $liveStatus->up_time->minutes, 'uptime_seconds' => $liveStatus->up_time->seconds,
                      'last_check' => $liveStatus->last_check
             ];
             $createLiveStatus = new BulkWrite;
             $createLiveStatus->insert($live);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".self::$serverStatusCollection, $createLiveStatus);
         }
 
         if($testServer)
@@ -63,13 +64,14 @@ class statusModel
             $testStatus->name = "Test";
 
             $test = ['_id' => new MongoID, 'server_name' => $testStatus->name, 'server_status' => $testStatus->server_status,
-                'popluation' => $testStatus->users_conneted, 'popluation_since_last_restart' => $testStatus->users_connected_since_last_restart,
+                'popluation' => $testStatus->users_connected, 'popluation_since_last_restart' => $testStatus->users_connected_since_last_restart,
                 'uptime_days' => $testStatus->up_time->days, 'uptime_hours' => $testStatus->up_time->hours,
                 'uptime_minutes' => $testStatus->up_time->minutes, 'uptime_seconds' => $testStatus->up_time->seconds,
                 'last_check' => $testStatus->last_check
             ];
             $createTestStatus = new BulkWrite;
             $createTestStatus->insert($test);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".self::$serverStatusCollection, $createTestStatus);
         }
     }
 

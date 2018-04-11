@@ -26,7 +26,11 @@ class security
 {
     private $failedLoginCollection = "failedlogin";
     private $lockRanges = [10,15,30]; // These are number of minutes to lock the account
-
+    
+    /**
+     * Summary loginAttempts - Track the number of login attempts by a user
+     * @param $args
+     */
     public function loginAttempts($args)
     {
         $session = new sessions();
@@ -48,7 +52,11 @@ class security
             $session->setLoginAttempts(1);
         }
     }
-
+    
+    /**
+     * Summary lockAccount - Lock the IP for a set range of time
+     * @param $args
+     */
     private function lockAccount($args)
     {
         $checkLocks = $this->checkLocks($args);

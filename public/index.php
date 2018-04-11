@@ -43,5 +43,4 @@
     require '../app/routes/routes.php';
 
     $swgAS->run();
-
 ?>

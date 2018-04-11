@@ -35,10 +35,10 @@ class accountController extends baseController
 	public function getAccount(ServerRequestInterface $request, ResponseInterface $response)
 	{
 		$account = accountModel::getAccounts(array(
-		    "db"=>$this->getCIElement('db'),
-            "errorlogger"=>$this->getCIElement('swgErrorLog'),
-            "apiLogger"=>$this->getCIElement('swgAPILog'),
-            "userLogger"=>$this->getCIElement('swgUsersLog'))
+			"db"=>$this->getCIElement('db'),
+          	"errorlogger"=>$this->getCIElement('swgErrorLog'),
+          	"apiLogger"=>$this->getCIElement('swgAPILog'),
+          	"userLogger"=>$this->getCIElement('swgUsersLog'))
         );
 
 		return $response->withJson($account,200);
