@@ -201,7 +201,7 @@ class validation
 	public static function validateAuthCodeLength($authCode)
 	{
 		$totalLength = 0;
-		$mainPrefixLen = strlen(settings::MAIN_CODE_PREFIX);
+		$mainPrefixLen = strlen(settings::PRIMARY_CODE_PREFIX);
 		$extendPrefixLen = strlen(settings::EXTENDED_CODE_PREFIX);
 		$primarySectionLen = settings::CODE_LENGTH_PRIMARY;
 		$secondarySectionLen = settings::CODE_LENGTH_SECONDARY;
@@ -215,7 +215,7 @@ class validation
 				$totalLength = 2;
 			}
 
-			if(preg_match("/".settings::MAIN_CODE_PREFIX."/",$authCode))
+			if(preg_match("/".settings::PRIMARY_CODE_PREFIX."/",$authCode))
 			{
 				$totalLength = $totalLength + $mainPrefixLen + $primarySectionLen + $secondarySectionLen;
 
@@ -241,7 +241,7 @@ class validation
 				$totalLength = 1;
 			}
 
-			if(preg_match("/".settings::MAIN_CODE_PREFIX."/",$authCode))
+			if(preg_match("/".settings::PRIMARY_CODE_PREFIX."/",$authCode))
 			{
 				$totalLength = $totalLength + $mainPrefixLen + $primarySectionLen;
 

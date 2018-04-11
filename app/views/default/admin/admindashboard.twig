@@ -11,7 +11,13 @@
     <link rel="shortcut icon" href="{{ base_url() }}/ui_elements/img/swgroicon.png" type="image/png"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jq-3.2.1/dt-1.10.16/b-1.5.1/fc-3.2.4/fh-3.1.3/r-2.2.1/datatables.min.css"/>
     <link rel="stylesheet" href="{{ base_url() }}/ui_elements/css/default.css">
+
+    <script>
+        var tokenURL = "{{ baseURL }}{{ tokenURL }}";
+        var statusURL = "{{ baseURL }}{{ statusURL }}";
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-inverse adm">
@@ -22,12 +28,12 @@
     <div class="sidebar">
         {% include 'adminsidebar.twig' %}
     </div>
-    <div class="content">
+    <div class="admincontent">
         {% block content %} {% endblock %}
     </div>
 </div>
 
-<footer class="navbar navbar-inverse navbar-fixed-bottom">
+<footer class="navbar navbar-inverse">
     <div class="container">
         <div class="foot"></div>
     </div>
@@ -40,7 +46,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="{{ base_url() }}/ui_elements/js/utils.js"></script>
 
-{% block js %} {% endblock %}
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/jq-3.2.1/dt-1.10.16/b-1.5.1/fc-3.2.4/fh-3.1.3/r-2.2.1/datatables.min.js"></script>
+
+
+{% block jsmodules %} {% endblock %}
 
 </body>
 </html>

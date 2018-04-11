@@ -79,12 +79,39 @@ class accountModel extends Model
 		return self::$accountsTable;
 	}
 
-	/**
-	 * Summary of getAccount
-	 * @param array $args
-	 * @throws \Error
-	 * @return mixed
-	 */
+    /**
+	 * Summary - checkUsername check to see if a username already exists in the system
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
+	public static function checkUsername(array $args)
+	{
+        try {
+
+            $results = $args['db']::table(self::$accountsTable)
+                ->select('account_id')
+                ->where('username', '=', $args['username'])
+                ->first();
+
+            if ($results === null)
+            {
+                return errormsg::getErrorMsg("noaccount",(new \ReflectionClass(self::class))->getShortName());
+            }
+
+            return $results;
+
+        } catch (Error $ex) {
+            $args['errorLogger']->error('accountModel::getAccount',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
+			throw new \Error (errormsg::getErrorMsg("getaccount",(new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
+		}
+	}
+
+    /**
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	public static function getAccount(array $args)
 	{
 		try {
@@ -109,12 +136,11 @@ class accountModel extends Model
 		}
 	}
 
-	/**
-	 * Summary of getAccounts
-	 * @param array $args
-	 * @throws \Error
-	 * @return mixed
-	 */
+    /**
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	public static function getAccounts(array $args)
 	{
 		try {
@@ -137,11 +163,11 @@ class accountModel extends Model
 		}
 	}
 
-	/**
-	 * Summary of addAccount
-	 * @param array $args
-	 * @return \array|boolean|null|string
-	 */
+    /**
+     * @param array $args
+     * @return array|bool|mixed|null|string
+     * @throws \ReflectionException
+     */
 	public static function addAccount(array $args)
 	{
 		$validate = validation::validateAccount($args);
@@ -241,11 +267,11 @@ class accountModel extends Model
 	 *  Private Methods
 	 */
 
-	/**
-	 * Summary of processNewAccount
-	 * @param array $args
-	 * @return array
-	 */
+    /**
+     * @param array $args
+     * @return array|string
+     * @throws \ReflectionException
+     */
 	private static function processNewAccountData(array $args)
 	{
 		// Check to see if we need to validate account count against Email
@@ -281,12 +307,11 @@ class accountModel extends Model
 		return statusmsg::getStatusMsg("checkspassed", (new \ReflectionClass(self::class))->getShortName());
 	}
 
-	/**
-	 * Summary of getAccountEmail
-	 * @param array $args
-	 * @throws \Error
-	 * @return mixed
-	 */
+    /**
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	private static function getAccountEmail(array $args)
 	{
 		try {
@@ -308,12 +333,11 @@ class accountModel extends Model
 		}
 	}
 
-	/**
-	 * Summary of getAccountUsername
-	 * @param array $args
-	 * @throws \Error
-	 * @return mixed
-	 */
+    /**
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	private static function getAccountUsername(array $args)
 	{
 		try {
@@ -336,12 +360,11 @@ class accountModel extends Model
 		}
 	}
 
-	/**
-	 * Summary of getAccountIp
-	 * @param array $args
-	 * @throws \Error
-	 * @return mixed
-	 */
+    /**
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	private static function getAccountIp(array $args)
 	{
 		try {

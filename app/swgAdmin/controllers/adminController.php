@@ -10,7 +10,7 @@ namespace swgAS\swgAdmin\controllers;
  * @version 1.0.0
  * ****************************************************************
  * NAMESPACE: swgAS\swgAdmin\controllers
- * CLASS: adminloginController
+ * CLASS: adminController
  ******************************************************************/
  // Use
  use \Psr\Http\Message\ServerRequestInterface;
@@ -19,15 +19,24 @@ namespace swgAS\swgAdmin\controllers;
  // Use swgAS
  use swgAS\controllers\baseController;
  use swgAS\swgAdmin\models\adminloginModel;
- use swgAS\utils\security;
+ use swgAS\config\settings;
 
-class adminloginController extends baseController
+class adminController extends baseController
 {
-  public function login(ServerRequestInterface $request, ResponseInterface $response)
-  {
-      $adminLogin = new adminloginModel();
 
-      $login = $adminLogin->authLogin(array(
+    public function adminIndex(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        return $this->getCIElement('views')->render($response, 'adminlogin.twig',[
+            'uIP'=>$this->getCIElement('userIP'),
+            'captchakey'=>settings::G_CAPTCHA_KEY,
+            'flash' => $this->getCIElement('flash')
+        ]);
+    }
+
+    public function adminLogin(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $adminLogin = new adminloginModel();
+        $login = $adminLogin->authLogin(array(
                   "mongodb" => $this->getCIElement('mongodb'),
                   "errorLogger" => $this->getCIElement('swgErrorLog'),
                   "adminLogger" => $this->getCIElement('adminLog'),
@@ -36,19 +45,19 @@ class adminloginController extends baseController
                   "userIP" => $this->getCIElement('userIP'),
                   "username" => $request->getParam('username'),
                   "password" => $request->getParam('password'))
-      );
+        );
 
-      if ($login === "Access Denied") {
-          $this->getCIElement('flash')->addMessage("error", $login);
-          return $response->withRedirect('/admin');
-      }
-      elseif ($this->getCIElement("flash")->getMessage("islocked")){
-        return $response->withRedirect('/admin');
-      }
-      else {
-          return $response->withRedirect('/admin/dashboard/overview');
-      }
-  }
+        if ($login === "Access Denied") {
+            $this->getCIElement('flash')->addMessage("error", $login);
+            return $response->withRedirect('/admin');
+        }
+        elseif ($this->getCIElement("flash")->getMessage("islocked")){
+            return $response->withRedirect('/admin');
+        }
+        else {
+            return $response->withRedirect('/admin/dashboard/overview');
+        }
+    }
 }
 
 ?>

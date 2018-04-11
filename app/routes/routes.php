@@ -22,34 +22,34 @@ $swgAS->group('/admin', function() use($swgAS){
     // Admin Base
     $adminBaseRoutes = ["", "/"];
     foreach($adminBaseRoutes as $adminRoutes) {
-        $swgAS->get($adminRoutes, function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'adminlogin.twig',['uIP'=>$this->get('userIP'), 'captchakey'=>settings::G_CAPTCHA_KEY, 'flash' => $this->flash]);
-        })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('adminlogin');
+        $swgAS->get($adminRoutes, \swgAS\swgAdmin\controllers\adminController::class .':adminIndex')
+            ->add(new adminauthmiddleware($swgAS->getContainer()))
+            ->setName('adminindex');
     }
 
     // Login
-    $swgAS->post('/login', \swgAS\swgAdmin\controllers\adminloginController::class . ':login');
+    $swgAS->post('/login', \swgAS\swgAdmin\controllers\adminController::class . ':adminLogin');
 
     // Dashboard Group
     $swgAS->group('/dashboard', function() use($swgAS) {
 
         // Dashboard Base
-        $swgAS->get('', function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'adminoverview.twig',['title' => 'Dashboard','route' => $request->getUri()->getPath()]);
-        })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('dashboard');
-
-        // Overview
-        $swgAS->get('/overview', function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'adminoverview.twig',['title' => 'Overview','route' => $request->getUri()->getPath()]);
-        })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('overview');
+        $dashboardBaseRoutes = ["", "/", "/overview"];
+        foreach($dashboardBaseRoutes as $dashboardRoutes) {
+            $swgAS->get($dashboardRoutes, \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminDashboardIndex')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('overview');
+        }
 
         // Create authcode form
-        $swgAS->get('/authcodes/createauth', function ($request, $response, $args) use ($swgAS) {
-            return $this->views->render($response, 'admincreateauthcodes.twig',['title' => 'Create Authcode','route' => $request->getUri()->getPath()]);
-        })->add(new adminauthmiddleware($swgAS->getContainer()))->setName('createauth');
+        $swgAS->get('/authcodes/createauth', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminCreateAuthCode')
+            ->add(new adminauthmiddleware($swgAS->getContainer()))
+            ->setName('createauth');
 
         // Generate an authcode
-        //$swgAS->post('/authcodes/genauthcode', \swgAS\swgAPI\controllers\authcodeController::class . ':adminGenerateAuthCode')->add(new adminauthmiddleware($swgAS->getContainer()))->setName('genauthcode');
+        $swgAS->post('/authcodes/genauthcode', \swgAS\swgAPI\controllers\authcodeController::class . ':adminGenerateAuthCode')
+            ->add(new adminauthmiddleware($swgAS->getContainer()))
+            ->setName('genauthcode');
     });
 
 });
@@ -83,7 +83,7 @@ $swgAS->group('/api', function() use ($swgAS) {
         $swgAS->group('/status', function() use($swgAS) {
 
             // POST - Server Status Last 7 Days
-            $swgAS->post('/lastseven', \swgAS\swgAPI\controllers\serverstatusController::class . ':lastSevenDays');
+            $swgAS->post('/lastsevenlive', \swgAS\swgAPI\controllers\serverstatusController::class . ':lastSevenDaysLive');
         });
 
     });

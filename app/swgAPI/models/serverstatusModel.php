@@ -26,14 +26,19 @@ class serverstatusModel
 {
     private $serverStatusCollection = "server_status";
 
-    public function getLastSevenDays($args)
+    /**
+     * Summary getLastSevenDays - Get the last 7 days of status updates from the db
+     * @param $args
+     * @return array
+     */
+    public function getLastSevenDaysLive($args)
     {
         $days = [];
 
         $currentTime = time();
         $sevenDaysAgo = time() - 7 * 24 * 60 * 60;
 
-        $statusFilter = ['last_check' => ['$gt' => $sevenDaysAgo, '$lt' => $currentTime]];
+        $statusFilter = ['last_check' => ['$gt' => $sevenDaysAgo, '$lt' => $currentTime], 'server_name' => 'Live'];
         $options = ['sort' => ['_id' => 1]];
         $query = new MongoQuery($statusFilter,$options);
 
@@ -43,29 +48,27 @@ class serverstatusModel
         {
 
             $timeDays = date('mdY', $r->last_check);
+            $dateReported = date('m-d-Y', $r->last_check);
             $timeHours = date('H',$r->last_check);
 
-            $days[$timeDays]['population_high'] = 0;
-            $days[$timeDays]['population_low'] = 0;
-
+            $days[$timeDays]['date'] = $dateReported;
             $days[$timeDays]['server'] = $r->server_name;
 
 
-            // Add To Days Objects
+            // Add To Days Array
+
+            if($days[$timeDays]['population_low'] == "" || $days[$timeDays]['population_low'] > $r->population)
+            {
+                $days[$timeDays]['population_low'] = $r->population;
+            }
+
             if($days[$timeDays]['population_high'] < $r->population)
             {
-                if($days[$timeDays]['population_low'] == "" || $days[$timeDays]['population_low'] > $r->population)
-                {
-                    $days[$timeDays]['population_low'] = $r->population;
-                }
-
                 $days[$timeDays]['population_high'] = $r->population;
             }
 
-
-            $days[$timeDays]['byHour'][$timeHours]['population'] = $r->population;
-            $days[$timeDays]['byHour'][$timeHours]['status'] = $r->server_status;
-
+            //$days[$timeDays]['byHour'][$timeHours]['population'] = $r->population;
+            //$days[$timeDays]['byHour'][$timeHours]['status'] = $r->server_status;
         }
 
         return $days;

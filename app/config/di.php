@@ -140,8 +140,8 @@ $ci["CorsMiddleware"] = function ($ci) {
 };
 
 // Controllers
-$ci[\swgAS\swgAdmin\controllers\adminloginController::class] = function(Container $ci) {
-    return new \swgAS\swgAdmin\controllers\adminloginController($ci);
+$ci[\swgAS\swgAdmin\controllers\adminController::class] = function(Container $ci) {
+    return new \swgAS\swgAdmin\controllers\adminController($ci);
 };
 
 // API

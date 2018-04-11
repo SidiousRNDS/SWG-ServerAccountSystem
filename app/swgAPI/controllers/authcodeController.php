@@ -21,16 +21,23 @@ use Psr\Http\Message\ResponseInterface;
 // Use swgAS
 use swgAS\controllers\baseController;
 use swgAS\swgAPI\models\authcodeModel;
+use swgAS\config\settings;
 
 class authcodeController extends baseController
 {
+
 	public function adminGenerateAuthCode(ServerRequestInterface $request, ResponseInterface $response)
 	{
 			$authCode = authcodeModel::createAuthCode(array(
 				"db"=>$this->getCIElement('db'),
 				"errorlogger"=>$this->getCIElement('swgErrorLog'),
-				"flash"=>$this->getCIElement('flash'))
+				"flash"=>$this->getCIElement('flash'),
+            	'username'=>$request->getParam('username'),
+            	'email' => $request->getParam('email'),
+            	'prefix' => $request->getParam('prefix'))
 			);
+
+			return $response->withRedirect('/admin/dashboard/authcodes/createauth');
 	}
 }
 

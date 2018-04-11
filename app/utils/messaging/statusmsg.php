@@ -28,6 +28,11 @@ class statusmsg
 		"lremoved" => "Lock has been removed"
 	];
 
+    protected static $authcodeStatus = [
+        "authcreated" => "Authcode ::AUTHCODE:: for ::USERNAME:: was created",
+		"accountnotfound" => "Account not found"
+    ];
+
 	/**
 	 * Summary of getStatusMsg
 	 * @param string $code
@@ -47,6 +52,9 @@ class statusmsg
                 case "security":
                     $status = self::$security[$code];
                     break;
+				case "authcodeModel":
+					$status = self::$authcodeStatus[$code];
+					break;
 			}
 		}
 

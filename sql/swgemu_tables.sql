@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS `admin_auth_codes` (
 	`username` varchar(32) NOT NULL,
 	`email` varchar(255) NOT NULL,
 	`code_used` tinyint NOT NULL DEFAULT 0,
-	`used_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	`used_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Alter Accounts table

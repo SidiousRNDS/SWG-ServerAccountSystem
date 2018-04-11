@@ -19,6 +19,9 @@ namespace swgAS\swgAPI\models;
 use swgAS\config\settings;
 use swgAS\utils\validation;
 use swgAS\utils\messaging\errormsg;
+use swgAS\utils\messaging\statusmsg;
+use swgAS\utils\utilities;
+
 use swgAS\swgAPI\models\accountModel;
 
 /**
@@ -155,15 +158,76 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	 */
 	public static function createAuthCode($args)
 	{
-		$user = accountModel::getAccount($args);
-		if($user == errormsg::getErrorMsg("noaccount",(new \ReflectionClass(self::class))->getShortName()))
+		$user = accountModel::checkUsername($args);
+
+
+		if($user == errormsg::getErrorMsg("noaccount",'accountModel'))
 		{
-			$authCode = self::buildAuthCode($args);
-			// Add Authcode to the DB
+            $checkAuthUsername = self::checkUsername($args);
+			
 
-			print"Authcode: " . $authCode ."<br>";
-			die();
+            if($checkAuthUsername == "") {
+                $authCode = self::buildAuthCode($args);
 
+                $args['authcode'] = $authCode;
+
+                $authCodeEntered = self::addAuthCode($args);
+
+                if ($authCodeEntered != "") {
+                    $args['flash']->addMessage("error", "Issue with the db authcode was not entered");
+                    return;
+                }
+
+                // Add Authcode to the DB
+                if ($authCode != "") {
+                    $statusMsg = statusmsg::getStatusMsg("authcreated", (new \ReflectionClass(self::class))->getShortName());
+                    $statusMsg = utilities::replaceStatusMsg($statusMsg, "::USERNAME::", $args['username']);
+                    $statusMsg = utilities::replaceStatusMsg($statusMsg, "::AUTHCODE::", $authCode);
+
+
+                    $args['flash']->addMessage("success", $statusMsg);
+                } else {
+                    $args['flash']->addMessage("error", "shit went south.");
+                }
+            }
+            else
+			{
+                $args['flash']->addMessage("error",errormsg::getErrorMsg("authnotgenerated", (new \ReflectionClass(self::class))->getShortName()));
+			}
+
+		}
+		else {
+            $args['flash']->addMessage("error",errormsg::getErrorMsg("authnotgenerated", (new \ReflectionClass(self::class))->getShortName()));
+		}
+	}
+
+	private static function checkUsername($args)
+	{
+        try {
+            $addAuthcode = $args['db']::table(self::$authTable)
+                ->select('aaid')
+                ->where('username', '=', $args['username'])
+				->orWhere('email', '=', $args['email'])
+				->first();
+
+            return $addAuthcode;
+
+
+        } catch (Error $ex) {
+            return $ex->getMessage();
+        }
+	}
+
+	private static function addAuthCode($args)
+	{
+		try {
+            $addAuthcode = $args['db']::table(self::$authTable)->insert([
+                "username" => $args["username"],
+                "email" => $args["email"],
+                "auth_code" => $args['authcode']
+            ]);
+        } catch (Error $ex) {
+			return $ex->getMessage();
 		}
 	}
 
@@ -175,9 +239,9 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	{
 		$authCode = null;
 
-		if($args['prefix'] === settings::MAIN_CODE_PREFIX)
+		if($args['prefix'] === settings::PRIMARY_CODE_PREFIX)
 		{
-			$authCode = settings::MAIN_CODE_PREFIX;
+			$authCode = settings::PRIMARY_CODE_PREFIX;
 		}
 
 		if($args['prefix'] === settings::EXTENDED_CODE_PREFIX)
@@ -185,13 +249,13 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 			$authCode = settings::EXTENDED_CODE_PREFIX;
 		}
 
-		$primarySection = self::generateAuthCodeSections(settings::CODE_LENGTH_PRIMARY);
+		$primarySection = self::buildAuthCodeSections(settings::CODE_LENGTH_PRIMARY);
 
 		$authCode = $authCode . "-". $primarySection;
 
 		if(settings::USE_SECONDARY)
 		{
-			$secondarySection = self::generateAuthCodeSections(settings::CODE_LENGTH_SECONDARY);
+			$secondarySection = self::buildAuthCodeSections(settings::CODE_LENGTH_SECONDARY);
 			$authCode = $authCode . "-". $secondarySection;
 		}
 
@@ -216,7 +280,7 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	 * @param int $sectionLength
 	 * @return \null|string
 	 */
-	private function buildAuthCodeSections(int $sectionLength)
+	private static function buildAuthCodeSections(int $sectionLength)
 	{
 		$section = null;
 
@@ -226,6 +290,27 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 		}
 
 		return $section;
+	}
+
+    /**
+	 * Summary of getActiveAuthcodes - Get a list of authcodes that have not been used yet
+     * @param $args
+     * @return int
+     * @throws \ReflectionException
+     */
+	public static function getActiveAuthcodes($args)
+	{
+        try {
+            $result = $args['db']::table(self::$authTable)
+				->select('aaid','username', 'email', 'used_date', 'auth_code')
+                ->where('auth_code_used', '!=', 1)
+            	->get();
+
+                return $result;
+        }
+        catch (Error $ex) {
+            throw new \Error (errormsg::getErrorMsg("getactiveauthcodes", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
+        }
 	}
 }
 

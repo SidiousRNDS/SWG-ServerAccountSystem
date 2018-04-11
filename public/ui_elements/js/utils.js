@@ -18,6 +18,15 @@ $(document).ready(function(){
     // Translate the page to galactic basic
     translate();
 
+    $('#authCodeList').DataTable({
+        "columns": [
+            null,
+            null,
+            null,
+            {"orderable":false, "width":"10%"}
+        ]
+    });
+
 });
 
 // Translate

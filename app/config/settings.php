@@ -19,6 +19,10 @@ namespace swgAS\config;
  class settings
  {
 
+     const BASE_URL = "http://swgusers.rnds.io";
+     const TOKEN_URL = "/api/token";
+     const STATUS_URL = "/api/v1/status";
+
   /**
   * Template location
   * @var string TEMPLATES - This is the active templates directory you want to use for both admin and client
@@ -119,7 +123,7 @@ namespace swgAS\config;
  	 * @var string AUTHCODE_GENERATE_USER - Name that is allowed to generate authcodes (this is passed in the post request)
  	 * @var string AUTHCODE_GENERATE_SALE - Salt to encode the user
  	 */
- 	const MAIN_CODE_PREFIX = "RNDS1";
+ 	const PRIMARY_CODE_PREFIX = "RNDS1";
  	const EXTENDED_CODE_PREFIX = "RNDS2";
  	const CODE_LENGTH_PRIMARY = 7;
  	const CODE_LENGTH_SECONDARY = 7;

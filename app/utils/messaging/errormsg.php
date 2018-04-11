@@ -69,7 +69,9 @@ class errormsg
 		"getauthid" => "Could not access the db for getAuthCodeId",
 		"getauthcodeuser" => "Could not access the db for getAuthCodeUser",
 		"validateauth" => "Could not access the db for validateAuth",
-		"updateauthcode" => "Could not access the db for updateAuthCode"
+		"updateauthcode" => "Could not access the db for updateAuthCode",
+		"getactiveauthcodes" => "Could not access the db for getActiveAuthcodes",
+		"authnotgenerated" => "No authcode created account already exists - Please change the username and/or email to generate an authcode"
 	];
 
 	/**

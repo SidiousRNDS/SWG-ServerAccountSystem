@@ -1,3 +1,7 @@
 {% extends "admindashboard.twig" %}
 
-{% block js %}{% include "overview_modules/overview_server_users.twig" %}{% endblock %}
+{% block jsmodules %}{% include "overview_modules/overview_server_users.twig" %}{% endblock %}
+
+{% block content %}
+    <div id="last7days" style="padding:20px 0 10px 0; border-bottom:2px solid #000000; margin:0 auto;"></div>
+{% endblock %}

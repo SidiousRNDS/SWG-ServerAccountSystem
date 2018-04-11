@@ -27,11 +27,11 @@ class serverstatusController extends baseController
      * @param ResponseInterface $response
      * @return mixed
      */
-    public function lastSevenDays(ServerRequestInterface $request, ResponseInterface $response)
+    public function lastSevenDaysLive(ServerRequestInterface $request, ResponseInterface $response)
     {
         $ss = new serverstatusModel();
 
-        $status = $ss->getLastSevenDays(array(
+        $status = $ss->getLastSevenDaysLive(array(
                 "mongodb"=>$this->getCIElement('mongodb'),
                 "errorlogger"=>$this->getCIElement('swgErrorLog'),
                 "apiLogger"=>$this->getCIElement('swgAPILog'))
