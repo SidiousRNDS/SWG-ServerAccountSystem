@@ -164,7 +164,7 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 		if($user == errormsg::getErrorMsg("noaccount",'accountModel'))
 		{
             $checkAuthUsername = self::checkUsername($args);
-			
+
 
             if($checkAuthUsername == "") {
                 $authCode = self::buildAuthCode($args);
@@ -302,7 +302,7 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	{
         try {
             $result = $args['db']::table(self::$authTable)
-				->select('aaid','username', 'email', 'used_date', 'auth_code')
+				->select('aaid','username', 'email', 'created_at', 'auth_code')
                 ->where('auth_code_used', '!=', 1)
             	->get();
 

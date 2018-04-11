@@ -3,7 +3,7 @@
 {% block content %}
     <div id="adminmain">
         <div id="newAuthcode">
-            <h2><i class="fas fa-user" aria-hidden="true"></i> Create New Authcode</h2>
+            <h2><i class="fas fa-user" aria-hidden="true"></i> Create New User Authentication Code</h2>
             <hr class="hspacer">
             {% if flash.getMessage('error')[0] %}
                 <div class="errmsg">
@@ -34,8 +34,13 @@
                     <div class="form-group">
                         <div class="col-xs-12" style="margin-top:1%;">
                             <label id="prefixlabel" for="prefix">Authcode Prefix</label><br/>
-                            <input type="radio" name="prefix" value="{{ primary_prefix }}"> First account<br/>
-                            <input type="radio" name="prefix" value="{{ extended_prefix }}"> Has more then One account
+                            <input type="radio" name="prefix" value="{{ primary_prefix }}"> Less than {{ numberOfAccounts }}
+                            {% if numberOfAccounts > 1 %}accounts {% endif %}
+                            {% if numberOfAccounts <= 1 %}account {% endif %}
+                            <br/>
+                            <input type="radio" name="prefix" value="{{ extended_prefix }}"> Greater than {{ numberOfAccounts }}
+                            {% if numberOfAccounts > 1 %}accounts {% endif %}
+                            {% if numberOfAccounts <= 1 %}account {% endif %}
                         </div>
                     </div>
                 </div>
@@ -51,8 +56,8 @@
             <thead>
                 <tr>
                     <th>Username</th>
-                    <!-- <th>Email</th> -->
-                    <th>Auth Code</th>
+                    <th>Email</th>
+                    <th>Active Authentication Code</th>
                     <th>Issue Date</th>
                     <th style="text-align:center;">Actions</th>
                 </tr>
@@ -61,10 +66,10 @@
                 {% for auth in authlist %}
                     <tr>
                         <td>{{ auth.username }}</td>
-                        <!-- <td>{{ auth.email }}</td> -->
+                        <td>{{ auth.email }}</td>
                         <td>{{ auth.auth_code }}</td>
-                        <td>{{ auth.used_date }}</td>
-                        <td style="text-align:center"><a href="{{ path_for('genauthcode')}}/edit/{{ user.aaid }}"><i class="fas fa-edit fa-lg"></i></a>  <a href="{{ path_for('genauthcode')}}/delete/{{ user.aaid }}"><i class="fas fa-times-circle fa-lg"></i></a></td>
+                        <td>{{ auth.created_at }}</td>
+                        <td style="text-align:center"><a href="{{ path_for('genauthcode')}}/delete/{{ user.aaid }}" title="Delete authentication code for {{ auth.username }}"><i class="fas fa-times-circle fa-lg"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>

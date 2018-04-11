@@ -13,7 +13,6 @@
 namespace swgAS\swgAdmin\controllers;
 
 // Use
-use Interop\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -52,6 +51,7 @@ class admindashboardController extends baseController
             'baseURL' => settings::BASE_URL,
             'tokenURL' => settings::TOKEN_URL,
             'statusURL' => settings::STATUS_URL,
+            'numberOfAccounts' => settings::NUMBER_OF_ACCOUNTS_ALLOWED,
             'authlist' => $authcodeList,
             'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
             'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
