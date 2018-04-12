@@ -10,13 +10,13 @@
      * your servers
      ******************************************************************/
     
-    require '../vendor/autoload.php';
+    require dirname(dirname(__FILE__)).'/vendor/autoload.php';
     
     // Use swgAS
     use \swgAS\config\settings;
     use \swgAS\swgStatus\models\statusModel;
     
-    require '../app/config/di.php';
+    require dirname(dirname(__FILE__)).'/app/config/di.php';
     
     statusModel::getServerStatus(['mongodb'=>$ci['mongodb']]);
     
