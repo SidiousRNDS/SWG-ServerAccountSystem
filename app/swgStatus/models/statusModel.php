@@ -92,10 +92,10 @@ class statusModel
             // Close the stream
             fclose($stream);
 
-            // Put the data returned from the server into a nicely formated XML Array
+            // Put the data returned from the server into a nicely formatted XML Array
             $xml = simplexml_load_string($streamXML);
 
-            return self::statusDataFormat($xml);        // Return the formated xml data as an object
+            return self::statusDataFormat($xml);        // Return the formatted xml data as an object
         }
     }
 

@@ -35,10 +35,12 @@ class serverstatusModel
     {
         $days = [];
 
-        $currentTime = time();
-        $sevenDaysAgo = time() - 7 * 24 * 60 * 60;
+        $date = new DateTime();
+        
+        $currentTime = $date->getTimestamp();
+        $sevenDaysAgo = $date->getTimestamp() - 7 * 24 * 60 * 60;
 
-        $statusFilter = ['last_check' => ['$gt' => $sevenDaysAgo, '$lt' => $currentTime], 'server_name' => 'Live'];
+        $statusFilter = ['last_check' => ['$gte' => $sevenDaysAgo, '$lte' => $currentTime], 'server_name' => 'Live'];
         $options = ['sort' => ['_id' => 1]];
         $query = new MongoQuery($statusFilter,$options);
 
@@ -49,7 +51,6 @@ class serverstatusModel
 
             $timeDays = date('mdY', $r->last_check);
             $dateReported = date('m-d-Y', $r->last_check);
-            $timeHours = date('H',$r->last_check);
 
             $days[$timeDays]['date'] = $dateReported;
             $days[$timeDays]['server'] = $r->server_name;
@@ -66,9 +67,6 @@ class serverstatusModel
             {
                 $days[$timeDays]['population_high'] = $r->population;
             }
-
-            //$days[$timeDays]['byHour'][$timeHours]['population'] = $r->population;
-            //$days[$timeDays]['byHour'][$timeHours]['status'] = $r->server_status;
         }
 
         return $days;
