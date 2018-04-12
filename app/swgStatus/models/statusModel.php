@@ -37,9 +37,9 @@ class statusModel
         if($liveServer)
         {
             $liveStatus = self::pollServer(['server'=>$liveServer,'port'=>$statusPort]);
-            $liveStatus->name = "Live";
+            $liveStatus->server_name = "Live";
 
-            $live = ['_id' => new MongoID, 'server_name' => $liveStatus->name, 'server_status' => $liveStatus->server_status,
+            $live = ['_id' => new MongoID, 'server_name' => $liveStatus->server_name, 'server_status' => $liveStatus->server_status,
                 'popluation' => $liveStatus->users_connected, 'popluation_since_last_restart' => $liveStatus->users_connected_since_last_restart,
                 'uptime_days' => $liveStatus->up_time->days, 'uptime_hours' => $liveStatus->up_time->hours,
                 'uptime_minutes' => $liveStatus->up_time->minutes, 'uptime_seconds' => $liveStatus->up_time->seconds,
@@ -47,14 +47,15 @@ class statusModel
             ];
             $createLiveStatus = new BulkWrite;
             $createLiveStatus->insert($live);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".self::$serverStatusCollection, $createLiveStatus);
         }
 
         if($testServer)
         {
             $testStatus = self::pollServer(['server'=>$testServer,'port'=>$statusPort]);
-            $testStatus->name = "Test";
+            $testStatus->server_name = "Test";
 
-            $test = ['_id' => new MongoID, 'server_name' => $testStatus->name, 'server_status' => $testStatus->server_status,
+            $test = ['_id' => new MongoID, 'server_name' => $testStatus->server_name, 'server_status' => $testStatus->server_status,
                 'popluation' => $testStatus->users_connected, 'popluation_since_last_restart' => $testStatus->users_connected_since_last_restart,
                 'uptime_days' => $testStatus->up_time->days, 'uptime_hours' => $testStatus->up_time->hours,
                 'uptime_minutes' => $testStatus->up_time->minutes, 'uptime_seconds' => $testStatus->up_time->seconds,
@@ -62,6 +63,7 @@ class statusModel
             ];
             $createTestStatus = new BulkWrite;
             $createTestStatus->insert($test);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".self::$serverStatusCollection, $createTestStatus);
         }
     }
 
