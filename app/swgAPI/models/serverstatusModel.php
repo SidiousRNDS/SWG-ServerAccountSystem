@@ -35,7 +35,7 @@ class serverstatusModel
     {
         $days = [];
 
-        $date = new DateTime();
+        $date = new \DateTime();
         
         $currentTime = $date->getTimestamp();
         $sevenDaysAgo = $date->getTimestamp() - 7 * 24 * 60 * 60;
@@ -50,7 +50,7 @@ class serverstatusModel
         {
 
             $timeDays = date('mdY', $r->last_check);
-            $dateReported = date('m-d-Y', $r->last_check);
+            $dateReported = date('m-d-Y H:i:s', $r->last_check);
 
             $days[$timeDays]['date'] = $dateReported;
             $days[$timeDays]['server'] = $r->server_name;

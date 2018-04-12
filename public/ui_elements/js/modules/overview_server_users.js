@@ -27,7 +27,7 @@ function drawChart()
                     arrData.sort(function (a, b) {
                         return a.date.localeCompare(b.date);
                     });
-
+parseInt()
                     // Build 7 days Graph
                     build7Days(arrData);
                 }
@@ -39,14 +39,16 @@ function drawChart()
 // build the Seven Day Graph
 function build7Days(arrData)
 {
-    if(arrData.length > 0) {
+    if(arrData.length !== 0){
         var graphDataUsersHighPop = [];
 
         graphDataUsersHighPop.push(['Datetime', 'Population']);
-
+parseInt()
         for (var i = 0; i < arrData.length; i++) {
-            graphDataUsersHighPop.push([new Date(arrData[i]['date']), arrData[i]['population_high']]);
+            graphDataUsersHighPop.push([new Date(arrData[i]['date']), parseInt(arrData[i]['population_high'])]);
         }
+
+        console.dir(graphDataUsersHighPop);
 
         var dataSevenDays = new google.visualization.arrayToDataTable(graphDataUsersHighPop);
         var options = {
