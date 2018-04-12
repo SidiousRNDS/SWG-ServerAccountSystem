@@ -15,22 +15,14 @@ namespace swgAS\swgStatus\models;
 
 
 // Use
-use \MongoDB\Driver\Query as MongoQuery;
 use \MongoDB\Driver\BulkWrite;
-use \MongoDB\Driver\Exception\Exception as MongoExpception;
 use \MongoDB\BSON\ObjectId as MongoID;
 
 // Use swgAS
 use swgAS\config\settings;
-use swgAS\utils\messaging\errormsg;
-use swgAS\utils\password;
-use swgAS\utils\security;
-use swgAS\utils\sessions;
-use swgAS\utils\utilities;
-
 class statusModel
 {
-    private static $serverStatusCollection = "server_status";
+    private $serverStatusCollection = "server_status";
 
     /**
      * Summary getServerStatus - Get the status of the game servers listed in settings
@@ -48,14 +40,13 @@ class statusModel
             $liveStatus->name = "Live";
 
             $live = ['_id' => new MongoID, 'server_name' => $liveStatus->name, 'server_status' => $liveStatus->server_status,
-                     'popluation' => $liveStatus->users_connected, 'popluation_since_last_restart' => $liveStatus->users_connected_since_last_restart,
-                     'uptime_days' => $liveStatus->up_time->days, 'uptime_hours' => $liveStatus->up_time->hours,
-                     'uptime_minutes' => $liveStatus->up_time->minutes, 'uptime_seconds' => $liveStatus->up_time->seconds,
-                     'last_check' => $liveStatus->last_check
+                'popluation' => $liveStatus->users_conneted, 'popluation_since_last_restart' => $liveStatus->users_connected_since_last_restart,
+                'uptime_days' => $liveStatus->up_time->days, 'uptime_hours' => $liveStatus->up_time->hours,
+                'uptime_minutes' => $liveStatus->up_time->minutes, 'uptime_seconds' => $liveStatus->up_time->seconds,
+                'last_check' => $liveStatus->last_check
             ];
             $createLiveStatus = new BulkWrite;
             $createLiveStatus->insert($live);
-            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".self::$serverStatusCollection, $createLiveStatus);
         }
 
         if($testServer)
@@ -64,14 +55,13 @@ class statusModel
             $testStatus->name = "Test";
 
             $test = ['_id' => new MongoID, 'server_name' => $testStatus->name, 'server_status' => $testStatus->server_status,
-                'popluation' => $testStatus->users_connected, 'popluation_since_last_restart' => $testStatus->users_connected_since_last_restart,
+                'popluation' => $testStatus->users_conneted, 'popluation_since_last_restart' => $testStatus->users_connected_since_last_restart,
                 'uptime_days' => $testStatus->up_time->days, 'uptime_hours' => $testStatus->up_time->hours,
                 'uptime_minutes' => $testStatus->up_time->minutes, 'uptime_seconds' => $testStatus->up_time->seconds,
                 'last_check' => $testStatus->last_check
             ];
             $createTestStatus = new BulkWrite;
             $createTestStatus->insert($test);
-            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".self::$serverStatusCollection, $createTestStatus);
         }
     }
 
@@ -123,6 +113,14 @@ class statusModel
             $status = "Offline";
         }
 
+        if(strlen($streamXML->timestamp) == 13)
+        {
+            $last_check = trim(substr($streamXML->timestamp,0,-3));
+        }
+        else
+        {
+            $last_check = $streamXML->timestamp;
+        }
         $serverStatus = (object) [
             "server_name" => '',
             "server_status" => $status,
@@ -130,7 +128,7 @@ class statusModel
             "users_connected_since_last_restart" => trim($streamXML->users->max),
             "user_cap" => trim($streamXML->users->cap),
             "up_time" => self::statusUptimeFormat($streamXML->uptime),
-            "last_check" => trim($streamXML->timestamp)
+            "last_check" => $last_check
         ];
 
         return $serverStatus;
