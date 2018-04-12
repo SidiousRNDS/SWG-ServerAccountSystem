@@ -22,7 +22,7 @@ use \MongoDB\BSON\ObjectId as MongoID;
 use swgAS\config\settings;
 class statusModel
 {
-    private $serverStatusCollection = "server_status";
+    private static $serverStatusCollection = "server_status";
 
     /**
      * Summary getServerStatus - Get the status of the game servers listed in settings
@@ -115,14 +115,9 @@ class statusModel
             $status = "Offline";
         }
 
-        if(strlen($streamXML->timestamp) == 13)
-        {
-            $last_check = trim(substr($streamXML->timestamp,0,-3));
-        }
-        else
-        {
-            $last_check = $streamXML->timestamp;
-        }
+        
+        $last_check = floor($streamXML->timestamp / 1000);
+        
         $serverStatus = (object) [
             "server_name" => '',
             "server_status" => $status,
