@@ -12,7 +12,7 @@
             </li>
             <ul class="sub-menu collapse" id="authcodes">
                 <li {{ 'createauth' in route ? 'class="active"' }}><a href="{{path_for('createauth')}}">Create Authcode</a></li>
-                <li><a href="#">View Used Authcodes</a></li>
+                <li {{ 'viewallused' in route ? 'class="active"' }}><a href="{{path_for('viewallused')}}">View Used Authcodes</a></li>
                 <li><a href="#">View Not Used Authcodes</a></li>
             </ul>
             <li data-toggle="collapse" data-target="#users" class="collapsed">
