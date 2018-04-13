@@ -57,4 +57,26 @@ class admindashboardController extends baseController
             'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
         ]);
     }
+    
+    public function adminViewUsedAuthCodes(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $authcodeList = authcodeModel::getUsedAuthcodes(array(
+                'db'=>$this->getCIElement('db'),
+                'errorlogger'=>$this->getCIElement('swgErrorLog'),
+                'flash'=>$this->getCIElement('flash'))
+        );
+        
+        return $this->getCIElement('views')->render($response, 'adminviewauthcodes.twig', [
+            'flash'=>$this->getCIElement('flash'),
+            'title' => 'View Used Authcode',
+            'route' => $request->getUri()->getPath(),
+            'baseURL' => settings::BASE_URL,
+            'tokenURL' => settings::TOKEN_URL,
+            'statusURL' => settings::STATUS_URL,
+            'numberOfAccounts' => settings::NUMBER_OF_ACCOUNTS_ALLOWED,
+            'authlist' => $authcodeList,
+            'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
+            'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
+        ]);
+    }
 }

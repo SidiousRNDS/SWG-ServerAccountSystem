@@ -50,6 +50,11 @@ $swgAS->group('/admin', function() use($swgAS){
         $swgAS->post('/authcodes/genauthcode', \swgAS\swgAPI\controllers\authcodeController::class . ':adminGenerateAuthCode')
             ->add(new adminauthmiddleware($swgAS->getContainer()))
             ->setName('genauthcode');
+    
+        // View all Used Authcodes
+        $swgAS->get('/authcodes/viewallused', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+            ->add(new adminauthmiddleware($swgAS->getContainer()))
+            ->setName('viewallused');
     });
 
 });

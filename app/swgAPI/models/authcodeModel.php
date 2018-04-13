@@ -312,6 +312,16 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
             throw new \Error (errormsg::getErrorMsg("getactiveauthcodes", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
         }
 	}
+	
+	public static function getUsedAuthcodes($args)
+	{
+        $results = $args['db']::table(self::$authTable)
+            ->select('aaid','username','email','created_at','used_date')
+            ->where('auth_code_used', '=', 1)
+            ->get();
+            
+        return $results;
+	}
 }
 
 ?>

@@ -22,7 +22,9 @@ $(document).ready(function(){
         "columns": [
             null,
             null,
-            null
+            null,
+            null,
+            {"orderable":false}
         ]
     });
 

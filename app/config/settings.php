@@ -23,6 +23,7 @@ namespace swgAS\config;
      const TOKEN_URL = "/api/token";
      const STATUS_URL = "/api/v1/status";
 
+     const SERVER_TIME_ZONE = "America/New_York";
   /**
   * Template location
   * @var string TEMPLATES - This is the active templates directory you want to use for both admin and client
@@ -50,7 +51,7 @@ namespace swgAS\config;
    * @var int STATUS_PORT - The Game Server Status Port
    */
   const LIVE_GAME_SERVER = "live.swgrogueone.com";
-  const TEST_GAME_SERVER = "test.swgrogueone.com";
+  const TEST_GAME_SERVER = "";
   const STATUS_PORT = 44455;
   /**
    * Database vars

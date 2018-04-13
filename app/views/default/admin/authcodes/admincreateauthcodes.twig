@@ -69,7 +69,7 @@
                         <td>{{ auth.email }}</td>
                         <td>{{ auth.auth_code }}</td>
                         <td>{{ auth.created_at }}</td>
-                        <td style="text-align:center"><a href="{{ path_for('genauthcode')}}/delete/{{ user.aaid }}" title="Delete authentication code for {{ auth.username }}"><i class="fas fa-times-circle fa-lg"></i></a></td>
+                        <td style="text-align:center"><a href="{{ path_for('genauthcode')}}/delete/{{ auth.aaid }}" title="Delete authentication code for {{ auth.username }}"><i class="fas fa-times-circle fa-lg"></i></a></td>
                     </tr>
                 {% endfor %}
             </tbody>
