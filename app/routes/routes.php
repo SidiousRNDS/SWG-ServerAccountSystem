@@ -55,7 +55,7 @@ $swgAS->group('/admin', function() use($swgAS){
         $swgAS->get('/authcodes/viewallused', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
             ->add(new adminauthmiddleware($swgAS->getContainer()))
             ->setName('viewallused');
-    });
+    }); 
 
 });
 
