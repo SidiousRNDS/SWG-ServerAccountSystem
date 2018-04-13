@@ -18,6 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 
 // Use swgAS
 use swgAS\controllers\baseController;
+use swgAS\swgAdmin\models\adminroleModel;
 use swgAS\swgAPI\models\authcodeModel;
 use swgAS\config\settings;
 
@@ -25,6 +26,12 @@ use swgAS\config\settings;
 class admindashboardController extends baseController
 {
 
+    /**
+     * Summary adminDashboardIndex - Default location
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
     public function adminDashboardIndex(ServerRequestInterface $request, ResponseInterface $response)
     {
         return $this->getCIElement('views')->render($response, 'adminoverview.twig',[
@@ -36,6 +43,13 @@ class admindashboardController extends baseController
         ]);
     }
 
+    /**
+     * Summary adminCreateAuthCode - Create authorization code
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
     public function adminCreateAuthCode(ServerRequestInterface $request, ResponseInterface $response)
     {
         $authcodeList = authcodeModel::getActiveAuthcodes(array(
@@ -57,7 +71,13 @@ class admindashboardController extends baseController
             'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
         ]);
     }
-    
+
+    /**
+     * Summary adminViewUsedAuthCodes - View all used authorization codes
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
     public function adminViewUsedAuthCodes(ServerRequestInterface $request, ResponseInterface $response)
     {
         $authcodeList = authcodeModel::getUsedAuthcodes(array(

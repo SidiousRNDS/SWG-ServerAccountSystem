@@ -1,0 +1,59 @@
+{% extends "admindashboard.twig" %}
+
+{% block content %}
+    <div id="adminmain">
+        <div id="newAuthcode">
+            <h2><i class="fas fa-gavel" aria-hidden="true"></i> Create New Role</h2>
+            <hr class="hspacer">
+            {% if flash.getMessage('error')[0] %}
+                <div class="errmsg">
+                    <i class="fas fa-exclamation-circle"></i> {{ flash.getMessage('error')[0] }}
+                </div>
+            {% endif %}
+            {% if flash.getMessage('success')[0] %}
+                <div class="successmsg">
+                    <i class="fas fa-check-circle"></i> {{ flash.getMessage('success')[0] }}
+                </div>
+            {% endif %}
+            <form id="nRole" name="newRole" method="post" action={{path_for('genrole')}}>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="rolenamelabel" for="rolenameInput">Role name</label>
+                            <input type="text" class="form-control" id="rolenameInput" name="rolename"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="permList" style="margin-top:3%;">
+                    <label id="permlabel" for="permissions">Role Permissions</label>
+                    <table id="permissionList" class="table table-striped table-bordered" style="width:100%;">
+                        <thead>
+                        <tr>
+                            <th>Section Name</th>
+                            <th style="text-align: center;">Create</th>
+                            <th style="text-align: center;">Update</th>
+                            <th style="text-align: center;">Read</th>
+                            <th style="text-align: center;">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for section in sections%}
+                            <tr>
+                                <td style="font-weight:700;">{{ section | capitalize }}</td>
+                                <td style="text-align: center;"><input type="checkbox" name="{{ section }}_create" value="c"></td>
+                                <td style="text-align: center;"><input type="checkbox" name="{{ section }}_read" value="r"></td>
+                                <td style="text-align: center;"><input type="checkbox" name="{{ section }}_update" value="u"></td>
+                                <td style="text-align: center;"><input type="checkbox" name="{{ section }}_delete" value="d"></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row sgroup">
+                    <button type="submit" class="btn btn-default" id="accCreate"><i class="fas fa-gavel" aria-hidden="true"></i> Create Role</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

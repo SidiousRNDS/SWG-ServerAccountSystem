@@ -41,20 +41,38 @@ $swgAS->group('/admin', function() use($swgAS){
                 ->setName('overview');
         }
 
-        // Create authcode form
-        $swgAS->get('/authcodes/createauth', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminCreateAuthCode')
-            ->add(new adminauthmiddleware($swgAS->getContainer()))
-            ->setName('createauth');
+        $swgAS->group('/authcodes', function() use($swgAS){
 
-        // Generate an authcode
-        $swgAS->post('/authcodes/genauthcode', \swgAS\swgAPI\controllers\authcodeController::class . ':adminGenerateAuthCode')
-            ->add(new adminauthmiddleware($swgAS->getContainer()))
-            ->setName('genauthcode');
-    
-        // View all Used Authcodes
-        $swgAS->get('/authcodes/viewallused', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
-            ->add(new adminauthmiddleware($swgAS->getContainer()))
-            ->setName('viewallused');
+            // Create Authcode form
+            $swgAS->get('/createauth', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminCreateAuthCode')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('createauth');
+
+            // Generate an Authcode TODO:check to see why i dont have a slash infront of this route
+            $swgAS->post('genauthcode', \swgAS\swgAPI\controllers\authcodeController::class . ':adminGenerateAuthCode')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('genauthcode');
+
+            // View all Used Authcodes
+            $swgAS->get('/viewallused', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('viewallused');
+
+        });
+
+
+        $swgAS->group('/administration', function() use($swgAS) {
+
+            // Create a Role form
+            $swgAS->get('/roles/createrole', \swgAS\swgAdmin\controllers\adminroleController::class . ':adminCreateRole')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('createrole');
+
+            // Generate a new Role
+            $swgAS->post('/roles/generaterole', \swgAS\swgAdmin\controllers\adminroleController::class .':adminGenerateRole')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('genrole');
+        });
     }); 
 
 });

@@ -90,6 +90,10 @@ class errormsg
 		"salt" => "No salt was generated"
 	];
 
+	protected static $roleErrorMsg = [
+		"rolenotcreated" => "Role ::ROLENAME:: was not created."
+	];
+
 	/**
 	 * Summary of getErrorMsg
 	 * @param string $code
@@ -125,6 +129,9 @@ class errormsg
 				case "adminauthmiddleware":
 					$error = self::$adminLoginErrorMsg[$code];
 					break;
+                case "adminroleModel":
+                    $error = self::$roleErrorMsg[$code];
+                    break;
 			}
 		}
 

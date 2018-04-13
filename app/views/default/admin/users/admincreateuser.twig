@@ -1,0 +1,53 @@
+{% extends "admindashboard.twig" %}
+
+{% block content %}
+    <div id="adminmain">
+        <div id="newAdminUser">
+            <h2><i class="fas fa-user" aria-hidden="true"></i> Create New User Authentication Code</h2>
+            <hr class="hspacer">
+            {% if flash.getMessage('error')[0] %}
+                <div class="errmsg">
+                    <i class="fas fa-exclamation-circle"></i> {{ flash.getMessage('error')[0] }}
+                </div>
+            {% endif %}
+            {% if flash.getMessage('success')[0] %}
+                <div class="successmsg">
+                    <i class="fas fa-check-circle"></i> {{ flash.getMessage('success')[0] }}
+                </div>
+            {% endif %}
+            <form id="nAdminUser" name="newAdminUser" method="post" action={{path_for('genauthcode')}}>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="usernamelabel" for="usernameInput">Username</label>
+                            <input type="text" class="form-control" id="usernameInput" name="username" aria-describedby="usernameHelp" placeholder="LordVader"/>
+                            <small id="usernameHelp" class="form-text text-muted">*Only use Alpha/Numeric and special characters (@.)</small>
+                        </div>
+                        <div class="col-xs-6">
+                            <label id="emaillabel" for="emailInput">Email</label>
+                            <input type="email" class="form-control" id="emailInput" name="email" aria-describedby="emailHelp" placeholder="vader@empire.org"/>
+                            <small id="emailHelp" class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12" style="margin-top:1%;">
+                            <label id="prefixlabel" for="prefix">Authcode Prefix</label><br/>
+                            <input type="radio" name="prefix" value="{{ primary_prefix }}"> Less than {{ numberOfAccounts }}
+                            {% if numberOfAccounts > 1 %}accounts {% endif %}
+                            {% if numberOfAccounts <= 1 %}account {% endif %}
+                            <br/>
+                            <input type="radio" name="prefix" value="{{ extended_prefix }}"> Greater than {{ numberOfAccounts }}
+                            {% if numberOfAccounts > 1 %}accounts {% endif %}
+                            {% if numberOfAccounts <= 1 %}account {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row sgroup">
+                    <button type="submit" class="btn btn-default" id="accCreate"><i class="fas fa-user-plus" aria-hidden="true"></i> Create Authcode</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

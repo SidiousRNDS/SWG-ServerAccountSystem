@@ -49,7 +49,6 @@ class adminloginModel extends Model
             $encryptedPassword = $pass->generateEncryptedPassword($args);
             $loginFilter = ['username' => $args['username'], 'password' => $encryptedPassword['passwordHash']];
 
-
             $query = new MongoQuery($loginFilter);
 
             $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN . "." . $this->usersCollection, $query);

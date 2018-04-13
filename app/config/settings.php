@@ -145,6 +145,15 @@ namespace swgAS\config;
  	const JWTSECRET = "th1s1sju$7@Pl@c3H0ld3r4y0ur$3cr3t";
  	const APIUSER = "swgApi";
 
+ 	const ADMIN_SECTIONS = [
+ 		'authcodes',
+		'players',
+		'bans',
+		'reports',
+		'users',
+		'roles',
+		'configurations'
+	];
  }
 
  ?>

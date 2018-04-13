@@ -27,7 +27,7 @@ function drawChart()
                     arrData.sort(function (a, b) {
                         return a.date.localeCompare(b.date);
                     });
-parseInt()
+
                     // Build 7 days Graph
                     build7Days(arrData);
                 }
@@ -43,7 +43,7 @@ function build7Days(arrData)
         var graphDataUsersHighPop = [];
 
         graphDataUsersHighPop.push(['Datetime', 'Population']);
-parseInt()
+
         for (var i = 0; i < arrData.length; i++) {
             graphDataUsersHighPop.push([new Date(arrData[i]['date']), parseInt(arrData[i]['population_high'])]);
         }

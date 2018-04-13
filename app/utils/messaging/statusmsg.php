@@ -33,6 +33,10 @@ class statusmsg
 		"accountnotfound" => "Account not found"
     ];
 
+    protected static $roleStatus = [
+    	"rolecreated" => "Role ::ROLENAME:: has been created"
+	];
+
 	/**
 	 * Summary of getStatusMsg
 	 * @param string $code
@@ -55,6 +59,9 @@ class statusmsg
 				case "authcodeModel":
 					$status = self::$authcodeStatus[$code];
 					break;
+                case "adminroleModel":
+                    $status = self::$roleStatus[$code];
+                    break;
 			}
 		}
 

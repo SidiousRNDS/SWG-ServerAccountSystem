@@ -28,6 +28,12 @@ $(document).ready(function(){
         ]
     });
 
+    $('#permissionList').DataTable({
+        "columns": [
+            {"orderable":false}
+        ]
+    });
+
 });
 
 // Translate

@@ -20,6 +20,7 @@ use \MongoDB\BSON\ObjectId as MongoID;
 
 // Use swgAS
 use swgAS\config\settings;
+
 class statusModel
 {
     private static $serverStatusCollection = "server_status";
