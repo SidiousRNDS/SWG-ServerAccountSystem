@@ -74,6 +74,10 @@ class utilities
         return base64_encode($data);
     }
 
+    /**
+	* @param string $data
+	* @return string
+	*/
     public static function unobscureData(string $data) : string
     {
         return base64_decode($data);

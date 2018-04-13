@@ -63,15 +63,29 @@ $swgAS->group('/admin', function() use($swgAS){
 
         $swgAS->group('/administration', function() use($swgAS) {
 
-            // Create a Role form
-            $swgAS->get('/roles/createrole', \swgAS\swgAdmin\controllers\adminroleController::class . ':adminCreateRole')
-                ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('createrole');
+            $swgAS->group('/roles',function() use($swgAS){
 
-            // Generate a new Role
-            $swgAS->post('/roles/generaterole', \swgAS\swgAdmin\controllers\adminroleController::class .':adminGenerateRole')
-                ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('genrole');
+                // Create a Role form
+                $swgAS->get('/createrole', \swgAS\swgAdmin\controllers\adminroleController::class . ':adminCreateRole')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('createrole');
+
+                // Generate a new Role
+                $swgAS->post('/generaterole', \swgAS\swgAdmin\controllers\adminroleController::class .':adminGenerateRole')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('genrole');
+
+                // View Roles
+                $swgAS->get('/viewrole', \swgAS\swgAdmin\controllers\adminroleController::class .':adminViewRole')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('viewroles');
+
+                // Update Role
+                $swgAS->get('/updaterole/{id}', \swgAS\swgAdmin\controllers\adminroleController::class .':adminUpdateRole')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('updaterole');
+
+            });
         });
     }); 
 

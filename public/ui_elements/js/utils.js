@@ -27,13 +27,6 @@ $(document).ready(function(){
             {"orderable":false}
         ]
     });
-
-    $('#permissionList').DataTable({
-        "columns": [
-            {"orderable":false}
-        ]
-    });
-
 });
 
 // Translate

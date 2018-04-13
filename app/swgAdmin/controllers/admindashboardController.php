@@ -60,7 +60,7 @@ class admindashboardController extends baseController
 
         return $this->getCIElement('views')->render($response, 'admincreateauthcodes.twig', [
             'flash'=>$this->getCIElement('flash'),
-            'title' => 'Create Authcode',
+            'title' => 'Authentication Code',
             'route' => $request->getUri()->getPath(),
             'baseURL' => settings::BASE_URL,
             'tokenURL' => settings::TOKEN_URL,
@@ -88,7 +88,7 @@ class admindashboardController extends baseController
         
         return $this->getCIElement('views')->render($response, 'adminviewauthcodes.twig', [
             'flash'=>$this->getCIElement('flash'),
-            'title' => 'View Used Authcode',
+            'title' => 'View Used Authentication Code',
             'route' => $request->getUri()->getPath(),
             'baseURL' => settings::BASE_URL,
             'tokenURL' => settings::TOKEN_URL,

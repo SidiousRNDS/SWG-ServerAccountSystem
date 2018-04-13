@@ -59,10 +59,23 @@ $ci['views'] = function($ci) {
         '../app/views/'.settings::TEMPLATES."/admin/reports",
         '../app/views/'.settings::TEMPLATES."/admin/users",
         '../app/views/'.settings::TEMPLATES."/admin/roles"
-    ], ['cache' => false]);
+    ], ['cache' => false,'debug'=>true]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');
+    $views->addExtension(new Twig_Extension_Debug());
+
     $views->addExtension(new \Slim\Views\TwigExtension($ci['router'], $basePath));
+
+    $filter = new Twig_SimpleFilter('cast_to_array', function ($stdClassObject) {
+        $response = array();
+        foreach ($stdClassObject as $key => $value) {
+            $response[] = array($key, $value);
+        }
+        return $response;
+    });
+
+    $views->getEnvironment()->addFilter($filter);
+
 
     return $views;
 };

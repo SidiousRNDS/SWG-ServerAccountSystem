@@ -41,7 +41,7 @@ class adminroleModel
             $mongoCommand = new Command(array('find'=>$this->roleCollection));
             $mongoCursor = $args['mongodb']->executeCommand(settings::MONGO_ADMIN,$mongoCommand);
 
-            return $mongoCursor->toArray();
+            return json_encode($mongoCursor->toArray());
 
         } catch (ConnectionException $ex) {
             $args['flash']->addMessage("error", $ex->getMessage());

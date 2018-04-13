@@ -46,7 +46,7 @@
                 <li>Create User</li>
                 <li>View Users</li>
                 <li {{ 'createrole' in route ? 'class="active"' }}><a href="{{path_for('createrole')}}">Create Role</a></li>
-                <li>View Roles</li>
+                <li {{ 'viewroles' in route ? 'class="active"' }}><a href="{{path_for('viewroles')}}">View Roles</a></li>
             </ul>
 
             <li>
