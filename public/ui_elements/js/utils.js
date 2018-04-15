@@ -27,6 +27,10 @@ $(document).ready(function(){
             {"orderable":false}
         ]
     });
+
+    $(".deleteEntry").on('click', function(e){
+        deleteEntry(e);
+    });
 });
 
 // Translate
@@ -273,3 +277,13 @@ var checkMobile = {
         return (checkMobile.Android() || checkMobile.BlackBerry() || checkMobile.iOS() || checkMobile.iPAD()|| checkMobile.Opera() || checkMobile.Windows());
     }
 };
+
+function deleteEntry(e)
+{
+    if( confirm("Are you sure you want to remove this entry? This can not be undone!")) {
+        return true;
+    }
+    else {
+        e.preventDefault();
+    }
+}

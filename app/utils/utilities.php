@@ -82,6 +82,16 @@ class utilities
     {
         return base64_decode($data);
     }
+
+    /**
+	 * Summary in_array_r  check to see if the item is in the multi dimensional array
+     * @param $item
+     * @param $array
+     * @return false|int
+     */
+    public function in_array_r($item , $array){
+        return preg_match('/"'.preg_quote($item, '/').'"/i' , json_encode($array));
+    }
 }
 
 ?>

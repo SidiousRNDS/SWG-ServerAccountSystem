@@ -117,7 +117,8 @@ class adminroleController extends baseController
             'flash'=>$this->getCIElement('flash'),
             'title'=>'Update Role',
             'route'=>$request->getUri()->getPath(),
-            'role' => $roleData
+            'role' => $roleData,
+            'sections' => settings::ADMIN_SECTIONS
         ]);
     }
 

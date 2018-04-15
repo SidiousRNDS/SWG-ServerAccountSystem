@@ -30,6 +30,7 @@ class adminroleModel
     private $roleCollection = "user_roles";
 
 
+    // TODO: Create a method that will loop through the sections and validate that all sections are actually in the mongo DB for each role and if not it will flag the perm and display it ot the screen
     /**
      * Summary getRoles - Get all the roles in the user_roles collection
      * @param $args
@@ -43,12 +44,52 @@ class adminroleModel
             $query = new MongoQuery($role);
             $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->roleCollection,$query);
             $roleData = current($res->toArray());
-            return json_encode($roleData);
+            $mongoEntryChecked = $this->checkSections($roleData);
+
+            return json_encode($mongoEntryChecked);
 
         } catch (ConnectionException $ex) {
             $args['flash']->addMessageNow("error", $ex->getMessage());
         }
 
+    }
+
+
+    /**
+     * Summary checkSections - check to see if there were have been new sections added to the system and if so
+     * then make sure we add them to the permissions object so that we can set them
+     * @param $roles
+     * @return mixed
+     */
+    private function checkSections($roles)
+    {
+        $missing = [];
+
+        foreach(settings::ADMIN_SECTIONS as $section) {
+            if (!utilities::in_array_r($section, $roles)) {
+                array_push($missing,$section);
+            }
+        }
+
+        if($missing) {
+            if(is_object($roles))
+            {
+                for ($x = 0; $x < count($missing); $x++) {
+                    $section = $missing[$x];
+                    $roles->role_permissions->$section = (object) ['create' => null, 'read' => null, 'update' => null, 'delete' => null];
+                }
+            }
+            else {
+                foreach ($roles as $role) {
+                    for ($x = 0; $x < count($missing); $x++) {
+                        $section = $missing[$x];
+                        $role->role_permissions->$section = ['create' => null, 'read' => null, 'update' => null, 'delete' => null];
+                    }
+                }
+            }
+        }
+
+        return $roles;
     }
 
     /**
@@ -63,7 +104,9 @@ class adminroleModel
             $mongoCommand = new Command(array('find'=>$this->roleCollection));
             $mongoCursor = $args['mongodb']->executeCommand(settings::MONGO_ADMIN,$mongoCommand);
 
-            return json_encode($mongoCursor->toArray());
+            $mongoEntryChecked = $this->checkSections($mongoCursor->toArray());
+
+            return json_encode($mongoEntryChecked);
 
         } catch (ConnectionException $ex) {
             $args['flash']->addMessageNow("error", $ex->getMessage());

@@ -152,7 +152,8 @@ namespace swgAS\config;
 		'reports',
 		'users',
 		'roles',
-		'configurations'
+		'configurations',
+		'testing'
 	];
  }
 
