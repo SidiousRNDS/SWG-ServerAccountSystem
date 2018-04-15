@@ -17,6 +17,7 @@ use \MongoDB\Driver\Command;
 use \MongoDB\Driver\BulkWrite as MongoBulkWrite;
 use \MongoDB\BSON\ObjectId as MongoID;
 use \MongoDB\Driver\Exception\ConnectionException;
+use \MongoDB\Driver\Query as MongoQuery;
 
 // Use swgAS
 use swgAS\config\settings;
@@ -35,6 +36,27 @@ class adminroleModel
      * @return \MongoCursor
      * @throws \Exception
      */
+    public function getRole($args)
+    {
+        try {
+            $role = ['_id' => new MongoID($args['id'])];
+            $query = new MongoQuery($role);
+            $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->roleCollection,$query);
+            $roleData = current($res->toArray());
+            return json_encode($roleData);
+
+        } catch (ConnectionException $ex) {
+            $args['flash']->addMessageNow("error", $ex->getMessage());
+        }
+
+    }
+
+    /**
+     * Summary getRoles - Get all the roles in the user_roles collection
+     * @param $args
+     * @return \MongoCursor
+     * @throws \Exception
+     */
     public function getRoles($args)
     {
         try {
@@ -44,7 +66,7 @@ class adminroleModel
             return json_encode($mongoCursor->toArray());
 
         } catch (ConnectionException $ex) {
-            $args['flash']->addMessage("error", $ex->getMessage());
+            $args['flash']->addMessageNow("error", $ex->getMessage());
         }
 
     }
@@ -57,9 +79,9 @@ class adminroleModel
     public function addRole($args)
     {
         if ($args['request']['rolename'] == "") {
-            $errorMsg = errormsg::getErrorMsg("rolenotecreated", (new \ReflectionClass(self::class))->getShortName());
+            $errorMsg = errormsg::getErrorMsg("rolenotcreated", (new \ReflectionClass(self::class))->getShortName());
             $errorMsg = utilities::replaceStatusMsg($errorMsg, "::ROLENAME::", $args['request']['rolename']);
-            $args['flash']->addMessage("error", $errorMsg);
+            $args['flash']->addMessageNow("error", $errorMsg);
 
             return;
         }
@@ -86,14 +108,68 @@ class adminroleModel
                 $statusMsg = statusmsg::getStatusMsg("rolecreated", (new \ReflectionClass(self::class))->getShortName());
                 $statusMsg = utilities::replaceStatusMsg($statusMsg, "::ROLENAME::", $args['request']['rolename']);
 
-                $args['flash']->addMessage("success", $statusMsg);
+                $args['flash']->addMessageNow("success", $statusMsg);
             } else {
                 $errorMsg = errormsg::getErrorMsg("rolenotecreated", (new \ReflectionClass(self::class))->getShortName());
                 $errorMsg = utilities::replaceStatusMsg($errorMsg, "::ROLENAME::", $args['request']['rolename']);
-                $args['flash']->addMessage("error", $errorMsg);
+                $args['flash']->addMessageNow("error", $errorMsg);
             }
 
             return;
+        } catch(ConnectionException $ex) {
+            $args['flash']->addMessageNow("error", $ex->getMessage());
+        }
+    }
+
+    /**
+     * Summary updateRole - Update selected role
+     * @param $args
+     * @throws \ReflectionException
+     */
+    public function updateRole($args)
+    {
+        try {
+            $permissionList = $this->processesPermissions($args['request']);
+            $updateRole = new MongoBulkWrite();
+            $updateRole->update(
+                ['_id' => new MongoID($args['request']['id'])],
+                ['$set' => ['role_name' => $args['request']['rolename'], 'role_permissions' => $permissionList]],
+                ['multi' => false, 'upsert' => false]
+            );
+
+            $res = $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->roleCollection, $updateRole);
+
+            $statusMsg = statusmsg::getStatusMsg("roleupdated", (new \ReflectionClass(self::class))->getShortName());
+            $statusMsg = utilities::replaceStatusMsg($statusMsg, "::ROLENAME::", $args['request']['rolename']);
+
+            $args['flash']->addMessageNow("success", $statusMsg);
+        } catch(ConnectionException $ex) {
+            $args['flash']->addMessageNow("error", $ex->getMessage());
+        }
+    }
+
+    /**
+     * Summary deleteRole - Remove selected role from the DB
+     * @param $args
+     * @throws \ReflectionException
+     */
+    public function deleteRole($args)
+    {
+        $roleData = json_decode($this->getRole($args));
+        $roleName = $roleData->role_name;
+
+
+        try {
+            $deleteRole = new MongoBulkWrite();
+            $deleteRole->delete(['_id' => new MongoID($args['id'])], ['limit' => 1]);
+
+            $res = $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->roleCollection, $deleteRole);
+
+            $statusMsg = statusmsg::getStatusMsg("roledeleted", (new \ReflectionClass(self::class))->getShortName());
+            $statusMsg = utilities::replaceStatusMsg($statusMsg, "::ROLENAME::", $roleName);
+
+            $args['flash']->addMessage("success", $statusMsg);
+
         } catch(ConnectionException $ex) {
             $args['flash']->addMessage("error", $ex->getMessage());
         }
@@ -112,10 +188,10 @@ class adminroleModel
 
         foreach($sections as $section)
         {
-            $createPerm = $args[$section.'_create'];
-            $readPerm = $args[$section.'_read'];
-            $updatePerm = $args[$section.'_update'];
-            $deletePerm = $args[$section.'_delete'];
+            $createPerm = (isset($args[$section.'_create']) ? $args[$section.'_create'] : null);
+            $readPerm = (isset($args[$section.'_read']) ? $args[$section.'_read'] : null);
+            $updatePerm = (isset($args[$section.'_update']) ? $args[$section.'_update'] : null);
+            $deletePerm = (isset($args[$section.'_delete']) ? $args[$section.'_delete'] : null);
 
             $permissions[$section] = ['create'=>$createPerm, 'read'=>$readPerm, 'update'=>$updatePerm, 'delete'=>$deletePerm];
         }

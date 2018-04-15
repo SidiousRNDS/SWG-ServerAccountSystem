@@ -34,7 +34,9 @@ class statusmsg
     ];
 
     protected static $roleStatus = [
-    	"rolecreated" => "Role ::ROLENAME:: has been created"
+    	"rolecreated" => "Role ::ROLENAME:: has been created",
+		"roleupdated" => "Role ::ROLENAME:: has been updated",
+		"roledeleted" => "Role ::ROLENAME:: has been deleted"
 	];
 
 	/**

@@ -66,24 +66,34 @@ $swgAS->group('/admin', function() use($swgAS){
             $swgAS->group('/roles',function() use($swgAS){
 
                 // Create a Role form
-                $swgAS->get('/createrole', \swgAS\swgAdmin\controllers\adminroleController::class . ':adminCreateRole')
+                $swgAS->get('/createrole', \swgAS\swgAdmin\controllers\adminroleController::class . ':adminCreateRoleView')
                     ->add(new adminauthmiddleware($swgAS->getContainer()))
                     ->setName('createrole');
 
-                // Generate a new Role
-                $swgAS->post('/generaterole', \swgAS\swgAdmin\controllers\adminroleController::class .':adminGenerateRole')
+                // Create Role Action
+                $swgAS->post('/createroleaction', \swgAS\swgAdmin\controllers\adminroleController::class .':adminCreateRoleAction')
                     ->add(new adminauthmiddleware($swgAS->getContainer()))
                     ->setName('genrole');
 
                 // View Roles
-                $swgAS->get('/viewrole', \swgAS\swgAdmin\controllers\adminroleController::class .':adminViewRole')
+                $swgAS->get('/viewrole', \swgAS\swgAdmin\controllers\adminroleController::class .':adminRoleView')
                     ->add(new adminauthmiddleware($swgAS->getContainer()))
                     ->setName('viewroles');
 
-                // Update Role
-                $swgAS->get('/updaterole/{id}', \swgAS\swgAdmin\controllers\adminroleController::class .':adminUpdateRole')
+                // Update Role form
+                $swgAS->get('/updaterole/{id}', \swgAS\swgAdmin\controllers\adminroleController::class .':adminUpdateRoleView')
                     ->add(new adminauthmiddleware($swgAS->getContainer()))
                     ->setName('updaterole');
+
+                // Update Role Action
+                $swgAS->post('/updateroleaction', \swgAS\swgAdmin\controllers\adminroleController::class .':adminUpdateRoleAction')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('updateroleaction');
+
+                // Delete Role Action
+                $swgAS->get('/deleteroleaction/{id}', \swgAS\swgAdmin\controllers\adminroleController::class .':adminDeleteRoleAction')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('deleteroleaction');
 
             });
         });

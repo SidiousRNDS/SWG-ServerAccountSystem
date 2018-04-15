@@ -76,6 +76,7 @@ $ci['views'] = function($ci) {
 
     $views->getEnvironment()->addFilter($filter);
 
+    //$views->getEnvironment()->addGlobal('flash', $_SESSION['slim.flash']);
 
     return $views;
 };
