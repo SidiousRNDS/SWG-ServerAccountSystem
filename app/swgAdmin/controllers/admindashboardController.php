@@ -18,7 +18,6 @@ use Psr\Http\Message\ResponseInterface;
 
 // Use swgAS
 use swgAS\controllers\baseController;
-use swgAS\swgAdmin\models\adminroleModel;
 use swgAS\swgAPI\models\authcodeModel;
 use swgAS\config\settings;
 

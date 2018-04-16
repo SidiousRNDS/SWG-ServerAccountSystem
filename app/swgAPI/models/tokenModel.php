@@ -29,13 +29,14 @@ use swgAS\utils\utilities as Utils;
  */
 class tokenModel extends Model
 {
-	/**
+    /**
 	 * Summary of genToken
-	 * @param ServerRequestInterface $request
-	 * @param ResponseInterface $response
-	 * @param array $args
-	 * @return array
-	 */
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     * @throws \Exception
+     */
 	public static function genToken(ServerRequestInterface $request, ResponseInterface $response, array $args)
 	{
 		$now = new \DateTime();

@@ -43,8 +43,8 @@
                 <a href="#"><i class="fas fa-user-secret fa-lg"></i> Adminstrator <span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="admintasks">
-                <li>Create User</li>
-                <li>View Users</li>
+                <li {{ 'createuserview' in route ? 'class="active"' }}><a href="{{path_for('createuserview')}}">Create User</a></li>
+                <li {{ 'viewusers' in route ? 'class="active"' }}><a href="{{path_for('viewusers')}}">View User</a></li>
                 <li {{ 'createrole' in route ? 'class="active"' }}><a href="{{path_for('createrole')}}">Create Role</a></li>
                 <li {{ 'viewroles' in route ? 'class="active"' }}><a href="{{path_for('viewroles')}}">View Roles</a></li>
             </ul>

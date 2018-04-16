@@ -35,12 +35,12 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	 */
 	protected static $authTable = "admin_auth_codes";
 
-	/**
+    /**
 	 * Summary of getAuthCodeId
-	 * @param mixed $args
-	 * @throws \Error
-	 * @return mixed
-	 */
+     * @param $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	public static function getAuthCodeId($args)
 	{
 		try {
@@ -65,12 +65,12 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 		}
 	}
 
-	/**
+    /**
 	 * Summary of getAuthcodeUser
-	 * @param array $args
-	 * @throws \Error
-	 * @return mixed
-	 */
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	public static function getAuthcodeUser(array $args)
 	{
 		try {
@@ -95,12 +95,12 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 		}
 	}
 
-	/**
+    /**
 	 * Summary of validateAuthcode
-	 * @param array $args
-	 * @throws \Error
-	 * @return mixed
-	 */
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	public static function validateAuth(array $args)
 	{
 		try {
@@ -125,11 +125,12 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 		}
 	}
 
-	/**
+    /**
 	 * Summary of updateAuthcode
-	 * @param array $args
-	 * @return boolean
-	 */
+     * @param array $args
+     * @return bool
+     * @throws \ReflectionException
+     */
 	public static function updateAuthcode(array $args)
 	{
 		try {
@@ -151,11 +152,11 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 		}
 	}
 
-	/**
+    /**
 	 * Summary of createAuthCode
-	 * @param mixed $args
-	 * @return \null|string
-	 */
+     * @param $args
+     * @throws \ReflectionException
+     */
 	public static function createAuthCode($args)
 	{
 		$user = accountModel::checkUsername($args);
@@ -201,6 +202,11 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 		}
 	}
 
+    /**
+	 * Summary checkUsername
+     * @param $args
+     * @return string
+     */
 	private static function checkUsername($args)
 	{
         try {
@@ -218,6 +224,11 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
         }
 	}
 
+    /**
+	 * Summary addAuthCode
+     * @param $args
+     * @return string
+     */
 	private static function addAuthCode($args)
 	{
 		try {
@@ -312,7 +323,12 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
             throw new \Error (errormsg::getErrorMsg("getactiveauthcodes", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
         }
 	}
-	
+
+    /**
+	 * Summary getUsedAuthcodes
+     * @param $args
+     * @return mixed
+     */
 	public static function getUsedAuthcodes($args)
 	{
         $results = $args['db']::table(self::$authTable)

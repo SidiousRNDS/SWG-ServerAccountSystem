@@ -1,7 +1,5 @@
 <?php
 
-namespace swgAS\swgAdmin\controllers;
-
 /*****************************************************************
  * RNDS SWG Account System
  * @author: Sidious <sidious@rnds.io>
@@ -12,6 +10,9 @@ namespace swgAS\swgAdmin\controllers;
  * NAMESPACE: swgAS\swgAdmin\controllers
  * CLASS: adminController
  ******************************************************************/
+
+namespace swgAS\swgAdmin\controllers;
+
  // Use
  use \Psr\Http\Message\ServerRequestInterface;
  use \Psr\Http\Message\ResponseInterface;
@@ -20,10 +21,17 @@ namespace swgAS\swgAdmin\controllers;
  use swgAS\controllers\baseController;
  use swgAS\swgAdmin\models\adminloginModel;
  use swgAS\config\settings;
+ use swgAS\utils\utilities;
 
 class adminController extends baseController
 {
 
+    /**
+     * Sumarry adminIndex
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
     public function adminIndex(ServerRequestInterface $request, ResponseInterface $response)
     {
         return $this->getCIElement('views')->render($response, 'adminlogin.twig',[
@@ -33,18 +41,25 @@ class adminController extends baseController
         ]);
     }
 
+    /**
+     * Summary adminLogin
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
     public function adminLogin(ServerRequestInterface $request, ResponseInterface $response)
     {
         $adminLogin = new adminloginModel();
         $login = $adminLogin->authLogin(array(
-                  "mongodb" => $this->getCIElement('mongodb'),
-                  "errorLogger" => $this->getCIElement('swgErrorLog'),
-                  "adminLogger" => $this->getCIElement('adminLog'),
-                  "adminLockLog" => $this->getCIElement('adminLockLog'),
-                  "flash" => $this->getCIElement('flash'),
-                  "userIP" => $this->getCIElement('userIP'),
-                  "username" => $request->getParam('username'),
-                  "password" => $request->getParam('password'))
+                'mongodb' => $this->getCIElement('mongodb'),
+                'errorLogger' => $this->getCIElement('swgErrorLog'),
+                'adminLogger' => $this->getCIElement('adminLog'),
+                'adminLockLog' => $this->getCIElement('adminLockLog'),
+                'flash' => $this->getCIElement('flash'),
+                'userIP' => $this->getCIElement('userIP'),
+                'username' => utilities::sanitizeFormData($request->getParam('username'), FILTER_SANITIZE_STRING ),
+                'password' => utilities::sanitizeFormData($request->getParam('password'), FILTER_SANITIZE_STRING ),)
         );
 
         if ($login === "Access Denied") {

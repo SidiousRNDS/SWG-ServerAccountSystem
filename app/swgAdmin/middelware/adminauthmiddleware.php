@@ -28,12 +28,25 @@ class adminauthmiddleware
     private $adminSession = "swgASA";
     public $args;
 
+    /**
+     * Summary __construct
+     * adminauthmiddleware constructor.
+     * @param $args
+     */
     public function __construct($args)
     {
         $this->args = $args;
 
     }
 
+    /**
+     * Summary __invoke
+     * @param Request $request
+     * @param Response $response
+     * @param $next
+     * @return mixed
+     * @throws \ReflectionException
+     */
     public function __invoke(Request $request, Response $response, $next)
     {
         if($request->getUri()->getPath() != "/admin") {
@@ -58,8 +71,6 @@ class adminauthmiddleware
         // Check if there is a lock on the account
         $security = new security();
         $lock = $security->checkLocks($this->args);
-        
-        //$lock !== statusmsg::getStatusMsg("lremoved", "security") ||
 
         if($lock != "")
         {
@@ -68,7 +79,7 @@ class adminauthmiddleware
             $lockMsg = utilities::replaceStatusMsg( $lockMsg, "::IP::",$lock->ip);
 
             $security->addLockMessage($this->args, $lockMsg);
-            //return $response->withRedirect('/admin');
+
             return $response = $next($request, $response);
         }
 

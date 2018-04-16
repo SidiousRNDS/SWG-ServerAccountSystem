@@ -1,7 +1,5 @@
 <?php
 
-namespace swgAS\swgAdmin\models;
-
 /*****************************************************************
  * RNDS SWG Account System
  * @author: Sidious <sidious@rnds.io>
@@ -12,6 +10,8 @@ namespace swgAS\swgAdmin\models;
  * NAMESPACE: swgAS\swgAdmin\models
  * CLASS: adminloginModel
  ******************************************************************/
+
+namespace swgAS\swgAdmin\models;
 
 // Use
 use \Illuminate\Database\Eloquent\Model as Model;

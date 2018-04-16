@@ -26,6 +26,11 @@ class sessions
     private $sessionLength = 15;
     private $sessionsCollection = "users_sessions";
 
+    /**
+     * Summary checkValidUserSession
+     * @param $args
+     * @return bool
+     */
     public function checkValidUserSession($args)
     {
         $sessionData = $this->checkUserSession($args);

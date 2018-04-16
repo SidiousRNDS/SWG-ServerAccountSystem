@@ -28,6 +28,14 @@ $(document).ready(function(){
         ]
     });
 
+    $('#userList').DataTable({
+        "columns": [
+            null,
+            null,
+            null,
+            {"orderable":false}
+        ]
+    });
     $(".deleteEntry").on('click', function(e){
         deleteEntry(e);
     });
@@ -278,6 +286,7 @@ var checkMobile = {
     }
 };
 
+// Confirm Delete
 function deleteEntry(e)
 {
     if( confirm("Are you sure you want to remove this entry? This can not be undone!")) {

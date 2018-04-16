@@ -25,13 +25,13 @@ use swgAS\swgAPI\models\accountModel;
 class accountController extends baseController
 {
 
-	/**
+    /**
 	 * Summary of getAccount
-	 * @param ServerRequestInterface $request
-	 * @param ResponseInterface $response
-	 * @param array $args
-	 * @return mixed
-	 */
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
 	public function getAccount(ServerRequestInterface $request, ResponseInterface $response)
 	{
 		$account = accountModel::getAccounts(array(
@@ -44,13 +44,13 @@ class accountController extends baseController
 		return $response->withJson($account,200);
 	}
 
-	/**
+    /**
 	 * Summary of checkAccount
-	 * @param ServerRequestInterface $request
-	 * @param ResponseInterface $response
-	 * @param array $args
-	 * @return mixed
-	 */
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
 	public function checkAccount(ServerRequestInterface $request, ResponseInterface $response)
     {
 		$accounts = accountModel::getAccount(array (
@@ -66,6 +66,13 @@ class accountController extends baseController
 		return $response->withJson($accounts,200);
 	}
 
+    /**
+	 * Summary addAccount
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
 	public function addAccount(ServerRequestInterface $request, ResponseInterface $response)
 	{
 		$newaccount = accountModel::addAccount(array(

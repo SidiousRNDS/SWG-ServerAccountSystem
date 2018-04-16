@@ -58,11 +58,12 @@ class validation
 		return $valid;
 	}
 
-	/**
+    /**
 	 * Summary of validateUsername
-	 * @param array $args
-	 * @return \null|string
-	 */
+     * @param array $args
+     * @return null|string
+     * @throws \Exception
+     */
 	private static function validateUsername(array $args)
 	{
 		// Check to see if the username is greater then the max length
@@ -172,11 +173,12 @@ class validation
 		return false;
 	}
 
-	/**
+    /**
 	 * Summary of validateAuthCode
-	 * @param array $args
-	 * @return mixed
-	 */
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	public static function validateAuthCode(array $args)
 	{
 		return authcode::validateAuth($args);

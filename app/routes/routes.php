@@ -96,6 +96,40 @@ $swgAS->group('/admin', function() use($swgAS){
                     ->setName('deleteroleaction');
 
             });
+
+            $swgAS->group('/users',function() use($swgAS) {
+
+                // Create user form
+                $swgAS->get('/createuserview', \swgAS\swgAdmin\controllers\adminuserController::class .':adminCreateUserView')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('createuserview');
+
+                // Create user form
+                $swgAS->post('/createuseraction', \swgAS\swgAdmin\controllers\adminuserController::class .':adminCreateUserAction')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('createuseraction');
+
+                // View Users
+                $swgAS->get('/viewusers', \swgAS\swgAdmin\controllers\adminuserController::class .':adminViewUser')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('viewusers');
+
+                // Update User form
+                $swgAS->get('/updateuserview/{id}', \swgAS\swgAdmin\controllers\adminuserController::class .':adminUpdateUserView')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('updateuserview');
+
+                // Update User Action
+                $swgAS->post('/updateuseraction', \swgAS\swgAdmin\controllers\adminuserController::class .':adminUpdateUserAction')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('updateuseraction');
+
+                // Delete User Action
+                $swgAS->get('/deleteuseraction/{id}', \swgAS\swgAdmin\controllers\adminuserController::class .':adminDeleteUserAction')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('deleteuseraction');
+
+            });
         });
     }); 
 

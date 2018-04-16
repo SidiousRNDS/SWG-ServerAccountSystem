@@ -1,0 +1,68 @@
+{% extends "admindashboard.twig" %}
+
+{% block content %}
+    <div id="adminmain">
+        <div id="newAdminUser">
+            <h2><i class="fas fa-user-secret" aria-hidden="true"></i> Update User {{ users.username }}</h2>
+            <hr class="hspacer">
+            {% if flash.getMessage('error')[0] %}
+                <div class="errmsg">
+                    <i class="fas fa-exclamation-circle"></i> {{ flash.getMessage('error')[0] }}
+                </div>
+            {% endif %}
+            {% if flash.getMessage('success')[0] %}
+                <div class="successmsg">
+                    <i class="fas fa-check-circle"></i> {{ flash.getMessage('success')[0] }}
+                </div>
+            {% endif %}
+            <form id="nAdminUser" name="newAdminUser" method="post" action={{path_for('updateuseraction')}}>
+                <input type="hidden" name="id" value="{{ id }}">
+                <input type="hidden" name="username" value="{{ users.username }}">
+                <div class="row">
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label id="emaillabel" for="emailInput">Email</label>
+                            <input type="email" class="form-control" id="emailInput" name="email" aria-describedby="emailHelp" value="{{ users.email }}" placeholder="vader@empire.org"/>
+                            <small id="emailHelp" class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sgroup">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="passwordlabel" for="passwordInput">Password</label> <br/><input type="checkbox" name="changepassword"> Change Password?
+                            <input type="password" class="form-control" id="passwordInput" name="password" aria-describedby="passwordHelp" placeholder="vaderistheman"/>
+                            <small id="passwordHelp" class="form-text text-muted">*Only use Alpha/Numeric and special characters (!@$*-:_)</small>
+                        </div>
+                        <div class="col-xs-6">
+                            <label id="password2label" for="password2Input">Confirm Password</label><br/><br/>
+                            <input type="password" class="form-control" id="password2Input" name="repassword" aria-describedby="password2Help" placeholder="vaderistheman"/>
+                            <small id="password2Help" class="form-text text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sgroup">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="prefixlabel" for="prefix">User Role</label><br/>
+                            <select name="rolename" class="form-control">
+                                <option value="null">Select a Role</option>
+                                {% for role in roles %}
+                                    {% if role.role_name == users.role %}
+                                        <option value="{{ role.role_name }}" selected>{{ role.role_name }}</option>
+                                    {% else %}
+                                        <option value="{{ role.role_name }}">{{ role.role_name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sgroup">
+                    <button type="submit" class="btn btn-default" id="accCreate"><i class="fas fa-user-plus" aria-hidden="true"></i> Update {{ users.username }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -26,6 +26,12 @@ use swgAS\config\settings;
 class authcodeController extends baseController
 {
 
+    /**
+	 * Summary adminGenerateAuthCode
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
 	public function adminGenerateAuthCode(ServerRequestInterface $request, ResponseInterface $response)
 	{
 			$authCode = authcodeModel::createAuthCode(array(

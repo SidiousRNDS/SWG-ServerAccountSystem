@@ -26,6 +26,13 @@ use swgAS\utils\utilities;
 class adminroleController extends baseController
 {
 
+    /**
+     * Summary adminCreateRoleView
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \Exception
+     */
     public function adminCreateRoleView(ServerRequestInterface $request, ResponseInterface $response)
     {
         $role = new adminroleModel();
@@ -42,8 +49,6 @@ class adminroleController extends baseController
             'roles' => $getRoles,
             'sections' => settings::ADMIN_SECTIONS
         ]);
-
-
     }
 
     /**
@@ -77,6 +82,13 @@ class adminroleController extends baseController
         ]);
     }
 
+    /**
+     * Summary adminRoleView
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \Exception
+     */
     public function adminRoleView(ServerRequestInterface $request, ResponseInterface $response)
     {
 
@@ -98,6 +110,13 @@ class adminroleController extends baseController
         ]);
     }
 
+    /**
+     * Summary adminUpdateRoleView
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \Exception
+     */
     public function adminUpdateRoleView(ServerRequestInterface $request, ResponseInterface $response)
     {
         $route = $request->getAttribute('route');
@@ -122,6 +141,13 @@ class adminroleController extends baseController
         ]);
     }
 
+    /**
+     * Summary adminUpdateRoleAction
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
     public function adminUpdateRoleAction(ServerRequestInterface $request, ResponseInterface $response)
     {
         $role = new adminroleModel();
@@ -151,6 +177,13 @@ class adminroleController extends baseController
         ]);
     }
 
+    /**
+     * Summary adminDeleteRoleAction
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
     public function adminDeleteRoleAction(ServerRequestInterface $request, ResponseInterface $response)
     {
         $route = $request->getAttribute('route');

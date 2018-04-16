@@ -1,7 +1,5 @@
 <?php
 
-namespace swgAS\utils\messaging;
-
 /*****************************************************************
  * RNDS SWG Account System
  * @author: Sidious <sidious@rnds.io>
@@ -12,6 +10,8 @@ namespace swgAS\utils\messaging;
  * NAMESPACE: swgAS\utils
  * CLASS: errormsg
  ******************************************************************/
+
+namespace swgAS\utils\messaging;
 
 class errormsg
 {
@@ -94,6 +94,14 @@ class errormsg
 		"rolenotcreated" => "Role ::ROLENAME:: was not created."
 	];
 
+	protected static $userErrorMsg = [
+		"usernotcreatedmissing" => "User was not created because its missing ::MISSING::",
+		"usernotcreatednomatch" => "User was not created because password did not match",
+		"usernotcreatednorole" => "User was not created because no role was selected",
+		"usernotcreatednoemail" => "User was not created because no email was provided",
+		"usernotcreated" => "User ::USERNAME:: was not created"
+	];
+
 	/**
 	 * Summary of getErrorMsg
 	 * @param string $code
@@ -132,6 +140,9 @@ class errormsg
                 case "adminroleModel":
                     $error = self::$roleErrorMsg[$code];
                     break;
+				case "adminusersModel":
+					$error = self::$userErrorMsg[$code];
+					break;
 			}
 		}
 

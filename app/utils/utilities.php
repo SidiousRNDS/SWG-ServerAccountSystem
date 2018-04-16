@@ -1,8 +1,5 @@
 <?php
 
-namespace swgAS\utils;
-
-
 /*****************************************************************
  * RNDS SWG Account System
  * @author: Sidious <sidious@rnds.io>
@@ -13,6 +10,8 @@ namespace swgAS\utils;
  * NAMESPACE: swgAPI\utils
  * CLASS: utilities
  ******************************************************************/
+
+namespace swgAS\utils;
 
 class utilities
 {
@@ -92,6 +91,19 @@ class utilities
     public function in_array_r($item , $array){
         return preg_match('/"'.preg_quote($item, '/').'"/i' , json_encode($array));
     }
+
+
+    /**
+	 * Summary sanitizeFormData - Sanitize the form data before it gets passed to a DB
+     * @param $data
+     * @param $filter
+     * @return mixed
+     */
+    public function sanitizeFormData($data, $filter)
+	{
+		$tdata = trim($data);
+		return filter_var($tdata, $filter);
+	}
 }
 
 ?>

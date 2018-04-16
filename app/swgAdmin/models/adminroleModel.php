@@ -30,7 +30,6 @@ class adminroleModel
     private $roleCollection = "user_roles";
 
 
-    // TODO: Create a method that will loop through the sections and validate that all sections are actually in the mongo DB for each role and if not it will flag the perm and display it ot the screen
     /**
      * Summary getRoles - Get all the roles in the user_roles collection
      * @param $args
@@ -51,7 +50,6 @@ class adminroleModel
         } catch (ConnectionException $ex) {
             $args['flash']->addMessageNow("error", $ex->getMessage());
         }
-
     }
 
 

@@ -1,7 +1,5 @@
 <?php
 
-namespace swgAS\utils\messaging;
-
 /*****************************************************************
  * RNDS SWG Account System
  * @author: Sidious <sidious@rnds.io>
@@ -12,6 +10,8 @@ namespace swgAS\utils\messaging;
  * NAMESPACE: swgAS\utils
  * CLASS: statusmsg
  ******************************************************************/
+
+namespace swgAS\utils\messaging;
 
 class statusmsg
 {
@@ -39,6 +39,12 @@ class statusmsg
 		"roledeleted" => "Role ::ROLENAME:: has been deleted"
 	];
 
+    protected static $userStatus = [
+    	"usercreated" => "User ::USERNAME:: has been created",
+		"userupdated" => "User ::USERNAME:: has been updated",
+		"userdeleted" => "User ::USERNAME:: has been deleted"
+	];
+
 	/**
 	 * Summary of getStatusMsg
 	 * @param string $code
@@ -63,6 +69,9 @@ class statusmsg
 					break;
                 case "adminroleModel":
                     $status = self::$roleStatus[$code];
+                    break;
+                case "adminusersModel":
+                    $status = self::$userStatus[$code];
                     break;
 			}
 		}

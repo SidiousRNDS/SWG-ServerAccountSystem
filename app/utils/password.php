@@ -1,7 +1,5 @@
 <?php
 
-namespace swgAS\utils;
-
 /*****************************************************************
  * RNDS SWG Account System
  * @author: Sidious <sidious@rnds.io>
@@ -13,6 +11,8 @@ namespace swgAS\utils;
  * CLASS: password
  ******************************************************************/
 
+namespace swgAS\utils;
+
 // Use
 
 // swgAS Use
@@ -21,20 +21,21 @@ use swgAS\utils\messaging\errormsg;
 
 class password
 {
-	/**
+    /**
 	 * Summary of getSalt
-	 * @return string
-	 */
+     * @return string
+     * @throws \ReflectionException
+     */
 	public function getSalt()
 	{
 		return $this->generateSalt();
 	}
 
-	/**
+    /**
 	 * Summary of generateSalt
-	 * @method generateSalt()
-	 * @return string
-	 */
+     * @return string
+     * @throws \ReflectionException
+     */
 	private function generateSalt()
 	{
 		$salt = base64_encode(openssl_random_pseudo_bytes(settings::OPENSSLBYTES_LENGTH));
@@ -46,12 +47,11 @@ class password
 		return $salt;
 	}
 
-	/**
+    /**
 	 * Summary of generateEncryptedPassword
-	 * @method generateEncyptedPassword
-	 * @param mixed $args
-	 * @return string
-	 */
+     * @param $args
+     * @return array
+     */
 	public function generateEncryptedPassword($args) : array
 	{
 		//$salt = $this->generateSalt();
