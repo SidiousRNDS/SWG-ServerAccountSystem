@@ -11,7 +11,7 @@
  * CLASS: errormsg
  ******************************************************************/
 
-namespace swgAS\utils\messaging;
+namespace swgAS\helpers\messaging;
 
 class errormsg
 {
@@ -49,7 +49,7 @@ class errormsg
 		"noaccountsavail" => "System has no accounts at this time",
 		"tomanyaccounts" => "Account not created you already have the max number of accounts allowed. If you think this is and error please contact the administrator",
 		"accountexits" => "The account you are trying to create already exists. If you think this is an error please contact the administrator",
-		"authusernomatch" => "The username you provided does not match the authcode user. If you think this is an error please contact the administrator",
+		"authusernomatch" => "The username you provided does not match the authcode helper. If you think this is an error please contact the administrator",
 		"passvalidation" => "Password could not be validated"
 	];
 

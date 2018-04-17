@@ -19,7 +19,7 @@ use \Psr\Http\Message\ResponseInterface;
 
 // Use swgAS
 use swgAS\controllers\baseController;
-use swgAS\utils\utilities;
+use swgAS\helpers\utilities;
 use swgAS\swgAPI\models\accountModel;
 
 class accountController extends baseController

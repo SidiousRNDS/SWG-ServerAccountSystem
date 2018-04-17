@@ -11,7 +11,7 @@
  * CLASS: utilities
  ******************************************************************/
 
-namespace swgAS\utils;
+namespace swgAS\helpers;
 
 class utilities
 {

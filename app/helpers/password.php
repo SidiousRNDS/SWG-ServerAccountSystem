@@ -11,13 +11,13 @@
  * CLASS: password
  ******************************************************************/
 
-namespace swgAS\utils;
+namespace swgAS\helpers;
 
 // Use
 
 // swgAS Use
 use swgAS\config\settings;
-use swgAS\utils\messaging\errormsg;
+use swgAS\helpers\messaging\errormsg;
 
 class password
 {

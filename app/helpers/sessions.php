@@ -10,7 +10,7 @@
  * CLASS: sessions
  ******************************************************************/
 
-namespace swgAS\utils;
+namespace swgAS\helpers;
 
 // Use
 use \MongoDB\Driver\Query as MongoQuery;
@@ -25,6 +25,24 @@ class sessions
 {
     private $sessionLength = 15;
     private $sessionsCollection = "users_sessions";
+
+    /**
+     * Summary getSession
+     * @return mixed
+     */
+    public function getSession()
+    {
+        return $_SESSION['swgASA'];
+    }
+
+    /**
+     * Summary getSessionTable
+     * @return string
+     */
+    public function getSessionTable()
+    {
+        return $this->sessionsCollection;
+    }
 
     /**
      * Summary checkValidUserSession
@@ -97,8 +115,8 @@ class sessions
     }
 
     /**
-     * Summary checkUserSession - Check to see if the user has a session stored and if so return the data
-     * if the user does not return null
+     * Summary checkUserSession - Check to see if the helper has a session stored and if so return the data
+     * if the helper does not return null
      * @param $args
      * @return mixed
      */
@@ -189,7 +207,7 @@ class sessions
     }
 
     /**
-     * Summary setLoginAttempts - This sets a session var to track the number of times a user has tried to login and failed
+     * Summary setLoginAttempts - This sets a session var to track the number of times a helper has tried to login and failed
      * @param $args
      */
     public function setLoginAttempts($attempts)
@@ -204,7 +222,7 @@ class sessions
     }
 
     /**
-     * Summary getLoginAttempts - This gets the data in the Session for the number of times a user has tried to login and failed
+     * Summary getLoginAttempts - This gets the data in the Session for the number of times a helper has tried to login and failed
      * @return mixed
      */
     public function getLoginAttempts()
@@ -221,7 +239,7 @@ class sessions
     }
 
     /**
-     * Summary setSessionLocked - This adds the session that we check for to see if the user is locked out
+     * Summary setSessionLocked - This adds the session that we check for to see if the helper is locked out
      */
     public function setSessionLocked()
     {

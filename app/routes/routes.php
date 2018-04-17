@@ -34,12 +34,15 @@ $swgAS->group('/admin', function() use($swgAS){
     $swgAS->group('/dashboard', function() use($swgAS) {
 
         // Dashboard Base
-        $dashboardBaseRoutes = ["", "/", "/overview"];
+        $dashboardBaseRoutes = ["", "/"];
         foreach($dashboardBaseRoutes as $dashboardRoutes) {
             $swgAS->get($dashboardRoutes, \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminDashboardIndex')
-                ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('overview');
+                ->add(new adminauthmiddleware($swgAS->getContainer()));
         }
+
+        $swgAS->get('/overview', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminDashboardIndex')
+            ->add(new adminauthmiddleware($swgAS->getContainer()))
+            ->setName('overview');
 
         $swgAS->group('/authcodes', function() use($swgAS){
 
@@ -99,12 +102,12 @@ $swgAS->group('/admin', function() use($swgAS){
 
             $swgAS->group('/users',function() use($swgAS) {
 
-                // Create user form
+                // Create helper form
                 $swgAS->get('/createuserview', \swgAS\swgAdmin\controllers\adminuserController::class .':adminCreateUserView')
                     ->add(new adminauthmiddleware($swgAS->getContainer()))
                     ->setName('createuserview');
 
-                // Create user form
+                // Create helper form
                 $swgAS->post('/createuseraction', \swgAS\swgAdmin\controllers\adminuserController::class .':adminCreateUserAction')
                     ->add(new adminauthmiddleware($swgAS->getContainer()))
                     ->setName('createuseraction');

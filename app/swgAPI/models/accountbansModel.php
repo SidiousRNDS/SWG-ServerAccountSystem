@@ -14,7 +14,7 @@ namespace swgAS\swgAPI\models;
  ******************************************************************/
 
 // Use
-use swgAS\utils\errorcodes;
+use swgAS\helpers\errorcodes;
 
 /**
  * Summary of accountbanModel

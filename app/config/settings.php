@@ -93,7 +93,7 @@ namespace swgAS\config;
 
  	/**
  	* Account settings
- 	* @var int NUMBEROFACCOUNTSALLOWED - Set the total number of accounts a user can have on the server with out a special authcode
+ 	* @var int NUMBEROFACCOUNTSALLOWED - Set the total number of accounts a helper can have on the server with out a special authcode
  	* @var bool CHECKEMAIL	- Should we validate account count against email address
  	* @var bool CHECKIP - Should we validate account count against ip
  	* @var string PWSECRET - Password seceret for the password
@@ -113,7 +113,7 @@ namespace swgAS\config;
 
  	/**
 	 * Auth Code Settings
- 	 * @var string MAIN_CODE_PREFIX - This is the primary code that will force the checks to see if the user has more then 2 acounts
+ 	 * @var string MAIN_CODE_PREFIX - This is the primary code that will force the checks to see if the helper has more then 2 acounts
  	 * @var string EXTENDED_CODE_PREFIX - This is the code that will bypass all checks for users that are allowed to have multiple household accounts (family accounts)
  	 * @var int CODE_LENGTH_PRIMARY - Number of characters that the primary code should be
  	 * @var int CODE_LENGTH_SECONDARY - Number of characters that the secondary code should be
@@ -122,7 +122,7 @@ namespace swgAS\config;
  	 * @var bool DIVIDERS - If set to true it will add three - to the authcode
  	 * @var bool AUTHCODE_GENERATE - Should we allow the generation of authcodes
  	 * @var string AUTHCODE_GENERATE_USER - Name that is allowed to generate authcodes (this is passed in the post request)
- 	 * @var string AUTHCODE_GENERATE_SALE - Salt to encode the user
+ 	 * @var string AUTHCODE_GENERATE_SALE - Salt to encode the helper
  	 */
  	const PRIMARY_CODE_PREFIX = "RNDS1";
  	const EXTENDED_CODE_PREFIX = "RNDS2";

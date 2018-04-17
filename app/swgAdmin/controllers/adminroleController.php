@@ -20,7 +20,7 @@ use Psr\Http\Message\ResponseInterface;
 use swgAS\config\settings;
 use swgAS\controllers\baseController;
 use swgAS\swgAdmin\models\adminroleModel;
-use swgAS\utils\utilities;
+use swgAS\helpers\utilities;
 
 
 class adminroleController extends baseController
@@ -47,7 +47,8 @@ class adminroleController extends baseController
             'title'=>'Roles',
             'route'=>$request->getUri()->getPath(),
             'roles' => $getRoles,
-            'sections' => settings::ADMIN_SECTIONS
+            'sections' => settings::ADMIN_SECTIONS,
+            'userRole' => unserialize($_SESSION['perms'])
         ]);
     }
 
@@ -106,7 +107,8 @@ class adminroleController extends baseController
             'title'=>'View Roles',
             'route'=>$request->getUri()->getPath(),
             'roles' => $roles,
-            'sections' => settings::ADMIN_SECTIONS
+            'sections' => settings::ADMIN_SECTIONS,
+            'userRole' => unserialize($_SESSION['perms'])
         ]);
     }
 
@@ -137,7 +139,8 @@ class adminroleController extends baseController
             'title'=>'Update Role',
             'route'=>$request->getUri()->getPath(),
             'role' => $roleData,
-            'sections' => settings::ADMIN_SECTIONS
+            'sections' => settings::ADMIN_SECTIONS,
+            'userRole' => unserialize($_SESSION['perms'])
         ]);
     }
 

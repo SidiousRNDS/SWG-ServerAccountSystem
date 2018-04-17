@@ -17,10 +17,10 @@ namespace swgAS\swgAPI\models;
 
 // swgAS Use
 use swgAS\config\settings;
-use swgAS\utils\validation;
-use swgAS\utils\messaging\errormsg;
-use swgAS\utils\messaging\statusmsg;
-use swgAS\utils\utilities;
+use swgAS\helpers\validation;
+use swgAS\helpers\messaging\errormsg;
+use swgAS\helpers\messaging\statusmsg;
+use swgAS\helpers\utilities;
 
 use swgAS\swgAPI\models\accountModel;
 

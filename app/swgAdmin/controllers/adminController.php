@@ -21,7 +21,7 @@ namespace swgAS\swgAdmin\controllers;
  use swgAS\controllers\baseController;
  use swgAS\swgAdmin\models\adminloginModel;
  use swgAS\config\settings;
- use swgAS\utils\utilities;
+ use swgAS\helpers\utilities;
 
 class adminController extends baseController
 {

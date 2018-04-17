@@ -21,7 +21,17 @@ function drawChart()
                     xhr.setRequestHeader('Authorization', 'Bearer ' + data.token);
                 },
                 success: function (data) {
-                    var arrData = Object.values(data);
+
+                    var i = 0;
+                    var arrData = [];
+                    for(prop in data){
+                        arrData[i] = data[prop];
+                        i++;
+                    }
+
+                    console.log(arrData);
+
+                    //var arrData = Object.values(data);
 
                     // Sort the Array cause the Object was did not come back in the correct sort
                     arrData.sort(function (a, b) {
@@ -42,13 +52,13 @@ function build7Days(arrData)
     if(arrData.length !== 0){
         var graphDataUsersHighPop = [];
 
-        graphDataUsersHighPop.push(['Datetime', 'Population']);
+        graphDataUsersHighPop.push(['Date', 'Population']);
 
         for (var i = 0; i < arrData.length; i++) {
-            graphDataUsersHighPop.push([new Date(arrData[i]['date']), parseInt(arrData[i]['population_high'])]);
-        }
 
-        console.dir(graphDataUsersHighPop);
+            var justDate = arrData[i]['date'].split(' ')[0];
+            graphDataUsersHighPop.push([ new Date(justDate), parseInt(arrData[i]['population_high'])]);
+        }
 
         var dataSevenDays = new google.visualization.arrayToDataTable(graphDataUsersHighPop);
         var options = {

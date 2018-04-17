@@ -21,10 +21,10 @@ use \MongoDB\Driver\Query as MongoQuery;
 
 // Use swgAS
 use swgAS\config\settings;
-use swgAS\utils\utilities;
-use swgAS\utils\messaging\errormsg;
-use swgAS\utils\messaging\statusmsg;
-use swgAS\utils\password;
+use swgAS\helpers\utilities;
+use swgAS\helpers\messaging\errormsg;
+use swgAS\helpers\messaging\statusmsg;
+use swgAS\helpers\password;
 
 class adminusersModel
 {
@@ -34,7 +34,7 @@ class adminusersModel
     private $usersCollection = "users";
 
     /**
-     * Summary addUser - Add a new user to the DB
+     * Summary addUser - Add a new helper to the DB
      * @param $args
      * @throws \ReflectionException
      */
@@ -107,8 +107,28 @@ class adminusersModel
     public function getUser($args)
     {
         try {
-            $role = ['_id' => new MongoID($args['id'])];
-            $query = new MongoQuery($role);
+            $user = ['_id' => new MongoID($args['id'])];
+            $query = new MongoQuery($user);
+            $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->usersCollection,$query);
+            $userData = current($res->toArray());
+
+            return $userData;
+
+        } catch (ConnectionException $ex) {
+            $args['flash']->addMessageNow("error", $ex->getMessage());
+        }
+    }
+
+    /**
+     * Summary getUserByName
+     * @param $args
+     * @return mixed
+     */
+    public function getUserByName($args)
+    {
+        try {
+            $user = ['username' => $args['username']];
+            $query = new MongoQuery($user);
             $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->usersCollection,$query);
             $userData = current($res->toArray());
 

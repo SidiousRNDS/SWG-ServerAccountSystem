@@ -1,29 +1,35 @@
 <div class="nav-side-menu">
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
     <div class="menu-list">
         <ul id="menu-content" class="menu-content collapse out">
             <li {{ 'overview' in route ? 'class="active"' }} >
-                <a href="{{ path_for('overview') }}"><i class="fas fa-tachometer-alt fa-lg"></i> Overview</a>
+                <a href="{{path_for('overview')}}">
+                    <i class="fas fa-dashboard fa-lg"></i> Overview
+                </a>
             </li>
-            <li data-toggle="collapse" data-target="#authcodes" class="{{ 'authcodes' in route ? '':'collapsed'}}">
+            <li data-toggle="collapse" data-target="#authcodes" class="{{ 'authcodes' in route ? 'active':'collapsed'}}">
                 <a href="javascript:void(0);"><i class="fas fa-barcode fa-lg"></i> Auth Codes<span class="arrow"></span></a>
             </li>
-            <ul class="sub-menu collapse {{ 'authcodes' in route ? 'in' }}" id="authcodes" {{ 'authcodes' in route ? 'aria-expanded="true"': null}}>
+            <ul class="sub-menu collapse" id="authcodes">
                 {%  if userRole.authcodes.create == "c"%}
                     <li {{ 'createauth' in route ? 'class="active"' }}><a href="{{path_for('createauth')}}">Create Authcode</a></li>
                 {% endif %}
                 {%  if userRole.authcodes.read == "r"%}
                     <li {{ 'viewallused' in route ? 'class="active"' }}><a href="{{path_for('viewallused')}}">View Used Authcodes</a></li>
+                {% endif %}
+                {%  if userRole.authcodes.read == "r"%}
                     <li><a href="#">View Not Used Authcodes</a></li>
                 {% endif %}
             </ul>
-            <li data-toggle="collapse" data-target="#admintasks" class="{{ 'administration' in route ? '':'collapsed'}}">
+
+            <li data-toggle="collapse" data-target="#admintasks" class="{{ 'administration' in route ? 'active':'collapsed'}}">
                 <a href="javascript:void(0);"><i class="fas fa-user-secret fa-lg"></i> Adminstrator <span class="arrow"></span></a>
             </li>
-            <ul class="sub-menu collapse {{ 'administration' in route ? 'in' }}" id="admintasks"  {{ 'administration' in route ? 'aria-expanded="true"': null}}>
-                {%  if userRole.users.create == "c"%}
+            <ul class="sub-menu collapse" id="admintasks">
+                {%  if userRole.user.create == "c"%}
                     <li {{ 'createuserview' in route ? 'class="active"' }}><a href="{{path_for('createuserview')}}">Create User</a></li>
                 {% endif %}
-                {%  if userRole.users.read == "r"%}
+                {%  if userRole.user.read == "r"%}
                     <li {{ 'viewusers' in route ? 'class="active"' }}><a href="{{path_for('viewusers')}}">View User</a></li>
                 {% endif %}
                 {%  if userRole.roles.create == "c"%}
@@ -33,6 +39,7 @@
                     <li {{ 'viewroles' in route ? 'class="active"' }}><a href="{{path_for('viewroles')}}">View Roles</a></li>
                 {% endif %}
             </ul>
+
             <li>
                 <a href="javascript:void(0);">
                     <i class="fas fa-cogs fa-lg"></i> Configure System

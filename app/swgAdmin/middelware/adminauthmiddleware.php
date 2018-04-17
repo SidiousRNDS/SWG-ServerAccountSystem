@@ -17,11 +17,11 @@ use \Psr\Http\Message\RequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 // swgAS Use
-use swgAS\utils\sessions;
-use swgAS\utils\messaging\errormsg;
-use swgAS\utils\messaging\statusmsg;
-use swgAS\utils\security;
-use swgAS\utils\utilities;
+use swgAS\helpers\sessions;
+use swgAS\helpers\messaging\errormsg;
+use swgAS\helpers\messaging\statusmsg;
+use swgAS\helpers\security;
+use swgAS\helpers\utilities;
 
 class adminauthmiddleware
 {

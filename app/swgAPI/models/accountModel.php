@@ -18,12 +18,12 @@ use \Illuminate\Database\Eloquent\Model as Model;
 
 // swgAS Use
 use swgAS\config\settings;
-use swgAS\utils\messaging\errormsg;
-use swgAS\utils\messaging\statusmsg;
-use swgAS\utils\validation;
-use swgAS\utils\password;
-use swgAS\utils\station;
-use swgAS\utils\utilities;
+use swgAS\helpers\messaging\errormsg;
+use swgAS\helpers\messaging\statusmsg;
+use swgAS\helpers\validation;
+use swgAS\helpers\password;
+use swgAS\helpers\station;
+use swgAS\helpers\utilities;
 
 /**
  * Summary of accountModel
@@ -186,7 +186,7 @@ class accountModel extends Model
 			// Check to see if we have a valid auth code
 			$aCheck = validation::validateAuthCode($args);
 
-			$processAccountRequest = self::processNewAccountData(["user"=>$uCheck, "email"=>$eCheck, "ip"=>$iCheck, "authcode"=>$aCheck, "username"=>$args['username']]);
+			$processAccountRequest = self::processNewAccountData(["helper"=>$uCheck, "email"=>$eCheck, "ip"=>$iCheck, "authcode"=>$aCheck, "username"=>$args['username']]);
 
 			if($processAccountRequest === statusmsg::getStatusMsg("checkspassed", (new \ReflectionClass(self::class))->getShortName()))
 			{
@@ -228,7 +228,7 @@ class accountModel extends Model
 
 				if($addResults !== false)
 				{
-					// Log user was created
+					// Log helper was created
 					//$args['apiLogger']->info('APITOKEN Given',array("clientIP"=>$client_ip,"Token"=>$token, "Expires"=>$future->getTimestamp()));
 					$args['userLogger']->info('USER: ' . $args['username'] .' has been created');
 
@@ -293,7 +293,7 @@ class accountModel extends Model
 		}
 
 		// Make sure we don't have an existing username
-		if($args['user'] === true)
+		if($args['helper'] === true)
 		{
 			return errormsg::getErrorMsg("accountexits", (new \ReflectionClass(self::class))->getShortName());
 		}

@@ -19,7 +19,11 @@
                     <td>{{ auth.email }}</td>
                     <td>{{ auth.created_at }}</td>
                     <td>{{ auth.used_date }}</td>
-                    <td style="text-align:center"><a href="{{ path_for('viewallused')}}/view/{{ auth.aaid }}" title="View data for the authentication code for {{ auth.username }}"><i class="fas fa-eye fa-lg"></i></a></td>
+                    <td style="text-align:center">
+                        {%  if userRole.authcodes.read == "r"%}
+                        <a href="{{ path_for('viewallused')}}/view/{{ auth.aaid }}" title="View data for the authentication code for {{ auth.username }}"><i class="fas fa-eye fa-lg"></i></a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

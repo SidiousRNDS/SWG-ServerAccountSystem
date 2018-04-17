@@ -44,7 +44,7 @@ $ci['mongodb'] = function($ci) {
 
 // User IP
 $ci['userIP'] = function($ci) {
-    return \swgAS\utils\utilities::getClientIp();
+    return \swgAS\helpers\utilities::getClientIp();
 };
 
 // Views

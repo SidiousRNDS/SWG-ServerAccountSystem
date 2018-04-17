@@ -21,7 +21,7 @@ use swgAS\config\settings;
 use swgAS\controllers\baseController;
 use swgAS\swgAdmin\models\adminroleModel;
 use swgAS\swgAdmin\models\adminusersModel;
-use swgAS\utils\utilities;
+use swgAS\helpers\utilities;
 
 class adminuserController extends baseController
 {
@@ -48,12 +48,13 @@ class adminuserController extends baseController
             'flash'=>$this->getCIElement('flash'),
             'title'=>'Users',
             'route'=>$request->getUri()->getPath(),
-            'roles' => $roles
+            'roles' => $roles,
+            'userRole' => unserialize($_SESSION['perms'])
         ]);
     }
 
     /**
-     * Summary adminCreateUserAction - Add new user to the DB
+     * Summary adminCreateUserAction - Add new helper to the DB
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -103,12 +104,13 @@ class adminuserController extends baseController
             'flash'=>$this->getCIElement('flash'),
             'title'=>'Users',
             'route'=>$request->getUri()->getPath(),
-            'users' => $userData
+            'users' => $userData,
+            'userRole' => unserialize($_SESSION['perms'])
         ]);
     }
 
     /**
-     * Summary adminUpdateUserView - Update user form display
+     * Summary adminUpdateUserView - Update helper form display
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -142,7 +144,8 @@ class adminuserController extends baseController
             'route'=>$request->getUri()->getPath(),
             'users' => $userData,
             'roles' => $roles,
-            'id' => $args['id']
+            'id' => $args['id'],
+            'userRole' => unserialize($_SESSION['perms'])
         ]);
     }
 

@@ -21,14 +21,35 @@ use \MongoDB\Driver\Query as MongoQuery;
 
 // Use swgAS
 use swgAS\config\settings;
-use swgAS\utils\utilities;
-use swgAS\utils\messaging\errormsg;
-use swgAS\utils\messaging\statusmsg;
+use swgAS\helpers\utilities;
+use swgAS\helpers\messaging\errormsg;
+use swgAS\helpers\messaging\statusmsg;
 
 class adminroleModel
 {
     private $roleCollection = "user_roles";
 
+
+    /**
+     * Summary getRoleByName
+     * @param $args
+     * @return string
+     */
+    public function getRoleByName($args)
+    {
+        try {
+            $role = ['role_name' =>$args['role_name']];
+            $query = new MongoQuery($role);
+            $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->roleCollection,$query);
+            $roleData = current($res->toArray());
+            $mongoEntryChecked = $this->checkSections($roleData);
+
+            return $mongoEntryChecked;
+
+        } catch (ConnectionException $ex) {
+            $args['flash']->addMessageNow("error", $ex->getMessage());
+        }
+    }
 
     /**
      * Summary getRoles - Get all the roles in the user_roles collection

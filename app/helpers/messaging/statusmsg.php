@@ -11,7 +11,7 @@
  * CLASS: statusmsg
  ******************************************************************/
 
-namespace swgAS\utils\messaging;
+namespace swgAS\helpers\messaging;
 
 class statusmsg
 {

@@ -20,6 +20,7 @@ use Psr\Http\Message\ResponseInterface;
 use swgAS\controllers\baseController;
 use swgAS\swgAPI\models\authcodeModel;
 use swgAS\config\settings;
+use swgAS\helpers\security;
 
 
 class admindashboardController extends baseController
@@ -33,12 +34,18 @@ class admindashboardController extends baseController
      */
     public function adminDashboardIndex(ServerRequestInterface $request, ResponseInterface $response)
     {
+        $security = new security();
+        $userRole = $security-> loggedInUserRole([
+            'mongodb' => $this->getCIElement('mongodb')
+        ]);
+
         return $this->getCIElement('views')->render($response, 'adminoverview.twig',[
             'title' => 'Overview',
             'route' => $request->getUri()->getPath(),
             'baseURL' => settings::BASE_URL,
             'tokenURL' => settings::TOKEN_URL,
-            'statusURL' => settings::STATUS_URL
+            'statusURL' => settings::STATUS_URL,
+            'userRole' => $userRole
         ]);
     }
 
@@ -68,6 +75,7 @@ class admindashboardController extends baseController
             'authlist' => $authcodeList,
             'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
             'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
+            'userRole' => unserialize($_SESSION['perms'])
         ]);
     }
 
@@ -96,6 +104,7 @@ class admindashboardController extends baseController
             'authlist' => $authcodeList,
             'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
             'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
+            'userRole' => unserialize($_SESSION['perms'])
         ]);
     }
 }

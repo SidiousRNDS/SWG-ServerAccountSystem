@@ -10,7 +10,7 @@
  * CLASS: security
  ******************************************************************/
 
-namespace swgAS\utils;
+namespace swgAS\helpers;
 
 // Use
 // Use
@@ -20,7 +20,10 @@ use \MongoDB\BSON\ObjectId as MongoID;
 
 // Use swgAS
 use swgAS\config\settings;
-use swgAS\utils\messaging\statusmsg;
+use swgAS\swgAdmin\models\adminroleModel;
+use swgAS\swgAdmin\models\adminusersModel;
+use swgAS\helpers\userperms;
+use swgAS\helpers\sessions;
 
 class security
 {
@@ -28,7 +31,7 @@ class security
     private $lockRanges = [10,15,30]; // These are number of minutes to lock the account
     
     /**
-     * Summary loginAttempts - Track the number of login attempts by a user
+     * Summary loginAttempts - Track the number of login attempts by a helper
      * @param $args
      */
     public function loginAttempts($args)
@@ -186,5 +189,48 @@ class security
     {
         $args['flash']->addMessage("error",$msg);
         $args['flash']->addMessage("islocked",true);
+    }
+
+    /**
+     * Summary loggedInUserRole - Get the perms for the helper that is logged in
+     * @param $args
+     * @return mixed
+     */
+    public function loggedInUserRole($args)
+    {
+        // Get helper Session
+        $userSession = new sessions();
+        $userSessionId = $userSession->getSession();
+        $sessionTable = $userSession->getSessionTable();
+
+        try {
+            $session = ['sessionID' => $userSessionId];
+            $query = new MongoQuery($session);
+            $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$sessionTable,$query);
+            $sessionData = current($res->toArray());
+
+            if($sessionData != "") {
+                $sessionName = $sessionData->username;
+                $user = new adminusersModel();
+                $args['username'] = $sessionName;
+                $userData = $user->getUserByName($args);
+
+                if($userData !="") {
+                    $userRole = $userData->role;
+                    $role = new adminroleModel();
+                    $args['role_name'] = $userRole;
+                    $perms = $role->getRoleByName($args);
+
+                    $_SESSION['perms'] = serialize($perms->role_permissions);
+                    return $perms->role_permissions;
+                }
+            }
+
+        } catch (ConnectionException $ex) {
+            $args['flash']->addMessageNow("error", $ex->getMessage());
+        }
+
+
+
     }
 }

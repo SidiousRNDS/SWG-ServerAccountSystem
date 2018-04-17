@@ -50,7 +50,7 @@ class serverstatusModel
         {
 
             $timeDays = date('mdY', $r->last_check);
-            $dateReported = date('m-d-Y H:i:s', $r->last_check);
+            $dateReported = date('Y-m-d H:i:s', $r->last_check);
 
             $days[$timeDays]['date'] = $dateReported;
             $days[$timeDays]['server'] = $r->server_name;

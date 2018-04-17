@@ -19,11 +19,11 @@ use \MongoDB\Driver\Query as MongoQuery;
 
 // Use swgAS
 use swgAS\config\settings;
-use swgAS\utils\messaging\errormsg;
-use swgAS\utils\password;
-use swgAS\utils\security;
-use swgAS\utils\sessions;
-use swgAS\utils\utilities;
+use swgAS\helpers\messaging\errormsg;
+use swgAS\helpers\password;
+use swgAS\helpers\security;
+use swgAS\helpers\sessions;
+use swgAS\helpers\utilities;
 
 class adminloginModel extends Model
 {
