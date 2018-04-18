@@ -73,6 +73,7 @@ class adminusersModel
         }
     }
 
+    // TODO finish this method so we can check to make sure we don't duplicate the user
     public function checkUser($args)
     {
         $checkUser = ['usernme' => $args['username']];
@@ -171,7 +172,6 @@ class adminusersModel
                     ['multi' => false, 'upsert' => false]
                 );
             }
-
 
             $res = $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->usersCollection, $updateUser);
 

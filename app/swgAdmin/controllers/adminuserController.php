@@ -155,12 +155,15 @@ class adminuserController extends baseController
         $user->updateUser([
             'mongodb' => $this->getCIElement('mongodb'),
             'flash'=>$this->getCIElement('flash'),
+            'id' => $request->getParam('id'),
             'username' => utilities::sanitizeFormData($request->getParam('username'), FILTER_SANITIZE_STRING ),
             'password' => utilities::sanitizeFormData($request->getParam('password'), FILTER_SANITIZE_STRING ),
             'repassword' => utilities::sanitizeFormData($request->getParam('repassword'), FILTER_SANITIZE_STRING ),
             'email' => utilities::sanitizeFormData($request->getParam('email'), FILTER_SANITIZE_EMAIL ),
-            'role' => utilities::sanitizeFormData($request->getParam('rolename'), FILTER_SANITIZE_STRING )
+            'role' => utilities::sanitizeFormData($request->getParam('rolename'), FILTER_SANITIZE_STRING ),
+            'changepassword' => $request->getParam('changepassword')
         ]);
+
 
         $uri = $request->getURI()->withPath($this->getCIElement('router')->pathFor('viewusers'));
 
