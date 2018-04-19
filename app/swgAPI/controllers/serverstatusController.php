@@ -39,4 +39,23 @@ class serverstatusController extends baseController
 
         return $response->withJson($status,200);
     }
+
+    /**
+     * Summary last24HoursLive - Get the last 24 hours of records
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
+    public function last24HoursLive(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $ss = new serverstatusModel();
+
+        $status = $ss->getlast24HoursLive([
+                "mongodb"=>$this->getCIElement('mongodb'),
+                "errorlogger"=>$this->getCIElement('swgErrorLog'),
+                "apiLogger"=>$this->getCIElement('swgAPILog')
+        ]);
+
+        return $response->withJson($status,200);
+    }
 }

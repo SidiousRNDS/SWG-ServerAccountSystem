@@ -1,11 +1,7 @@
 
-//var tokenURL = "http://swgusers.rnds.io/api/token";
-//var statusURL = "http://swgusers.rnds.io/api/v1/status/lastseven";
-var statusEndPointLS = "/lastsevenlive";
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+var statusEndPoint24 = "/lasttwentyfourlive";
 
-function drawChart()
+function draw24HourChart()
 {
     $.ajax({
         url: tokenURL,
@@ -15,7 +11,7 @@ function drawChart()
         if (data.status === "ok")
         {
             $.ajax({
-                url: statusURL+statusEndPointLS,
+                url: statusURL+statusEndPoint24,
                 type: 'POST',
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + data.token);
@@ -29,17 +25,13 @@ function drawChart()
                         i++;
                     }
 
-                    console.log(arrData);
-
-                    //var arrData = Object.values(data);
-
                     // Sort the Array cause the Object was did not come back in the correct sort
-                    arrData.sort(function (a, b) {
+                    /*arrData.sort(function (a, b) {
                         return a.date.localeCompare(b.date);
-                    });
+                    });*/
 
                     // Build 7 days Graph
-                    build7Days(arrData);
+                    build24Hour(arrData);
                 }
             });
         }
@@ -47,24 +39,26 @@ function drawChart()
 }
 
 // build the Seven Day Graph
-function build7Days(arrData)
+function build24Hour(arrData)
 {
     if(arrData.length !== 0){
         var graphDataUsersHighPop = [];
 
-        graphDataUsersHighPop.push(['Date', 'Population']);
+        graphDataUsersHighPop.push(['Hour', 'Population']);
 
         for (var i = 0; i < arrData.length; i++) {
 
-            var justDate = arrData[i]['date'].split(' ')[0];
-            graphDataUsersHighPop.push([ new Date(justDate), parseInt(arrData[i]['population_high'])]);
+            var hourReported = arrData[i]['hourreported'] + "00:00";
+
+
+            graphDataUsersHighPop.push([ parseInt(arrData[i]['hourreported']), parseInt(arrData[i]['population_high'])]);
         }
 
         var dataSevenDays = new google.visualization.arrayToDataTable(graphDataUsersHighPop);
         var options = {
             width: 500,
             height: 240,
-            title: 'Users Online over the last 7 days',
+            title: 'Users Online for the last 24 hours',
             vAxis: {'title': 'Server Population'},
             legend: 'none',
             backgroundColor: '#EDE8E6',
@@ -74,7 +68,7 @@ function build7Days(arrData)
         };
 
 
-        var chart = new google.visualization.LineChart(document.getElementById('last7days'));
+        var chart = new google.visualization.LineChart(document.getElementById('last24hours'));
         chart.draw(dataSevenDays, options);
     }
     else {

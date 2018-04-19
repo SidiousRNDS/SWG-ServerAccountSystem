@@ -168,6 +168,9 @@ $swgAS->group('/api', function() use ($swgAS) {
 
             // POST - Server Status Last 7 Days
             $swgAS->post('/lastsevenlive', \swgAS\swgAPI\controllers\serverstatusController::class . ':lastSevenDaysLive');
+
+            // POST - Server Status Last 24 Hours
+            $swgAS->post('/lasttwentyfourlive', \swgAS\swgAPI\controllers\serverstatusController::class . ':last24HoursLive');
         });
 
     });

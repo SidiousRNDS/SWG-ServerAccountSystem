@@ -71,4 +71,38 @@ class serverstatusModel
 
         return $days;
     }
+
+    public function getlast24HoursLive($args)
+    {
+        $hours = [];
+        $date = new \DateTime();
+        $currentTime = $date->getTimestamp();
+        $last24Hours = $date->getTimestamp() - 1 * 24 * 60 * 60;
+
+        $statusFilter = ['last_check' => ['$gte' => $last24Hours, '$lte' => $currentTime], 'server_name' => 'Live'];
+        $options = ['sort' => ['_id' => 1]];
+        $query = new MongoQuery($statusFilter,$options);
+
+        $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->serverStatusCollection, $query);
+
+        foreach($res as $r)
+        {
+            $hour = date('H', $r->last_check);
+            $hours[$hour]['hourreported'] = $hour;
+            $hours[$hour]['servername'] = $r->server_name;
+
+            // Add Entry to the hour Array
+            if($hours[$hour]['population_low'] == "" || $hours[$hour]['population_low'] > $r->population)
+            {
+                $hours[$hour]['population_low'] = $r->population;
+            }
+
+            if($hours[$hour]['population_high'] < $r->population)
+            {
+                $hours[$hour]['population_high'] = $r->population;
+            }
+        }
+
+        return $hours;
+    }
 }
