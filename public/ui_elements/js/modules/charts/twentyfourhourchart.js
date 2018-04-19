@@ -26,9 +26,9 @@ function draw24HourChart()
                     }
 
                     // Sort the Array cause the Object was did not come back in the correct sort
-                    /*arrData.sort(function (a, b) {
-                        return a.date.localeCompare(b.date);
-                    });*/
+                    arrData.sort(function (a, b) {
+                        return a.recordedDate.localeCompare(b.recordedDate);
+                    });
 
                     // Build 7 days Graph
                     build24Hour(arrData);
@@ -48,10 +48,11 @@ function build24Hour(arrData)
 
         for (var i = 0; i < arrData.length; i++) {
 
-            var hourReported = arrData[i]['hourreported'] + "00:00";
+            var hourReported = arrData[i]['hourreported'] + ":00:00";
+            console.log("Hour Reported: " + hourReported);
 
 
-            graphDataUsersHighPop.push([ parseInt(arrData[i]['hourreported']), parseInt(arrData[i]['population_high'])]);
+            graphDataUsersHighPop.push([arrData[i]['hourreported'], parseInt(arrData[i]['population_high'])]);
         }
 
         var dataSevenDays = new google.visualization.arrayToDataTable(graphDataUsersHighPop);
@@ -64,17 +65,24 @@ function build24Hour(arrData)
             backgroundColor: '#EDE8E6',
             series: {
                 0: {color: '#A5D6A7'}
-            }
+            },
+            hAxis: {
+                title: 'Time',
+                viewWindow:{
+                    max:24,
+                    min:0
+                }
+            },
         };
 
 
         var chart = new google.visualization.LineChart(document.getElementById('last24hours'));
-        chart.draw(dataSevenDays, options);
+        chart.draw(dataSevenDays,options);
     }
     else {
-        $('#last7days').css("width","500");
-        $('#last7days').css("height","240");
+        $('#last24hours').css("width","500");
+        $('#last24hours').css("height","240");
 
-        $('#last7days').html("No data to report at this time.");
+        $('#last24hours').html("No data to report at this time.");
     }
 }

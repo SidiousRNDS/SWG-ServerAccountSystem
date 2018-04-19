@@ -77,9 +77,11 @@ class serverstatusModel
         $hours = [];
         $date = new \DateTime();
         $currentTime = $date->getTimestamp();
-        $last24Hours = $date->getTimestamp() - 1 * 24 * 60 * 60;
+        $last24Hours = $date->getTimestamp() - 12 * 60 * 60;
+        $dayStart = mktime(0, 0, 0, date("m")  , date("d"), date("Y"));
+        $dayEnd = mktime(24, 0, 0, date("m")  , date("d"), date("Y"));
 
-        $statusFilter = ['last_check' => ['$gte' => $last24Hours, '$lte' => $currentTime], 'server_name' => 'Live'];
+        $statusFilter = ['last_check' => ['$gte' => $dayStart, '$lte' => $dayEnd], 'server_name' => 'Live'];
         $options = ['sort' => ['_id' => 1]];
         $query = new MongoQuery($statusFilter,$options);
 
@@ -90,6 +92,8 @@ class serverstatusModel
             $hour = date('H', $r->last_check);
             $hours[$hour]['hourreported'] = $hour;
             $hours[$hour]['servername'] = $r->server_name;
+            $hours[$hour]['recordedDate'] = date('Y-m-d H:i:s', $r->last_check);
+            $hours[$hour]['currentTime'] = date('Y-m-d H:i:s');
 
             // Add Entry to the hour Array
             if($hours[$hour]['population_low'] == "" || $hours[$hour]['population_low'] > $r->population)
