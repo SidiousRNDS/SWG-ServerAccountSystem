@@ -49,7 +49,9 @@ class adminuserController extends baseController
             'title'=>'Users',
             'route'=>$request->getUri()->getPath(),
             'roles' => $roles,
-            'userRole' => unserialize($_SESSION['perms'])
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 
@@ -105,7 +107,9 @@ class adminuserController extends baseController
             'title'=>'Users',
             'route'=>$request->getUri()->getPath(),
             'users' => $userData,
-            'userRole' => unserialize($_SESSION['perms'])
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 
@@ -145,7 +149,9 @@ class adminuserController extends baseController
             'users' => $userData,
             'roles' => $roles,
             'id' => $args['id'],
-            'userRole' => unserialize($_SESSION['perms'])
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 

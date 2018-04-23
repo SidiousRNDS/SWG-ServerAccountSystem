@@ -30,7 +30,7 @@ function draw24HourChart()
                         return a.recordedDate.localeCompare(b.recordedDate);
                     });
 
-                    // Build 7 days Graph
+                    // Build 24 hour Graph
                     build24Hour(arrData);
                 }
             });
@@ -41,17 +41,25 @@ function draw24HourChart()
 // build the Seven Day Graph
 function build24Hour(arrData)
 {
+    var today = new Date();
+    var d = today.getDate();
+    var m = today.getMonth()+1; //January is 0!
+    var y = today.getFullYear();
+
+    if(d < 10){
+        d ='0'+d;
+    }
+    if(m < 10){
+        m ='0'+ m;
+    }
+    var today = m+'/'+d+'/'+y;
+
     if(arrData.length !== 0){
         var graphDataUsersHighPop = [];
 
         graphDataUsersHighPop.push(['Hour', 'Population']);
 
         for (var i = 0; i < arrData.length; i++) {
-
-            var hourReported = arrData[i]['hourreported'] + ":00:00";
-            console.log("Hour Reported: " + hourReported);
-
-
             graphDataUsersHighPop.push([arrData[i]['hourreported'], parseInt(arrData[i]['population_high'])]);
         }
 
@@ -59,20 +67,23 @@ function build24Hour(arrData)
         var options = {
             width: 500,
             height: 240,
-            title: 'Users Online for the last 24 hours',
-            vAxis: {'title': 'Server Population'},
+            title: 'Users online over the last 24 hours (' + today + ')',
             legend: 'none',
             backgroundColor: '#EDE8E6',
             series: {
                 0: {color: '#A5D6A7'}
             },
             hAxis: {
-                title: 'Time',
+                title: 'Time (24h)',
                 viewWindow:{
                     max:24,
                     min:0
                 }
             },
+            vAxis: {
+                title: 'Server Population',
+                format: '0'
+            }
         };
 
 

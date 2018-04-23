@@ -211,12 +211,11 @@ function validateClientForm() {
             $('#authcodelabel span').remove();
 
             authcode = $.trim($('#authcodeInput').val());
-            console.log("Authcode check: " + authcode);
 
             authcodelen = authcode.length;
 
             if (authcode === "") {
-                $('#authcodelabel').append('<span class="error"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Authorization code is required. Please put in a ticket at <a href="http://rogueone.freshdesk.com" target="blank">RogueOne HelpDesk</a></span>');
+                $('#authcodelabel').append('<span class="error"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Authorization code is required.</span>');
                 $('#authcodeInput').css("border-color",errorBorderColor);
                 validation.authcode = false;
             }
@@ -240,12 +239,23 @@ function isValidEmailAddress(emailAddress) {
 function unlockCaptcha(formname) {
 
     if (formname.name == 'newAccount') {
-        if (validation.username === true &&  validation.email === true &&  validation.password === true &&  validation.password2 === true && validation.authcode === true) {
-            $('.g-recaptcha').css('display','block');
+        if(useAuth == true) {
+            if (validation.username === true && validation.email === true && validation.password === true && validation.password2 === true && validation.authcode === true) {
+                $('.g-recaptcha').css('display', 'block');
+            }
+            else {
+                // If something is missing disable captcha and submit button
+                captchaSubmitDisabled();
+            }
         }
         else {
-            // If something is missing disable captcha and submit button
-            captchaSubmitDisabled();
+            if (validation.username === true && validation.email === true && validation.password === true && validation.password2 === true) {
+                $('.g-recaptcha').css('display', 'block');
+            }
+            else {
+                // If something is missing disable captcha and submit button
+                captchaSubmitDisabled();
+            }
         }
     }
 

@@ -9,7 +9,6 @@ var validation = {username : false, email : false, password : false, password2 :
 
 // TODO Have to rewrite this part to use tokens and point to the correct location
 var tokenURL = "http://swgusers.rnds.io/api/token";
-var stats = "http://status.swgrogueone.com/api/sp/d0535411a3448051be1b4d91b52b55db/swgrogueone";
 var newaccountURL = "http://swgusers.rnds.io/api/v1/account/addaccount";
 
 if (checkMobile.any()) {

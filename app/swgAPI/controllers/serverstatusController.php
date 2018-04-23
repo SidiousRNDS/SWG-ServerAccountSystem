@@ -31,11 +31,11 @@ class serverstatusController extends baseController
     {
         $ss = new serverstatusModel();
 
-        $status = $ss->getLastSevenDaysLive(array(
+        $status = $ss->getLastSevenDaysLive([
                 "mongodb"=>$this->getCIElement('mongodb'),
                 "errorlogger"=>$this->getCIElement('swgErrorLog'),
-                "apiLogger"=>$this->getCIElement('swgAPILog'))
-        );
+                "apiLogger"=>$this->getCIElement('swgAPILog')
+        ]);
 
         return $response->withJson($status,200);
     }
@@ -54,6 +54,24 @@ class serverstatusController extends baseController
                 "mongodb"=>$this->getCIElement('mongodb'),
                 "errorlogger"=>$this->getCIElement('swgErrorLog'),
                 "apiLogger"=>$this->getCIElement('swgAPILog')
+        ]);
+
+        return $response->withJson($status,200);
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
+    public function uniqueAccountLoginsCurrentMonth(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $ss = new serverstatusModel();
+
+        $status = $ss->getUniqueAccounts([
+            "db"=>$this->getCIElement('db'),
+            "errorlogger"=>$this->getCIElement('swgErrorLog'),
+            "apiLogger"=>$this->getCIElement('swgAPILog')
         ]);
 
         return $response->withJson($status,200);

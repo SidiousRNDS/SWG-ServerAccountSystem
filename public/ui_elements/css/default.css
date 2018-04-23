@@ -208,7 +208,10 @@ a {color:#EE5828; text-decoration none;}
     }*/
 }
 
-
+.overviewchart {
+    width: 100%;
+    min-height: 450px;
+}
 
 
 @font-face {

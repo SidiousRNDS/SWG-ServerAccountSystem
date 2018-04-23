@@ -1,6 +1,7 @@
 {% extends "admindashboard.twig" %}
 
 {% block content %}
+    User Role:  {{ userRole }}
     <div id="adminmain">
         <div id="newAdminUser">
             <h2><i class="fas fa-user-secret" aria-hidden="true"></i> Create New User</h2>
@@ -51,7 +52,11 @@
                             <select name="rolename" class="form-control">
                                 <option value="null">Select a Role</option>
                                 {% for role in roles %}
-                                    <option value="{{ role.role_name }}">{{ role.role_name }}</option>
+                                    {% if role.role_name == "Owner" and userRole == "Owner" %}
+                                        <option value="{{ role.role_name }}">{{ role.role_name }}</option>
+                                        {% elseif role.role_name != "Owner" %}
+                                            <option value="{{ role.role_name }}">{{ role.role_name }}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>

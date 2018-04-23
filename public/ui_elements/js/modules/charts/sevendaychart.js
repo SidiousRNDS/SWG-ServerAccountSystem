@@ -25,8 +25,6 @@ function draw7DayChart()
                         i++;
                     }
 
-                    console.dir(arrData);
-
                     // Sort the Array cause the Object was did not come back in the correct sort
                     arrData.sort(function (a, b) {
                         return a.date.localeCompare(b.date);
@@ -58,12 +56,15 @@ function build7Days(arrData)
         var options = {
             width: 500,
             height: 240,
-            title: 'Users Online over the last 7 days',
-            vAxis: {'title': 'Server Population'},
+            title: 'Users online over the last 7 days',
             legend: 'none',
             backgroundColor: '#EDE8E6',
             series: {
                 0: {color: '#A5D6A7'}
+            },
+            vAxis: {
+                title: 'Server Population',
+                format: '0'
             }
         };
 

@@ -221,6 +221,7 @@ class security
                     $args['role_name'] = $userRole;
                     $perms = $role->getRoleByName($args);
 
+                    $_SESSION['role'] = serialize(($userRole));
                     $_SESSION['perms'] = serialize($perms->role_permissions);
                     return $perms->role_permissions;
                 }

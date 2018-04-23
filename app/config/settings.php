@@ -113,6 +113,7 @@ namespace swgAS\config;
 
  	/**
 	 * Auth Code Settings
+	 * @var bool USE_AUTHCODES - If you don't want to use authcodes but want to use the rest of the system set this to false default is true
  	 * @var string MAIN_CODE_PREFIX - This is the primary code that will force the checks to see if the helper has more then 2 acounts
  	 * @var string EXTENDED_CODE_PREFIX - This is the code that will bypass all checks for users that are allowed to have multiple household accounts (family accounts)
  	 * @var int CODE_LENGTH_PRIMARY - Number of characters that the primary code should be
@@ -124,6 +125,7 @@ namespace swgAS\config;
  	 * @var string AUTHCODE_GENERATE_USER - Name that is allowed to generate authcodes (this is passed in the post request)
  	 * @var string AUTHCODE_GENERATE_SALE - Salt to encode the helper
  	 */
+ 	const USE_AUTHCODES = true;
  	const PRIMARY_CODE_PREFIX = "RNDS1";
  	const EXTENDED_CODE_PREFIX = "RNDS2";
  	const CODE_LENGTH_PRIMARY = 7;
@@ -152,8 +154,7 @@ namespace swgAS\config;
 		'reports',
 		'users',
 		'roles',
-		'configurations',
-		'testing'
+		'configurations'
 	];
  }
 

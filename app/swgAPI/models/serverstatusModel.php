@@ -13,16 +13,13 @@
 namespace swgAS\swgAPI\models;
 
 // Use
+use \Illuminate\Database\Eloquent\Model as Model;
 use \MongoDB\Driver\Query as MongoQuery;
-use \MongoDB\Driver\Command as MongoCommand;
-use \MongoDB\Driver\BulkWrite;
-use \MongoDB\Driver\Exception\Exception as MongoExpception;
-use \MongoDB\BSON\ObjectId as MongoID;
 
 // Use swgAS
 use \swgAS\config\settings;
 
-class serverstatusModel
+class serverstatusModel extends Model
 {
     private $serverStatusCollection = "server_status";
 
@@ -72,12 +69,14 @@ class serverstatusModel
         return $days;
     }
 
+    /**
+     * Summary getLast24HoursLive - Get the last 24 hours stats
+     * @param $args
+     * @return array
+     */
     public function getlast24HoursLive($args)
     {
         $hours = [];
-        $date = new \DateTime();
-        $currentTime = $date->getTimestamp();
-        $last24Hours = $date->getTimestamp() - 12 * 60 * 60;
         $dayStart = mktime(0, 0, 0, date("m")  , date("d"), date("Y"));
         $dayEnd = mktime(24, 0, 0, date("m")  , date("d"), date("Y"));
 
@@ -108,5 +107,37 @@ class serverstatusModel
         }
 
         return $hours;
+    }
+
+    public function getUniqueAccounts($args)
+    {
+        //$from = date(Y-m-d 00:00:00);
+        //$to = date(Y-m-d 23:59:59);
+        $logins = [];
+        $from = '2017-10-01 00:00:00';
+        $to = '2017-10-31 23:59:59';
+
+        $res = $args['db']::table('account_ips')
+            ->distinct()
+            ->whereBetween('timestamp',[$from, $to])
+            ->groupBy('account_id')
+            ->get(['ip','account_id','timestamp']);
+
+        foreach($res as $r)
+        {
+            $splitTimeStamp = preg_split("/[\s]+/",$r->timestamp);
+            $loginDate = $splitTimeStamp[0];
+            $loginTime = $splitTimeStamp[1];
+
+            $logins[$loginDate]['loginDate'] = $loginDate;
+            $logins[$loginDate]['loginTime'] = $loginTime;
+            $logins[$loginDate]['loginTime']['ip'] = $r->ip;
+            $logins[$loginDate]['loginTime']['ip']['aid'] = $r->account_id;
+
+        }
+
+        print_r($logins);
+        die();
+
     }
 }

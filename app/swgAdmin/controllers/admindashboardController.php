@@ -45,7 +45,9 @@ class admindashboardController extends baseController
             'baseURL' => settings::BASE_URL,
             'tokenURL' => settings::TOKEN_URL,
             'statusURL' => settings::STATUS_URL,
-            'userRole' => $userRole
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 
@@ -75,7 +77,9 @@ class admindashboardController extends baseController
             'authlist' => $authcodeList,
             'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
             'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
-            'userRole' => unserialize($_SESSION['perms'])
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 
@@ -104,7 +108,9 @@ class admindashboardController extends baseController
             'authlist' => $authcodeList,
             'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
             'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
-            'userRole' => unserialize($_SESSION['perms'])
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 }

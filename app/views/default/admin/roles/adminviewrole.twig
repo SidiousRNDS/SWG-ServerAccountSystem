@@ -34,11 +34,20 @@
                 {% endfor %}
                 <div class="permList" style="margin-top:3%;">
                     <label class="permlabel" for="permissions">{{ role.role_name}} Role
-                        {%  if userRole.roles.update == "u"%}
-                            <a href="{{ path_for('updaterole',{'id': roleId.1}) }}" title="Edit {{ role.role_name }} Role" style="color:#1E8449;"><i class="fas fa-edit"></i></a>
-                        {% endif %}
-                        {%  if userRole.roles.delete == "d"%}
-                            <a href="{{ path_for('deleteroleaction',{'id': roleId.1}) }}" title="Delete {{ role.role_name }} Role" style="color:#ff0000;" class="deleteEntry"><i class="fas fa-times-circle"></i></a>
+                        {% if role.role_name == "Owner" and userRole == "Owner" %}
+                            {%  if userPerms.roles.update == "u"%}
+                                <a href="{{ path_for('updaterole',{'id': roleId.1}) }}" title="Edit {{ role.role_name }} Role" style="color:#1E8449;"><i class="fas fa-edit"></i></a>
+                            {% endif %}
+                            {%  if userPerms.roles.delete == "d"%}
+                                <a href="{{ path_for('deleteroleaction',{'id': roleId.1}) }}" title="Delete {{ role.role_name }} Role" style="color:#ff0000;" class="deleteEntry"><i class="fas fa-times-circle"></i></a>
+                            {% endif %}
+                        {% elseif  role.role_name != "Owner"  %}
+                            {%  if userPerms.roles.update == "u"%}
+                                <a href="{{ path_for('updaterole',{'id': roleId.1}) }}" title="Edit {{ role.role_name }} Role" style="color:#1E8449;"><i class="fas fa-edit"></i></a>
+                            {% endif %}
+                            {%  if userPerms.roles.delete == "d"%}
+                                <a href="{{ path_for('deleteroleaction',{'id': roleId.1}) }}" title="Delete {{ role.role_name }} Role" style="color:#ff0000;" class="deleteEntry"><i class="fas fa-times-circle"></i></a>
+                            {% endif %}
                         {% endif %}
                     </label>
 

@@ -48,7 +48,9 @@ class adminroleController extends baseController
             'route'=>$request->getUri()->getPath(),
             'roles' => $getRoles,
             'sections' => settings::ADMIN_SECTIONS,
-            'userRole' => unserialize($_SESSION['perms'])
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 
@@ -108,7 +110,9 @@ class adminroleController extends baseController
             'route'=>$request->getUri()->getPath(),
             'roles' => $roles,
             'sections' => settings::ADMIN_SECTIONS,
-            'userRole' => unserialize($_SESSION['perms'])
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 
@@ -140,7 +144,9 @@ class adminroleController extends baseController
             'route'=>$request->getUri()->getPath(),
             'role' => $roleData,
             'sections' => settings::ADMIN_SECTIONS,
-            'userRole' => unserialize($_SESSION['perms'])
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
         ]);
     }
 

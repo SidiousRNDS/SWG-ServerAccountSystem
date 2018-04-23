@@ -12,7 +12,7 @@ use swgAS\swgAdmin\middelware\adminauthmiddleware;
 
 
 $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
-    return $this->views->render($response, 'clients.twig',['uIP'=>$this->get('userIP'),'captchakey'=>settings::G_CAPTCHA_KEY]);
+    return $this->views->render($response, 'clients.twig',['uIP'=>$this->get('userIP'),'captchakey'=>settings::G_CAPTCHA_KEY,'useAuth'=>settings::USE_AUTHCODES]);
 })->setName('home');
 
 
@@ -171,6 +171,10 @@ $swgAS->group('/api', function() use ($swgAS) {
 
             // POST - Server Status Last 24 Hours
             $swgAS->post('/lasttwentyfourlive', \swgAS\swgAPI\controllers\serverstatusController::class . ':last24HoursLive');
+
+            // POST - Uniquie logins current month
+            $swgAS->post('/uniqueloginscurrentmonth', \swgAS\swgAPI\controllers\serverstatusController::class . ':uniqueAccountLoginsCurrentMonth');
+
         });
 
     });
