@@ -71,7 +71,7 @@ function buildCopyRight() {
     $('.foot').append('<span class="translation"><a href="#" class="translate" title="Translate to Galactic Basic"><i class="fab fa-empire" aria-hidden="true"></i> Translate</a></span>');
 }
 
-// Form validation
+// Client Form validation
 function validateClientForm() {
     // Set form for New Accounts
     if ($('#nAccount') !== undefined) {

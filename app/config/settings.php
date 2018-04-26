@@ -50,7 +50,7 @@ namespace swgAS\config;
    * @var string TEST_GAME_SERVER - the URI or IP of you test game server (leave empty if you don't have one)
    * @var int STATUS_PORT - The Game Server Status Port
    */
-  const LIVE_GAME_SERVER = "live.swgrogueone.com";
+  const LIVE_GAME_SERVER = "live.swgrehab.com";
   const TEST_GAME_SERVER = "";
   const STATUS_PORT = 44455;
   /**
