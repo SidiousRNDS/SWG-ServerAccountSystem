@@ -95,27 +95,27 @@ body {
 #newAccount .form-control {
   font-size: 1.12em;
 }
-#newAccount .btn-default {
+.error {
+  padding: 0 16px;
+  color: #ff0000;
+  font-weight: 700;
+}
+.error-msg {
+  color: #ff0000;
+  font-weight: 700;
+}
+.successmsg {
+  color: #1E8449;
+  font-weight: 700;
+}
+.btn-default {
   margin-left: 14px;
   background-image: linear-gradient(#EE5828, #EE5828);
   background: #EE5828;
   color: #000000;
 }
-#newAccount .btn {
+.btn {
   font-size: 1.12em;
-}
-#newAccount .error {
-  padding: 0 16px;
-  color: #ff0000;
-  font-weight: 700;
-}
-#newAccount .error-msg {
-  color: #ff0000;
-  font-weight: 700;
-}
-#newAccount .successmsg {
-  color: #1E8449;
-  font-weight: 700;
 }
 ::-webkit-input-placeholder {
   color: #ff0000;
@@ -153,6 +153,123 @@ body {
   -webkit-border-radius: 20px 20px 0px 0px;
   -moz-border-radius: 20px 20px 0px 0px;
   border-radius: 20px 20px 0px 0px;
+}
+.navbar-brand {
+  color: #EE5828;
+}
+.wrapper {
+  display: flex;
+  align-items: stretch;
+}
+.admincontent {
+  width: 100%;
+  padding: 0 2%;
+}
+#adminmain {
+  border: 1px solid #333;
+  margin-top: 3%;
+  width: 80%;
+  padding: 3%;
+  background-color: #ffffff;
+}
+#adminmain h2 {
+  color: #EE5828;
+}
+thead {
+  background-color: #000000;
+}
+a {
+  color: #EE5828;
+  text-decoration: none;
+}
+.table-border {
+  border: 1px solid #000000;
+}
+.table-border tbody tr td {
+  border: 1px soild #000000;
+}
+.table-border tbody tr th {
+  border: 1px solid #000000;
+}
+.table-border tfoot tr td {
+  border: 1px solid #000000;
+}
+.table-border tfoot tr th {
+  border: 1px solid #000000;
+}
+.table-border thead tr td {
+  border: 1px solid #000000;
+}
+.table-border thead tr th {
+  border: 1px solid #000000;
+}
+.pagination .active a {
+  z-index: 3;
+  color: #000000;
+  cursor: default;
+  background-color: #EE5828;
+  border-color: #EE5828;
+}
+.pagination .active a:focus {
+  z-index: 3;
+  color: #000000;
+  cursor: default;
+  background-color: #EE5828;
+  border-color: #EE5828;
+}
+.pagination .active a:hover {
+  z-index: 3;
+  color: #000000;
+  cursor: default;
+  background-color: #EE5828;
+  border-color: #EE5828;
+}
+.pagination .active span {
+  z-index: 3;
+  color: #000000;
+  cursor: default;
+  background-color: #EE5828;
+  border-color: #EE5828;
+}
+.pagination .active span:focus {
+  z-index: 3;
+  color: #000000;
+  cursor: default;
+  background-color: #EE5828;
+  border-color: #EE5828;
+}
+.pagination .active span:hover {
+  z-index: 3;
+  color: #000000;
+  cursor: default;
+  background-color: #EE5828;
+  border-color: #EE5828;
+}
+.pagination li a {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #000000;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+.pagination li span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #000000;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+}
+.overviewchart {
+  width: 100%;
+  min-height: 450px;
 }
 .nav-side-menu {
   overflow: auto;

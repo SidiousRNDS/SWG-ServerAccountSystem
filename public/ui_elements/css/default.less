@@ -137,27 +137,29 @@ body {
     padding:10px 0;
   }
   .form-control {
-    font-size:@bodyFontSize;
+    font-size: @bodyFontSize;
   }
-  .btn-default {
-    margin-left:14px;
-    background-image: linear-gradient(@color-Orange, @color-Orange);
-    background: @color-Orange;
-    color:#000000;
-  }
-  .btn {
-    font-size:@bodyFontSize;
-  }
-  .error {
-    padding:0 16px;
-    .messages;
-  }
-  .error-msg {
-    .messages;
-  }
-  .successmsg {
-    .messages(@color-Green);
-  }
+}
+
+.error {
+  padding:0 16px;
+  .messages;
+}
+.error-msg {
+  .messages;
+}
+.successmsg {
+  .messages(@color-Green);
+}
+
+.btn-default {
+  margin-left:14px;
+  background-image: linear-gradient(@color-Orange, @color-Orange);
+  background: @color-Orange;
+  color:#000000;
+}
+.btn {
+  font-size:@bodyFontSize;
 }
 
 ::-webkit-input-placeholder { color: @color-Red; font-family: @basicLang;}
@@ -180,6 +182,127 @@ body {
   height:40px;
   width:50%;
   .elementHeader();
+}
+
+.navbar-brand {
+  color: @color-Orange;
+}
+
+.wrapper {
+  display:flex;
+  align-items:stretch;
+}
+
+.admincontent {
+  width:100%;
+  padding: 0 2%;
+}
+
+#adminmain {
+  border:1px solid #333;
+  margin-top:3%;
+  width:80%;
+  padding: 3%;
+  background-color: @color-White;
+
+  h2 {
+    color: @color-Orange;
+  }
+}
+
+thead {
+  background-color:@color-Black;
+}
+
+a {
+  color: @color-Orange;
+  text-decoration: none;
+}
+
+.table-border {
+  border:1px solid @color-Black;
+
+  tbody tr td {
+    border:1px soild @color-Black;
+  }
+
+  tbody tr th {
+    border: 1px solid @color-Black;
+  }
+
+  tfoot tr td {
+    border: 1px solid @color-Black;
+  }
+
+  tfoot tr th {
+    border: 1px solid @color-Black;
+  }
+
+  thead tr td {
+    border: 1px solid @color-Black;
+  }
+
+  thead tr th {
+    border: 1px solid @color-Black;
+  }
+}
+
+.paginationActive() {
+  z-index: 3;
+  color: @color-Black;
+  cursor: default;
+  background-color: @color-Orange;
+  border-color: @color-Orange;
+}
+
+.pagination {
+  .active a {
+    .paginationActive();
+  }
+  .active a:focus {
+    .paginationActive();
+  }
+  .active a:hover {
+    .paginationActive();
+  }
+  .active span {
+    .paginationActive();
+  }
+  .active span:focus {
+    .paginationActive();
+  }
+  .active span:hover {
+    .paginationActive();
+  }
+
+  li a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: @color-Black;
+    text-decoration: none;
+    background-color: @color-White;
+    border: 1px solid #ddd;
+  }
+
+  li span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: @color-Black;
+    text-decoration: none;
+    background-color: @color-White;
+    border: 1px solid #ddd;
+  }
+}
+
+.overviewchart {
+  width: 100%;
+  min-height: 450px;
 }
 
 .nav-side-menu {
