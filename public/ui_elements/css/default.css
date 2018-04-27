@@ -1,3 +1,5 @@
+/* Mixins */
+/* End Mixins */
 body {
   background-color: #EDE8E6;
   color: #333333;
@@ -5,6 +7,10 @@ body {
 }
 #navbar {
   font-size: 1.5em;
+}
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
 }
 .navbar-inverse .navbar-nav li a {
   color: #EE5828;
@@ -175,33 +181,33 @@ body {
 #adminmain h2 {
   color: #EE5828;
 }
-thead {
-  background-color: #000000;
-  color: #EE5828;
-}
-thead tr td {
-  border: 1px solid #000000;
-}
-thead tr th {
-  border: 1px solid #000000;
-}
 a {
   color: #EE5828;
   text-decoration: none;
 }
-.table-border {
+.table-bordered {
   border: 1px solid #000000;
 }
-tbody tr td {
+.table-bordered thead {
+  background-color: #000000;
+  color: #EE5828;
+}
+.table-bordered thead tr td {
+  border: 1px solid #000000;
+}
+.table-bordered thead tr th {
+  border: 1px solid #000000;
+}
+.table-bordered tbody tr td {
   border: 1px soild #000000;
 }
-tbody tr th {
+.table-bordered tbody tr th {
   border: 1px solid #000000;
 }
-tfoot tr td {
+.table-bordered tfoot tr td {
   border: 1px solid #000000;
 }
-tfoot tr th {
+.table-bordered tfoot tr th {
   border: 1px solid #000000;
 }
 .pagination .active a {
@@ -353,11 +359,6 @@ tfoot tr th {
 .nav-side-menu li:hover {
   border-left: 3px solid #EE5828;
   background-color: #4f5b69;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  transition: all 1s ease;
 }
 @font-face {
   font-family: 'galbasic';

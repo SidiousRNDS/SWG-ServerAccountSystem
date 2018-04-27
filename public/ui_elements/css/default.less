@@ -8,6 +8,41 @@
 @color-Green: #1E8449;
 @basicLang: 'galbasic';
 
+/* Mixins */
+
+.elementHeader() {
+  background-image: linear-gradient( to bottom, #3c3c3c 0, #222 100%);
+  -webkit-border-radius: 20px 20px 0px 0px;
+  -moz-border-radius: 20px 20px 0px 0px;
+  border-radius: 20px 20px 0px 0px;
+}
+.elementBody(@border-color: #333333, @padding: 3%, @backgroundColor: #ffffff) {
+  border-left:1px solid @border-color;
+  border-right:1px solid @border-color;
+  padding: @padding;
+  background-color: @backgroundColor;
+}
+.messages(@color: @color-Red, @fontweight: 700) {
+  color: @color;
+  font-weight: @fontweight;
+}
+.paginationActive() {
+  z-index: 3;
+  color: @color-Black;
+  cursor: default;
+  background-color: @color-Orange;
+  border-color: @color-Orange;
+}
+.active(){
+  border-left:3px solid @color-Orange;
+  background-color: #4f5b69;
+  a {
+    color: @color-Orange;
+  }
+}
+
+/* End Mixins */
+
 body {
   background-color: @bodyBGColor;
   color: @bodyTextColor;
@@ -16,6 +51,11 @@ body {
 
 #navbar {
   font-size:1.5em;
+}
+
+.navbar {
+  margin-bottom:0;
+  border-radius: 0;
 }
 
 .navbar-inverse {
@@ -46,19 +86,6 @@ body {
 
 .content {
   padding: 0 2%;
-}
-
-.elementHeader() {
-  background-image: linear-gradient( to bottom, #3c3c3c 0, #222 100%);
-  -webkit-border-radius: 20px 20px 0px 0px;
-  -moz-border-radius: 20px 20px 0px 0px;
-  border-radius: 20px 20px 0px 0px;
-}
-.elementBody(@border-color: #333333, @padding: 3%, @backgroundColor: #ffffff) {
-  border-left:1px solid @border-color;
-  border-right:1px solid @border-color;
-  padding: @padding;
-  background-color: @backgroundColor;
 }
 
 #status {
@@ -120,11 +147,6 @@ body {
     text-decoration: none;
     color: @color-Orange;
   }
-}
-
-.messages(@color: @color-Red, @fontweight: 700) {
-  color: @color;
-  font-weight: @fontweight;
 }
 
 #newAccount {
@@ -208,53 +230,45 @@ body {
   }
 }
 
-thead {
-  background-color:@color-Black;
-  color: @color-Orange;
-
-  tr td {
-    border: 1px solid @color-Black;
-  }
-
-  tr th {
-    border: 1px solid @color-Black;
-  }
-}
-
 a {
   color: @color-Orange;
   text-decoration: none;
 }
 
-.table-border {
+.table-bordered {
   border: 1px solid @color-Black;
-}
 
-tbody {
-  tr td {
-    border: 1px soild @color-Black;
-  }
-  tr th {
-    border: 1px solid @color-Black;
-  }
-}
+  thead {
+    background-color:@color-Black;
+    color: @color-Orange;
 
-tfoot {
-  tr td {
-    border: 1px solid @color-Black;
+    tr td {
+      border: 1px solid @color-Black;
+    }
+
+    tr th {
+      border: 1px solid @color-Black;
+    }
   }
 
-  tr th {
-    border: 1px solid @color-Black;
+  tbody {
+    tr td {
+      border: 1px soild @color-Black;
+    }
+    tr th {
+      border: 1px solid @color-Black;
+    }
   }
-}
 
-.paginationActive() {
-  z-index: 3;
-  color: @color-Black;
-  cursor: default;
-  background-color: @color-Orange;
-  border-color: @color-Orange;
+  tfoot {
+    tr td {
+      border: 1px solid @color-Black;
+    }
+
+    tr th {
+      border: 1px solid @color-Black;
+    }
+  }
 }
 
 .pagination {
@@ -345,14 +359,6 @@ tfoot {
     float:right;
   }
 
-  .active(){
-    border-left:3px solid @color-Orange;
-    background-color: #4f5b69;
-    a {
-      color: @color-Orange;
-    }
-  }
-
   ul li .active {
     .active();
   }
@@ -399,11 +405,6 @@ tfoot {
   li:hover{
     border-left: 3px solid @color-Orange;
     background-color: #4f5b69;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease;
   }
 }
 
