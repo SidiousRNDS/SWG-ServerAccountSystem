@@ -54,7 +54,7 @@ function build7Days(arrData)
 
         var dataSevenDays = new google.visualization.arrayToDataTable(graphDataUsersHighPop);
         var options = {
-            width: 500,
+            width: 400,
             height: 240,
             title: 'Users online over the last 7 days',
             legend: 'none',
@@ -73,9 +73,9 @@ function build7Days(arrData)
         chart.draw(dataSevenDays, options);
     }
     else {
-        $('#last7days').css("width","500");
-        $('#last7days').css("height","240");
+        $('#last7days').css("width","400");
+        $('#last7days').css("height","272");
 
-        $('#last7days').html("No data to report at this time.");
+        $('#last7days').html("No data to report at this time for the population over the last 7 days graph");
     }
 }

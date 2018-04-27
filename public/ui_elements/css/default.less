@@ -1,0 +1,282 @@
+@bodyBGColor: #EDE8E6;
+@bodyTextColor: #333333;
+@bodyFontSize: 1.12em;
+@color-Orange: #EE5828;
+@color-Black: #000000;
+@color-White: #ffffff;
+@color-Red: #ff0000;
+@color-Green: #1E8449;
+@basicLang: 'galbasic';
+
+body {
+  background-color: @bodyBGColor;
+  color: @bodyTextColor;
+  font-size: @bodyFontSize;
+}
+
+#navbar {
+  font-size:1.5em;
+}
+
+.navbar-inverse {
+  .navbar-nav {
+    li a {
+      color: @color-Orange;
+    }
+    .navbar-toggle .icon-bar {
+      background-color: @color-Orange;
+    }
+  }
+}
+
+.dropdown-menu {
+  background-color: @color-Black;
+  li a {
+    color: @color-White;
+  }
+  li a:hover {
+    background-color: @color-Orange;
+    color: @color-White;
+  }
+}
+
+.content {
+  padding: 0 2%;
+}
+
+.elementHeader() {
+  background-image: linear-gradient( to bottom, #3c3c3c 0, #222 100%);
+  -webkit-border-radius: 20px 20px 0px 0px;
+  -moz-border-radius: 20px 20px 0px 0px;
+  border-radius: 20px 20px 0px 0px;
+}
+.elementBody(@border-color: #333333, @padding: 3%, @backgroundColor: #ffffff) {
+  border-left:1px solid @border-color;
+  border-right:1px solid @border-color;
+  padding: @padding;
+  background-color: @backgroundColor;
+}
+
+#status {
+  margin:0 2% 0 2%;
+  height:40px;
+  width:96%;
+  .elementHeader();
+
+  .left {
+    float:left;
+    margin:0 2% 0 2%;
+    color:@color-Orange;
+    height:30px;
+    padding:0.7% 0;
+    font-weight:bold;
+    display:block;
+    overflow:hidden;
+  }
+
+  .right {
+    color:lime;
+    padding:0.7% 0;
+    height:30px;
+    margin-left:10px;
+    display:block;
+    overflow:hidden;
+    width:25%;
+  }
+}
+
+
+
+#main {
+  .elementBody();
+  height: 100%;
+
+  h2 {
+    color: @color-Orange;
+    margin-top:0;
+    font-size:2.0em;
+  }
+
+  .hspacer {
+    border-top: 1px solid #cccccc;
+  }
+}
+
+.foot {
+  color: @color-Orange;
+  padding: 1.2% 0 1% 0;
+  font-family: @basicLang;
+}
+
+.credits {
+  font-family: @basicLang;
+}
+
+.translation {
+  float:right;
+  a {
+    text-decoration: none;
+    color: @color-Orange;
+  }
+}
+
+.messages(@color: @color-Red, @fontweight: 700) {
+  color: @color;
+  font-weight: @fontweight;
+}
+
+#newAccount {
+  .sgroup {
+    margin: 15px -15px 0 -15px;
+  }
+
+  .gcap {
+    margin:15px 0 0 1px;
+  }
+  #authcodelabel {
+    padding:10px 0;
+  }
+  .form-control {
+    font-size:@bodyFontSize;
+  }
+  .btn-default {
+    margin-left:14px;
+    background-image: linear-gradient(@color-Orange, @color-Orange);
+    background: @color-Orange;
+    color:#000000;
+  }
+  .btn {
+    font-size:@bodyFontSize;
+  }
+  .error {
+    padding:0 16px;
+    .messages;
+  }
+  .error-msg {
+    .messages;
+  }
+  .successmsg {
+    .messages(@color-Green);
+  }
+}
+
+::-webkit-input-placeholder { color: @color-Red; font-family: @basicLang;}
+:-moz-placeholder { color: @color-Red; font-family: @basicLang;}
+::-moz-placeholder { color: @color-Red; font-family: @basicLang;}
+:-ms-input-placeholder {  color: @color-Red;  font-family: @basicLang;}
+
+/* Admin Section */
+#adminLogin {
+  .elementBody();
+  background-color:#ffffff;
+  width:50%;
+  margin:0 auto;
+}
+
+#adminLoginHeader {
+  padding:0.6% 0.6% 0.6% 3%;
+  font-size:1.5em; color:#EE5828;
+  margin:0 auto;
+  height:40px;
+  width:50%;
+  .elementHeader();
+}
+
+.nav-side-menu {
+  overflow:auto;
+  font-size:12px;
+  font-weight:200;
+  background-image:linear-gradient(to bottom, #3c3c3c 0, #222 100%);
+  top:0;
+  width:200px;
+  height:100%;
+  color:@color-Orange;
+  min-height:90vh;
+
+  .toggle-btn {
+    display:none;
+  }
+
+  ul li {
+    list-style: none;
+    padding:0;
+    maring:0;
+    line-height:35px;
+    cursor: pointer;
+  }
+
+  ul li :not(collapsed) .arrow:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight:900;
+    content: "\f078";
+    display:inline-block;
+    padding:0 10px 0 10px;
+    vertical-align: middle;
+    float:right;
+  }
+
+  .active(){
+    border-left:3px solid @color-Orange;
+    background-color: #4f5b69;
+    a {
+      color: @color-Orange;
+    }
+  }
+  ul li .active {
+    .active();
+  }
+
+  ul li .sub-menu li.active {
+    .active();
+  }
+
+  ul li .sub-menu li {
+    background-color: #181c20;
+    border:none;
+    line-height: 28px;
+    border-bottom: 1px solid #23282e;
+    margin-left: 0;
+    border-left: 3px solid #2e353d;
+  }
+
+  ul li .sub-menu li:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight:900;
+    content: "\f105";
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+  }
+
+  li a {
+    text-decoration: none;
+    color: #EE5828;
+  }
+
+  li a i {
+    padding-left: 10px;
+    width: 20px;
+    padding-right: 20px;
+  }
+
+  li:hover{
+    border-left: 3px solid @color-Orange;
+    background-color: #4f5b69;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+  }
+}
+
+@font-face {
+  font-family: 'galbasic';
+  src: url('../fonts/galbasic.eot');
+  src: local('galbasic'), url('../fonts/galbasic.woff') format('woff'), url('../fonts/galbasic.ttf') format('truetype');
+}
+
+.fontsforweb_fontid_691 {
+  font-family: 'galbasic' !important;
+}

@@ -109,18 +109,26 @@ class serverstatusModel extends Model
         return $hours;
     }
 
+    /**
+     * @param $args
+     * @return array
+     */
     public function getUniqueAccounts($args)
     {
-        //$from = date(Y-m-d 00:00:00);
-        //$to = date(Y-m-d 23:59:59);
+        $startMonthDay = mktime(0, 0, 0, date("m"), 1, date("Y"));
+        $endMonthDay = mktime(0, 0, 0, date("m") + 1, 0, date("Y"));
+
+        $from = date('Y-m-d 00:00:00', $startMonthDay);
+        $to = date('Y-m-d 23:59:59', $endMonthDay);
+
         $logins = [];
-        $from = '2017-10-01 00:00:00';
-        $to = '2017-10-31 23:59:59';
+        //$from = '2017-10-01 00:00:00';
+        //$to = '2017-10-31 23:59:59';
 
         $res = $args['db']::table('account_ips')
             ->distinct()
             ->whereBetween('timestamp',[$from, $to])
-            ->groupBy('account_id')
+            ->groupBy('ip')
             ->get(['ip','account_id','timestamp']);
 
         foreach($res as $r)
@@ -129,15 +137,16 @@ class serverstatusModel extends Model
             $loginDate = $splitTimeStamp[0];
             $loginTime = $splitTimeStamp[1];
 
-            $logins[$loginDate]['loginDate'] = $loginDate;
-            $logins[$loginDate]['loginTime'] = $loginTime;
-            $logins[$loginDate]['loginTime']['ip'] = $r->ip;
-            $logins[$loginDate]['loginTime']['ip']['aid'] = $r->account_id;
-
+            if(array_key_exists($loginDate,$logins)) {
+                array_push($logins[$loginDate]['userdata'], array(['ip'=>$r->ip, 'aid'=>$r->account_id, 'loginTime' => $loginTime]));
+            }
+            else {
+                $logins[$loginDate]['loginDate'] = $loginDate;
+                $logins[$loginDate]['userdata'] = array(array(['ip'=>$r->ip, 'aid'=>$r->account_id, 'loginTime' => $loginTime]));
+            }
+            
         }
 
-        print_r($logins);
-        die();
-
+        return $logins;
     }
 }

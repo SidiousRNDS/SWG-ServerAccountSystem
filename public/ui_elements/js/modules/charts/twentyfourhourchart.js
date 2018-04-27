@@ -65,7 +65,7 @@ function build24Hour(arrData)
 
         var dataSevenDays = new google.visualization.arrayToDataTable(graphDataUsersHighPop);
         var options = {
-            width: 500,
+            width: 400,
             height: 240,
             title: 'Users online over the last 24 hours (' + today + ')',
             legend: 'none',
@@ -91,9 +91,9 @@ function build24Hour(arrData)
         chart.draw(dataSevenDays,options);
     }
     else {
-        $('#last24hours').css("width","500");
-        $('#last24hours').css("height","240");
+        $('#last24hours').css("width","400");
+        $('#last24hours').css("height","272");
 
-        $('#last24hours').html("No data to report at this time.");
+        $('#last24hours').html("No data to report at this time for the population for the last 24 hours graph");
     }
 }
