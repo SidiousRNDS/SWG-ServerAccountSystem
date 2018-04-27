@@ -12,6 +12,9 @@ body {
 .navbar-inverse .navbar-nav .navbar-toggle .icon-bar {
   background-color: #EE5828;
 }
+.navbar-inverse .navbar-brand {
+  color: #EE5828;
+}
 .dropdown-menu {
   background-color: #000000;
 }
@@ -154,9 +157,6 @@ body {
   -moz-border-radius: 20px 20px 0px 0px;
   border-radius: 20px 20px 0px 0px;
 }
-.navbar-brand {
-  color: #EE5828;
-}
 .wrapper {
   display: flex;
   align-items: stretch;
@@ -177,6 +177,13 @@ body {
 }
 thead {
   background-color: #000000;
+  color: #EE5828;
+}
+thead tr td {
+  border: 1px solid #000000;
+}
+thead tr th {
+  border: 1px solid #000000;
 }
 a {
   color: #EE5828;
@@ -185,22 +192,16 @@ a {
 .table-border {
   border: 1px solid #000000;
 }
-.table-border tbody tr td {
+tbody tr td {
   border: 1px soild #000000;
 }
-.table-border tbody tr th {
+tbody tr th {
   border: 1px solid #000000;
 }
-.table-border tfoot tr td {
+tfoot tr td {
   border: 1px solid #000000;
 }
-.table-border tfoot tr th {
-  border: 1px solid #000000;
-}
-.table-border thead tr td {
-  border: 1px solid #000000;
-}
-.table-border thead tr th {
+tfoot tr th {
   border: 1px solid #000000;
 }
 .pagination .active a {
@@ -282,13 +283,17 @@ a {
   color: #EE5828;
   min-height: 90vh;
 }
+.nav-side-menu .menu-content {
+  margin-left: 0;
+  padding-left: 0;
+}
 .nav-side-menu .toggle-btn {
   display: none;
 }
 .nav-side-menu ul li {
   list-style: none;
   padding: 0;
-  maring: 0;
+  margin: 0;
   line-height: 35px;
   cursor: pointer;
 }
@@ -308,12 +313,8 @@ a {
 .nav-side-menu ul li .active a {
   color: #EE5828;
 }
-.nav-side-menu ul li .sub-menu li.active {
-  border-left: 3px solid #EE5828;
-  background-color: #4f5b69;
-}
-.nav-side-menu ul li .sub-menu li.active a {
-  color: #EE5828;
+.nav-side-menu ul .sub-menu {
+  padding-left: 32px;
 }
 .nav-side-menu ul li .sub-menu li {
   background-color: #181c20;
@@ -323,7 +324,14 @@ a {
   margin-left: 0;
   border-left: 3px solid #2e353d;
 }
-.nav-side-menu ul li .sub-menu li:before {
+.nav-side-menu ul li .sub-menu li li.active {
+  border-left: 3px solid #EE5828;
+  background-color: #4f5b69;
+}
+.nav-side-menu ul li .sub-menu li li.active a {
+  color: #EE5828;
+}
+.nav-side-menu ul li .sub-menu li li:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f105";
@@ -335,6 +343,7 @@ a {
 .nav-side-menu li a {
   text-decoration: none;
   color: #EE5828;
+  padding-left: 5px;
 }
 .nav-side-menu li a i {
   padding-left: 10px;
@@ -357,5 +366,36 @@ a {
 }
 .fontsforweb_fontid_691 {
   font-family: 'galbasic' !important;
+}
+@media (max-width: 768px) {
+  .nav-side-menu {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .nav-side-menu .toggle-btn {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10 !important;
+    padding: 3px;
+    background-color: #EE5828;
+    color: #000000;
+    width: 40px;
+    text-align: center;
+  }
+  .nav-side-menu .navbar-brand {
+    text-align: left !important;
+    font-size: 22px;
+    padding-left: 20px;
+    line-height: 50px !important;
+  }
+}
+@media (min-width: 768px) {
+  .nav-side-menu .menu-list .menu-content {
+    display: block;
+  }
 }
 /*# sourceMappingURL=default.css.map */

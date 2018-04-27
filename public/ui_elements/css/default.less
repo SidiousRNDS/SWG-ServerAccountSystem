@@ -27,6 +27,10 @@ body {
       background-color: @color-Orange;
     }
   }
+
+  .navbar-brand {
+    color: @color-Orange;
+  }
 }
 
 .dropdown-menu {
@@ -84,8 +88,6 @@ body {
     width:25%;
   }
 }
-
-
 
 #main {
   .elementBody();
@@ -184,10 +186,6 @@ body {
   .elementHeader();
 }
 
-.navbar-brand {
-  color: @color-Orange;
-}
-
 .wrapper {
   display:flex;
   align-items:stretch;
@@ -212,6 +210,15 @@ body {
 
 thead {
   background-color:@color-Black;
+  color: @color-Orange;
+
+  tr td {
+    border: 1px solid @color-Black;
+  }
+
+  tr th {
+    border: 1px solid @color-Black;
+  }
 }
 
 a {
@@ -220,29 +227,24 @@ a {
 }
 
 .table-border {
-  border:1px solid @color-Black;
+  border: 1px solid @color-Black;
+}
 
-  tbody tr td {
-    border:1px soild @color-Black;
+tbody {
+  tr td {
+    border: 1px soild @color-Black;
   }
+  tr th {
+    border: 1px solid @color-Black;
+  }
+}
 
-  tbody tr th {
+tfoot {
+  tr td {
     border: 1px solid @color-Black;
   }
 
-  tfoot tr td {
-    border: 1px solid @color-Black;
-  }
-
-  tfoot tr th {
-    border: 1px solid @color-Black;
-  }
-
-  thead tr td {
-    border: 1px solid @color-Black;
-  }
-
-  thead tr th {
+  tr th {
     border: 1px solid @color-Black;
   }
 }
@@ -316,6 +318,11 @@ a {
   color:@color-Orange;
   min-height:90vh;
 
+  .menu-content {
+    margin-left:0;
+    padding-left:0;
+  }
+
   .toggle-btn {
     display:none;
   }
@@ -323,7 +330,7 @@ a {
   ul li {
     list-style: none;
     padding:0;
-    maring:0;
+    margin:0;
     line-height:35px;
     cursor: pointer;
   }
@@ -345,12 +352,13 @@ a {
       color: @color-Orange;
     }
   }
+
   ul li .active {
     .active();
   }
 
-  ul li .sub-menu li.active {
-    .active();
+  ul .sub-menu {
+    padding-left:32px;
   }
 
   ul li .sub-menu li {
@@ -360,21 +368,26 @@ a {
     border-bottom: 1px solid #23282e;
     margin-left: 0;
     border-left: 3px solid #2e353d;
-  }
 
-  ul li .sub-menu li:before {
-    font-family: "Font Awesome 5 Free";
-    font-weight:900;
-    content: "\f105";
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    vertical-align: middle;
+    li.active {
+      .active();
+    }
+
+    li:before {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f105";
+      display: inline-block;
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+    }
   }
 
   li a {
     text-decoration: none;
-    color: #EE5828;
+    color: @color-Orange;
+    padding-left:5px;
   }
 
   li a i {
@@ -402,4 +415,43 @@ a {
 
 .fontsforweb_fontid_691 {
   font-family: 'galbasic' !important;
+}
+
+@media (max-width:768px){
+  .nav-side-menu {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+
+    .toggle-btn {
+      display: block;
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 10 !important;
+      padding: 3px;
+      background-color: @color-Orange;
+      color: @color-Black;
+      width: 40px;
+      text-align: center;
+    }
+
+    .navbar-brand {
+      text-align: left !important;
+      font-size: 22px;
+      padding-left: 20px;
+      line-height: 50px !important;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-side-menu {
+    .menu-list {
+      .menu-content {
+        display:block;
+      }
+    }
+  }
 }
