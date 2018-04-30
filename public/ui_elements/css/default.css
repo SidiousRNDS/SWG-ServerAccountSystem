@@ -38,7 +38,7 @@ body {
   padding: 0 2%;
 }
 #status {
-  margin: 0 2% 0 2%;
+  margin: 2% 2% 0 2%;
   height: 40px;
   width: 96%;
   background-image: linear-gradient(to bottom, #3c3c3c 0, #222 100%);
@@ -97,9 +97,6 @@ body {
 }
 .sgroup {
   margin: 15px -15px 0 -15px;
-}
-.gcap {
-  margin: 15px 0 0 1px;
 }
 #newAccount #authcodelabel {
   padding: 10px 0;
@@ -171,7 +168,7 @@ body {
 }
 .admincontent {
   width: 100%;
-  padding: 0 2%;
+  padding: 0 0 2% 2%;
 }
 #adminmain {
   border: 1px solid #333;
