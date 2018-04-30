@@ -51,16 +51,17 @@ $sudo serivce apache2 restart
 ### Built with
 * [PHP 7.1](http://php.net) - PHP ^7.1 is required
 * [MongoDB](https://www.mongodb.com/) - MongoDB
-* [Slim](https://www.slimframework.com/) - Slim framework
 * [Bootstrap](https://getbootstrap.com/) - v3.7
+* [Slim](https://www.slimframework.com/) - Slim framework
 * [Slim JWT Auth](https://github.com/tuupola/slim-jwt-auth) - JWT Auth for Slim framework
 * [Slim Flash](https://github.com/slimphp/Slim-Flash) - Flash Messages for the Slim Framework
 * [Mono Log](https://github.com/Seldaek/monolog) - Mono Log logger
-* [IP Info DB](http://ipinfodb.com/) - IP Info DB - Geolocation based on IP Address
 * [Twig](https://twig.symfony.com) - Twig Templates
 * [Twig-View](https://github.com/slimphp/Twig-View) - Slim Twig View
 * [Google Charts](https://developers.google.com/chart/) - Google Charts
 * [DataTables](https://datatables.net) - Advanced interaction controls for HTML Tables
+* [Summernote](https://summernote.org/) - Summer note WYISWIG for Text Areas
+* [IP Info DB](http://ipinfodb.com/) - IP Info DB - Geolocation based on IP Address
 
 ## Versioning
 
