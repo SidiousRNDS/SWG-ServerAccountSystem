@@ -53,6 +53,32 @@ namespace swgAS\config;
   const LIVE_GAME_SERVER = "live.swgrehab.com";
   const TEST_GAME_SERVER = "";
   const STATUS_PORT = 44455;
+
+  /**
+   * Update locations and files
+   * @var string UPDATE_PATH - Path to where all the files live
+   * @var string LIVE_CONFIG_PATH - Path to where the live.cfg file lives
+   * @var string LOGIN_CONFIG_PATH - Path to where the login.cfg file lives
+   * @var string TEXTURE_CONFIG_PATH - Path to were the texture.cfg file lives
+   * 
+   * If you are not using the RO launcher you may not have these and they can remain empty
+   * @var string TRE_FILE_PATH - Path to where the TRE files live
+   * @var DYN_LAUNCHER_IMAGE_PATH - Path to where the Dyn Launcher Image lives
+   * @var TEXTURE_PATH - Path to where the texture files live
+   * @var ANNOUNCEMENTS_FILE - File name for the announcments file
+   * @var LAUNCHER_UPDATE_XML - File name for the launcher updates
+   */
+  const UPDATE_PATH = "/var/www/rehab-patch/";
+  const LIVE_CONFIG_PATH = "Rehab_live.cfg";
+  const LOGIN_CONFIG_PATH = "Rehab_login.cfg";
+  const TEXTURE_CONFIG_PATH = "Rehab_texture.cfg";
+  const TRE_FILE_PATH = "tre/";
+  const DYN_LAUNCHER_IMAGE_PATH = "dyn_launcher_image/";
+  const TEXTURE_PATH = "texture/";
+  const ANNOUNCEMENTS_FILE = "announcements.html";
+  const LAUNCHER_UPDATE_XML = "launcher_update.xml";
+
+
   /**
    * Database vars
    * @var string DBUSER

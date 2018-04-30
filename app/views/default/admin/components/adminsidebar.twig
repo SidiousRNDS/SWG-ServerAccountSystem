@@ -4,6 +4,7 @@
             <li {{ 'overview' in route ? 'class="active"' }} >
                 <a href="{{ path_for('overview') }}"><i class="fas fa-tachometer-alt fa-lg"></i> Overview</a>
             </li>
+
             {% if useAuth == true %}
                 <li data-toggle="collapse" data-target="#authcodes" class="{{ 'authcodes' in route ? '':'collapsed'}}">
                     <a href="javascript:void(0);"><i class="fas fa-barcode fa-lg"></i> Auth Codes<span class="arrow"></span></a>
@@ -19,6 +20,17 @@
                     {% endif %}
                 </ul>
             {% endif %}
+
+            <li data-toggle="collapse" data-target="#updates" class="{{ 'updates' in route ? '':'collapsed'}}">
+                <a href="javascript:void(0);"><i class="fas fa-wrench fa-lg"></i> Game Updates<span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse {{ 'updates' in route ? 'in' }}" id="updates" {{ 'updates' in route ? 'aria-expanded="true"': null}}>
+                <li><a href="">Create Server Patch</a></li>
+                <li><a href="">View Server Patches</a></li>
+                <li><a href="">Create Launcher Patch</a></li>
+                <li><a href="">View Launcher Patches</a></li>
+            </ul>
+
             <li data-toggle="collapse" data-target="#admintasks" class="{{ 'administration' in route ? '':'collapsed'}}">
                 <a href="javascript:void(0);"><i class="fas fa-user-secret fa-lg"></i> Adminstrator <span class="arrow"></span></a>
             </li>

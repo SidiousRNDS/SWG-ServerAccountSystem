@@ -21,6 +21,9 @@ body {
 .navbar-inverse .navbar-brand {
   color: #EE5828;
 }
+.navbar-inverse .navbar-brand:hover {
+  color: #EE5828;
+}
 .dropdown-menu {
   background-color: #000000;
 }
@@ -92,10 +95,10 @@ body {
   text-decoration: none;
   color: #EE5828;
 }
-#newAccount .sgroup {
+.sgroup {
   margin: 15px -15px 0 -15px;
 }
-#newAccount .gcap {
+.gcap {
   margin: 15px 0 0 1px;
 }
 #newAccount #authcodelabel {
@@ -155,7 +158,7 @@ body {
   padding: 0.6% 0.6% 0.6% 3%;
   font-size: 1.5em;
   color: #EE5828;
-  margin: 0 auto;
+  margin: 10px auto auto auto;
   height: 40px;
   width: 50%;
   background-image: linear-gradient(to bottom, #3c3c3c 0, #222 100%);
@@ -181,7 +184,7 @@ body {
 #adminmain h2 {
   color: #EE5828;
 }
-a {
+#adminmain a {
   color: #EE5828;
   text-decoration: none;
 }
@@ -252,28 +255,6 @@ a {
   background-color: #EE5828;
   border-color: #EE5828;
 }
-.pagination li a {
-  position: relative;
-  float: left;
-  padding: 6px 12px;
-  margin-left: -1px;
-  line-height: 1.42857143;
-  color: #000000;
-  text-decoration: none;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-}
-.pagination li span {
-  position: relative;
-  float: left;
-  padding: 6px 12px;
-  margin-left: -1px;
-  line-height: 1.42857143;
-  color: #000000;
-  text-decoration: none;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-}
 .overviewchart {
   width: 100%;
   min-height: 450px;
@@ -282,7 +263,8 @@ a {
   overflow: auto;
   font-size: 12px;
   font-weight: 200;
-  background-image: linear-gradient(to bottom, #3c3c3c 0, #222 100%);
+  /*background-image:linear-gradient(to bottom, #3c3c3c 0, #222 100%);*/
+  background-color: #222222;
   top: 0;
   width: 200px;
   height: 100%;
@@ -298,46 +280,79 @@ a {
 }
 .nav-side-menu ul li {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
   line-height: 35px;
   cursor: pointer;
 }
-.nav-side-menu ul li :not(collapsed) .arrow:before {
+.nav-side-menu li {
+  padding-left: 0;
+  border-left: 3px solid #222222;
+  border-bottom: 1px solid #23282e;
+}
+.nav-side-menu li a {
+  text-decoration: none;
+  color: #EE5828;
+}
+.nav-side-menu li a i {
+  padding-left: 10px;
+  width: 20px;
+  padding-right: 20px;
+}
+.nav-side-menu li :not(collapsed) .arrow:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f078";
   display: inline-block;
-  padding: 0 10px 0 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   vertical-align: middle;
   float: right;
 }
-.nav-side-menu ul li .active {
+.nav-side-menu li:hover {
+  border-left: 3px solid #EE5828;
+  background-color: #4f5b69;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.nav-side-menu li.active {
   border-left: 3px solid #EE5828;
   background-color: #4f5b69;
 }
-.nav-side-menu ul li .active a {
+.nav-side-menu li.active a {
   color: #EE5828;
 }
-.nav-side-menu ul .sub-menu {
-  padding-left: 32px;
+.nav-side-menu .sub-menu {
+  padding-left: 13px;
 }
-.nav-side-menu ul li .sub-menu li {
-  background-color: #181c20;
+.nav-side-menu .sub-menu li.active {
+  border-left: 3px solid #EE5828;
+  background-color: #4f5b69;
+}
+.nav-side-menu .sub-menu li.active a {
+  color: #EE5828;
+}
+.nav-side-menu .sub-menu li {
+  background-color: #222222;
   border: none;
   line-height: 28px;
   border-bottom: 1px solid #23282e;
-  margin-left: 0;
-  border-left: 3px solid #2e353d;
+  margin-left: 0px;
+  border-left: 3px solid #222222;
 }
-.nav-side-menu ul li .sub-menu li li.active {
+.nav-side-menu .sub-menu li:hover {
   border-left: 3px solid #EE5828;
   background-color: #4f5b69;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
 }
-.nav-side-menu ul li .sub-menu li li.active a {
-  color: #EE5828;
-}
-.nav-side-menu ul li .sub-menu li li:before {
+.nav-side-menu .sub-menu li:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f105";
@@ -345,20 +360,6 @@ a {
   padding-left: 10px;
   padding-right: 10px;
   vertical-align: middle;
-}
-.nav-side-menu li a {
-  text-decoration: none;
-  color: #EE5828;
-  padding-left: 5px;
-}
-.nav-side-menu li a i {
-  padding-left: 10px;
-  width: 20px;
-  padding-right: 20px;
-}
-.nav-side-menu li:hover {
-  border-left: 3px solid #EE5828;
-  background-color: #4f5b69;
 }
 @font-face {
   font-family: 'galbasic';

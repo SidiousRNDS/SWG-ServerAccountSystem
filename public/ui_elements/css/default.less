@@ -22,7 +22,7 @@
   padding: @padding;
   background-color: @backgroundColor;
 }
-.messages(@color: @color-Red, @fontweight: 700) {
+.message(@color: @color-Red, @fontweight: 700) {
   color: @color;
   font-weight: @fontweight;
 }
@@ -33,12 +33,22 @@
   background-color: @color-Orange;
   border-color: @color-Orange;
 }
-.active(){
+.nav-active(){
   border-left:3px solid @color-Orange;
   background-color: #4f5b69;
   a {
     color: @color-Orange;
   }
+}
+
+.nav-hover(){
+  border-left: 3px solid @color-Orange;
+  background-color: #4f5b69;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
 }
 
 /* End Mixins */
@@ -69,6 +79,11 @@ body {
   }
 
   .navbar-brand {
+    color: @color-Orange;
+  }
+
+
+  .navbar-brand:hover{
     color: @color-Orange;
   }
 }
@@ -149,14 +164,14 @@ body {
   }
 }
 
-#newAccount {
-  .sgroup {
-    margin: 15px -15px 0 -15px;
-  }
+.sgroup {
+  margin: 15px -15px 0 -15px;
+}
+.gcap {
+  margin:15px 0 0 1px;
+}
 
-  .gcap {
-    margin:15px 0 0 1px;
-  }
+#newAccount {
   #authcodelabel {
     padding:10px 0;
   }
@@ -167,13 +182,13 @@ body {
 
 .error {
   padding:0 16px;
-  .messages;
+  .message();
 }
 .error-msg {
-  .messages;
+  .message();
 }
 .successmsg {
-  .messages(@color-Green);
+  .message(@color-Green);
 }
 
 .btn-default {
@@ -202,7 +217,7 @@ body {
 #adminLoginHeader {
   padding:0.6% 0.6% 0.6% 3%;
   font-size:1.5em; color:#EE5828;
-  margin:0 auto;
+  margin:10px auto auto auto;
   height:40px;
   width:50%;
   .elementHeader();
@@ -219,20 +234,20 @@ body {
 }
 
 #adminmain {
-  border:1px solid #333;
-  margin-top:3%;
-  width:80%;
+  border: 1px solid #333;
+  margin-top: 3%;
+  width: 80%;
   padding: 3%;
   background-color: @color-White;
 
   h2 {
     color: @color-Orange;
   }
-}
 
-a {
-  color: @color-Orange;
-  text-decoration: none;
+  a {
+    color: @color-Orange;
+    text-decoration: none;
+  }
 }
 
 .table-bordered {
@@ -290,30 +305,6 @@ a {
   .active span:hover {
     .paginationActive();
   }
-
-  li a {
-    position: relative;
-    float: left;
-    padding: 6px 12px;
-    margin-left: -1px;
-    line-height: 1.42857143;
-    color: @color-Black;
-    text-decoration: none;
-    background-color: @color-White;
-    border: 1px solid #ddd;
-  }
-
-  li span {
-    position: relative;
-    float: left;
-    padding: 6px 12px;
-    margin-left: -1px;
-    line-height: 1.42857143;
-    color: @color-Black;
-    text-decoration: none;
-    background-color: @color-White;
-    border: 1px solid #ddd;
-  }
 }
 
 .overviewchart {
@@ -322,78 +313,43 @@ a {
 }
 
 .nav-side-menu {
-  overflow:auto;
-  font-size:12px;
-  font-weight:200;
-  background-image:linear-gradient(to bottom, #3c3c3c 0, #222 100%);
-  top:0;
-  width:200px;
-  height:100%;
-  color:@color-Orange;
-  min-height:90vh;
+  overflow: auto;
+  font-size: 12px;
+  font-weight: 200;
+  /*background-image:linear-gradient(to bottom, #3c3c3c 0, #222 100%);*/
+  background-color: #222222;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  color: @color-Orange;
+  min-height: 90vh;
 
   .menu-content {
-    margin-left:0;
-    padding-left:0;
+    margin-left: 0;
+    padding-left: 0;
   }
 
   .toggle-btn {
-    display:none;
+    display: none;
   }
 
   ul li {
     list-style: none;
-    padding:0;
-    margin:0;
-    line-height:35px;
+    padding: 0px;
+    margin: 0px;
+    line-height: 35px;
     cursor: pointer;
   }
 
-  ul li :not(collapsed) .arrow:before {
-    font-family: "Font Awesome 5 Free";
-    font-weight:900;
-    content: "\f078";
-    display:inline-block;
-    padding:0 10px 0 10px;
-    vertical-align: middle;
-    float:right;
-  }
-
-  ul li .active {
-    .active();
-  }
-
-  ul .sub-menu {
-    padding-left:32px;
-  }
-
-  ul li .sub-menu li {
-    background-color: #181c20;
-    border:none;
-    line-height: 28px;
+  li {
+    padding-left: 0;
+    border-left: 3px solid #222222;
     border-bottom: 1px solid #23282e;
-    margin-left: 0;
-    border-left: 3px solid #2e353d;
-
-    li.active {
-      .active();
-    }
-
-    li:before {
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      content: "\f105";
-      display: inline-block;
-      padding-left: 10px;
-      padding-right: 10px;
-      vertical-align: middle;
-    }
   }
 
   li a {
     text-decoration: none;
     color: @color-Orange;
-    padding-left:5px;
   }
 
   li a i {
@@ -402,9 +358,53 @@ a {
     padding-right: 20px;
   }
 
-  li:hover{
-    border-left: 3px solid @color-Orange;
-    background-color: #4f5b69;
+  li :not(collapsed) {
+    .arrow:before {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f078";
+      display: inline-block;
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+      float: right;
+    }
+  }
+
+  li:hover {
+    .nav-hover();
+  }
+
+  li.active {
+    .nav-active();
+  }
+
+  .sub-menu {
+    padding-left:13px;
+
+    li.active {
+      .nav-active();
+    }
+    li {
+      background-color: #222222;
+      border: none;
+      line-height: 28px;
+      border-bottom: 1px solid #23282e;
+      margin-left: 0px;
+      border-left: 3px solid #222222;
+    }
+    li:hover {
+      .nav-hover();
+    }
+    li:before {
+      font-family: "Font Awesome 5 Free";
+      font-weight:900;
+      content: "\f105";
+      display: inline-block;
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+    }
   }
 }
 

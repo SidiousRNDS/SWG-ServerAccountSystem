@@ -7,7 +7,7 @@
             <h2><i class="fas fa-user-secret" aria-hidden="true"></i> Create New User</h2>
             <hr class="hspacer">
             {% if flash.getMessage('error')[0] %}
-                <div class="errmsg">
+                <div class="error-msg">
                     <i class="fas fa-exclamation-circle"></i> {{ flash.getMessage('error')[0] }}
                 </div>
             {% endif %}
