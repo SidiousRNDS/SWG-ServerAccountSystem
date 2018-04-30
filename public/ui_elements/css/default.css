@@ -121,7 +121,6 @@ body {
   font-weight: 700;
 }
 .btn-default {
-  margin-left: 14px;
   background-image: linear-gradient(#EE5828, #EE5828);
   background: #EE5828;
   color: #000000;
@@ -215,42 +214,42 @@ body {
 }
 .pagination .active a {
   z-index: 3;
-  color: #000000;
+  color: #000000 !important;
   cursor: default;
   background-color: #EE5828;
   border-color: #EE5828;
 }
 .pagination .active a:focus {
   z-index: 3;
-  color: #000000;
+  color: #000000 !important;
   cursor: default;
   background-color: #EE5828;
   border-color: #EE5828;
 }
 .pagination .active a:hover {
   z-index: 3;
-  color: #000000;
+  color: #000000 !important;
   cursor: default;
   background-color: #EE5828;
   border-color: #EE5828;
 }
 .pagination .active span {
   z-index: 3;
-  color: #000000;
+  color: #000000 !important;
   cursor: default;
   background-color: #EE5828;
   border-color: #EE5828;
 }
 .pagination .active span:focus {
   z-index: 3;
-  color: #000000;
+  color: #000000 !important;
   cursor: default;
   background-color: #EE5828;
   border-color: #EE5828;
 }
 .pagination .active span:hover {
   z-index: 3;
-  color: #000000;
+  color: #000000 !important;
   cursor: default;
   background-color: #EE5828;
   border-color: #EE5828;
@@ -360,6 +359,19 @@ body {
   padding-left: 10px;
   padding-right: 10px;
   vertical-align: middle;
+}
+.note-toolbar .btn-default {
+  background: #dddddd;
+  color: #000000;
+}
+.note-toolbar .dropdown-menu {
+  background-color: #ffffff;
+}
+.note-toolbar a {
+  color: #000000 !important;
+}
+.note-toolbar h2 {
+  color: #000000 !important;
 }
 @font-face {
   font-family: 'galbasic';

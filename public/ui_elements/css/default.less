@@ -28,7 +28,7 @@
 }
 .paginationActive() {
   z-index: 3;
-  color: @color-Black;
+  color: @color-Black !important;
   cursor: default;
   background-color: @color-Orange;
   border-color: @color-Orange;
@@ -192,7 +192,6 @@ body {
 }
 
 .btn-default {
-  margin-left:14px;
   background-image: linear-gradient(@color-Orange, @color-Orange);
   background: @color-Orange;
   color:#000000;
@@ -406,6 +405,16 @@ body {
       vertical-align: middle;
     }
   }
+}
+
+.note-toolbar {
+  .btn-default {
+    background:#dddddd;
+    color:@color-Black;
+  }
+  .dropdown-menu {background-color:@color-White;}
+  a {color:@color-Black !important;}
+  h2 {color:@color-Black !important;}
 }
 
 @font-face {
