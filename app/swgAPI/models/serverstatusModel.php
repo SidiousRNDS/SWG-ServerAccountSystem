@@ -24,7 +24,7 @@ class serverstatusModel extends Model
     private $serverStatusCollection = "server_status";
 
     /**
-     * Summary getLastSevenDays - Get the last 7 days of status updates from the db
+     * Summary getLastSevenDays - Get the last 7 days of status gameupdates from the db
      * @param $args
      * @return array
      */

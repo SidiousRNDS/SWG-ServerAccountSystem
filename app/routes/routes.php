@@ -133,6 +133,17 @@ $swgAS->group('/admin', function() use($swgAS){
                     ->setName('deleteuseraction');
 
             });
+            
+            $swgAS->group('/gameupdates', function() use($swgAS){
+                
+                $swgAS->get('/createserverpatchview', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchCreateView')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('createserverpatchview');
+    
+                $swgAS->get('/createserverpatchaction', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchCreateAction')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('createserverpatchaction');
+            });
         });
     }); 
 

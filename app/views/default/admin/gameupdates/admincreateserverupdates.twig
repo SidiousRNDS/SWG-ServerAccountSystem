@@ -1,0 +1,30 @@
+{% extends "admindashboard.twig" %}
+
+{% block content %}
+    <div id="adminmain">
+        <div id="newUpdate">
+            <h2><i class="fas fa-gavel" aria-hidden="true"></i> Create New Server Patch</h2>
+            <hr class="hspacer">
+            {% include 'messaging.twig' %}
+
+            <form id="nUpdate" name="newUpdate" method="post" action={{path_for('createserverpatchaction')}}>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="updateTitlelabel" for="updateTitleInput">Patch Title</label>
+                            <input type="text" class="form-control" id="updateTitleInput" name="updateTitle"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sgroup">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label id="updateDescriptionlabel" for="updateDescriptionInput">Patch Description</label>
+                            <textarea  rows="4" cols="50" class="form-control" id="updateDescriptionInput" name="updateDescription"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

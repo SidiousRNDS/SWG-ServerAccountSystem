@@ -58,7 +58,8 @@ $ci['views'] = function($ci) {
         '../app/views/'.settings::TEMPLATES."/admin/players",
         '../app/views/'.settings::TEMPLATES."/admin/reports",
         '../app/views/'.settings::TEMPLATES."/admin/users",
-        '../app/views/'.settings::TEMPLATES."/admin/roles"
+        '../app/views/'.settings::TEMPLATES."/admin/roles",
+        '../app/views/'.settings::TEMPLATES."/admin/gameupdates"
     ], ['cache' => false,'debug'=>true]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $ci['request']->getUri()->getBasePath()), '/');

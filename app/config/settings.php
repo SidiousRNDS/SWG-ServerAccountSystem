@@ -66,7 +66,7 @@ namespace swgAS\config;
    * @var DYN_LAUNCHER_IMAGE_PATH - Path to where the Dyn Launcher Image lives
    * @var TEXTURE_PATH - Path to where the texture files live
    * @var ANNOUNCEMENTS_FILE - File name for the announcments file
-   * @var LAUNCHER_UPDATE_XML - File name for the launcher updates
+   * @var LAUNCHER_UPDATE_XML - File name for the launcher gameupdates
    */
   const UPDATE_PATH = "/var/www/rehab-patch/";
   const LIVE_CONFIG_PATH = "Rehab_live.cfg";
@@ -175,6 +175,7 @@ namespace swgAS\config;
 
  	const ADMIN_SECTIONS = [
  		'authcodes',
+		'gameupdates',
 		'players',
 		'bans',
 		'reports',

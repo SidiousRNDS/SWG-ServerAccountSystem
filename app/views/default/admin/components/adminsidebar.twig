@@ -21,14 +21,22 @@
                 </ul>
             {% endif %}
 
-            <li data-toggle="collapse" data-target="#updates" class="{{ 'updates' in route ? '':'collapsed'}}">
+            <li data-toggle="collapse" data-target="#updates" class="{{ 'gameupdates' in route ? '':'collapsed'}}">
                 <a href="javascript:void(0);"><i class="fas fa-wrench fa-lg"></i> Game Updates<span class="arrow"></span></a>
             </li>
-            <ul class="sub-menu collapse {{ 'updates' in route ? 'in' }}" id="updates" {{ 'updates' in route ? 'aria-expanded="true"': null}}>
-                <li><a href="">Create Server Patch</a></li>
-                <li><a href="">View Server Patches</a></li>
-                <li><a href="">Create Launcher Patch</a></li>
-                <li><a href="">View Launcher Patches</a></li>
+            <ul class="sub-menu collapse {{ 'gameupdates' in route ? 'in' }}" id="updates" {{ 'gameupdates' in route ? 'aria-expanded="true"': null}}>
+                {%  if userPerms.gameupdates.create == "c"%}
+                    <li><a href="{{path_for('createserverpatchview')}}">Create Server Patch</a></li>
+                {%  endif %}
+                {%  if userPerms.gameupdates.read == "r"%}
+                    <li><a href="">View Server Patches</a></li>
+                {% endif %}
+                {%  if userPerms.gameupdates.create == "c"%}
+                    <li><a href="">Create Launcher Patch</a></li>
+                {% endif %}
+                {%  if userPerms.gameupdates.read == "r"%}
+                    <li><a href="">View Launcher Patches</a></li>
+                {% endif %}
             </ul>
 
             <li data-toggle="collapse" data-target="#admintasks" class="{{ 'administration' in route ? '':'collapsed'}}">
