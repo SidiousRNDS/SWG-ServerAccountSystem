@@ -71,11 +71,19 @@
                     </div>
                 </div>
                 {% endif %}
-                <div class="row sgroup gcap">
-                    <div class="g-recaptcha" data-sitekey="{{ captchakey }}" data-callback="captchaSubmitEnabled" data-expired-callback="captchaSubmitDisabled"></div>
+                <div class="row sgroup">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <div class="g-recaptcha" data-sitekey="{{ captchakey }}" data-callback="captchaSubmitEnabled" data-expired-callback="captchaSubmitDisabled"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row sgroup">
-                    <button type="submit" class="btn btn-default" id="accCreate"><i class="fas fa-user-plus" aria-hidden="true"></i> Create</button>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <button type="submit" class="btn btn-default" id="accCreate"><i class="fas fa-user-plus" aria-hidden="true"></i> Create</button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
