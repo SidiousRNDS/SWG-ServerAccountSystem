@@ -10,6 +10,11 @@ var monthNames = [
     "NOV", "DEC"
 ];
 
+var errorBorderColor  = "#FF0000";
+var defaultBorderColor = "#CCCCCC";
+var validationParams = {usernameMinLength : 4, usernameMaxLength : 32, passwordMinLength : 5, passwordMaxLength : 20};
+var validation = {username : false, email : false, password : false, password2 : false, authcode : false};
+
 $(document).ready(function(){
 
     // Display the copyright data
@@ -36,6 +41,15 @@ $(document).ready(function(){
             {"orderable":false}
         ]
     });
+
+    $('#patchList').DataTable({
+        "columns": [
+            null,
+            null,
+            {"orderable":false}
+        ]
+    });
+
     $(".deleteEntry").on('click', function(e){
         deleteEntry(e);
     });
@@ -312,4 +326,50 @@ function deleteEntry(e)
     }
 }
 
+$(function() {
+
+    // Disable Form Buttons
+    $('#nUpdate .btn').prop('disabled',true);
+
+    // File Upload Check
+    $('#updateTreFileInput').bind('change',function(){
+        var maxFileSize = 220200960;    // In Bytes
+        var uFile = this.files[0];
+        var humanReadableSize = humanReadableFileSize(uFile.size, true);
+
+        console.log("File Size: " + uFile.size);
+
+        if (uFile.size > maxFileSize) {
+            $('#updateTreFilelabel').find('span').remove();
+            $('#updateTreFilelabel').append('<span class="error"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Your file is ' + humanReadableSize + ' which exceeds max file upload size of ' + humanReadableFileSize(maxFileSize, true) + '</span>');
+            $('#updateTreFileInput').css("border-color", errorBorderColor);
+            this.value = null;
+            $('.btn').prop('disabled',true);
+        }
+        else {
+            $('#updateTreFilelabel').find('span').remove();
+            $('#updateTreFilelabel').append('<span class="accepted"><i class="fas fa-check-circle" aria-hidden="true"></i> Your file size is ' + humanReadableSize + '</span>');
+            $('#updateTreFileInput').css("border-color", defaultBorderColor);
+            $('.btn').prop('disabled',false);
+        }
+    });
+});
+
+// Human Readable Filesizes
+function humanReadableFileSize(bytes, si) {
+    var thresh = si ? 1000 : 1024;
+    if(Math.abs(bytes) < thresh) {
+        return bytes + ' B';
+    }
+    var units = si
+        ? ['kB','MB','GB','TB','PB','EB','ZB','YB']
+        : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+    var u = -1;
+    do {
+        bytes /= thresh;
+        ++u;
+    } while(Math.abs(bytes) >= thresh && u < units.length - 1);
+
+    return bytes.toFixed(1)+' '+units[u];
+}
 

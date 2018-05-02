@@ -150,15 +150,6 @@ class adminroleModel
 
         $permissionList = $this->processesPermissions($args['request']);
 
-        /*if (empty($permissionList]))
-        {
-            $errorMsg = errormsg::getErrorMsg("rolenotecreated", (new \ReflectionClass(self::class))->getShortName());
-            $errorMsg = utilities::replaceStatusMsg($errorMsg, "::ROLENAME::",  $args['request']['rolename']);
-            $args['flash']->addMessage("error", $errorMsg);
-
-            return;
-        }*/
-
         try {
 
             $role = ['_id' => new MongoID, 'role_name' => $args['request']['rolename'], 'role_permissions' => $permissionList];

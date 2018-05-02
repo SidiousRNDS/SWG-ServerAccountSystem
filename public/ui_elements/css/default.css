@@ -98,9 +98,6 @@ body {
 .sgroup {
   margin: 15px -15px 0 -15px;
 }
-.gcap {
-  margin: 15px 0 0 1px;
-}
 #newAccount #authcodelabel {
   padding: 10px 0;
 }
@@ -110,6 +107,11 @@ body {
 .error {
   padding: 0 16px;
   color: #ff0000;
+  font-weight: 700;
+}
+.accepted {
+  padding: 0 16px;
+  color: #1E8449;
   font-weight: 700;
 }
 .error-msg {

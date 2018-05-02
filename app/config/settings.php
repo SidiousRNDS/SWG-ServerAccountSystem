@@ -68,12 +68,12 @@ namespace swgAS\config;
    * @var ANNOUNCEMENTS_FILE - File name for the announcments file
    * @var LAUNCHER_UPDATE_XML - File name for the launcher gameupdates
    */
-  const UPDATE_PATH = "/var/www/rehab-patch/";
+  const UPDATE_PATH = "/var/www/rehab-patch";
   const LIVE_CONFIG_PATH = "Rehab_live.cfg";
   const LOGIN_CONFIG_PATH = "Rehab_login.cfg";
   const TEXTURE_CONFIG_PATH = "Rehab_texture.cfg";
   const TRE_FILE_PATH = "tre/";
-  const DYN_LAUNCHER_IMAGE_PATH = "dyn_launcher_image/";
+  const DYN_LAUNCHER_IMAGE_PATH = "dyn_launcher_image";
   const TEXTURE_PATH = "texture/";
   const ANNOUNCEMENTS_FILE = "announcements.html";
   const LAUNCHER_UPDATE_XML = "launcher_update.xml";
@@ -99,13 +99,13 @@ namespace swgAS\config;
    const ADMIN_PASSWORD_SALT = "eYXdQT7B32xWHSNvbeGx";
 
    /**
-	*	Logging vars
-	*	@var string LOGPATH - Path to the log files
- 	*	@var string APILOG - API Log Filename
- 	*	@var string USERSLOG - User Log Filename
- 	*	@var string ERRORLOG - Error Log Filename
- 	*	@var string PASSRESETLOG - Password Reset Log Filename
- 	*	@var string MULTIPLEATTEMPTSLOG - Multiple attempts to create an account log
+	* Logging vars
+	* @var string LOGPATH - Path to the log files
+ 	* @var string APILOG - API Log Filename
+ 	* @var string USERSLOG - User Log Filename
+ 	* @var string ERRORLOG - Error Log Filename
+ 	* @var string PASSRESETLOG - Password Reset Log Filename
+ 	* @var string MULTIPLEATTEMPTSLOG - Multiple attempts to create an account log
     * @var string ADMINLOG - Admin log logs actions for the admin section
  	*/
  	const LOGPATH = "../storage/logs/";

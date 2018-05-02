@@ -102,6 +102,15 @@ class errormsg
 		"usernotcreated" => "User ::USERNAME:: was not created"
 	];
 
+	protected static $patchErrorMsg = [
+		"patchmissingtitle" => "The patch you are trying to create is missing a title this is required to create a patch.",
+		"patchmissingnotes" => "The patch you are trying to create is missing notes this is required to create a patch",
+        "patchalreadyexists" => "Server patch ::PATCHNAME:: already exists. Please choose a different name.",
+		"serverpatchnotcreated" => "Server patch ::PATCHNAME:: was not created",
+		"liveconfigfailed" => "Server patch ::PATCHNAME:: was unable to update the live.cfg file",
+		"uploadfailed" => "File upload failed."
+	];
+
 	/**
 	 * Summary of getErrorMsg
 	 * @param string $code
@@ -142,6 +151,9 @@ class errormsg
                     break;
 				case "adminusersModel":
 					$error = self::$userErrorMsg[$code];
+					break;
+				case "admingameupdatesModel":
+					$error = self::$patchErrorMsg[$code];
 					break;
 			}
 		}

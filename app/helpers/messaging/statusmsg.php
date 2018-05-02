@@ -45,6 +45,10 @@ class statusmsg
 		"userdeleted" => "User ::USERNAME:: has been deleted"
 	];
 
+    protected static $patchStatus = [
+    	"serverpatchcreated" => "Server patch ::PATCHNAME:: has been created"
+	];
+
 	/**
 	 * Summary of getStatusMsg
 	 * @param string $code
@@ -73,6 +77,9 @@ class statusmsg
                 case "adminusersModel":
                     $status = self::$userStatus[$code];
                     break;
+				case "admingameupdatesModel":
+					$status = self::$patchStatus[$code];
+					break;
 			}
 		}
 

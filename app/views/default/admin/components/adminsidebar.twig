@@ -26,10 +26,10 @@
             </li>
             <ul class="sub-menu collapse {{ 'gameupdates' in route ? 'in' }}" id="updates" {{ 'gameupdates' in route ? 'aria-expanded="true"': null}}>
                 {%  if userPerms.gameupdates.create == "c"%}
-                    <li><a href="{{path_for('createserverpatchview')}}">Create Server Patch</a></li>
+                    <li {{ 'createserverpatchview' in route ? 'class="active"' }}><a href="{{path_for('createserverpatchview')}}">Create Server Patch</a></li>
                 {%  endif %}
                 {%  if userPerms.gameupdates.read == "r"%}
-                    <li><a href="">View Server Patches</a></li>
+                    <li {{ 'viewserverpatches' in route ? 'class="active"' }}><a href="{{path_for('viewserverpatches')}}">View Server Patches</a></li>
                 {% endif %}
                 {%  if userPerms.gameupdates.create == "c"%}
                     <li><a href="">Create Launcher Patch</a></li>
