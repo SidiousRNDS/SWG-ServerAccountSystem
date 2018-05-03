@@ -46,7 +46,7 @@ class statusmsg
 	];
 
     protected static $patchStatus = [
-    	"serverpatchcreated" => "Server movefiles ::PATCHNAME:: has been created"
+    	"serverpatchcreated" => "Server patch ::PATCHNAME:: has been created"
 	];
 
 	/**

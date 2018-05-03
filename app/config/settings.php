@@ -70,7 +70,7 @@ namespace swgAS\config;
    * @var ANNOUNCEMENTS_FILE - File name for the announcments file
    * @var LAUNCHER_UPDATE_XML - File name for the launcher gameupdates
    */
-  const UPDATE_PATH = "/var/www/rehab-movefiles";
+  const UPDATE_PATH = "/var/www/rehab-patch";
   const LIVE_CONFIG_PATH = "Rehab_live.cfg";
   const LOGIN_CONFIG_PATH = "Rehab_login.cfg";
   const TEXTURE_CONFIG_PATH = "Rehab_texture.cfg";
