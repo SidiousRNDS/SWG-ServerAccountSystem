@@ -25,20 +25,37 @@
                 <a href="javascript:void(0);"><i class="fas fa-wrench fa-lg"></i> Game Updates<span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse {{ 'gameupdates' in route ? 'in' }}" id="updates" {{ 'gameupdates' in route ? 'aria-expanded="true"': null}}>
-                {%  if userPerms.gameupdates.create == "c"%}
-                    <li {{ 'createserverpatchview' in route ? 'class="active"' }}><a href="{{path_for('createserverpatchview')}}">Create Server Patch</a></li>
-                {%  endif %}
-                {%  if userPerms.gameupdates.read == "r"%}
-                    <li {{ 'viewserverpatches' in route ? 'class="active"' }}><a href="{{path_for('viewserverpatches')}}">View Server Patches</a></li>
-                {% endif %}
-                {%  if userPerms.gameupdates.create == "c"%}
-                    <li><a href="">Create Launcher Patch</a></li>
-                {% endif %}
-                {%  if userPerms.gameupdates.read == "r"%}
-                    <li><a href="">View Launcher Patches</a></li>
-                {% endif %}
-                <li><a href="">Create Client Patch</a></li>
-                <li><a href="">View Client Patches</a></li>
+
+                <li data-toggle="collapse" data-target="#server" class="{{ 'serverpatch' in route ? '':'collapsed'}} ">
+                    <a href="javascript:void(0);">Server Patches <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse {{ 'serverpatch' in route ? 'in' }}" id="server" {{ 'serverpatch' in route ? 'aria-expanded="true"': null}}>
+                    {%  if userPerms.gameupdates.create == "c"%}
+                        <li {{ 'createserverpatch' in route ? 'class="active"' }}><a href="{{path_for('createserverpatch')}}">Create Server Patch</a></li>
+                    {%  endif %}
+                    {%  if userPerms.gameupdates.read == "r"%}
+                        <li {{ 'viewserverpatches' in route ? 'class="active"' }}><a href="{{path_for('viewserverpatches')}}">View Server Patches</a></li>
+                    {% endif %}
+                </ul>
+
+                <li data-toggle="collapse" data-target="#launcher" class="{{ 'launcherpatch' in route ? '':'collapsed'}}">
+                    <a href="javascript:void(0);">Launcher Patches <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse {{ 'launcherpatch' in route ? 'in' }}" id="launcher" {{ 'launcherpatch' in route ? 'aria-expanded="true"': null}}>
+                    {%  if userPerms.gameupdates.create == "c"%}
+                        <li><a href="">Create Launcher Patch</a></li>
+                    {% endif %}
+                    {%  if userPerms.gameupdates.read == "r"%}
+                        <li><a href="">View Launcher Patches</a></li>
+                    {% endif %}
+                </ul>
+                <li data-toggle="collapse" data-target="#client" class="{{ 'clientpatch' in route ? '':'collapsed'}}">
+                    <a href="javascript:void(0);">Client Patches <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse {{ 'clientpatch' in route ? 'in' }}" id="client" {{ 'clientpatch' in route ? 'aria-expanded="true"': null}}>
+                    <li><a href="">Create Client Patch</a></li>
+                    <li><a href="">View Client Patches</a></li>
+                </ul>
             </ul>
 
             <li data-toggle="collapse" data-target="#admintasks" class="{{ 'administration' in route ? '':'collapsed'}}">

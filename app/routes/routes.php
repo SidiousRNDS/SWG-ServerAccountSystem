@@ -136,18 +136,24 @@ $swgAS->group('/admin', function() use($swgAS){
         });
 
         $swgAS->group('/gameupdates', function() use($swgAS){
-
-            $swgAS->get('/createserverpatchview', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchCreateView')
-                ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('createserverpatchview');
-
-            $swgAS->post('/createserverpatchaction', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchCreateAction')
-                ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('createserverpatchaction');
-
-            $swgAS->get('/viewserverpatches', \swgAS\swgAdmin\controllers\admingameupdatesController::class .':adminGameUpdatesServerPatchView')
-                ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('viewserverpatches');
+    
+            $swgAS->group('/serverpatch', function() use($swgAS) {
+                $swgAS->get('/createserverpatch', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchCreateView')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('createserverpatch');
+    
+                $swgAS->post('/createserverpatchaction', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchCreateAction')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('createserverpatchaction');
+    
+                $swgAS->get('/viewserverpatches', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchView')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('viewserverpatches');
+    
+                $swgAS->get('/updateserverpatch/{id}', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchDetailView')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('updateserverpatch');
+            });
         });
     }); 
 

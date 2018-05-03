@@ -103,11 +103,11 @@ class errormsg
 	];
 
 	protected static $patchErrorMsg = [
-		"patchmissingtitle" => "The patch you are trying to create is missing a title this is required to create a patch.",
-		"patchmissingnotes" => "The patch you are trying to create is missing notes this is required to create a patch",
-        "patchalreadyexists" => "Server patch ::PATCHNAME:: already exists. Please choose a different name.",
-		"serverpatchnotcreated" => "Server patch ::PATCHNAME:: was not created",
-		"liveconfigfailed" => "Server patch ::PATCHNAME:: was unable to update the live.cfg file",
+		"patchmissingtitle" => "The movefiles you are trying to create is missing a title this is required to create a movefiles.",
+		"patchmissingnotes" => "The movefiles you are trying to create is missing notes this is required to create a movefiles",
+        "patchalreadyexists" => "Server movefiles ::PATCHNAME:: already exists. Please choose a different name.",
+		"serverpatchnotcreated" => "Server movefiles ::PATCHNAME:: was not created",
+		"liveconfigfailed" => "Server movefiles ::PATCHNAME:: was unable to update the live.cfg file",
 		"uploadfailed" => "File upload failed."
 	];
 
@@ -152,7 +152,7 @@ class errormsg
 				case "adminusersModel":
 					$error = self::$userErrorMsg[$code];
 					break;
-				case "admingameupdatesModel":
+				case "admingameupdatesutilsModel":
 					$error = self::$patchErrorMsg[$code];
 					break;
 			}

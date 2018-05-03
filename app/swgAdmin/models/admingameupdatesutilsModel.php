@@ -1,0 +1,67 @@
+<?php
+    /*****************************************************************
+     * RNDS SWG Account System
+     * @author:  Sidious <sidious@rnds.io>
+     * @since:   30 April 2018
+     * @link:    https://github.com/SidiousRNDS/SWGRO-AccountSystem
+     * @version: 1.0.0
+     *****************************************************************
+     * NAMESPACE: swgAS\swgAdmin\models
+     * CLASS: admingameupdatesutilsModel
+     *****************************************************************/
+    
+    namespace swgAS\swgAdmin\models;
+
+    // Use
+    use \MongoDB\BSON\ObjectId as MongoID;
+    use \MongoDB\Driver\Exception\ConnectionException;
+    use \MongoDB\Driver\Query as MongoQuery;
+
+    // Use swgAS
+    use swgAS\config\settings;
+
+    class admingameupdatesutilsModel
+    {
+        /**
+         * Summary getPatchByName - Get a patch by its name and return the results
+         * @param $args  - mongodb, flash, collections (name of the mongodb collection we need to look in)
+         * @return mixed
+         */
+        public function getPatchByName($args)
+        {
+            try {
+                $patch = ['patch_title' =>$args['patch_title']];
+                $query = new MongoQuery($patch);
+                $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$args['collection'],$query);
+                $patchData = current($res->toArray());
+
+                return $patchData;
+
+            } catch (ConnectionException $ex) {
+                $args['flash']->addMessageNow("error", $ex->getMessage());
+            }
+        }
+    
+        /**
+         * Summary getPatchById - Get a patch by its ID and return the results
+         * @param $args  - mongodb, flash, collections (name of the mongodb collection we need to look in)
+         * @return mixed
+         */
+        public function getPatchById($args)
+        {
+            print"ID: " + $args['id'] . "<br/>";
+            
+            try {
+                $patch = ['_id' => new MongoID($args['id'])];
+                $query = new MongoQuery($patch);
+                $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$args['collection'],$query);
+                $patchData = current($res->toArray());
+                
+                return $patchData;
+        
+            } catch (ConnectionException $ex) {
+                $args['flash']->addMessageNow("error", $ex->getMessage());
+            }
+        }
+
+    }

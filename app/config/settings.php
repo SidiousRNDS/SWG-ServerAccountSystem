@@ -46,10 +46,12 @@ namespace swgAS\config;
 
   /**
    * Game Server Info
+   * @var string SERVER_NAME - Name of the server you want to display
    * @var string LIVE_GAME_SERVER - the URI or IP of your live game server
    * @var string TEST_GAME_SERVER - the URI or IP of you test game server (leave empty if you don't have one)
    * @var int STATUS_PORT - The Game Server Status Port
    */
+  const SERVER_NAME = "SWG Rehab";
   const LIVE_GAME_SERVER = "live.swgrehab.com";
   const TEST_GAME_SERVER = "";
   const STATUS_PORT = 44455;
@@ -68,7 +70,7 @@ namespace swgAS\config;
    * @var ANNOUNCEMENTS_FILE - File name for the announcments file
    * @var LAUNCHER_UPDATE_XML - File name for the launcher gameupdates
    */
-  const UPDATE_PATH = "/var/www/rehab-patch";
+  const UPDATE_PATH = "/var/www/rehab-movefiles";
   const LIVE_CONFIG_PATH = "Rehab_live.cfg";
   const LOGIN_CONFIG_PATH = "Rehab_login.cfg";
   const TEXTURE_CONFIG_PATH = "Rehab_texture.cfg";

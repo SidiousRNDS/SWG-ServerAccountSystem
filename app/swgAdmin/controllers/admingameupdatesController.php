@@ -18,10 +18,11 @@
 
 // Use swgAS
     use swgAS\controllers\baseController;
-    use swgAS\swgAdmin\models\admingameupdatesModel;
+    use swgAS\swgAdmin\models\admingameupdatesutilsModel;
     use swgAS\config\settings;
     use swgAS\helpers\security;
-    
+    use swgAS\swgAdmin\models\adminserverupdatesModel;
+
     class admingameupdatesController extends baseController
     {
 
@@ -32,7 +33,7 @@
          */
         public function adminGameUpdatesServerPatchCreateView(ServerRequestInterface $request, ResponseInterface $response)
         {
-            return $this->getCIElement('views')->render($response, 'admincreateserverupdates.twig', [
+            return $this->getCIElement('views')->render($response, 'admincreateserverpatch.twig', [
                 'flash'=>$this->getCIElement('flash'),
                 'title' => 'Server Patch',
                 'route' => $request->getUri()->getPath(),
@@ -50,16 +51,16 @@
          */
         public function adminGameUpdatesServerPatchCreateAction(ServerRequestInterface $request, ResponseInterface $response)
         {
-            $gameUpdates = new admingameupdatesModel();
+            $gameUpdates = new adminserverupdatesModel();
 
-            $createPatch = $gameUpdates->addServerPatch([
+            $gameUpdates->addServerPatch([
                 'mongodb' => $this->getCIElement('mongodb'),
                 'flash' => $this->getCIElement('flash'),
                 'file' => $request->getUploadedFiles(),
                 'request'=>$request->getParsedBody()
             ]);
 
-            return $this->getCIElement('views')->render($response, 'admincreateserverupdates.twig', [
+            return $this->getCIElement('views')->render($response, 'admincreateserverpatch.twig', [
                 'flash'=>$this->getCIElement('flash'),
                 'title' => 'Server Patch',
                 'route' => $request->getUri()->getPath(),
@@ -77,17 +78,49 @@
          */
         public function adminGameUpdatesServerPatchView(ServerRequestInterface $request, ResponseInterface $response)
         {
-            $gameUpdates = new admingameupdatesModel();
+            $gameUpdates = new adminserverupdatesModel();
             $getPatches = $gameUpdates->getServerPatches([
                 'mongodb' => $this->getCIElement('mongodb'),
                 'flash'=>$this->getCIElement('flash'),
             ]);
 
-            return $this->getCIElement('views')->render($response, 'adminviewserverupdates.twig', [
+            return $this->getCIElement('views')->render($response, 'adminviewsererpatches.twig', [
                 'mongodb' => $this->getCIElement('mongodb'),
                 'flash'=>$this->getCIElement('flash'),
                 'title' => 'Server Patch',
                 'patches' => json_decode($getPatches),
+                'route' => $request->getUri()->getPath(),
+                'userRole' => unserialize($_SESSION['role']),
+                'userPerms' => unserialize($_SESSION['perms']),
+                'useAuth' => settings::USE_AUTHCODES
+            ]);
+        }
+    
+    
+        /**
+         * Summary adminGameUpdateServerPatchDetailView - View the Patch details
+         * @param ServerRequestInterface $request
+         * @param ResponseInterface      $response
+         * @return mixed
+         */
+        public function adminGameUpdatesServerPatchDetailView(ServerRequestInterface $request, ResponseInterface $response)
+        {
+            $route = $request->getAttribute('route');
+            $args= $route->getArguments();
+            
+            $serverPatch = new adminserverupdatesModel();
+            $getPatch = $serverPatch->getServerPatchById([
+                'mongodb' => $this->getCIElement('mongodb'),
+                'flash'=>$this->getCIElement('flash'),
+                'id' => $args['id']
+            ]);
+            
+            
+            return $this->getCIElement('views')->render($response, 'adminupdateserverpatch.twig', [
+                'mongodb' => $this->getCIElement('mongodb'),
+                'flash'=>$this->getCIElement('flash'),
+                'title' => 'Server Patch',
+                'patches' => json_decode($getPatch),
                 'route' => $request->getUri()->getPath(),
                 'userRole' => unserialize($_SESSION['role']),
                 'userPerms' => unserialize($_SESSION['perms']),
@@ -102,7 +135,7 @@
          */
         public function adminGameUpdatesLauncherPatchCreateView(ServerRequestInterface $request, ResponseInterface $response)
         {
-            return $this->getCIElement('views')->render($response, 'admincreatelauncherupdates.twig', [
+            return $this->getCIElement('views')->render($response, 'admincreatelauncherpatch.twig', [
                 'flash'=>$this->getCIElement('flash'),
                 'title' => 'Launcher Patch  ',
                 'route' => $request->getUri()->getPath(),

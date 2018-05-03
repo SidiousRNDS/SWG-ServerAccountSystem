@@ -7,7 +7,7 @@
  * @version: 1.0.0
  ******************************************************************
  * NAMESPACE: swgAS\helpers
- * CLASS: patch
+ * CLASS: movefiles
  ******************************************************************/
 
 namespace swgAS\helpers;
@@ -17,7 +17,7 @@ namespace swgAS\helpers;
 // Use swgAS
 use swgAS\config\settings;
 
-class patch
+class movefiles
 {
     /**
      * @param $args
@@ -36,15 +36,5 @@ class patch
         }
 
         return true;
-    }
-
-    public function readLiveCFG($args)
-    {
-
-    }
-
-    public function writeLiveCFG($args)
-    {
-
     }
 }

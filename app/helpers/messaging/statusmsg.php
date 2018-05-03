@@ -46,7 +46,7 @@ class statusmsg
 	];
 
     protected static $patchStatus = [
-    	"serverpatchcreated" => "Server patch ::PATCHNAME:: has been created"
+    	"serverpatchcreated" => "Server movefiles ::PATCHNAME:: has been created"
 	];
 
 	/**
@@ -77,7 +77,7 @@ class statusmsg
                 case "adminusersModel":
                     $status = self::$userStatus[$code];
                     break;
-				case "admingameupdatesModel":
+				case "admingameupdatesutilsModel":
 					$status = self::$patchStatus[$code];
 					break;
 			}

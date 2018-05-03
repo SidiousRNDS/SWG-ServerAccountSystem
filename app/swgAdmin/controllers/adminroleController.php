@@ -161,7 +161,7 @@ class adminroleController extends baseController
     {
         $role = new adminroleModel();
 
-        $update = $role->updateRole([
+        $role->updateRole([
             'mongodb' => $this->getCIElement('mongodb'),
             'flash' => $this->getCIElement('flash'),
             'request'=>$request->getParsedBody()
