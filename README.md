@@ -62,7 +62,7 @@ $sudo serivce apache2 restart
 * [Google Charts](https://developers.google.com/chart/) - Google Charts
 * [DataTables](https://datatables.net) - Advanced interaction controls for HTML Tables
 * [Summernote](https://summernote.org/) - Summer note WYISWIG for Text Areas
-* [IP Info DB](http://ipinfodb.com/) - IP Info DB - Geolocation based on IP Address
+* [WriteiniFile](https://github.com/Magicalex/WriteiniFile) - Write-ini-file php library for create, remove, erase, add, and update ini file.
 
 ## Versioning
 
