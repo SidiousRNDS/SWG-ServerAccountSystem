@@ -10,7 +10,7 @@
      * CLASS: patchController
      *****************************************************************/
     
-    namespace swgAPI\controllers;
+    namespace swgAS\swgAPI\controllers;
     
     // Use
     use \Psr\Http\Message\ServerRequestInterface;

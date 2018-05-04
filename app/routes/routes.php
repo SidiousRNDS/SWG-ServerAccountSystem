@@ -197,6 +197,12 @@ $swgAS->group('/api', function() use ($swgAS) {
             $swgAS->post('/uniqueloginscurrentmonth', \swgAS\swgAPI\controllers\serverstatusController::class . ':uniqueAccountLoginsCurrentMonth');
 
         });
+        
+        $swgAS->group('/patch', function() use($swgAS) {
+           
+            // GET - Server Patch Notes
+            $swgAS->get('/serverpatch', \swgAS\swgAPI\controllers\patchController::class  . ':getServerPatchNotes');
+        });
 
     });
 });
