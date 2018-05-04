@@ -86,6 +86,7 @@
                 $cDateTime = new \DateTime();
                 $treUpdate = "";
                 $treMD5 = "";
+                $serverPath = settings::UPDATE_LIVE_PATH;
                 
                 if ($args['file']['updateTreFile']->getClientFilename() != "") {
                     $treUpdate = $args['file']['updateTreFile']->getClientFilename();
@@ -113,8 +114,12 @@
                         $patchUtils = new movefiles();
                         $isUploaded = $patchUtils->moveTreFile($args);
                         
+                        if($args['request']['updateforserver'] == settings::TEST_GAME_SERVER) {
+                            $serverPath = settings::UPDATE_LIVE_PATH;
+                        }
+                        
                         // Update MD5 Checksum
-                        $treMD5 = utilities::md5CheckSum(settings::UPDATE_PATH . "/" . $args['file']['updateTreFile']->getClientFilename());
+                        $treMD5 = utilities::md5CheckSum($serverPath . "/" . $args['file']['updateTreFile']->getClientFilename());
     
                         $serverUpdateMD5 = new MongoBulkWrite();
                         $serverUpdateMD5->update(
