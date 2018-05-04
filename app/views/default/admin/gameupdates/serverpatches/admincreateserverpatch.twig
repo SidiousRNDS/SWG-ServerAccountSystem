@@ -19,6 +19,18 @@
                 <div class="row sgroup">
                     <div class="form-group">
                         <div class="col-xs-12">
+                            <label id="updateServerlabel" for="updateServerInput">Patch Server</label>
+                            <select name="updateforserver">
+                                <option name="">Select the server this patch is for</option>
+                                <option name="live">{{ liveserver }}</option>
+                                <option name="test">{{ testserver }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sgroup">
+                    <div class="form-group">
+                        <div class="col-xs-12">
                             <label id="updateNoteslabel" for="updateNotesInput">Patch Notes</label>
                             <textarea  rows="4" cols="300" class="form-control" id="summernote" name="updateNotes"></textarea>
                         </div>

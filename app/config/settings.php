@@ -40,9 +40,9 @@ namespace swgAS\config;
 
   /**
    * ipInfoDB
-   * @var string IP_INFO_DB_KEY - You must set up your own account to use this functionality
+   * @var string IP_INFO_DB_KEY - You must set up your own account to use this functionality - NOT USED AT THIS TIME
    */
-  const IP_INFO_DB_KEY = "683864c8e14039b85e0235ffb7ce2c6fc26f5fd1d74f82f48e84e1bef2cf9d78";
+  //const IP_INFO_DB_KEY = "683864c8e14039b85e0235ffb7ce2c6fc26f5fd1d74f82f48e84e1bef2cf9d78";
 
   /**
    * Game Server Info
@@ -64,21 +64,21 @@ namespace swgAS\config;
    * @var string TEXTURE_CONFIG_PATH - Path to were the texture.cfg file lives
    * 
    * If you are not using the RO launcher you may not have these and they can remain empty
-   * @var string TRE_FILE_PATH - Path to where the TRE files live
-   * @var DYN_LAUNCHER_IMAGE_PATH - Path to where the Dyn Launcher Image lives
-   * @var TEXTURE_PATH - Path to where the texture files live
-   * @var ANNOUNCEMENTS_FILE - File name for the announcments file
+   * @var string TRE_FOLDER - Folder to where the TRE files live
+   * @var DYN_LAUNCHER_IMAGE_FOLDER - Folder to where the Dyn Launcher Image lives
+   * @var TEXTURE_FOLDER - Folder to where the texture files live
    * @var LAUNCHER_UPDATE_XML - File name for the launcher gameupdates
    */
-  const UPDATE_PATH = "/var/www/rehab-patch";
+  const UPDATE_LIVE_PATH = "/var/www/rehab-patch/live";
+  const UPDATE_TEST_PATH = "/var/www/rehab-patch/test";
   const LIVE_CONFIG_PATH = "Rehab_live.cfg";
+  const TEST_CONFIG_FILE = "Rehab_test.cfg";
   const LOGIN_CONFIG_PATH = "Rehab_login.cfg";
   const TEXTURE_CONFIG_PATH = "Rehab_texture.cfg";
-  const TRE_FILE_PATH = "tre/";
-  const DYN_LAUNCHER_IMAGE_PATH = "dyn_launcher_image";
-  const TEXTURE_PATH = "texture/";
-  const ANNOUNCEMENTS_FILE = "announcements.html";
   const LAUNCHER_UPDATE_XML = "launcher_update.xml";
+  const TRE_FOLDER = "tre/";
+  const DYN_LAUNCHER_IMAGE_FOLDER = "dyn_launcher_image";
+  const TEXTURE_FOLDER = "texture/";
 
 
   /**
@@ -88,7 +88,7 @@ namespace swgAS\config;
    * @var string DBNAME
    * @var string DBHOST
    * @var string MONGO_STATUS - This is the status database that holds the status database
-   * @var string MONGO_ADMIN - This is the database that holds all the admin data (TODO make a better description)
+   * @var string MONGO_ADMIN - This is the database that holds all data
    * @var string ADMIN_PASSWORD_SALT - This is the salt that encrypts password for the admin section (you can change it to what ever you want)
    */
    const DBUSER = "swgemu";

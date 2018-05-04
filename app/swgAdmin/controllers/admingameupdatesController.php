@@ -39,7 +39,9 @@
                 'route' => $request->getUri()->getPath(),
                 'userRole' => unserialize($_SESSION['role']),
                 'userPerms' => unserialize($_SESSION['perms']),
-                'useAuth' => settings::USE_AUTHCODES
+                'useAuth' => settings::USE_AUTHCODES,
+                'liveserver'=>settings::LIVE_GAME_SERVER,
+                'testserver'=>settings::TEST_GAME_SERVER
             ]);
         }
 

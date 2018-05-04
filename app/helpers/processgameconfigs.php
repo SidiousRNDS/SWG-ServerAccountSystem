@@ -41,7 +41,7 @@ class processgameconfigs
         $treFileName = $treFile->getClientFilename();
 
         $args['configFile'] = settings::LIVE_CONFIG_PATH;
-        $readConfigData = $this->readConfig($args);
+        $readConfigData = $this->readIniConfig($args);
 
         $newSharedFile = [];
         foreach($readConfigData['SharedFile'] as $key => $value)
@@ -62,26 +62,28 @@ class processgameconfigs
 
         $args['newConfigData'] = $updateConfigData;
 
-        $writeConfig = $this->writeConfig($args);
+        $writeConfig = $this->writeIniConfig($args);
 
         return $writeConfig;
     }
 
     /**
+     * Summary readIniConfg
      * @param $args
      * @return array|bool
      */
-    private function readConfig($args)
+    private function readIniConfig($args)
     {
         return parse_ini_file(settings::UPDATE_PATH."/".$args['configFile'], true);
     }
 
     /**
+     * Summary writeIniConfig
      * @param $args
      * @return bool
      * @throws \Exception
      */
-    private function writeConfig($args)
+    private function writeIniConfig($args)
     {
         try {
             unlink(settings::UPDATE_PATH . "/" . $args['configFile']);
@@ -96,5 +98,15 @@ class processgameconfigs
         {
             throw new \Exception($e->getMessage());
         }
+    }
+    
+    private function readXMLConfig($args)
+    {
+    
+    }
+    
+    private function writeXMLConfig($args)
+    {
+    
     }
 }

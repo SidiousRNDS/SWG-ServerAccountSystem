@@ -104,6 +104,16 @@ class utilities
 		$tdata = trim($data);
 		return filter_var($tdata, $filter);
 	}
+    
+    /**
+	 * Summary md5CehckSum - Create a md5 Checksum where needed
+     * @param $filePath
+     * @return string
+     */
+	public static function md5CheckSum($filePath)
+	{
+        return md5_file($filePath);
+	}
 }
 
 ?>

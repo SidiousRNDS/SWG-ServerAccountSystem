@@ -105,6 +105,7 @@ class errormsg
 	protected static $patchErrorMsg = [
 		"patchmissingtitle" => "The patch you are trying to create is missing a title this is required to create a patch.",
 		"patchmissingnotes" => "The patch you are trying to create is missing notes this is required to create a patch",
+		"patchmissingserver" => "The patch you are trying to create is missing the server it is to be applied to",
         "patchalreadyexists" => "Server patch ::PATCHNAME:: already exists. Please choose a different name.",
 		"serverpatchnotcreated" => "Server patch ::PATCHNAME:: was not created",
 		"liveconfigfailed" => "Server patch ::PATCHNAME:: was unable to update the live.cfg file",

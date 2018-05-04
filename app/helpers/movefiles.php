@@ -26,11 +26,18 @@ class movefiles
      */
     public function moveTreFile($args)
     {
-        $treFile = $args['updateTreFile'];
+        $treFile = $args['file']['updateTreFile'];
         $treFileName = $treFile->getClientFilename();
+        $server = $args['request']['updateforserver'];
+        $trePath = settings::UPDATE_LIVE_PATH;
 
         try {
-            $treFile->moveTo(settings::UPDATE_PATH . "/" . $treFileName);
+            if($server == settings::TEST_GAME_SERVER) {
+                $trePath = settings::UPDATE_TEST_PATH;
+            }
+            
+            $treFile->moveTo($trePath . "/" . $treFileName);
+            
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
