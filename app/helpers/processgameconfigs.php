@@ -25,12 +25,7 @@ class processgameconfigs
      * @return bool
      * @throws \Exception
      */
-    public function liveConfig($args)
-    {
-        return $this->processLiveConfig($args);
-    }
-    
-    public function testConfig($args)
+    public function gameLiveConfig($args)
     {
         return $this->processLiveConfig($args);
     }
@@ -44,13 +39,17 @@ class processgameconfigs
     {
         $treFile = $args['file']['updateTreFile'];
         $treFileName = $treFile->getClientFilename();
-        $configPath = settings::LIVE_CONFIG_FILE;
+        $configFile = settings::LIVE_CONFIG_FILE;
+        $configPath = settings::UPDATE_LIVE_PATH;
 
         if($args['request']['updateforserver'] == settings::TEST_GAME_SERVER) {
-            $configPath = settings::TEST_CONFIG_FILE;
+            $configFile = settings::TEST_CONFIG_FILE;
+            $configPath = settings::UPDATE_TEST_PATH;
         }
         
-        $args['configFile'] = $configPath;
+        $args['configFile'] = $configFile;
+        $args['configPath'] = $configPath;
+        
         $readConfigData = $this->readIniConfig($args);
 
         $newSharedFile = [];
@@ -84,7 +83,7 @@ class processgameconfigs
      */
     private function readIniConfig($args)
     {
-        return parse_ini_file(settings::UPDATE_PATH."/".$args['configFile'], true);
+        return parse_ini_file( $args['configPath']."/".$args['configFile'], true);
     }
 
     /**
@@ -96,9 +95,9 @@ class processgameconfigs
     private function writeIniConfig($args)
     {
         try {
-            unlink(settings::UPDATE_PATH . "/" . $args['configFile']);
+            unlink( $args['configPath'] . "/" . $args['configFile']);
             
-            $createNewConfig = new WriteiniFile(settings::UPDATE_PATH . "/" . $args['configFile']);
+            $createNewConfig = new WriteiniFile( $args['configPath'] . "/" . $args['configFile']);
             $createNewConfig->add($args['newConfigData']);
             $createNewConfig->write();
             

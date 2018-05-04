@@ -123,12 +123,7 @@
                             
                             $processGameConfig = new processgameconfigs();
                             
-                            if ($args['request']['updateforserver'] == settings::TEST_GAME_SERVER) {
-                                $fileUpdated = $processGameConfig->testConfig($args);
-                            }
-                            else {
-                                $fileUpdated = $processGameConfig->liveConfig($args);
-                            }
+                            $fileUpdated = $processGameConfig->gameLiveConfig($args);
                         
                             if ($fileUpdated) {
                                 $args['flash']->addMessageNow("success", $statusMsg);
