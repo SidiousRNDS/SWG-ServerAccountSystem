@@ -57,7 +57,7 @@ class statusmsg
 	 */
 	public static function getStatusMsg(string $code, string $model ) : string
 	{
-		$status = [];
+		$status = "unknown";
 
 		if ($code != "") {
 			switch($model)
@@ -77,7 +77,8 @@ class statusmsg
                 case "adminusersModel":
                     $status = self::$userStatus[$code];
                     break;
-				case "admingameupdatesutilsModel":
+                case "adminserverupdatesModel":
+                case "admingameupdatesutilsModel":
 					$status = self::$patchStatus[$code];
 					break;
 			}

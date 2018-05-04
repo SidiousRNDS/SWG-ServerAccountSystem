@@ -329,15 +329,13 @@ function deleteEntry(e)
 $(function() {
 
     // Disable Form Buttons
-    $('#nUpdate .btn').prop('disabled',true);
+    //$('#nUpdate .btn').prop('disabled',true);
 
     // File Upload Check
     $('#updateTreFileInput').bind('change',function(){
         var maxFileSize = 220200960;    // In Bytes
         var uFile = this.files[0];
         var humanReadableSize = humanReadableFileSize(uFile.size, true);
-
-        console.log("File Size: " + uFile.size);
 
         if (uFile.size > maxFileSize) {
             $('#updateTreFilelabel').find('span').remove();

@@ -119,7 +119,8 @@ class errormsg
 	 */
 	public static function getErrorMsg(string $code, string $model ) : string
 	{
-		$error = null;
+		
+		$error = "unknown";
 
 		if ($code != "") {
 			switch($model)
@@ -152,6 +153,7 @@ class errormsg
 				case "adminusersModel":
 					$error = self::$userErrorMsg[$code];
 					break;
+				case "adminserverupdatesModel":
 				case "admingameupdatesutilsModel":
 					$error = self::$patchErrorMsg[$code];
 					break;

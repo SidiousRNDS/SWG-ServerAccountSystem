@@ -39,6 +39,8 @@
          */
         public function addServerPatch($args)
         {
+            $patchUtils = new admingameupdatesutilsModel();
+            
             if (count($args['request']) == 0) {
                 $errorMsg = errormsg::getErrorMsg("uploadfailed", (new \ReflectionClass(self::class))->getShortName());
                 $args['flash']->addMessageNow("error", $errorMsg);
@@ -63,7 +65,7 @@
             $args['collection'] = $this->serverUpdateCollection;
             $args['patch_title'] = $args['request']['updateTitle'];
         
-            if ($this->getPatchByName($args))
+            if ($patchUtils->getPatchByName($args))
             {
                 $errorMsg = errormsg::getErrorMsg("patchalreadyexists", (new \ReflectionClass(self::class))->getShortName());
                 $errorMsg = utilities::replaceStatusMsg($errorMsg, "::PATCHNAME::", $args['request']['updateTitle']);
@@ -75,8 +77,15 @@
             try {
             
                 $cDateTime = new \DateTime();
-            
-                $serverPatch = ['_id' => new MongoID, 'patch_title' => $args['request']['updateTitle'], 'patch_notes' => $args['request']['updateNotes'], 'patch_date' => $cDateTime->format('d M Y H:i:s')];
+                $treUpdate = "";
+                
+                if ($args['file']['updateTreFile']->getClientFilename() != "") {
+                    $treUpdate = $args['file']['updateTreFile']->getClientFilename();
+                }
+                
+                $serverPatch = ['_id' => new MongoID, 'patch_title' => $args['request']['updateTitle'],
+                                'patch_notes' => $args['request']['updateNotes'], 'patch_date' => $cDateTime->format('d M Y H:i:s'),
+                                'patch_tre_update' => $treUpdate];
                 $createServerPatch = new MongoBulkWrite();
                 $createServerPatch->insert($serverPatch);
                 $res = $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->serverUpdateCollection, $createServerPatch);

@@ -12,6 +12,9 @@
 
 namespace swgAS\helpers;
 
+// Use
+use WriteiniFile\WriteiniFile;
+
 // Use swgAS
 use swgAS\config\settings;
 
@@ -20,12 +23,18 @@ class processgameconfigs
     /**
      * @param $args
      * @return bool
+     * @throws \Exception
      */
     public function liveConfig($args)
     {
         return $this->processLiveConfig($args);
     }
-
+    
+    /**
+     * @param $args
+     * @return bool
+     * @throws \Exception
+     */
     private function processLiveConfig($args)
     {
         $treFile = $args['updateTreFile'];
@@ -76,23 +85,11 @@ class processgameconfigs
     {
         try {
             unlink(settings::UPDATE_PATH . "/" . $args['configFile']);
-            $configWrite = fopen(settings::UPDATE_PATH . "/" . $args['configFile'], 'w');
-
-            foreach ($args['newConfigData'] as $key => $value) {
-                $iniHeader = "[" . $key . "]\n\n";
-                fwrite($configWrite, $iniHeader);
-
-                if (is_array($value)) {
-                    foreach ($value as $itemKey => $itemValue) {
-                        $itemHeader = "[" . $itemKey . "]";
-                        $itemData = "\t" . $itemHeader . "=" . $itemValue . "\n";
-                        fwrite($configWrite, $itemData);
-                    }
-                    fwrite($configWrite, "\n\n");
-                }
-            }
-            fclose($configWrite);
-
+            
+            $createNewConfig = new WriteiniFile(settings::UPDATE_PATH . "/" . $args['configFile']);
+            $createNewConfig->add($args['newConfigData']);
+            $createNewConfig->write();
+            
             return true;
         }
         catch(\Exception $e)
