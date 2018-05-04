@@ -30,6 +30,11 @@ class processgameconfigs
         return $this->processLiveConfig($args);
     }
     
+    public function testConfig($args)
+    {
+        return $this->processLiveConfig($args);
+    }
+    
     /**
      * @param $args
      * @return bool
@@ -37,10 +42,15 @@ class processgameconfigs
      */
     private function processLiveConfig($args)
     {
-        $treFile = $args['updateTreFile'];
+        $treFile = $args['file']['updateTreFile'];
         $treFileName = $treFile->getClientFilename();
+        $configPath = settings::LIVE_CONFIG_FILE;
 
-        $args['configFile'] = settings::LIVE_CONFIG_PATH;
+        if($args['request']['updateforserver'] == settings::TEST_GAME_SERVER) {
+            $configPath = settings::TEST_CONFIG_FILE;
+        }
+        
+        $args['configFile'] = $configPath;
         $readConfigData = $this->readIniConfig($args);
 
         $newSharedFile = [];

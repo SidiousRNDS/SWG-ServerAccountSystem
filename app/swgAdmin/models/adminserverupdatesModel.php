@@ -17,7 +17,6 @@
     use \MongoDB\Driver\BulkWrite as MongoBulkWrite;
     use \MongoDB\BSON\ObjectId as MongoID;
     use \MongoDB\Driver\Exception\ConnectionException;
-    use \MongoDB\Driver\Query as MongoQuery;
 
     // Use swgAS
     use swgAS\config\settings;
@@ -48,7 +47,7 @@
                 return;
             }
         
-            if ($args['request']['updateforserver'] == "Select the server this patch is for") {
+            if ($args['request']['updateforserver'] == "Select the server this patch is for" || $args['request']['updateforserver'] == "") {
                 $errorMsg = errormsg::getErrorMsg("patchmissingserver", (new \ReflectionClass(self::class))->getShortName());
                 $args['flash']->addMessageNow("error", $errorMsg);
     
@@ -85,8 +84,6 @@
             
                 $cDateTime = new \DateTime();
                 $treUpdate = "";
-                $treMD5 = "";
-                $serverPath = settings::UPDATE_LIVE_PATH;
                 
                 if ($args['file']['updateTreFile']->getClientFilename() != "") {
                     $treUpdate = $args['file']['updateTreFile']->getClientFilename();
@@ -96,7 +93,7 @@
                 
                 $serverPatch = ['_id' => $id, 'patch_title' => $args['request']['updateTitle'],
                                 'patch_notes' => $args['request']['updateNotes'], 'patch_date' => $cDateTime->format('d M Y H:i:s'),
-                                'patch_tre_update' => $treUpdate, 'patch_tre_md5' => $treMD5, 'patch_server' => $args['request']['updateforserver']];
+                                'patch_tre_update' => $treUpdate, 'patch_tre_md5' => '', 'patch_server' => $args['request']['updateforserver']];
                 
                 $createServerPatch = new MongoBulkWrite();
                 $createServerPatch->insert($serverPatch);
@@ -112,32 +109,25 @@
                     if ($args['file']['updateTreFile']->getClientFilename() != "") {
                     
                         $patchUtils = new movefiles();
-                        $isUploaded = $patchUtils->moveTreFile($args);
-                        
-                        if($args['request']['updateforserver'] == settings::TEST_GAME_SERVER) {
-                            $serverPath = settings::UPDATE_LIVE_PATH;
-                        }
-                        
-                        // Update MD5 Checksum
-                        $treMD5 = utilities::md5CheckSum($serverPath . "/" . $args['file']['updateTreFile']->getClientFilename());
-    
-                        $serverUpdateMD5 = new MongoBulkWrite();
-                        $serverUpdateMD5->update(
-                            ['_id' => new MongoID($id)],
-                            ['$set' => ['patch_tre_md5' => $treMD5]],
-                            ['multi' => false, 'upsert' => false]
-                        );
-                        $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->serverUpdateCollection, $serverUpdateMD5);
+                        $md5CheckValue = $patchUtils->moveTreFile($args);
                     
-                        if ($isUploaded == true) {
-                        
+                        if ($md5CheckValue != false) {
+    
+                            $serverUpdateMD5 = new MongoBulkWrite();
+                            $serverUpdateMD5->update(
+                                ['_id' => new MongoID($id)],
+                                ['$set' => ['patch_tre_md5' => $md5CheckValue]],
+                                ['multi' => false, 'upsert' => false]
+                            );
+                            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->serverUpdateCollection, $serverUpdateMD5);
+                            
                             $processGameConfig = new processgameconfigs();
                             
-                            if ($args['request']['updateforserver'] == settings::LIVE_GAME_SERVER) {
-                                $fileUpdated = $processGameConfig->liveConfig($args['file']);
+                            if ($args['request']['updateforserver'] == settings::TEST_GAME_SERVER) {
+                                $fileUpdated = $processGameConfig->testConfig($args);
                             }
                             else {
-                                $fileUpdated = $processGameConfig->testConfig($args['file']);
+                                $fileUpdated = $processGameConfig->liveConfig($args);
                             }
                         
                             if ($fileUpdated) {

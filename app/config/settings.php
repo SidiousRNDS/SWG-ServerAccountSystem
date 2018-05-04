@@ -71,10 +71,10 @@ namespace swgAS\config;
    */
   const UPDATE_LIVE_PATH = "/var/www/rehab-patch/live";
   const UPDATE_TEST_PATH = "/var/www/rehab-patch/test";
-  const LIVE_CONFIG_PATH = "Rehab_live.cfg";
+  const LIVE_CONFIG_FILE = "Rehab_live.cfg";
   const TEST_CONFIG_FILE = "Rehab_test.cfg";
-  const LOGIN_CONFIG_PATH = "Rehab_login.cfg";
-  const TEXTURE_CONFIG_PATH = "Rehab_texture.cfg";
+  const LOGIN_CONFIG_FILE = "Rehab_login.cfg";
+  const TEXTURE_CONFIG_FILE = "Rehab_texture.cfg";
   const LAUNCHER_UPDATE_XML = "launcher_update.xml";
   const TRE_FOLDER = "tre/";
   const DYN_LAUNCHER_IMAGE_FOLDER = "dyn_launcher_image";

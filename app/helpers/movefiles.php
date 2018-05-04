@@ -37,11 +37,14 @@ class movefiles
             }
             
             $treFile->moveTo($trePath . "/" . $treFileName);
+    
+            // Update MD5 Checksum
+            return utilities::md5CheckSum($trePath . "/" . $args['file']['updateTreFile']->getClientFilename());
             
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
 
-        return true;
+        return false;
     }
 }
