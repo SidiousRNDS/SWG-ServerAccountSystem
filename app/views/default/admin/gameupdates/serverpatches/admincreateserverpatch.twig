@@ -22,8 +22,12 @@
                             <label id="updateServerlabel" for="updateServerInput">Patch Server</label>
                             <select name="updateforserver">
                                 <option name="">Select the server this patch is for</option>
-                                <option name="live">{{ liveserver }}</option>
-                                <option name="test">{{ testserver }}</option>
+                                {% if liveserver != "" %}
+                                    <option name="live">{{ liveserver }}</option>
+                                {% endif %}
+                                {% if testserver != "" %}
+                                    <option name="test">{{ testserver }}</option>
+                                {% endif %}
                             </select>
                         </div>
                     </div>

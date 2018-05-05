@@ -30,7 +30,7 @@
         public function getPatchByName($args)
         {
             try {
-                $patch = ['patch_title' =>$args['patch_title']];
+                $patch = ['patch_title' =>$args['patch_title'], 'patch_server' => $args['request']['updateforserver']];
                 $query = new MongoQuery($patch);
                 $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$args['collection'],$query);
                 $patchData = current($res->toArray());

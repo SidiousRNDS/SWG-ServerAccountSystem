@@ -53,7 +53,7 @@ namespace swgAS\config;
    */
   const SERVER_NAME = "SWG Rehab";
   const LIVE_GAME_SERVER = "live.swgrehab.com";
-  const TEST_GAME_SERVER = "";
+  const TEST_GAME_SERVER = "test.swgrehab.com";
   const STATUS_PORT = 44455;
 
   /**
@@ -77,7 +77,7 @@ namespace swgAS\config;
   const TEXTURE_CONFIG_FILE = "Rehab_texture.cfg";
   const LAUNCHER_UPDATE_XML = "launcher_update.xml";
   const TRE_FOLDER = "tre/";
-  const DYN_LAUNCHER_IMAGE_FOLDER = "dyn_launcher_image";
+  const DYN_LAUNCHER_IMAGE_FOLDER = "dyn_launcher_image/";
   const TEXTURE_FOLDER = "texture/";
 
 
