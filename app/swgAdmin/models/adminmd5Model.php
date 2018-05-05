@@ -23,7 +23,28 @@ class adminmd5Model
 {
     private $md5Collection = "tre_md5";
 
+    public function getMD5ById($args)
+    {
+
+    }
+
+    public function getMD5ByName($argS)
+    {
+
+    }
+
+    public function setMD5($args)
+    {
+
+    }
+
+    public function getAllTreMD5($args)
+    {
+
+    }
+
     /**
+     * Summary loadMD5Data - This is only used to load in base data for the TRE files
      * @param $args
      * @return mixed
      */

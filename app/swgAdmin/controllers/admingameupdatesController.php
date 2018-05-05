@@ -18,10 +18,8 @@
 
 // Use swgAS
     use swgAS\controllers\baseController;
-    use swgAS\swgAdmin\models\admingameupdatesutilsModel;
     use swgAS\config\settings;
-    use swgAS\helpers\security;
-    use swgAS\swgAdmin\models\adminserverupdatesModel;
+    use swgAS\swgAdmin\models\gameupdates\adminserverupdatesModel;
 
     class admingameupdatesController extends baseController
     {

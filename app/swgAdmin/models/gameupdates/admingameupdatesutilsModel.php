@@ -10,7 +10,7 @@
      * CLASS: admingameupdatesutilsModel
      *****************************************************************/
     
-    namespace swgAS\swgAdmin\models;
+    namespace swgAS\swgAdmin\models\gameupdates;
 
     // Use
     use \MongoDB\BSON\ObjectId as MongoID;

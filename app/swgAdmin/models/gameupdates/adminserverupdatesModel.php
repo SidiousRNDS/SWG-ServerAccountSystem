@@ -10,7 +10,7 @@
      * CLASS: adminserverupdatesModel
      *****************************************************************/
     
-    namespace swgAS\swgAdmin\models;
+    namespace swgAS\swgAdmin\models\gameupdates;
 
     // Use
     use \MongoDB\Driver\Command;
