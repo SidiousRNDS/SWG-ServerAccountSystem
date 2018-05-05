@@ -17,6 +17,7 @@
     use \MongoDB\Driver\BulkWrite as MongoBulkWrite;
     use \MongoDB\BSON\ObjectId as MongoID;
     use \MongoDB\Driver\Exception\ConnectionException;
+    use \MongoDB\Driver\Query as MongoQuery;
 
     // Use swgAS
     use swgAS\config\settings;
@@ -25,7 +26,7 @@
     use swgAS\helpers\messaging\statusmsg;
     use swgAS\helpers\movefiles;
     use swgAS\helpers\processgameconfigs;
-    use swgAS\swgAdmin\models\admingameupdatesutilsModel;
+    use swgAS\swgAdmin\models\adminmd5Model;
     
     class adminserverupdatesModel
     {
@@ -112,15 +113,36 @@
                         $md5CheckValue = $patchUtils->moveTreFile($args);
                     
                         if ($md5CheckValue != false) {
-    
+                            $md5Id = new MongoID();
+
+                            $md5 = new adminmd5Model();
+                            $md5Data = $md5->getMD5ByName(['mongodb' => $args['mongodb'], 'trefile' => $args['file']['updateTreFile']->getClientFilename()]);
+
+                            if($md5Data != "")
+                            {
+                                // Validate MD5 that was created by the new upload of the tre file
+                                if($md5Data->md5 != $md5CheckValue)
+                                {
+                                    // We need to update the MD5 record with the new file MD5
+                                    $md5->updateMD5ById(['mongodb' => $args['mongodb'], 'md5data' => $md5Data]);
+                                    $md5Id = $md5Data->_id;
+                                }
+                            }
+                            else {
+                                // Create a new entry
+                                $md5Data = $md5->createMD5ByName(['mongodb' => $args['mongodb'], 'trefile' => $args['file']['updateTreFile']->getClientFilename(), 'md5' => $md5CheckValue]);
+                                $md5Id = $md5Data;
+                            }
+
                             $serverUpdateMD5 = new MongoBulkWrite();
                             $serverUpdateMD5->update(
                                 ['_id' => new MongoID($id)],
                                 ['$set' => ['patch_tre_md5' => $md5CheckValue]],
                                 ['multi' => false, 'upsert' => false]
                             );
+
                             $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->serverUpdateCollection, $serverUpdateMD5);
-                            
+
                             $processGameConfig = new processgameconfigs();
                             
                             $fileUpdated = $processGameConfig->gameLiveConfig($args);
@@ -175,7 +197,27 @@
                 $args['flash']->addMessageNow("error", $ex->getMessage());
             }
         }
-    
+
+        /**
+         * Summary getServerPatchesByServer
+         * @param $args
+         * @return mixed
+         */
+        public function getServerPatchesByServer($args)
+        {
+            try {
+                $patch = ['patch_server' =>$args['servername']];
+                $query = new MongoQuery($patch);
+                $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->serverUpdateCollection,$query);
+                $patchData = json_encode($res->toArray());
+
+                return $patchData;
+
+            } catch (ConnectionException $ex) {
+                $args['flash']->addMessageNow("error", $ex->getMessage());
+            }
+        }
+
         /**
          * Summary getServerPatchById
          * @param $args

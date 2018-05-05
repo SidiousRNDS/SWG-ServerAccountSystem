@@ -49,8 +49,6 @@
          */
         public function getPatchById($args)
         {
-            print"ID: " + $args['id'] . "<br/>";
-            
             try {
                 $patch = ['_id' => new MongoID($args['id'])];
                 $query = new MongoQuery($patch);

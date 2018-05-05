@@ -199,9 +199,12 @@ $swgAS->group('/api', function() use ($swgAS) {
         });
         
         $swgAS->group('/patch', function() use($swgAS) {
-           
-            // GET - Server Patch Notes
-            $swgAS->get('/serverpatch', \swgAS\swgAPI\controllers\patchController::class  . ':getServerPatchNotes');
+
+            // GET - All Server Patch Notes
+            $swgAS->get('/serverpatch', \swgAS\swgAPI\controllers\patchController::class  . ':getAllServerPatchNotes');
+
+            // GET - Specific Server Patch Notes
+            $swgAS->get('/serverpatch/{servername}', \swgAS\swgAPI\controllers\patchController::class  . ':getSpecificServerPatchNotes');
         });
 
     });
