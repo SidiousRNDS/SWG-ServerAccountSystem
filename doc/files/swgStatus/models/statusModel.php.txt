@@ -1,0 +1,164 @@
+<?php
+
+/*****************************************************************
+ * RNDS SWG Server System
+ * @author: Sidious <sidious@rnds.io>
+ * @since: 16 March 2018
+ * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
+ * @version 1.0.0
+ * ****************************************************************
+ * NAMESPACE: swgAS\swgStatus\models
+ * CLASS: statusModel
+ ******************************************************************/
+
+namespace swgAS\swgStatus\models;
+
+
+// Use
+use \MongoDB\Driver\BulkWrite;
+use \MongoDB\BSON\ObjectId as MongoID;
+
+// Use swgAS
+use swgAS\config\settings;
+
+class statusModel
+{
+    private static $serverStatusCollection = "server_status";
+
+    /**
+     * Summary getServerStatus - Get the status of the game servers listed in settings
+     * @param $args
+     */
+    public static function getServerStatus($args)
+    {
+        $liveServer = settings::LIVE_GAME_SERVER;
+        $testServer = settings::TEST_GAME_SERVER;
+        $statusPort = settings::STATUS_PORT;
+
+        if($liveServer)
+        {
+            $liveStatus = self::pollServer(['server'=>$liveServer,'port'=>$statusPort]);
+            $liveStatus->server_name = "Live";
+
+            $live = ['_id' => new MongoID, 'server_name' => $liveStatus->server_name, 'server_status' => $liveStatus->server_status,
+                'population' => $liveStatus->users_connected, 'population_since_last_restart' => $liveStatus->users_connected_since_last_restart,
+                'uptime_days' => $liveStatus->up_time->days, 'uptime_hours' => $liveStatus->up_time->hours,
+                'uptime_minutes' => $liveStatus->up_time->minutes, 'uptime_seconds' => $liveStatus->up_time->seconds,
+                'last_check' => $liveStatus->last_check
+            ];
+            $createLiveStatus = new BulkWrite;
+            $createLiveStatus->insert($live);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".self::$serverStatusCollection, $createLiveStatus);
+        }
+
+        if($testServer)
+        {
+            $testStatus = self::pollServer(['server'=>$testServer,'port'=>$statusPort]);
+            $testStatus->server_name = "Test";
+
+            $test = ['_id' => new MongoID, 'server_name' => $testStatus->server_name, 'server_status' => $testStatus->server_status,
+                'population' => $testStatus->users_connected, 'population_since_last_restart' => $testStatus->users_connected_since_last_restart,
+                'uptime_days' => $testStatus->up_time->days, 'uptime_hours' => $testStatus->up_time->hours,
+                'uptime_minutes' => $testStatus->up_time->minutes, 'uptime_seconds' => $testStatus->up_time->seconds,
+                'last_check' => $testStatus->last_check
+            ];
+            $createTestStatus = new BulkWrite;
+            $createTestStatus->insert($test);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN.".".self::$serverStatusCollection, $createTestStatus);
+        }
+    }
+
+
+    /**
+     * Summary pollServer - Poll the server and get the XML data back from the server
+     * @param $args
+     * @return \SimpleXMLElement|void
+     */
+    private static function pollServer($args)
+    {
+        $stream = stream_socket_client("tcp://".$args['server'].":".$args['port'], $streamErrno, $streamErrorStr, 30);
+
+        if(!$stream)
+        {
+            // Throw Error to the error handler and log
+            throw new Exception("Could not connect to server (".$args['server'].") :: ".$streamErrorStr."(".$streamErrno.")\n");
+            return;
+        }
+        else
+        {
+            // Write to the stream
+            fwrite($stream, "\n");
+            // Capture the data returned from the server
+            $streamXML = fread($stream,1000);
+            // Close the stream
+            fclose($stream);
+
+            // Put the data returned from the server into a nicely formatted XML Array
+            $xml = simplexml_load_string($streamXML);
+
+            return self::statusDataFormat($xml);        // Return the formatted xml data as an object
+        }
+    }
+
+    /**
+     * Summary statusDataFormat - Format all the returned XML into a nice neat object
+     * @param $streamXML
+     * @return object
+     */
+    private static function statusDataFormat($streamXML)
+    {
+        if($streamXML->status == "up")
+        {
+            $status = "Online";
+        }
+        else
+        {
+            $status = "Offline";
+        }
+
+        
+        $last_check = floor($streamXML->timestamp / 1000);
+        
+        $serverStatus = (object) [
+            "server_name" => '',
+            "server_status" => $status,
+            "users_connected" => trim($streamXML->users->connected),
+            "users_connected_since_last_restart" => trim($streamXML->users->max),
+            "user_cap" => trim($streamXML->users->cap),
+            "up_time" => self::statusUptimeFormat($streamXML->uptime),
+            "last_check" => $last_check
+        ];
+
+        return $serverStatus;
+    }
+
+    /**
+     * Summary statusUptimeFormat - Format the xml data for uptime into a human readable format
+     * @param $streamXMLUptime
+     * @return object
+     */
+    private static function statusUptimeFormat($streamXMLUptime)
+    {
+        // Set Days
+        $days = floor($streamXMLUptime / (24*60*60));
+
+        // Set Hours
+        $hours = floor(($streamXMLUptime - ($days*24*60*60)) / (60*60));
+
+        // Set Minutes
+        $minutes = floor(($streamXMLUptime - ($days*24*60*60) - ($hours*60*60)) / 60);
+
+        // Set Seconds
+        $seconds = ($streamXMLUptime - ($days*24*60*60) - ($hours*60*60) - ($minutes*60)) %60;
+
+        // Build ServerUptime Object
+        $serverUptime = (object) [
+            "days" => $days,
+            "hours" => $hours,
+            "minutes" => $minutes,
+            "seconds" => $seconds
+        ];
+
+        return $serverUptime;
+    }
+}

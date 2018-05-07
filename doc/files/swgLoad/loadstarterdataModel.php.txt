@@ -1,0 +1,27 @@
+<?php
+/*****************************************************************
+ * RNDS SWG Server System
+ * @author: Sidious <sidious@rnds.io>
+ * @since: 04 May 2018
+ * @link: https://github.com/SidiousRNDS/SWGRO-AccountSystem
+ * @version: 1.0.0
+ ******************************************************************
+ * NAMESPACE: swgAS\helpers
+ * CLASS: loadstarterdataModel
+ ******************************************************************/
+
+namespace swgAS\swgLoad;
+
+use swgAS\swgAdmin\models\adminmd5Model;
+
+
+class loadstarterdataModel
+{
+    public static function initloadTreMD5($args)
+    {
+        $md5Model = new adminmd5Model();
+
+        $md5loaded = $md5Model->loadMD5Data($args);
+        return [$md5loaded-1, count(json_decode($args['md5Data'], true))];
+    }
+}

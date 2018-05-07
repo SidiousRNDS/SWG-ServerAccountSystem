@@ -1,0 +1,79 @@
+<?php
+
+/*****************************************************************
+ * RNDS SWG Server System
+ * @author: Sidious <sidious@rnds.io>
+ * @since: 16 March 2018
+ * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
+ * @version 1.0.0
+ * ****************************************************************
+ * NAMESPACE: swgAS\swgAdmin\controllers
+ * CLASS: adminController
+ ******************************************************************/
+
+namespace swgAS\swgAdmin\controllers;
+
+ // Use
+ use \Psr\Http\Message\ServerRequestInterface;
+ use \Psr\Http\Message\ResponseInterface;
+
+ // Use swgAS
+ use swgAS\controllers\baseController;
+ use swgAS\swgAdmin\models\adminloginModel;
+ use swgAS\config\settings;
+ use swgAS\helpers\utilities;
+
+class adminController extends baseController
+{
+
+    /**
+     * Sumarry adminIndex
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
+    public function adminIndex(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        return $this->getCIElement('views')->render($response, 'adminlogin.twig',[
+            'uIP'=>$this->getCIElement('userIP'),
+            'captchakey'=>settings::G_CAPTCHA_KEY,
+            'flash' => $this->getCIElement('flash')
+        ]);
+    }
+
+    /**
+     * Summary adminLogin
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function adminLogin(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $adminLogin = new adminloginModel();
+        $login = $adminLogin->authLogin(array(
+                'mongodb' => $this->getCIElement('mongodb'),
+                'errorLogger' => $this->getCIElement('swgErrorLog'),
+                'adminLogger' => $this->getCIElement('adminLog'),
+                'adminLockLog' => $this->getCIElement('adminLockLog'),
+                'flash' => $this->getCIElement('flash'),
+                'userIP' => $this->getCIElement('userIP'),
+                'username' => utilities::sanitizeFormData($request->getParam('username'), FILTER_SANITIZE_STRING ),
+                'password' => utilities::sanitizeFormData($request->getParam('password'), FILTER_SANITIZE_STRING ),)
+        );
+
+        if ($login === "Access Denied") {
+            $this->getCIElement('flash')->addMessage("error", $login);
+            return $response->withRedirect('/admin');
+        }
+        elseif ($this->getCIElement("flash")->getMessage("islocked")){
+            return $response->withRedirect('/admin');
+        }
+        else {
+            return $response->withRedirect('/admin/dashboard/overview');
+        }
+    }
+}
+
+?>
+

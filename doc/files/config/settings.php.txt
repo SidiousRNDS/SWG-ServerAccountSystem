@@ -14,7 +14,7 @@ namespace swgAS\config;
  ******************************************************************/
 
 /**
- * This holds all the constants that can be modified for use in the SWG Server System
+ * Summary of config
  */
  class settings
  {
@@ -213,3 +213,4 @@ namespace swgAS\config;
  }
 
  ?>
+
