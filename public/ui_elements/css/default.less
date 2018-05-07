@@ -6,6 +6,8 @@
 @color-White: #ffffff;
 @color-Red: #ff0000;
 @color-Green: #1E8449;
+@color-darkBg: #222222;
+
 @basicLang: 'galbasic';
 
 /* Mixins */
@@ -68,6 +70,11 @@ body {
   border-radius: 0;
 }
 
+.navbar-header {
+  .toggle-btn {
+    display: none;
+  }
+}
 .navbar-inverse {
   .navbar-nav {
     li a {
@@ -144,24 +151,32 @@ body {
   .hspacer {
     border-top: 1px solid #cccccc;
   }
+
+  .moduleHeader {
+    color:@color-Red;
+  }
+
+  .module {
+    color:@color-Red;
+  }
 }
 
 .foot {
   color: @color-Orange;
   padding: 1.2% 0 1% 0;
   font-family: @basicLang;
+
+  .translation {
+    line-height:20px;
+    a {
+      text-decoration: none;
+      color: @color-Orange;
+    }
+  }
 }
 
 .credits {
   font-family: @basicLang;
-}
-
-.translation {
-  float:right;
-  a {
-    text-decoration: none;
-    color: @color-Orange;
-  }
 }
 
 .sgroup {
@@ -207,19 +222,23 @@ body {
 :-ms-input-placeholder {  color: @color-Red;  font-family: @basicLang;}
 
 /* Admin Section */
+.adminLoginWrapper {
+
+}
+
 #adminLogin {
   .elementBody();
   background-color:#ffffff;
-  width:50%;
+  width:100%;
   margin:0 auto;
 }
 
 #adminLoginHeader {
-  padding:0.6% 0.6% 0.6% 3%;
+  padding:3.0% 0.6% 0.6% 3%;
   font-size:1.5em; color:#EE5828;
   margin:10px auto auto auto;
   height:40px;
-  width:50%;
+  width:100%;
   .elementHeader();
 }
 
@@ -316,8 +335,7 @@ body {
   overflow: auto;
   font-size: 12px;
   font-weight: 200;
-  /*background-image:linear-gradient(to bottom, #3c3c3c 0, #222 100%);*/
-  background-color: #222222;
+  background-color: @color-darkBg;
   top: 0;
   width: 200px;
   height: 100%;
@@ -327,10 +345,6 @@ body {
   .menu-content {
     margin-left: 0;
     padding-left: 0;
-  }
-
-  .toggle-btn {
-    display: none;
   }
 
   ul li {
@@ -343,7 +357,7 @@ body {
 
   li {
     padding-left: 0;
-    border-left: 3px solid #222222;
+    border-left: 3px solid @color-darkBg;
     border-bottom: 1px solid #23282e;
   }
 
@@ -386,12 +400,12 @@ body {
       .nav-active();
     }
     li {
-      background-color: #222222;
+      background-color: @color-darkBg;
       border: none;
       line-height: 28px;
       border-bottom: 1px solid #23282e;
       margin-left: 0px;
-      border-left: 3px solid #222222;
+      border-left: 3px solid @color-darkBg;
     }
     li:hover {
       .nav-hover();
@@ -418,6 +432,10 @@ body {
   h2 {color:@color-Black !important;}
 }
 
+#yoda img {
+  width:100%;
+}
+
 @font-face {
   font-family: 'galbasic';
   src: url('../fonts/galbasic.eot');
@@ -434,6 +452,18 @@ body {
     width: 100%;
     margin-bottom: 10px;
 
+    .navbar-brand {
+      text-align: left !important;
+      font-size: 22px;
+      padding-left: 20px;
+      line-height: 50px !important;
+    }
+  }
+
+  .navbar-header {
+    .navbar-brand {
+      font-size:1.3em;
+    }
     .toggle-btn {
       display: block;
       cursor: pointer;
@@ -442,21 +472,27 @@ body {
       top: 10px;
       z-index: 10 !important;
       padding: 3px;
-      background-color: @color-Orange;
-      color: @color-Black;
+      background-color: @color-darkBg;
+      color: @color-Orange;
       width: 40px;
       text-align: center;
     }
+  }
 
-    .navbar-brand {
-      text-align: left !important;
-      font-size: 22px;
-      padding-left: 20px;
-      line-height: 50px !important;
+  #adminmain {
+    width:98%;
+
+    h2 {
+      font-size:2.2em;
     }
+  }
+
+  .menu-content {
+    width:200px;
   }
 }
 
+/* Desktop */
 @media (min-width: 768px) {
   .nav-side-menu {
     .menu-list {
@@ -464,5 +500,20 @@ body {
         display:block;
       }
     }
+  }
+
+  .foot {
+    .translation {
+      float:right;
+    }
+  }
+
+  #adminLogin {
+    width:50%;
+  }
+
+  #adminLoginHeader {
+    width:50%;
+    padding:0.6% 0.6% 0.6% 3%;
   }
 }

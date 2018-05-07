@@ -1,8 +1,7 @@
 <?php
-namespace swgAS\swgAPI\controllers;
 
 /*****************************************************************
- * RNDS SWG Account System
+ * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
@@ -11,6 +10,8 @@ namespace swgAS\swgAPI\controllers;
  * NAMESPACE: swgAPI\controllers
  * CLASS: tokenController
  ******************************************************************/
+
+namespace swgAS\swgAPI\controllers;
 
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
@@ -21,13 +22,14 @@ use swgAS\swgAPI\models\tokenModel;
 
 class tokenController extends baseController
 {
-	/**
-	 * Summary of getToken
-	 * @param ServerRequestInterface $request
-	 * @param ResponseInterface $response
-	 * @param array $args
-	 * @return mixed
-	 */
+    /**
+     * Summary of getToken
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param array $args
+     * @return mixed
+     * @throws \Exception
+     */
 	public function getToken(ServerRequestInterface $request, ResponseInterface $response, array $args)
 	{
 		$token = tokenModel::genToken($request, $response, array("token"=>$this->getCIElement('JwToken'),"apiLogger"=>$this->getCIElement('swgAPILog'),"errorLogger"=>$this->getCIElement('swgErrorLog')));

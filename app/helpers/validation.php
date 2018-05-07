@@ -1,8 +1,7 @@
 <?php
-namespace swgAS\helpers;
 
 /*****************************************************************
- * RNDS SWG Account System
+ * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
@@ -11,6 +10,8 @@ namespace swgAS\helpers;
  * NAMESPACE: swgAPI\utils
  * CLASS: validation
  ******************************************************************/
+
+namespace swgAS\helpers;
 
 // Use
 
@@ -22,11 +23,12 @@ use swgAS\helpers\messaging\errormsg;
 
 class validation
 {
-	/**
-	 * Summary of validateAccount
-	 * @param mixed $args
-	 * @return \boolean|null|string
-	 */
+    /**
+     * Summary of validateAccount
+     * @param $args
+     * @return bool|null|string
+     * @throws \Exception
+     */
 	public static function validateAccount($args)
 	{
 		$valid = true;

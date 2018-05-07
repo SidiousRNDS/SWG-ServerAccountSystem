@@ -1,6 +1,6 @@
 <?php
     /*****************************************************************
-     * RNDS
+     * RNDS SWG Server System
      * @author : Sidious <sidious@rnds.io>
      * @since  : 03 May 2018
      * @link   : https://github.com/SidiousRNDS/
@@ -177,7 +177,63 @@
             }
             return;
         }
-    
+
+        /**
+         * Summary updateServerPatch
+         * @param $args
+         * @throws \ReflectionException
+         */
+        public function updateServerPatch($args)
+        {
+            try {
+                $updateServerpatch = new MongoBulkWrite();
+                $updateServerpatch->update(
+                    ['_id' => new MongoID($args['request']['id'])],
+                    ['$set' => ['patch_notes' => $args['request']['updateNotes']]],
+                    ['multi' => false, 'upsert' => false]
+                );
+
+                $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->serverUpdateCollection, $updateServerpatch);
+
+                $statusMsg = statusmsg::getStatusMsg("serverpatchupdated", (new \ReflectionClass(self::class))->getShortName());
+                $statusMsg = utilities::replaceStatusMsg($statusMsg, "::PATCHNAME::", $args['request']['patch_title']);
+
+                $args['flash']->addMessage("success", $statusMsg);
+
+            } catch(ConnectionException $ex) {
+                $args['flash']->addMessage("error", $ex->getMessage());
+            }
+        }
+
+        /**
+         * Summary deleteServerPatch
+         * @param $args
+         * @throws \ReflectionException
+         */
+        public function deleteServerPatch($args)
+        {
+            try {
+                $patchUtils = new admingameupdatesutilsModel();
+                $args['collection'] = $this->serverUpdateCollection;
+                $patchData = $patchUtils->getPatchById($args);
+
+                $patch_title = $patchData->patch_title;
+
+                $deleteServerPatch = new MongoBulkWrite();
+                $deleteServerPatch->delete(['_id' => new MongoID($args['id'])], ['limit' => 1]);
+
+                $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->serverUpdateCollection, $deleteServerPatch);
+
+                $statusMsg = statusmsg::getStatusMsg("serverpatchdeleted", (new \ReflectionClass(self::class))->getShortName());
+                $statusMsg = utilities::replaceStatusMsg($statusMsg, "::PATCHNAME::", $patch_title);
+
+                $args['flash']->addMessage("success", $statusMsg);
+
+            } catch(ConnectionException $ex) {
+                $args['flash']->addMessage("error", $ex->getMessage());
+            }
+        }
+
         /**
          * Summary getServerPatches - List all the server patches that have been put in the system
          * @param $args

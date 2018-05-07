@@ -1,9 +1,7 @@
 <?php
 
-namespace swgAS\swgAPI\controllers;
-
 /*****************************************************************
- * RNDS SWG Account System
+ * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
@@ -12,6 +10,8 @@ namespace swgAS\swgAPI\controllers;
  * NAMESPACE: swgAS\swgAPI\controllers
  * CLASS: accountController
  ******************************************************************/
+
+namespace swgAS\swgAPI\controllers;
 
 // Use
 use \Psr\Http\Message\ServerRequestInterface;

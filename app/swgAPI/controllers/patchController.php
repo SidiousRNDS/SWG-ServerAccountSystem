@@ -1,6 +1,6 @@
 <?php
     /*****************************************************************
-     * RNDS
+     * RNDS SWG Server System
      * @author : Sidious <sidious@rnds.io>
      * @since  : 03 May 2018
      * @link   : https://github.com/SidiousRNDS/

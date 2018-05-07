@@ -13,8 +13,9 @@
         {% for id in patches._id|cast_to_array %}
             {% set patchId = id.1 %}
         {% endfor %}
-        <form id="nNotesUpdate" name="newUpdate" method="post" action="">
+        <form id="nNotesUpdate" name="newUpdate" method="post" action="{{path_for('updateserverpatchaction')}}">
             <input type="hidden" name="id" value="{{ patchId}}">
+            <input type="hidden" name="patch_title" value="{{ patches.patch_title }}">
             <div class="row sgroup">
                 <div class="form-group">
                     <div class="col-xs-12">

@@ -1,6 +1,6 @@
 <?php
 /*****************************************************************
- * RNDS SWG Account System
+ * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 12 April 2018
  * @link: https://github.com/SidiousRNDS/SWGRO-AccountSystem
@@ -65,7 +65,7 @@ class adminroleController extends baseController
     {
         $role = new adminroleModel();
 
-        $addRole = $role->addRole([
+        $role->addRole([
             'mongodb' => $this->getCIElement('mongodb'),
             'flash'=>$this->getCIElement('flash'),
             'request'=>$request->getParsedBody()

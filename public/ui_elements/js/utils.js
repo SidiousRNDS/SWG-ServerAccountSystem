@@ -24,6 +24,11 @@ $(document).ready(function(){
     translate();
 
     $('#authCodeList').DataTable({
+        responsive: true,
+        columnDefs: [
+            {responsivePriority: 1, targets: 0},
+            {responsivePriority: 2, targets: -1},
+        ],
         "columns": [
             null,
             null,
@@ -34,6 +39,11 @@ $(document).ready(function(){
     });
 
     $('#userList').DataTable({
+        responsive: true,
+        columnDefs: [
+            {responsivePriority: 1, targets: 0},
+            {responsivePriority: 2, targets: -1},
+        ],
         "columns": [
             null,
             null,
@@ -42,7 +52,13 @@ $(document).ready(function(){
         ]
     });
 
+
     $('#patchList').DataTable({
+        responsive: true,
+        columnDefs: [
+            {responsivePriority: 1, targets: 0},
+            {responsivePriority: 2, targets: -1},
+        ],
         "columns": [
             null,
             null,

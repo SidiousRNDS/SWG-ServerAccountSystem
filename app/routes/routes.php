@@ -1,6 +1,6 @@
 <?php
 /*****************************************************************
- * RNDS SWG Account System
+ * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
@@ -60,6 +60,22 @@ $swgAS->group('/admin', function() use($swgAS){
             $swgAS->get('/viewallused', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
                 ->add(new adminauthmiddleware($swgAS->getContainer()))
                 ->setName('viewallused');
+
+            // Update Authcode
+            $swgAS->get('/updateauthcode/{id}',\swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('updateauthcode');
+
+            // Update Role Action
+            $swgAS->post('/updateuthcodeaction', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('updateauthcodeaction');
+
+            // Delete Role Action
+            $swgAS->get('/deleteauthcodeaction/{id}', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('deleteauthcodeaction');
+
 
         });
 
@@ -153,6 +169,14 @@ $swgAS->group('/admin', function() use($swgAS){
                 $swgAS->get('/updateserverpatch/{id}', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdatesServerPatchDetailView')
                     ->add(new adminauthmiddleware($swgAS->getContainer()))
                     ->setName('updateserverpatch');
+
+                $swgAS->post('/updateserverpatchaction', \swgAS\swgAdmin\controllers\admingameupdatesController::class .':adminGameUpdateServerPatchUpdateAction')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('updateserverpatchaction');
+
+                $swgAS->post('/deleteserverpatchaction/{id}', \swgAS\swgAdmin\controllers\admingameupdatesController::class . ':adminGameUpdateServerPatchDelete')
+                    ->add(new adminauthmiddleware($swgAS->getContainer()))
+                    ->setName('deleteserverpatchaction');
             });
         });
     }); 

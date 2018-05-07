@@ -1,6 +1,6 @@
 <?php
 /*****************************************************************
- * RNDS SWG Account System
+ * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 04 May 2018
  * @link: https://github.com/SidiousRNDS/SWGRO-AccountSystem

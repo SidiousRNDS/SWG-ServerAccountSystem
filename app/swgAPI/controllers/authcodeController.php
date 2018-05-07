@@ -1,9 +1,7 @@
 <?php
 
-namespace swgAS\swgAPI\controllers;
-
 /*****************************************************************
- * RNDS SWG Account System
+ * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
@@ -12,6 +10,8 @@ namespace swgAS\swgAPI\controllers;
  * NAMESPACE: swgAS\swgAPI\controllers
  * CLASS: authcodeController
  ******************************************************************/
+
+namespace swgAS\swgAPI\controllers;
 
 // Use
 use Interop\Container\ContainerInterface;
@@ -34,7 +34,7 @@ class authcodeController extends baseController
      */
 	public function adminGenerateAuthCode(ServerRequestInterface $request, ResponseInterface $response)
 	{
-			$authCode = authcodeModel::createAuthCode(array(
+			authcodeModel::createAuthCode(array(
 				"db"=>$this->getCIElement('db'),
 				"errorlogger"=>$this->getCIElement('swgErrorLog'),
 				"flash"=>$this->getCIElement('flash'),
@@ -43,7 +43,9 @@ class authcodeController extends baseController
             	'prefix' => $request->getParam('prefix'))
 			);
 
-			return $response->withRedirect('/admin/dashboard/authcodes/createauth');
+            $uri = $request->getURI()->withPath($this->getCIElement('router')->pathFor('createauth'));
+
+            return $response->withRedirect($uri);
 	}
 }
 

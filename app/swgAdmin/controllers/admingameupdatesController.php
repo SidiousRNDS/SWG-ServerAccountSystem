@@ -1,6 +1,6 @@
 <?php
     /*****************************************************************
-     * RNDS SWG Account System
+     * RNDS SWG Server System
      * @author: Sidious <sidious@rnds.io>
      * @since: 30 April 2018
      * @link: https://github.com/SidiousRNDS/SWGRO-AccountSystem
@@ -51,9 +51,9 @@
          */
         public function adminGameUpdatesServerPatchCreateAction(ServerRequestInterface $request, ResponseInterface $response)
         {
-            $gameUpdates = new adminserverupdatesModel();
+            $serverPatch = new adminserverupdatesModel();
 
-            $gameUpdates->addServerPatch([
+            $serverPatch->addServerPatch([
                 'mongodb' => $this->getCIElement('mongodb'),
                 'flash' => $this->getCIElement('flash'),
                 'file' => $request->getUploadedFiles(),
@@ -70,7 +70,6 @@
                 'liveserver'=>settings::LIVE_GAME_SERVER,
                 'testserver'=>settings::TEST_GAME_SERVER
             ]);
-            
         }
 
         /**
@@ -80,8 +79,8 @@
          */
         public function adminGameUpdatesServerPatchView(ServerRequestInterface $request, ResponseInterface $response)
         {
-            $gameUpdates = new adminserverupdatesModel();
-            $getPatches = $gameUpdates->getServerPatches([
+            $serverPatch = new adminserverupdatesModel();
+            $getPatches =  $serverPatch->getServerPatches([
                 'mongodb' => $this->getCIElement('mongodb'),
                 'flash'=>$this->getCIElement('flash'),
             ]);
@@ -128,6 +127,49 @@
                 'userPerms' => unserialize($_SESSION['perms']),
                 'useAuth' => settings::USE_AUTHCODES
             ]);
+        }
+
+        /**
+         * Summary adminGameUpdateServerPatchUpdateAction
+         * @param ServerRequestInterface $request
+         * @param ResponseInterface $response
+         * @return mixed
+         * @throws \ReflectionException
+         */
+        public function adminGameUpdateServerPatchUpdateAction(ServerRequestInterface $request, ResponseInterface $response)
+        {
+            //$route = $request->getAttribute('route');
+            //$args= $route->getArguments();
+
+            $serverPatch = new adminserverupdatesModel();
+            $serverPatch->updateServerPatch([
+                'mongodb' => $this->getCIElement('mongodb'),
+                'flash'=>$this->getCIElement('flash'),
+                'request'=>$request->getParsedBody()
+            ]);
+
+            $uri = $request->getURI()->withPath($this->getCIElement('router')->pathFor('viewserverpatches'));
+
+            return $response->withRedirect($uri);
+        }
+
+        public function adminGameUpdateServerPatchDelete(ServerRequestInterface $request, ResponseInterface $response)
+        {
+            $route = $request->getAttribute('route');
+            $args= $route->getArguments();
+
+
+            $serverPatch = new adminserverupdatesModel();
+
+            $serverPatch->deleteServerPatch([
+                'mongodb' => $this->getCIElement('mongodb'),
+                'flash'=>$this->getCIElement('flash'),
+                'id'=>$args['id']
+            ]);
+
+            $uri = $request->getURI()->withPath($this->getCIElement('router')->pathFor('viewserverpatches'));
+
+            return $response->withRedirect($uri);
         }
 
         /**
