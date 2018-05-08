@@ -81,6 +81,8 @@ To load the intial user and role and MD5 TRE data run the following script
 $ cd setup
 $ php setup.php
 ```
+The username is admin and the password is 123456 (CHANGE THE PASSWORD AS SOON AS YOU HAVE IT SETUP)
+
 ### app/configs/settings_dist.php
 After you have got everything setup on your server you are going to want to update this file with all your information.
 The following items must be setup for this application to work.
