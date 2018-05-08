@@ -46,7 +46,7 @@ All have slightly different permissions and the only role that is not currently 
 ### Install
 Clone the repository
 ``` bash
-$ git clone https://github.com/SidiousRNDS/SWGRO-AccountSystem.git
+$ git clone https://github.com/SidiousRNDS/SWG-ServerAccountSystem.git
 ```
 Run composer install
 ``` bash
@@ -140,13 +140,13 @@ Anything else in this file that is not listed above should be left alone at this
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/SidiousRNDS/SWGRO-AccountSystem/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/SidiousRNDS/SWG-ServerAccountSystem/tags).
 
 ## Authors
 
 * **Ian Ford** aka(Sidious)- *Initial work* - [SidiousRNDS](https://github.com/SidiousRNDS)
 
-See also the list of [contributors](https://github.com/SidiousRNDS/SWGRO-AccountSystem/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/SidiousRNDS/SWG-ServerAccountSystem/contributors) who participated in this project.
 
 ## License
 
