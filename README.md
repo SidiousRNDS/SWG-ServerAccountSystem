@@ -46,7 +46,52 @@ Add extension=mongodb.so in the extension section of the ini file and restart ap
 ``` bash
 $sudo serivce apache2 restart
 ```
+### app/configs/settings_dist.php
+After you have got everything setup on your server you are going to want to update this file with all your information.
+The following items must be setup for this application to work.
 
+* BASE_URL - this should hold your sites URL
+* SERVER_TIME_ZONE - This should be set to your timezone
+* G_CAPTCHA_KEY - If you don't have one of these you can go to (https://www.google.com/recaptcha/intro/android.html) and create one.
+
+Game Server Settings
+* SERVER_NAME - The name of your game server
+* LIVE_GAME_SERVER - This is either the IP or URI to your live game server
+* TEST_GAME_SERVER - This is either the IP or URI to your test game server
+* STATUS_PORT - If you have changed this from the default port you will want to make sure you change it here as well.
+* UPDATE_LIVE_PATH - This is where you will store your TRE files and config files for download by your launcher for live.
+* UPDATE_TEST_PATH - This is wehre you will store your TRE files config files for download by your launcher for test.
+* LIVE_CONFIG_FILE - This is the name of the live.cfg file you will use for the live game server.
+* TEST_CONFIG_FILE - This is the name of the live.cfg file you will use for the test game server.
+
+DB Settings
+* DBUSER - The user that connects to your game database.
+* DBPASS - The password for the user that connects to your game database.
+* DBNAME - The name of the game database.
+* DBHOST - The host location of the game database.
+
+Game Account Settings
+* NUMBER_OF_ACCOUNTS_ALLOWED - This is the number of accounts you will allow a single user to have on your server (default is 2)
+* CHECKEMAIL - This sets if the authcode system should check to see how many times the users email has been used to create accounts.
+* CHECKIP - This sets if the authcode system should check to see how many times the users IP address has been used to create accounts.
+* PWSECRET - This should have been changed in your SWGEMU config file if it has not well you can just leave it but if you did then please change it to what you have in your SWGEMU config file
+* CRYPTHASH - Unless you changes how the SWGEMU creates password don't touch this
+
+Authcode Settings
+* USE_AUTHCODES - Set this to true if you want to use Authcodes false if you do not (default is true)
+* PRIMARY_CODE_PREFIX - Set this to what every you like or leave it as it is this is completely up to you.
+* EXTENDED_CODE_PREFIX - Set this to what every you like or leave it as it is this is completely up to you.
+* CODE_LENGTH_PRIMARY - This is the number of characters that will be in the first section of the authcode (set it to what ever you like default is 7 chars)
+* CODE_LENGTH_SECONDARY  - This is the number of characters that will be in the second section of the authcode (set it to what ever you like default is 7 chars
+* USE_SECONDARY - If you want a short code then set this to false and it will not generate a secondary part of the authcode.
+* DIVEIDERS - Set this to false if you want to turn off the - between the code sections 
+
+JWT Auth Settings
+* JWTSECURE - If you are not running this over SSL then keep this to false
+* JWTSECRET - Change this before you go live for security
+* APIUSER - you can set this to what ever you would or just leave it.
+
+Anything else in this file that is not listed above should be left alone at this time.
 
 ### Built with
 * [PHP 7.1](http://php.net) - PHP ^7.1 is required
