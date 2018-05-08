@@ -17,6 +17,7 @@ namespace swgAS\swgAPI\models;
 use \Illuminate\Database\Eloquent\Model as Model;
 
 // swgAS Use
+use swgAS\swgAdmin\models\adminauthcodeModel;
 use swgAS\config\settings;
 use swgAS\helpers\messaging\errormsg;
 use swgAS\helpers\messaging\statusmsg;
@@ -235,7 +236,8 @@ class accountModel extends Model
 					$args['userLogger']->info('USER: ' . $args['username'] .' has been created');
 
 					// Update the Authcode to used
-					$authUpdate = authcodeModel::updateAuthcode($args);
+                    $authCode = new adminauthcodeModel();
+                    $authUpdate = $authCode->authCodeUpdateAPI($args);
 
 					if($authUpdate === false)
 					{

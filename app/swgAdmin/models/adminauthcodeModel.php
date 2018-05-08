@@ -125,6 +125,31 @@ class adminauthcodeModel
     }
 
     /**
+     * @method getAuthCodeByCode
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
+    public function getAuthCodeByCode($args)
+    {
+        try {
+            $authCode = ['auth_code' =>$args['authcode']];
+            $query = new MongoQuery($authCode);
+            $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->authcodeCollection,$query);
+            $authCodeData = json_encode($res->toArray());
+
+            if(empty($authCode))
+            {
+                return errormsg::getErrorMsg("authnotfound", (new \ReflectionClass(self::class))->getShortName());
+            }
+            return $authCodeData;
+
+        } catch (ConnectionException $ex) {
+            $args['flash']->addMessageNow("error", $ex->getMessage());
+        }
+    }
+
+    /**
      * @method createAuthCode
      * Create an authcode and add it to the mongo db collection for the user that is passed in
      * @param array $args
@@ -240,6 +265,33 @@ class adminauthcodeModel
     }
 
     /**
+     * @method authCodeUpdateAPI
+     * @param array $args
+     * @return bool
+     */
+    public function authCodeUpdateAPI($args)
+    {
+        try {
+            $cDateTime = new \DateTime();
+            $updateAuthCode = new MongoBulkWrite();
+            $updateAuthCode->update(
+                ['username' => $args['username']],
+                ['$set' => ['auth_code_used' => 1, 'used_date'=> $cDateTime->format('d M Y H:i:s'), 'modified_date' => $cDateTime->format('d M Y H:i:s')]],
+                ['multi' => false, 'upsert' => false]
+            );
+            $update = $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->authcodeCollection, $updateAuthCode);
+
+            if ($update) {
+                return true;
+            }
+
+            return false;
+        } catch(ConnectionException $ex) {
+            $args['flash']->addMessage("error", $ex->getMessage());
+        }
+    }
+
+    /**
      * @method deleteAuthCode
      * Delete a specific authcode by its Id
      * @param array $args
@@ -265,6 +317,31 @@ class adminauthcodeModel
 
         } catch(ConnectionException $ex) {
             $args['flash']->addMessage("error", $ex->getMessage());
+        }
+    }
+
+    /**
+     * @method getAuthCodeUser
+     * @param array $args
+     * @return mixed|string
+     * @throws \ReflectionException
+     */
+    public function getAuthCodeUser($args)
+    {
+        try {
+            $authCode = ['username' => $args['username']];
+            $query = new MongoQuery($authCode);
+            $res = $args['mongodb']->executeQuery(settings::MONGO_ADMIN.".".$this->authcodeCollection,$query);
+            $authCodeData = current($res->toArray());
+
+            if(empty($authCode))
+            {
+                return errormsg::getErrorMsg("authnotfound", (new \ReflectionClass(self::class))->getShortName());
+            }
+            return $authCodeData;
+
+        } catch (ConnectionException $ex) {
+            $args['flash']->addMessageNow("error", $ex->getMessage());
         }
     }
 }

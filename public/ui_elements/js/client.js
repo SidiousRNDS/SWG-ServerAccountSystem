@@ -45,7 +45,7 @@ $(document).ready(function(){
                     },
                     success: function(data) {
                         // Error
-                        if (data !== "Account for " + username + " has been created.") {
+                        if (!data.includes("has been created.")) {
                             $('.msg').html("<span class='error-msg'><i class='fas fa-exclamation-triangle' aria-hidden='true'></i> " + data + "</span>");
                             $('#nAccount')[0].reset();
                             grecaptcha.reset();
@@ -64,17 +64,3 @@ $(document).ready(function(){
         });
     });
 });
-
-
-/* Misc Methods */
-
-
-
-
-// Encode special Chars
-function specialCharsEncode(special)
-{
-    var encodeSpecial = encodeURI(special);
-
-    return encodeSpecial;
-}

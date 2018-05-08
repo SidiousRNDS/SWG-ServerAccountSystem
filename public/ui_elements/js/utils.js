@@ -23,6 +23,8 @@ $(document).ready(function(){
     // Translate the page to galactic basic
     translate();
 
+    adminCaptchaSubmitDisabled();
+
     $('#authCodeList').DataTable({
         responsive: true,
         columnDefs: [
@@ -88,11 +90,6 @@ $(document).ready(function(){
     $(".deleteEntry").on('click', function(e){
         deleteEntry(e);
     });
-
-    $("#leftside-navigation .sub-menu > a").click(function(e) {
-        $("#leftside-navigation ul ul").slideUp(), $(this).next().is(":visible") || $(this).next().slideDown(),
-            e.stopPropagation()
-    })
 });
 
 // Translate
@@ -116,7 +113,7 @@ function translate() {
 // Build out the copyright
 function buildCopyRight() {
 
-    $('.foot').html("Copyright <i class='fa fa-copyright' aria-hidden='true'></i> "+year+" SWG Rogue One");
+    $('.foot').html("Copyright <i class='fa fa-copyright' aria-hidden='true'></i> "+year+" RNDS");
     $('.foot').append('<span class="translation"><a href="#" class="translate" title="Translate to Galactic Basic"><i class="fab fa-empire" aria-hidden="true"></i> Translate</a></span>');
 }
 
@@ -313,12 +310,18 @@ function unlockCaptcha(formname) {
 // Enable Submit button after captcha has been processed
 function captchaSubmitEnabled() {
     $('#accCreate').prop('disabled',false);
+    $('#loginBtn').prop('disabled',false);
 }
 // Disable Submit button before catpcha has been processed or if captcha fails
 function captchaSubmitDisabled() {
     $('#accCreate').prop('disabled',true);
     // Hide captcha till the require fields are all filled in
     $('.g-recaptcha').css('display','none');
+}
+
+function adminCaptchaSubmitDisabled() {
+    console.log("Disabling login button");
+    $('#loginBtn').prop('disabled',true);
 }
 
 /**

@@ -31,7 +31,8 @@ $swgAS->group('/admin', function() use($swgAS){
     }
 
     // Login
-    $swgAS->post('/login', \swgAS\swgAdmin\controllers\adminController::class . ':adminLogin');
+    $swgAS->post('/login', \swgAS\swgAdmin\controllers\adminController::class . ':adminLogin')
+        ->setName('login');
 
     // Dashboard Group
     $swgAS->group('/dashboard', function() use($swgAS) {
@@ -196,10 +197,10 @@ $swgAS->group('/api', function() use ($swgAS) {
     $swgAS->post('/token', \swgAS\swgAPI\controllers\tokenController::class . ':getToken');
 
     // TODO - Remove before launch this is really not needed and is only for testing
-    $swgAS->get('/test', function($request, $response, $args) {
+    /*$swgAS->get('/test', function($request, $response, $args) {
         $decode = $this->JwToken;
         print_r($decode);
-    });
+    });*/
 
     // Version: V1
     $swgAS->group('/v1', function() use ($swgAS) {

@@ -17,7 +17,7 @@ namespace swgAS\helpers;
 
 // swgAS Use
 use swgAS\config\settings;
-use swgAS\swgAPI\models\authcodeModel as authcode;
+use swgAS\swgAdmin\models\adminauthcodeModel;
 use swgAS\swgAPI\models\accountModel as account;
 use swgAS\helpers\messaging\errormsg;
 
@@ -187,7 +187,8 @@ class validation
      */
 	public static function validateAuthCode(array $args)
 	{
-		return authcode::validateAuth($args);
+	    $authCode = new adminauthcodeModel();
+		return $authCode->getAuthCodeByCode($args);
 	}
 
     /**
@@ -198,7 +199,8 @@ class validation
      */
 	public static function validateAuthUsername(array $args)
 	{
-		return authcode::getAuthcodeUser($args);
+	    $authCode = new adminauthcodeModel();
+		return $authCode->getAuthCodeUser($args);
 	}
 
 	/**

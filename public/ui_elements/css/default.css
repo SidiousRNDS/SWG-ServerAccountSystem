@@ -89,6 +89,14 @@ body {
 #main .module {
   color: #ff0000;
 }
+#main .msg {
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+#main .msg .success {
+  color: #1E8449;
+}
 .foot {
   color: #EE5828;
   padding: 1.2% 0 1% 0;

@@ -87,6 +87,7 @@ class accountController extends baseController
 				"authcode"=>$request->getParam('authcode'),
 				"ip"=>utilities::unobscureData($request->getParam('uip')),
 				"db"=>$this->getCIElement('db'),
+				"mongodb"=>$this->getCIElement('mongodb'),
 				"errorLogger"=>$this->getCIElement('swgErrorLog'),
 				"apiLogger"=>$this->getCIElement('swgAPILog'),
 				"userLogger"=>$this->getCIElement('swgUsersLog'),
