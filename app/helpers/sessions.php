@@ -21,13 +21,23 @@ use \MongoDB\BSON\ObjectId as MongoID;
 // Use swgAS
 use swgAS\config\settings;
 
+/**
+ * Class sessions
+ * @package swgAS\helpers
+ */
 class sessions
 {
+    /**
+     * @var int
+     */
     private $sessionLength = 15;
+    /**
+     * @var string
+     */
     private $sessionsCollection = "users_sessions";
 
     /**
-     * Summary getSession
+     * @method getSession
      * @return mixed
      */
     public function getSession()
@@ -36,7 +46,7 @@ class sessions
     }
 
     /**
-     * Summary getSessionTable
+     * @method getSessionTable
      * @return string
      */
     public function getSessionTable()
@@ -45,8 +55,8 @@ class sessions
     }
 
     /**
-     * Summary checkValidUserSession
-     * @param $args
+     * @method checkValidUserSession
+     * @param array $args
      * @return bool
      */
     public function checkValidUserSession($args)
@@ -60,8 +70,8 @@ class sessions
     }
 
     /**
-     * Summary setUserSession
-     * @param $args
+     * @method setUserSession
+     * @param array $args
      * @throws \Exception
      */
     public function setUserSession($args)
@@ -70,8 +80,9 @@ class sessions
     }
 
     /**
-     * Summary generateUserSession - Check for current session or generate a new one if there is not one or its expired
-     * @param $args
+     * @method generateUserSession
+     * Check for current session or generate a new one if there is not one or its expired
+     * @param array $args
      * @throws \Exception
      */
     private function generateUserSession($args)
@@ -115,9 +126,9 @@ class sessions
     }
 
     /**
-     * Summary checkUserSession - Check to see if the helper has a session stored and if so return the data
-     * if the helper does not return null
-     * @param $args
+     * @method checkUserSession
+     * Check to see if the helper has a session stored and if so return the data if the helper does not return null
+     * @param array $args
      * @return mixed
      */
     private function checkUserSession($args)
@@ -133,9 +144,9 @@ class sessions
     }
 
     /**
-     * Summary checkSessionIsExpired - Check to see if the session timestamp that was passed in is behind the current timestamp
-     * if so then the session is expired and return true else return false
-     * @param $args
+     * @method checkSessionIsExpired
+     * Check to see if the session timestamp that was passed in is behind the current timestamp if so then the session is expired and return true else return false
+     * @param array $args
      * @return bool
      */
     private function checkSessionIsExpired($args)
@@ -153,8 +164,9 @@ class sessions
     }
 
     /**
-     * Summary removeSessionById - Remove the existing session from the db
-     * @param $args
+     * @method removeSessionById
+     * Remove the existing session from the db
+     * @param array $args
      */
     private function removeSessionById($args)
     {
@@ -168,8 +180,9 @@ class sessions
     }
 
     /**
-     * Summary removeSessionByUsername - Remove the existing session from the db
-     * @param $args
+     * @method removeSessionByUsername
+     * Remove the existing session from the db
+     * @param array $args
      */
     private function removeSessionByUser($args)
     {
@@ -183,7 +196,8 @@ class sessions
     }
 
     /**
-     * Summary generateSessionID - Genereate a random session ID
+     * @method generateSessionID
+     * Genereate a random session ID
      * @return bool|string
      * @throws \Exception
      */
@@ -207,8 +221,9 @@ class sessions
     }
 
     /**
-     * Summary setLoginAttempts - This sets a session var to track the number of times a helper has tried to login and failed
-     * @param $args
+     * @method setLoginAttempts
+     * This sets a session var to track the number of times a helper has tried to login and failed
+     * @param array $args
      */
     public function setLoginAttempts($attempts)
     {
@@ -222,7 +237,8 @@ class sessions
     }
 
     /**
-     * Summary getLoginAttempts - This gets the data in the Session for the number of times a helper has tried to login and failed
+     * @method getLoginAttempts
+     * This gets the data in the Session for the number of times a helper has tried to login and failed
      * @return mixed
      */
     public function getLoginAttempts()
@@ -239,7 +255,8 @@ class sessions
     }
 
     /**
-     * Summary setSessionLocked - This adds the session that we check for to see if the helper is locked out
+     * @method setSessionLocked
+     * This adds the session that we check for to see if the helper is locked out
      */
     public function setSessionLocked()
     {

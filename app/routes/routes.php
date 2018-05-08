@@ -10,6 +10,9 @@
 use swgAS\config\settings;
 use swgAS\swgAdmin\middelware\adminauthmiddleware;
 
+/**
+ * Application routes
+ */
 
 $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
     return $this->views->render($response, 'clients.twig',['uIP'=>$this->get('userIP'),'captchakey'=>settings::G_CAPTCHA_KEY,'useAuth'=>settings::USE_AUTHCODES]);

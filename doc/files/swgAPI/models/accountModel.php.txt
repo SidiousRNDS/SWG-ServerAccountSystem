@@ -26,42 +26,43 @@ use swgAS\helpers\station;
 use swgAS\helpers\utilities;
 
 /**
- * Summary of accountModel
+ * Class accountModel
+ * @package swgAS\swgAPI\models
  */
 class accountModel extends Model
 {
 	/**
-	 * Summary of $accountsTable
+	 * @method  of $accountsTable
 	 * @var string
 	 */
 	protected static $accountsTable = "accounts";
 
 	/**
-	 * Summary of $usernameMaxLength
+	 * @method  of $usernameMaxLength
 	 * @var int
 	 */
 	public static $usernameMaxLength = 32;
 
 	/**
-	 * Summary of $usernameMinLength
+	 * @method  of $usernameMinLength
 	 * @var int
 	 */
 	public static $usernameMinLength = 4;
 
 	/**
-	 * Summary of $usernameRegEx
+	 * @method  of $usernameRegEx
 	 * @var mixed
 	 */
 	public static $usernameRegEx = "/^[a-zA-Z0-9@.\-]*$/";
 
 	/**
-	 * Summary of $passwordMaxLength
+	 * @method  of $passwordMaxLength
 	 * @var int
 	 */
 	public static $passwordMaxLength = 32;
 
 	/**
-	 * Summary of $passwordMinLength
+	 * @method  of $passwordMinLength
 	 * @var int
 	 */
 	public static $passwordMinLength = 5;
@@ -71,7 +72,7 @@ class accountModel extends Model
 	 */
 
 	/**
-	 * Summary of getTableName
+	 * @method  of getTableName
 	 * @return string
 	 */
 	public static function getTableName()
@@ -80,7 +81,7 @@ class accountModel extends Model
 	}
 
     /**
-	 * Summary - checkUsername check to see if a username already exists in the system
+	 * @method  - checkUsername check to see if a username already exists in the system
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -108,6 +109,7 @@ class accountModel extends Model
 	}
 
     /**
+     * @method getAccount
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -164,6 +166,7 @@ class accountModel extends Model
 	}
 
     /**
+     * @method addAccount
      * @param array $args
      * @return array|bool|mixed|null|string
      * @throws \ReflectionException
@@ -258,16 +261,8 @@ class accountModel extends Model
 		return $validate;
 	}
 
-	public function updateAccount()
-	{
-
-	}
-
-	/**
-	 *  Private Methods
-	 */
-
     /**
+     * @method processNewAccountData
      * @param array $args
      * @return array|string
      * @throws \ReflectionException
@@ -308,6 +303,7 @@ class accountModel extends Model
 	}
 
     /**
+     * @method getAccountEmail
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -334,6 +330,7 @@ class accountModel extends Model
 	}
 
     /**
+     * @method getAccountUsername
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -361,6 +358,7 @@ class accountModel extends Model
 	}
 
     /**
+     * @method getAccountIp
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -387,6 +385,4 @@ class accountModel extends Model
 		}
 	}
 }
-
-?>
 

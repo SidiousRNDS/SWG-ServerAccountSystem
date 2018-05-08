@@ -10,6 +10,9 @@
 use swgAS\config\settings;
 use swgAS\swgAdmin\middelware\adminauthmiddleware;
 
+/**
+ * Application routes
+ */
 
 $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
     return $this->views->render($response, 'clients.twig',['uIP'=>$this->get('userIP'),'captchakey'=>settings::G_CAPTCHA_KEY,'useAuth'=>settings::USE_AUTHCODES]);
@@ -47,36 +50,39 @@ $swgAS->group('/admin', function() use($swgAS){
         $swgAS->group('/authcodes', function() use($swgAS){
 
             // Create Authcode form
-            $swgAS->get('/createauth', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminCreateAuthCode')
+            $swgAS->get('/createauthview', \swgAS\swgAdmin\controllers\adminauthcodeController::class . ':adminCreateAuthCodeView')
                 ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('createauth');
+                ->setName('createauthview');
 
-            // Generate an Authcode TODO:check to see why i dont have a slash infront of this route
-            $swgAS->post('genauthcode', \swgAS\swgAPI\controllers\authcodeController::class . ':adminGenerateAuthCode')
+            // Generate an Authcode
+            $swgAS->post('/createauthaction', \swgAS\swgAdmin\controllers\adminauthcodeController::class . ':adminCreateAuthCodeAction')
                 ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('genauthcode');
+                ->setName('createauthaction');
+
+            // View all Not Used Authcodes
+            $swgAS->get('/viewnotused', \swgAS\swgAdmin\controllers\adminauthcodeController::class . ':adminNotUsedAuthCodesView')
+                ->add(new adminauthmiddleware($swgAS->getContainer()))
+                ->setName('viewnotused');
 
             // View all Used Authcodes
-            $swgAS->get('/viewallused', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+            $swgAS->get('/viewused', \swgAS\swgAdmin\controllers\adminauthcodeController::class . ':adminUsedAuthCodesView')
                 ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('viewallused');
+                ->setName('viewused');
 
-            // Update Authcode
-            $swgAS->get('/updateauthcode/{id}',\swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+            // Update Authcode View
+            $swgAS->get('/updateauthview/{id}', \swgAS\swgAdmin\controllers\adminauthcodeController::class . ':adminUpdateAuthCodeView')
                 ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('updateauthcode');
+                ->setName('updateauthview');
 
-            // Update Role Action
-            $swgAS->post('/updateuthcodeaction', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+            // Update Authcode Action
+            $swgAS->post('/updateauthaction', \swgAS\swgAdmin\controllers\adminauthcodeController::class . ':adminUpdateAuthCodeAction')
                 ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('updateauthcodeaction');
+                ->setName('updateauthaction');
 
-            // Delete Role Action
-            $swgAS->get('/deleteauthcodeaction/{id}', \swgAS\swgAdmin\controllers\admindashboardController::class . ':adminViewUsedAuthCodes')
+            // Update Authcode Action
+            $swgAS->get('/deleteauth/{id}', \swgAS\swgAdmin\controllers\adminauthcodeController::class . ':adminDeleteAuthCodeAction')
                 ->add(new adminauthmiddleware($swgAS->getContainer()))
-                ->setName('deleteauthcodeaction');
-
-
+                ->setName('deleteauth');
         });
 
 

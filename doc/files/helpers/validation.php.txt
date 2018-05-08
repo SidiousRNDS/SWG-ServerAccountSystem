@@ -21,11 +21,15 @@ use swgAS\swgAPI\models\authcodeModel as authcode;
 use swgAS\swgAPI\models\accountModel as account;
 use swgAS\helpers\messaging\errormsg;
 
+/**
+ * Class validation
+ * @package swgAS\helpers
+ */
 class validation
 {
     /**
-     * Summary of validateAccount
-     * @param $args
+     * @method validateAccount
+     * @param array $args
      * @return bool|null|string
      * @throws \Exception
      */
@@ -61,7 +65,7 @@ class validation
 	}
 
     /**
-	 * Summary of validateUsername
+	 * @method validateUsername
      * @param array $args
      * @return null|string
      * @throws \Exception
@@ -96,7 +100,7 @@ class validation
 	}
 
 	/**
-	 * Summary of validatePassword
+	 * @method validatePassword
 	 * @param array $args
 	 * @return \null|string
 	 */
@@ -124,7 +128,7 @@ class validation
 	}
 
 	/**
-	 * Summary of validateEmail
+	 * @method validateEmail
 	 * @param array $args
 	 * @return \null|string
 	 */
@@ -140,7 +144,7 @@ class validation
 	}
 
 	/**
-	 * Summary of validateIp
+	 * @method  of validateIp
 	 * @param array $args
 	 * @return \null|string
 	 */
@@ -158,7 +162,7 @@ class validation
 
 
 	/**
-	 * Summary of validateEncryptedPassword
+	 * @method validateEncryptedPassword
 	 * Used for Unit Test
 	 * @param mixed $args
 	 * @return boolean
@@ -176,7 +180,7 @@ class validation
 	}
 
     /**
-	 * Summary of validateAuthCode
+	 * @method validateAuthCode
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -186,19 +190,19 @@ class validation
 		return authcode::validateAuth($args);
 	}
 
-	/**
-	 * Summary of validateAuthUsername
-	 * @param string $username
-	 * @throws \Exception
-	 * @return mixed
-	 */
+    /**
+     * @method validateAuthUsername
+     * @param array $args
+     * @return string
+     * @throws \ReflectionException
+     */
 	public static function validateAuthUsername(array $args)
 	{
 		return authcode::getAuthcodeUser($args);
 	}
 
 	/**
-	 * Summary of validateAuthCodeLength
+	 * @method validateAuthCodeLength
 	 * @param mixed $authCode
 	 * @return boolean
 	 */
@@ -267,6 +271,4 @@ class validation
 		return false;
 	}
 }
-
-?>
 

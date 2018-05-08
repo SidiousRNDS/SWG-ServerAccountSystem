@@ -1,7 +1,5 @@
 <?php
 
-namespace swgAS\controllers;
-
 /*****************************************************************
  * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
@@ -13,14 +11,20 @@ namespace swgAS\controllers;
  * CLASS: baseController
  ******************************************************************/
 
+namespace swgAS\controllers;
+
 use \Slim\Container;
 
+/**
+ * Class baseController
+ * @package swgAS\controllers
+ */
 class baseController
 {
 	protected $ci;
 
 	/**
-	 * Summary of __construct
+	 * @method __construct
 	 * @param Container $ci
 	 */
 	public function __construct(Container $ci)
@@ -29,7 +33,7 @@ class baseController
 	}
 
 	/**
-	 * Summary of getCI
+	 * @method getCI
 	 * @return Container
 	 */
 	public function getCI()
@@ -38,7 +42,7 @@ class baseController
 	}
 
 	/**
-	 * Summary of getCIElement
+	 * @method getCIElement
 	 * @param mixed $name
 	 * @return mixed
 	 */
@@ -48,7 +52,7 @@ class baseController
 	}
 
 	/**
-	 * Summary of setCIElement
+	 * @method setCIElement
 	 * @param mixed $name
 	 * @param mixed $value
 	 */
@@ -57,6 +61,3 @@ class baseController
 		$this->ci->{$name} = $value;
 	}
 }
-
-?>
-

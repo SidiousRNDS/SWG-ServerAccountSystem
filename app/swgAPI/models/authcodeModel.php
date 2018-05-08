@@ -25,19 +25,20 @@ use swgAS\helpers\utilities;
 use swgAS\swgAPI\models\accountModel;
 
 /**
- * Summary of authcodeModel
+ * Class authcodeModel
+ * @package swgAS\swgAPI\models
  */
 class authcodeModel extends \Illuminate\Database\Eloquent\Model
 {
 	/**
-	 * Summary of $accountsTable
+	 * @method  $accountsTable
 	 * @var string
 	 */
 	protected static $authTable = "admin_auth_codes";
 
     /**
-	 * Summary of getAuthCodeId
-     * @param $args
+	 * @method  getAuthCodeId
+     * @param array $args
      * @return string
      * @throws \ReflectionException
      */
@@ -90,7 +91,7 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
-	 * Summary of getAuthcodeUser
+	 * @method  getAuthcodeUser
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -120,7 +121,7 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
     /**
-	 * Summary of validateAuthcode
+	 * @method  validateAuthcode
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -150,7 +151,7 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
     /**
-	 * Summary of updateAuthcode
+	 * @method  updateAuthcode
      * @param array $args
      * @return bool
      * @throws \ReflectionException
@@ -177,8 +178,8 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
     /**
-	 * Summary of createAuthCode
-     * @param $args
+	 * @method createAuthCode
+     * @param array $args
      * @throws \ReflectionException
      */
 	public static function createAuthCode($args)
@@ -227,8 +228,8 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
     /**
-	 * Summary checkUsername
-     * @param $args
+	 * @method  checkUsername
+     * @param array $args
      * @return string
      */
 	private static function checkUsername($args)
@@ -249,8 +250,8 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
     /**
-	 * Summary addAuthCode
-     * @param $args
+	 * @method  addAuthCode
+     * @param array $args
      * @return string
      */
 	private static function addAuthCode($args)
@@ -267,7 +268,7 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
 	/**
-	 * Summary of generateAuthCode
+	 * @method  generateAuthCode
 	 * @return \null|string
 	 */
 	private static function buildAuthCode($args)
@@ -311,7 +312,7 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
 	/**
-	 * Summary of generateAuthCodeSections
+	 * @method  generateAuthCodeSections
 	 * @param int $sectionLength
 	 * @return \null|string
 	 */
@@ -328,8 +329,8 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
     /**
-	 * Summary of getActiveAuthcodes - Get a list of authcodes that have not been used yet
-     * @param $args
+	 * @method  getActiveAuthcodes - Get a list authcodes that have not been used yet
+     * @param array $args
      * @return int
      * @throws \ReflectionException
      */
@@ -349,8 +350,8 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 	}
 
     /**
-	 * Summary getUsedAuthcodes
-     * @param $args
+	 * @method  getUsedAuthcodes
+     * @param array $args
      * @return mixed
      */
 	public static function getUsedAuthcodes($args)

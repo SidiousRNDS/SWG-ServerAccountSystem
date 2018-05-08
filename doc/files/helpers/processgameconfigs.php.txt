@@ -13,15 +13,20 @@
 namespace swgAS\helpers;
 
 // Use
-use WriteiniFile\WriteiniFile;
+use \WriteiniFile\WriteiniFile;
 
 // Use swgAS
 use swgAS\config\settings;
 
+/**
+ * Class processgameconfigs
+ * @package swgAS\helpers
+ */
 class processgameconfigs
 {
     /**
-     * @param $args
+     * @method gameLiveConfig
+     * @param array $args
      * @return bool
      * @throws \Exception
      */
@@ -29,9 +34,10 @@ class processgameconfigs
     {
         return $this->processLiveConfig($args);
     }
-    
+
     /**
-     * @param $args
+     * @method processLiveConfig
+     * @param array $args
      * @return bool
      * @throws \Exception
      */
@@ -77,8 +83,8 @@ class processgameconfigs
     }
 
     /**
-     * Summary readIniConfg
-     * @param $args
+     * @method readIniConfig
+     * @param array $args
      * @return array|bool
      */
     private function readIniConfig($args)
@@ -87,8 +93,8 @@ class processgameconfigs
     }
 
     /**
-     * Summary writeIniConfig
-     * @param $args
+     * @method writeIniConfig
+     * @param array $args
      * @return bool
      * @throws \Exception
      */

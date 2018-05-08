@@ -27,6 +27,10 @@ use swgAS\helpers\utilities;
 use swgAS\helpers\processauthcodes;
 use swgAS\swgAPI\models\accountModel;
 
+/**
+ * Class adminauthcodeModel
+ * @package swgAS\swgAdmin\models
+ */
 class adminauthcodeModel
 {
 

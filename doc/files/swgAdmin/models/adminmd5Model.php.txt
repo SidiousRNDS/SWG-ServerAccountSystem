@@ -20,13 +20,21 @@ use \MongoDB\Driver\Query as MongoQuery;
 // Use swgAS
 use swgAS\config\settings;
 
+/**
+ * Class adminmd5Model
+ * @package swgAS\swgAdmin\models
+ */
 class adminmd5Model
 {
+    /**
+     * @var string 
+     */
     private $md5Collection = "tre_md5";
 
     /**
-     * Summary getMD5ById - get the MD5 document by the ID passed
-     * @param $args
+     * @method  getMD5ById
+     * get the MD5 document by the ID passed
+     * @params array $args
      * @return mixed
      */
     public function getMD5ById($args)
@@ -45,8 +53,9 @@ class adminmd5Model
     }
 
     /**
-     * Summary getMD5ByName - get the MD5 document by the filename passed
-     * @param $args
+     * @method  getMD5ByName
+     * get the MD5 document by the filename passed
+     * @params array $args
      * @return mixed
      */
     public function getMD5ByName($args)
@@ -65,8 +74,9 @@ class adminmd5Model
     }
 
     /**
-     * Summary updateMD5ById - Update the MD5 Record by the ID padded
-     * @param $args
+     * @method  updateMD5ById
+     * Update the MD5 Record by the ID padded
+     * @params array $args
      */
     public function updateMD5ById($args)
     {
@@ -84,8 +94,9 @@ class adminmd5Model
     }
 
     /**
-     * Summary createMD5ByName - Create a new MD5 entry based on the name passed
-     * @param $args
+     * @method  createMD5ByName
+     * Create a new MD5 entry based on the name passed
+     * @params array $args
      * @return MongoID
      */
     public function createMD5ByName($args)
@@ -109,8 +120,9 @@ class adminmd5Model
     }
 
     /**
-     * Summary loadMD5Data - This is only used to load in base data for the TRE files
-     * @param $args
+     * @method  loadMD5Data
+     * This is only used to load in base data for the TRE files
+     * @params array $args
      * @return mixed
      */
     public function loadMD5Data($args)

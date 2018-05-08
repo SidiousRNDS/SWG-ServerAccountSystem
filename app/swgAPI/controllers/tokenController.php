@@ -20,10 +20,14 @@ use \Psr\Http\Message\ResponseInterface;
 use swgAS\controllers\baseController;
 use swgAS\swgAPI\models\tokenModel;
 
+/**
+ * Class tokenController
+ * @package swgAS\swgAPI\controllers
+ */
 class tokenController extends baseController
 {
     /**
-     * Summary of getToken
+     * @method getToken
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @param array $args
@@ -37,5 +41,3 @@ class tokenController extends baseController
 		return $response->withJson($token, 201);
 	}
 }
-
-?>

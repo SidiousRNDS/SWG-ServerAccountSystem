@@ -16,15 +16,20 @@
     use Psr\Http\Message\ServerRequestInterface;
     use Psr\Http\Message\ResponseInterface;
 
-// Use swgAS
+    // Use swgAS
     use swgAS\controllers\baseController;
     use swgAS\config\settings;
     use swgAS\swgAdmin\models\gameupdates\adminserverupdatesModel;
 
+    /**
+     * Class admingameupdatesController
+     * @package swgAS\swgAdmin\controllers
+     */
     class admingameupdatesController extends baseController
     {
 
         /**
+         * @method adminGameUpdateServerPatchCreateView
          * @param ServerRequestInterface $request
          * @param ResponseInterface $response
          * @return mixed
@@ -44,6 +49,7 @@
         }
 
         /**
+         * @method adminGameUpdatesServerPatchCreateAction
          * @param ServerRequestInterface $request
          * @param ResponseInterface $response
          * @return mixed
@@ -73,6 +79,7 @@
         }
 
         /**
+         * @method adminGameUpdatesServerPatchView
          * @param ServerRequestInterface $request
          * @param ResponseInterface $response
          * @return mixed
@@ -99,7 +106,7 @@
     
     
         /**
-         * Summary adminGameUpdateServerPatchDetailView - View the Patch details
+         * @method adminGameUpdatesServerPatchDetailView
          * @param ServerRequestInterface $request
          * @param ResponseInterface      $response
          * @return mixed
@@ -130,7 +137,7 @@
         }
 
         /**
-         * Summary adminGameUpdateServerPatchUpdateAction
+         * @method adminGameUpdateServerPatchUpdateAction
          * @param ServerRequestInterface $request
          * @param ResponseInterface $response
          * @return mixed
@@ -170,6 +177,7 @@
         }
 
         /**
+         * @method adminGameUpdatesLauncherPatchCreateView
          * @param ServerRequestInterface $request
          * @param ResponseInterface $response
          * @return mixed

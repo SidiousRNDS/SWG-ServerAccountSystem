@@ -19,12 +19,17 @@
     // Use swgAS
     use swgAS\controllers\baseController;
     use swgAS\swgAdmin\models\gameupdates\adminserverupdatesModel;
-    
+
+    /**
+     * Class patchController
+     * @package swgAS\swgAPI\controllers
+     */
     class patchController extends baseController
     {
     
         /**
-         * Summary getServerPatchNotes - Get all the notes for the server and pass it back as a json_object
+         * @method getServerPatchNotes
+         * Get all the notes for the server and pass it back as a json_object
          * @param ServerRequestInterface $request
          * @param ResponseInterface      $response
          * @return string
@@ -39,6 +44,12 @@
             return $serverPatchNotes->getServerPatchesByServer(['mongodb' => $this->getCIElement('mongodb'), 'servername' => $args['servername']]);
         }
 
+        /**
+         * @method getAllServerPatchNotes
+         * @param ServerRequestInterface $request
+         * @param ResponseInterface $response
+         * @return string
+         */
         public function getAllServerPatchNotes(ServerRequestInterface $request, ResponseInterface $response)
         {
             $serverPatchNotes = new adminserverupdatesModel();

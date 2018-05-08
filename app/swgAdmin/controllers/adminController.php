@@ -23,11 +23,15 @@ namespace swgAS\swgAdmin\controllers;
  use swgAS\config\settings;
  use swgAS\helpers\utilities;
 
+/**
+ * Class adminController
+ * @package swgAS\swgAdmin\controllers
+ */
 class adminController extends baseController
 {
 
     /**
-     * Sumarry adminIndex
+     * @method adminIndex
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -42,7 +46,7 @@ class adminController extends baseController
     }
 
     /**
-     * Summary adminLogin
+     * @method adminLogin
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -74,5 +78,3 @@ class adminController extends baseController
         }
     }
 }
-
-?>

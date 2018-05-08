@@ -25,13 +25,21 @@ use swgAS\helpers\security;
 use swgAS\helpers\sessions;
 use swgAS\helpers\utilities;
 
+/**
+ * Class adminloginModel
+ * @package swgAS\swgAdmin\models
+ */
 class adminloginModel extends Model
 {
+    /**
+     * @var string 
+     */
     private $usersCollection = "users";
 
     /**
-     * Summary authLogin - Admin login check
-     * @param $args
+     * @method  authLogin
+     * Admin login check
+     * @param array $args
      * @return bool|string
      * @throws \ReflectionException
      */

@@ -13,18 +13,24 @@
 
 namespace swgAS\helpers\messaging;
 
+/**
+ * Class errormsg
+ * @package swgAS\helpers\messaging
+ */
 class errormsg
 {
+    /**
+     * @var array
+     */
     protected static $adminLoginErrorMsg = [
     	"notauthorized" => "Access Denied",
 		"tomanyattempts" => "IP ::IP:: has been blocked for ::LIMIT:: minutes",
 		"invalidsession" => "Invalid Session - Please login"
 	];
 
-	/**
-	 * Summary of $accountErrorMsg
-	 * @var mixed
-	 */
+    /**
+     * @var array
+     */
 	protected static $accountErrorMsg = [
 		"unamelong" => "Username is greater then the max length",
 		"unameshort" => "Username is shorter then required length",
@@ -53,16 +59,14 @@ class errormsg
 		"passvalidation" => "Password could not be validated"
 	];
 
-	/**
-	 * Summary of $accountbanErrorMsg
-	 * @var mixed
-	 */
+    /**
+     * @var array
+     */
 	protected static $accountbanErrorMsg = [];
 
-	/**
-	 * Summary of $authcodeErrorMsg
-	 * @var mixed
-	 */
+    /**
+     * @var array
+     */
 	protected static $authcodeErrorMsg = [
 		"authnotfound" => "Authcode was not found",
 		"validateauthusername" => "Could not access the db for validateAuthUsername",
@@ -76,26 +80,33 @@ class errormsg
 		"issuegeneratingauthcode" => "There was an issue generation the authcode it either did not match the length or there is a bigger issue"
 	];
 
-	/**
-	 * Summary of $characterbanErrorMsg
-	 * @var mixed
-	 */
+    /**
+     * @var array
+     */
 	protected static $characterbanErrorMsg = [];
 
-	/**
-	 * Summary of $galaxybanErrorMsg
-	 * @var mixed
-	 */
+    /**
+     * @var array
+     */
 	protected static $galaxybanErrorMsg = [];
 
+    /**
+     * @var array
+     */
 	protected static $passwordErrorMsg = [
 		"salt" => "No salt was generated"
 	];
 
+    /**
+     * @var array
+     */
 	protected static $roleErrorMsg = [
 		"rolenotcreated" => "Role ::ROLENAME:: was not created."
 	];
 
+    /**
+     * @var array
+     */
 	protected static $userErrorMsg = [
 		"usernotcreatedmissing" => "User was not created because its missing ::MISSING::",
 		"usernotcreatednomatch" => "User was not created because password did not match",
@@ -104,6 +115,9 @@ class errormsg
 		"usernotcreated" => "User ::USERNAME:: was not created"
 	];
 
+    /**
+     * @var array
+     */
 	protected static $patchErrorMsg = [
 		"patchmissingtitle" => "The patch you are trying to create is missing a title this is required to create a patch.",
 		"patchmissingnotes" => "The patch you are trying to create is missing notes this is required to create a patch",
@@ -114,12 +128,13 @@ class errormsg
 		"uploadfailed" => "File upload failed."
 	];
 
-	/**
-	 * Summary of getErrorMsg
-	 * @param string $code
-	 * @param string $model
-	 * @return string
-	 */
+    /**
+	 * @method getErrorMsg
+	 * Get the requested error message and return it to the calling method
+     * @param string $code
+     * @param string $model
+     * @return string
+     */
 	public static function getErrorMsg(string $code, string $model ) : string
 	{
 		
@@ -168,5 +183,3 @@ class errormsg
 		return $error;
 	}
 }
-
-?>

@@ -1,20 +1,21 @@
 <?php
 
-namespace swgAS\config;
-
-/**
+/*****************************************************************
  * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
  * @version 1.0.0
- *
- * NAMESPACE: config
+ * ****************************************************************
+ * NAMESPACE: swgAS\config
  * CLASS: settings
- */
+ ******************************************************************/
+
+namespace swgAS\config;
 
 /**
- * This holds all the constants that can be modified for use in the SWG Server System
+ * Class settings
+ * @package swgAS\config
  */
  class settings
  {
@@ -212,5 +213,3 @@ namespace swgAS\config;
 		'configurations'
 	];
  }
-
- ?>

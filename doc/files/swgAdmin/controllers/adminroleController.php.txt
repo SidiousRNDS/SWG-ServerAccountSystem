@@ -22,12 +22,15 @@ use swgAS\controllers\baseController;
 use swgAS\swgAdmin\models\adminroleModel;
 use swgAS\helpers\utilities;
 
-
+/**
+ * Class adminroleController
+ * @package swgAS\swgAdmin\controllers
+ */
 class adminroleController extends baseController
 {
 
     /**
-     * Summary adminCreateRoleView
+     * @method adminCreateRoleView
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -55,7 +58,7 @@ class adminroleController extends baseController
     }
 
     /**
-     * Summary adminCreateRole - Create new role
+     * @method adminCreateRole - Create new role
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -86,7 +89,7 @@ class adminroleController extends baseController
     }
 
     /**
-     * Summary adminRoleView
+     * @method adminRoleView
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -117,7 +120,7 @@ class adminroleController extends baseController
     }
 
     /**
-     * Summary adminUpdateRoleView
+     * @method adminUpdateRoleView
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -151,7 +154,7 @@ class adminroleController extends baseController
     }
 
     /**
-     * Summary adminUpdateRoleAction
+     * @method adminUpdateRoleAction
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -187,7 +190,7 @@ class adminroleController extends baseController
     }
 
     /**
-     * Summary adminDeleteRoleAction
+     * @method adminDeleteRoleAction
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed

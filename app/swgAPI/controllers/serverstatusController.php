@@ -19,10 +19,15 @@ use \Psr\Http\Message\ResponseInterface;
 use swgAS\controllers\baseController;
 use swgAS\swgAPI\models\serverstatusModel;
 
+/**
+ * Class serverstatusController
+ * @package swgAS\swgAPI\controllers
+ */
 class serverstatusController extends baseController
 {
     /**
-     * Summary lastSevenDays - Get the last seven days of records
+     * @method  lastSevenDays
+     * Get the last seven days of records
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -41,7 +46,8 @@ class serverstatusController extends baseController
     }
 
     /**
-     * Summary last24HoursLive - Get the last 24 hours of records
+     * @method  last24HoursLive
+     * Get the last 24 hours of records
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -60,6 +66,7 @@ class serverstatusController extends baseController
     }
 
     /**
+     * @method uniqueAccountLoginsCurrentMont
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed

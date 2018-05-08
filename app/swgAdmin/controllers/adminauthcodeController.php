@@ -21,6 +21,10 @@ use swgAS\controllers\baseController;
 use swgAS\config\settings;
 use swgAS\swgAdmin\models\adminauthcodeModel;
 
+/**
+ * Class adminauthcodeController
+ * @package swgAS\swgAdmin\controllers
+ */
 class adminauthcodeController extends baseController
 {
 

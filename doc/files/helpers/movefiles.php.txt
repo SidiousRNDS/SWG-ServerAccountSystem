@@ -17,11 +17,16 @@ namespace swgAS\helpers;
 // Use swgAS
 use swgAS\config\settings;
 
+/**
+ * Class movefiles
+ * @package swgAS\helpers
+ */
 class movefiles
 {
     /**
-     * @param $args
-     * @return bool
+     * @method moveTreFiles
+     * @param array $args
+     * @return bool|string
      * @throws \Exception
      */
     public function moveTreFile($args)

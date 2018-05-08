@@ -26,6 +26,10 @@ use swgAS\helpers\messaging\errormsg;
 use swgAS\helpers\messaging\statusmsg;
 use swgAS\helpers\password;
 
+/**
+ * Class adminusersModel
+ * @package swgAS\swgAdmin\models
+ */
 class adminusersModel
 {
     /**
@@ -34,8 +38,9 @@ class adminusersModel
     private $usersCollection = "users";
 
     /**
-     * Summary addUser - Add a new helper to the DB
-     * @param $args
+     * @method  addUser
+     * Add a new helper to the DB
+     * @param array $args
      * @throws \ReflectionException
      */
     public function addUser($args)
@@ -81,8 +86,8 @@ class adminusersModel
     }
 
     /**
-     * Summary getUsers
-     * @param $args
+     * @method  getUsers
+     * @param array $args
      * @return string
      */
     public function getUsers($args)
@@ -101,8 +106,8 @@ class adminusersModel
     }
 
     /**
-     * Summary getUser
-     * @param $args
+     * @method  getUser
+     * @param array $args
      * @return mixed
      */
     public function getUser($args)
@@ -121,8 +126,8 @@ class adminusersModel
     }
 
     /**
-     * Summary getUserByName
-     * @param $args
+     * @method  getUserByName
+     * @param array $args
      * @return mixed
      */
     public function getUserByName($args)
@@ -141,8 +146,8 @@ class adminusersModel
     }
 
     /**
-     * Summary updateUser
-     * @param $args
+     * @method  updateUser
+     * @param array $args
      * @throws \ReflectionException
      */
     public function updateUser($args)
@@ -184,6 +189,11 @@ class adminusersModel
         }
     }
 
+    /**
+     * @method deleteUser
+     * @param array $args
+     * @throws \ReflectionException
+     */
     public function deleteUser($args)
     {
         $userData = $this->getUser($args);
@@ -206,8 +216,9 @@ class adminusersModel
     }
 
     /**
-     * Summary userFormCheck - Check the data that was passed by the form
-     * @param $args
+     * @method  userFormCheck
+     * Check the data that was passed by the form
+     * @param array $args
      * @throws \ReflectionException
      */
     private function userFormCheck($args)

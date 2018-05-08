@@ -27,7 +27,7 @@ class adminuserController extends baseController
 {
 
     /**
-     * Summary adminCreateUserView - Display the User Create Form
+     * @method adminCreateUserView - Display the User Create Form
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -56,7 +56,7 @@ class adminuserController extends baseController
     }
 
     /**
-     * Summary adminCreateUserAction - Add new helper to the DB
+     * @method adminCreateUserAction - Add new helper to the DB
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -92,6 +92,12 @@ class adminuserController extends baseController
         ]);
     }
 
+    /**
+     * @method adminViewUser
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
     public function adminViewUser(ServerRequestInterface $request, ResponseInterface $response)
     {
         $users = new adminusersModel();
@@ -114,7 +120,7 @@ class adminuserController extends baseController
     }
 
     /**
-     * Summary adminUpdateUserView - Update helper form display
+     * @method adminUpdateUserView - Update helper form display
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -155,6 +161,13 @@ class adminuserController extends baseController
         ]);
     }
 
+    /**
+     * @method adminUpdateUserAction
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
     public function adminUpdateUserAction(ServerRequestInterface $request, ResponseInterface $response)
     {
         $user = new adminusersModel();
@@ -177,7 +190,7 @@ class adminuserController extends baseController
     }
 
     /**
-     * Summary adminDeleteUsersAction - Remove User from the DB
+     * @method adminDeleteUsersAction - Remove User from the DB
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -186,8 +199,6 @@ class adminuserController extends baseController
     {
         $route = $request->getAttribute('route');
         $args= $route->getArguments();
-
-        //$id = $args['id'];
 
         $uri = $request->getURI()->withPath($this->getCIElement('router')->pathFor('viewusers'));
 

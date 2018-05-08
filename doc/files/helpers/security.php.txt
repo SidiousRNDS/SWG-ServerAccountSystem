@@ -23,16 +23,25 @@ use swgAS\config\settings;
 use swgAS\swgAdmin\models\adminroleModel;
 use swgAS\swgAdmin\models\adminusersModel;
 use swgAS\helpers\userperms;
-use swgAS\helpers\sessions;
 
+/**
+ * Class security
+ * @package swgAS\helpers
+ */
 class security
 {
-    private $failedLoginCollection = "failedlogin";
-    private $lockRanges = [10,15,30]; // These are number of minutes to lock the account
-    
     /**
-     * Summary loginAttempts - Track the number of login attempts by a helper
-     * @param $args
+     * @var string
+     */
+    private $failedLoginCollection = "failedlogin";
+    /**
+     * @var array
+     */
+    private $lockRanges = [10,15,30]; // These are number of minutes to lock the account
+
+    /**
+     * @method loginAttempts
+     * @param array $args
      */
     public function loginAttempts($args)
     {
@@ -55,10 +64,10 @@ class security
             $session->setLoginAttempts(1);
         }
     }
-    
+
     /**
-     * Summary lockAccount - Lock the IP for a set range of time
-     * @param $args
+     * @method lockAccount
+     * @param array $args
      */
     private function lockAccount($args)
     {
@@ -113,8 +122,8 @@ class security
     }
 
     /**
-     * Summary - Check if there are any locks currently in place for this ip
-     * @param $args
+     * @method checkLocks
+     * @param array $args
      * @return mixed
      */
     public function checkLocks($args)
@@ -128,8 +137,8 @@ class security
     }
 
     /**
-     * Summary removeLock - Remove the lock if its past the time limit
-     * @param $args
+     * @method removeLock
+     * @param array $args
      * @return bool
      */
     private function removeLock($args)
@@ -162,8 +171,9 @@ class security
     }
 
     /**
-     * Summary removeLockTracking - Unset the tracking session and flash messages
-     * @param $args
+     * @method removeLockTracking
+     * Unset the tracking session and flash messages
+     * @param array $args
      */
     private function removeAllLockTracking($args)
     {
@@ -173,7 +183,7 @@ class security
     }
 
     /**
-     * Summary removeSessionLockTracking - Unset the session tracking
+     * @method removeSessionLockTracking
      */
     private function removeSessionLockTracking()
     {
@@ -181,8 +191,9 @@ class security
     }
 
     /**
-     * Summary addLockMessage - Add lock message to the Flash Message System
-     * @param $args
+     * @method addLockMessage
+     * Add lock message to the Flash Message System
+     * @param array $args
      * @param $msg
      */
     public function addLockMessage($args, $msg)
@@ -192,8 +203,9 @@ class security
     }
 
     /**
-     * Summary loggedInUserRole - Get the perms for the helper that is logged in
-     * @param $args
+     * @method loggedInUserRole
+     * Get the perms for the helper that is logged in
+     * @param array $args
      * @return mixed
      */
     public function loggedInUserRole($args)
@@ -230,9 +242,6 @@ class security
         } catch (ConnectionException $ex) {
             $args['flash']->addMessageNow("error", $ex->getMessage());
         }
-
-
-
     }
 }
 

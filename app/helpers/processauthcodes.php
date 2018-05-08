@@ -15,18 +15,22 @@ namespace swgAS\helpers;
 // Use swgAS
 use swgAS\config\settings;
 use swgAS\helpers\messaging\errormsg;
-use swgAS\helpers\validation;
-use swgAS\helpers\utilities;
 
+/**
+ * Class processauthcodes
+ * @package swgAS\helpers
+ */
 class processauthcodes
 {
+    /**
+     * @var string
+     */
     private $error = "ERROR";
 
     /**
-     * Summary generateAuthCode
-     * build the requested authcode and return the results
-     * @param $args
-     * @return null|string|string[]
+     * @method generateAuthCode
+     * @param array $args
+     * @return bool|null|string|string[]
      * @throws \ReflectionException
      */
     public function genereateAuthCode($args)
@@ -84,8 +88,7 @@ class processauthcodes
 
 
     /**
-     * Summary buildAuthCodeSections
-     * build out the sections for the auth code based on the sectionLength that is passed in
+     * @method buildAuthCodeSections
      * @param int $sectionLength
      * @return null|string
      */

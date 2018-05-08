@@ -25,12 +25,13 @@ use swgAS\config\settings;
 use swgAS\helpers\utilities as Utils;
 
 /**
- * Summary of tokenModel
+ * Class tokenModel
+ * @package swgAS\swgAPI\models
  */
 class tokenModel extends Model
 {
     /**
-	 * Summary of genToken
+	 * @method genToken
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @param array $args
@@ -65,5 +66,3 @@ class tokenModel extends Model
 		return $data;
 	}
 }
-
-?>

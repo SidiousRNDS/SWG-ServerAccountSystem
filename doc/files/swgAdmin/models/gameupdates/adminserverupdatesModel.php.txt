@@ -27,14 +27,22 @@
     use swgAS\helpers\movefiles;
     use swgAS\helpers\processgameconfigs;
     use swgAS\swgAdmin\models\adminmd5Model;
-    
+
+    /**
+     * Class adminserverupdatesModel
+     * @package swgAS\swgAdmin\models\gameupdates
+     */
     class adminserverupdatesModel
     {
+        /**
+         * @var string 
+         */
         private $serverUpdateCollection = "server_updates";
         
         /**
-         * Summary addServerPatch - Add the record to the mongoDB and setup the TRE file to the correct location on the server
-         * @param $args
+         * @method addServerPatch
+         * Add the record to the mongoDB and setup the TRE file to the correct location on the server
+         * @param array $args
          * @throws \ReflectionException
          */
         public function addServerPatch($args)
@@ -179,8 +187,8 @@
         }
 
         /**
-         * Summary updateServerPatch
-         * @param $args
+         * @method updateServerPatch
+         * @param array $args
          * @throws \ReflectionException
          */
         public function updateServerPatch($args)
@@ -206,8 +214,8 @@
         }
 
         /**
-         * Summary deleteServerPatch
-         * @param $args
+         * @method deleteServerPatch
+         * @param array $args
          * @throws \ReflectionException
          */
         public function deleteServerPatch($args)
@@ -235,8 +243,8 @@
         }
 
         /**
-         * Summary getServerPatches - List all the server patches that have been put in the system
-         * @param $args
+         * @method getServerPatches - List all the server patches that have been put in the system
+         * @param array $args
          * @return string
          */
         public function getServerPatches($args)
@@ -255,8 +263,8 @@
         }
 
         /**
-         * Summary getServerPatchesByServer
-         * @param $args
+         * @method getServerPatchesByServer
+         * @param array $args
          * @return mixed
          */
         public function getServerPatchesByServer($args)
@@ -275,8 +283,8 @@
         }
 
         /**
-         * Summary getServerPatchById
-         * @param $args
+         * @method getServerPatchById
+         * @param array $args
          * @return mixed
          */
         public function getServerPatchById($args)

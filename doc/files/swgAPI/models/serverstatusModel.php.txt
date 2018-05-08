@@ -19,13 +19,21 @@ use \MongoDB\Driver\Query as MongoQuery;
 // Use swgAS
 use \swgAS\config\settings;
 
+/**
+ * Class serverstatusModel
+ * @package swgAS\swgAPI\models
+ */
 class serverstatusModel extends Model
 {
+    /**
+     * @var string 
+     */
     private $serverStatusCollection = "server_status";
 
     /**
-     * Summary getLastSevenDays - Get the last 7 days of status gameupdates from the db
-     * @param $args
+     * @method  getLastSevenDays
+     * Get the last 7 days of status gameupdates from the db
+     * @param array $args
      * @return array
      */
     public function getLastSevenDaysLive($args)
@@ -70,8 +78,9 @@ class serverstatusModel extends Model
     }
 
     /**
-     * Summary getLast24HoursLive - Get the last 24 hours stats
-     * @param $args
+     * @method  getLast24HoursLive
+     * Get the last 24 hours stats
+     * @param array $args
      * @return array
      */
     public function getlast24HoursLive($args)
@@ -110,7 +119,8 @@ class serverstatusModel extends Model
     }
 
     /**
-     * @param $args
+     * @method getUniqueAccounts
+     * @param array $args
      * @return array
      */
     public function getUniqueAccounts($args)
@@ -122,8 +132,6 @@ class serverstatusModel extends Model
         $to = date('Y-m-d 23:59:59', $endMonthDay);
 
         $logins = [];
-        //$from = '2017-10-01 00:00:00';
-        //$to = '2017-10-31 23:59:59';
 
         $res = $args['db']::table('account_ips')
             ->distinct()

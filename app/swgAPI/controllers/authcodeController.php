@@ -23,10 +23,15 @@ use swgAS\controllers\baseController;
 use swgAS\swgAPI\models\authcodeModel;
 use swgAS\config\settings;
 
+/**
+ * Class authcodeController
+ * @package swgAS\swgAPI\controllers
+ */
 class authcodeController extends baseController
 {
     
     /**
+     * @method adminGenerateAuthcode
      * @param ServerRequestInterface $request
      * @param ResponseInterface      $response
      * @return mixed
@@ -48,5 +53,3 @@ class authcodeController extends baseController
             return $response->withRedirect($uri);
 	}
 }
-
-?>

@@ -21,13 +21,21 @@ use \MongoDB\BSON\ObjectId as MongoID;
 // Use swgAS
 use swgAS\config\settings;
 
+/**
+ * Class statusModel
+ * @package swgAS\swgStatus\models
+ */
 class statusModel
 {
+    /**
+     * @var string 
+     */
     private static $serverStatusCollection = "server_status";
 
     /**
-     * Summary getServerStatus - Get the status of the game servers listed in settings
-     * @param $args
+     * @method  getServerStatus
+     * Get the status of the game servers listed in settings
+     * @param array $args
      */
     public static function getServerStatus($args)
     {
@@ -70,8 +78,9 @@ class statusModel
 
 
     /**
-     * Summary pollServer - Poll the server and get the XML data back from the server
-     * @param $args
+     * @method  pollServer
+     * Poll the server and get the XML data back from the server
+     * @param array $args
      * @return \SimpleXMLElement|void
      */
     private static function pollServer($args)
@@ -101,7 +110,8 @@ class statusModel
     }
 
     /**
-     * Summary statusDataFormat - Format all the returned XML into a nice neat object
+     * @method  statusDataFormat
+     * Format all the returned XML into a nice neat object
      * @param $streamXML
      * @return object
      */
@@ -133,7 +143,7 @@ class statusModel
     }
 
     /**
-     * Summary statusUptimeFormat - Format the xml data for uptime into a human readable format
+     * @method  statusUptimeFormat - Format the xml data for uptime into a human readable format
      * @param $streamXMLUptime
      * @return object
      */

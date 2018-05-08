@@ -23,13 +23,23 @@ use swgAS\helpers\messaging\statusmsg;
 use swgAS\helpers\security;
 use swgAS\helpers\utilities;
 
+/**
+ * Class adminauthmiddleware
+ * @package swgAS\swgAdmin\middelware
+ */
 class adminauthmiddleware
 {
+    /**
+     * @var string
+     */
     private $adminSession = "swgASA";
+    /**
+     * @var
+     */
     public $args;
 
     /**
-     * Summary __construct
+     * @method __construct
      * adminauthmiddleware constructor.
      * @param $args
      */
@@ -40,7 +50,7 @@ class adminauthmiddleware
     }
 
     /**
-     * Summary __invoke
+     * @method __invoke
      * @param Request $request
      * @param Response $response
      * @param $next

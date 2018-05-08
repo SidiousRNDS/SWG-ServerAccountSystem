@@ -22,11 +22,15 @@ use swgAS\controllers\baseController;
 use swgAS\helpers\utilities;
 use swgAS\swgAPI\models\accountModel;
 
+/**
+ * Class accountController
+ * @package swgAS\swgAPI\controllers
+ */
 class accountController extends baseController
 {
 
     /**
-	 * Summary of getAccount
+	 * @method getAccount
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -45,7 +49,7 @@ class accountController extends baseController
 	}
 
     /**
-	 * Summary of checkAccount
+	 * @method  checkAccount
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -67,7 +71,7 @@ class accountController extends baseController
 	}
 
     /**
-	 * Summary addAccount
+	 * @method  addAccount
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed
@@ -92,6 +96,4 @@ class accountController extends baseController
 		return $response->withJson($newaccount,201);
 	}
 }
-
-?>
 

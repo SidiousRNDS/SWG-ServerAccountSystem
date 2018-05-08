@@ -20,11 +20,16 @@
     // Use swgAS
     use swgAS\config\settings;
 
+    /**
+     * Class admingameupdatesutilsModel
+     * @package swgAS\swgAdmin\models\gameupdates
+     */
     class admingameupdatesutilsModel
     {
         /**
-         * Summary getPatchByName - Get a patch by its name and return the results
-         * @param $args  - mongodb, flash, collections (name of the mongodb collection we need to look in)
+         * @method getPatchByName
+         * Get a patch by its name and return the results
+         * @param array $args  - mongodb, flash, collections (name of the mongodb collection we need to look in)
          * @return mixed
          */
         public function getPatchByName($args)
@@ -43,8 +48,9 @@
         }
     
         /**
-         * Summary getPatchById - Get a patch by its ID and return the results
-         * @param $args  - mongodb, flash, collections (name of the mongodb collection we need to look in)
+         * @method getPatchById
+         * Get a patch by its ID and return the results
+         * @param array $args  - mongodb, flash, collections (name of the mongodb collection we need to look in)
          * @return mixed
          */
         public function getPatchById($args)

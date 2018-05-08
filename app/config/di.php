@@ -15,10 +15,14 @@ use \Monolog\Logger;
 // swgAS Use
 use swgAS\config\settings;
 
-
+/**
+ * contaners for SLIM 3
+ */
 $ci = new Container();
 
-// DB
+/**
+ * Database Connection using Capsule
+ */
 $capsule = new \Illuminate\Database\Capsule\Manager;
 $capsule->addConnection([
     "driver"		=> "mysql",
@@ -33,21 +37,38 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+/**
+ * Mysql DB Container
+ * @param $ci
+ * @return \Illuminate\Database\Capsule\Manager
+ */
 $ci['db'] = function($ci) use ($capsule) {
     return $capsule;
 };
 
-// MongoDB
+/**
+ * Mongo DB Container
+ * @param $ci
+ * @return \MongoDB\Driver\Manager
+ */
 $ci['mongodb'] = function($ci) {
     return new \MongoDB\Driver\Manager("mongodb://127.0.0.1");
 };
 
-// User IP
+/**
+ * User IP Container
+ * @param $ci
+ * @return mixed
+ */
 $ci['userIP'] = function($ci) {
     return \swgAS\helpers\utilities::getClientIp();
 };
 
-// Views
+/**
+ * Views Container
+ * @param $ci
+ * @return \Slim\Views\Twig
+ */
 $ci['views'] = function($ci) {
     $views = new \Slim\Views\Twig([
         '../app/views/'.settings::TEMPLATES."/client",
@@ -84,12 +105,20 @@ $ci['views'] = function($ci) {
     return $views;
 };
 
-// Flash messages
+/**
+ * Flash Messages Container
+ * @param $ci
+ * @return \Slim\Flash\Messages
+ */
 $ci['flash'] = function($ci) {
     return new \Slim\Flash\Messages();
 };
 
-// Logs
+/**
+ * API Log Container
+ * @param $ci
+ * @return Logger
+ */
 $ci['swgAPILog'] = function($ci) {
     $apiLogger = new Logger('apiLogger');
     $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::APILOG);
@@ -97,6 +126,11 @@ $ci['swgAPILog'] = function($ci) {
     return $apiLogger;
 };
 
+/**
+ * User Log Container
+ * @param $ci
+ * @return Logger
+ */
 $ci['swgUsersLog'] = function($ci) {
     $userLogger = new Logger('userLogger');
     $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::USERSLOG);
@@ -104,6 +138,11 @@ $ci['swgUsersLog'] = function($ci) {
     return $userLogger;
 };
 
+/**
+ * Error Log Container
+ * @param $ci
+ * @return Logger
+ */
 $ci['swgErrorLog'] = function($ci) {
     $errorLogger = new Logger('errorLogger');
     $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::ERRORLOG);
@@ -111,6 +150,11 @@ $ci['swgErrorLog'] = function($ci) {
     return $errorLogger;
 };
 
+/**
+ * Pass Reset Log Container
+ * @param $ci
+ * @return Logger
+ */
 $ci['swgPassResetLog'] = function($ci) {
     $passResetLogger = new Logger('passresetLogger');
     $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::PASS_RESET_LOG);
@@ -118,6 +162,11 @@ $ci['swgPassResetLog'] = function($ci) {
     return $passResetLogger;
 };
 
+/**
+ * Multiple Attempts Log Container
+ * @param $ci
+ * @return Logger
+ */
 $ci['swgMultipleAttemptsLog'] = function($ci) {
     $attemptsLogger = new Logger('attemptsLogger');
     $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::MULTIPLE_ATTEMPTS_LOG);
@@ -125,6 +174,11 @@ $ci['swgMultipleAttemptsLog'] = function($ci) {
     return $attemptsLogger;
 };
 
+/**
+ * Admin Log Container
+ * @param $ci
+ * @return Logger
+ */
 $ci['adminLog'] = function($ci) {
     $adminLogger = new Logger('adminLogger');
     $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::ADMINLOG);
@@ -132,6 +186,11 @@ $ci['adminLog'] = function($ci) {
     return $adminLogger;
 };
 
+/**
+ * Lock Log Container
+ * @param $ci
+ * @return Logger
+ */
 $ci['adminLockLog'] = function($ci) {
     $adminLockLogger = new Logger('adminLockLogger');
     $file_handler = new \Monolog\Handler\StreamHandler(settings::LOGPATH.settings::ADMINLOCKLOG);
@@ -139,13 +198,21 @@ $ci['adminLockLog'] = function($ci) {
     return $adminLockLogger;
 };
 
-// JWT
+/**
+ * JwToken Container
+ * @param $ci
+ * @return stdClass
+ */
 $ci["JwToken"] = function($ci) {
     return new stdClass;
 };
 
 
-// Cors
+/**
+ * Cors Middleware Container
+ * @param $ci
+ * @return CorsMiddleware
+ */
 $ci["CorsMiddleware"] = function ($ci) {
     return new CorsMiddleware([
         "origin" => ["*"],

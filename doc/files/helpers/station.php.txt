@@ -19,10 +19,13 @@ namespace swgAS\helpers;
 use swgAS\config\settings;
 use swgAS\swgAPI\models\accountModel;
 
+/**
+ * Class station
+ * @package swgAS\helpers
+ */
 class station
 {
 	/**
-	 * Summary of getStationId
 	 * @method getStationId()
 	 * @param array $args
 	 * @return mixed
@@ -38,7 +41,6 @@ class station
 	}
 
 	/**
-	 * Summary of generateStationId
 	 * @method generateStationId()
 	 * @return integer
 	 */
@@ -58,6 +60,4 @@ class station
 		}
 	}
 }
-
-?>
 

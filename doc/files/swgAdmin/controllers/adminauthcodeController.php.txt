@@ -1,0 +1,254 @@
+<?php
+/*****************************************************************
+ * RNDS SWG Server System
+ * @author: Sidious <sidious@rnds.io>
+ * @since: 07 May 2018
+ * @link: https://github.com/SidiousRNDS/SWGRO-AccountSystem
+ * @version: 1.0.0
+ ******************************************************************
+ * NAMESPACE: swgAS\swgAdmin\controllers
+ * CLASS: adminauthcodeController
+ ******************************************************************/
+
+namespace swgAS\swgAdmin\controllers;
+
+// Use
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
+
+// Use swgAS
+use swgAS\controllers\baseController;
+use swgAS\config\settings;
+use swgAS\swgAdmin\models\adminauthcodeModel;
+
+/**
+ * Class adminauthcodeController
+ * @package swgAS\swgAdmin\controllers
+ */
+class adminauthcodeController extends baseController
+{
+
+
+    /**
+     * @method adminCreateAuthCode
+     * Display the create a new authcode form
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function adminCreateAuthCodeView(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $authcode = new adminauthcodeModel();
+
+        $authcodeList = $authcode->getAllNotUsedAuthCodes([
+                'mongodb'=>$this->getCIElement('mongodb'),
+                'flash'=>$this->getCIElement('flash')
+        ]);
+
+        return $this->getCIElement('views')->render($response, 'admincreateauthcodes.twig', [
+            'flash'=>$this->getCIElement('flash'),
+            'title' => 'Authentication Code',
+            'route' => $request->getUri()->getPath(),
+            'baseURL' => settings::BASE_URL,
+            'tokenURL' => settings::TOKEN_URL,
+            'statusURL' => settings::STATUS_URL,
+            'numberOfAccounts' => settings::NUMBER_OF_ACCOUNTS_ALLOWED,
+            'authlist' => json_decode($authcodeList),
+            'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
+            'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
+        ]);
+    }
+
+    /**
+     * @method adminCreateAuthCodeAction
+     * Create a new authentication code
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function adminCreateAuthCodeAction(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $authcode = new adminauthcodeModel();
+
+        $authcode->createAuthCode([
+            'db' => $this->getCIElement('db'),
+            'mongodb'=>$this->getCIElement('mongodb'),
+            'flash'=>$this->getCIElement('flash'),
+            'request'=>$request->getParsedBody()
+        ]);
+
+        $authcodeList = $authcode->getAllNotUsedAuthCodes([
+            'mongodb'=>$this->getCIElement('mongodb'),
+            'flash'=>$this->getCIElement('flash')
+        ]);
+
+        return $this->getCIElement('views')->render($response, 'admincreateauthcodes.twig', [
+            'flash'=>$this->getCIElement('flash'),
+            'title' => 'Authentication Code',
+            'route' => $request->getUri()->getPath(),
+            'baseURL' => settings::BASE_URL,
+            'tokenURL' => settings::TOKEN_URL,
+            'statusURL' => settings::STATUS_URL,
+            'numberOfAccounts' => settings::NUMBER_OF_ACCOUNTS_ALLOWED,
+            'authlist' => json_decode($authcodeList),
+            'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
+            'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
+        ]);
+
+    }
+
+    /**
+     * @method adminNotUsedAuthCodesView
+     * Display all not used authcodes
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
+    public function adminNotUsedAuthCodesView(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $authcode = new adminauthcodeModel();
+        $authcodeList = $authcode->getAllNotUsedAuthCodes([
+            'mongodb'=>$this->getCIElement('mongodb'),
+            'flash'=>$this->getCIElement('flash'),
+        ]);
+
+        return $this->getCIElement('views')->render($response, 'adminviewnotusedauthcodes.twig', [
+            'flash'=>$this->getCIElement('flash'),
+            'title' => 'Not Used Authentication Code',
+            'route' => $request->getUri()->getPath(),
+            'baseURL' => settings::BASE_URL,
+            'tokenURL' => settings::TOKEN_URL,
+            'statusURL' => settings::STATUS_URL,
+            'numberOfAccounts' => settings::NUMBER_OF_ACCOUNTS_ALLOWED,
+            'authlist' => json_decode($authcodeList),
+            'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
+            'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
+        ]);
+    }
+
+    /**
+     * @method adminUsedAuthCodesView
+     * Display all used authentication codes
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
+    public function adminUsedAuthCodesView(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $authcode = new adminauthcodeModel();
+        $authcodeList = $authcode->getAllUsedAuthCodes([
+            'mongodb'=>$this->getCIElement('mongodb'),
+            'flash'=>$this->getCIElement('flash'),
+        ]);
+
+        return $this->getCIElement('views')->render($response, 'adminviewusedauthcodes.twig', [
+            'flash'=>$this->getCIElement('flash'),
+            'title' => 'Used Authentication Code',
+            'route' => $request->getUri()->getPath(),
+            'baseURL' => settings::BASE_URL,
+            'tokenURL' => settings::TOKEN_URL,
+            'statusURL' => settings::STATUS_URL,
+            'numberOfAccounts' => settings::NUMBER_OF_ACCOUNTS_ALLOWED,
+            'authlist' => json_decode($authcodeList),
+            'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
+            'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
+        ]);
+    }
+
+    /**
+     * @method adminUpdateAuthCodeView
+     * Display the update authcode view
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     */
+    public function adminUpdateAuthCodeView(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $route = $request->getAttribute('route');
+        $args = $route->getArguments();
+
+        $authcode = new adminauthcodeModel();
+        $authcodeList = $authcode->getAuthCodeById([
+            'mongodb'=>$this->getCIElement('mongodb'),
+            'flash'=>$this->getCIElement('flash'),
+            'id' => $args['id']
+        ]);
+
+        return $this->getCIElement('views')->render($response, 'adminupdateauthcodes.twig', [
+            'flash'=>$this->getCIElement('flash'),
+            'title' => 'Used Authentication Code',
+            'route' => $request->getUri()->getPath(),
+            'baseURL' => settings::BASE_URL,
+            'tokenURL' => settings::TOKEN_URL,
+            'statusURL' => settings::STATUS_URL,
+            'numberOfAccounts' => settings::NUMBER_OF_ACCOUNTS_ALLOWED,
+            'authlist' => $authcodeList,
+            'primary_prefix' => settings::PRIMARY_CODE_PREFIX,
+            'extended_prefix' => settings::EXTENDED_CODE_PREFIX,
+            'userRole' => unserialize($_SESSION['role']),
+            'userPerms' => unserialize($_SESSION['perms']),
+            'useAuth' => settings::USE_AUTHCODES
+        ]);
+    }
+
+    /**
+     * @method adminUpdateAuthCodeAction
+     * Update auth code
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function adminUpdateAuthCodeAction(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $authcode = new adminauthcodeModel();
+        $authcode->updateAuthCode([
+            'mongodb' => $this->getCIElement('mongodb'),
+            'flash'=>$this->getCIElement('flash'),
+            'request'=>$request->getParsedBody()
+        ]);
+
+        $uri = $request->getURI()->withPath($this->getCIElement('router')->pathFor('viewnotused'));
+
+        return $response->withRedirect($uri);
+    }
+
+    /**
+     * @method adminDeleteAuthCodeAction
+     * Delete authcode
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    public function adminDeleteAuthCodeAction(ServerRequestInterface $request, ResponseInterface $response)
+    {
+        $route = $request->getAttribute('route');
+        $args= $route->getArguments();
+
+        $authcode = new adminauthcodeModel();
+        $authcode->deleteAuthCode([
+            'mongodb' => $this->getCIElement('mongodb'),
+            'flash'=>$this->getCIElement('flash'),
+            'id'=>$args['id']
+        ]);
+
+        $uri = $request->getURI()->withPath($this->getCIElement('router')->pathFor('viewnotused'));
+
+        return $response->withRedirect($uri);
+    }
+}

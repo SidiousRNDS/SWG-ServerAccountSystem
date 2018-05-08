@@ -25,14 +25,21 @@ use swgAS\helpers\utilities;
 use swgAS\helpers\messaging\errormsg;
 use swgAS\helpers\messaging\statusmsg;
 
+/**
+ * Class adminroleModel
+ * @package swgAS\swgAdmin\models
+ */
 class adminroleModel
 {
+    /**
+     * @var string 
+     */
     private $roleCollection = "user_roles";
 
 
     /**
-     * Summary getRoleByName
-     * @param $args
+     * @method  getRoleByName
+     * @params array $args
      * @return string
      */
     public function getRoleByName($args)
@@ -52,8 +59,9 @@ class adminroleModel
     }
 
     /**
-     * Summary getRoles - Get all the roles in the user_roles collection
-     * @param $args
+     * @method  getRoles
+     * Get all the roles in the user_roles collection
+     * @params array $args
      * @return \MongoCursor
      * @throws \Exception
      */
@@ -75,8 +83,8 @@ class adminroleModel
 
 
     /**
-     * Summary checkSections - check to see if there were have been new sections added to the system and if so
-     * then make sure we add them to the permissions object so that we can set them
+     * @method  checkSections
+     * check to see if there were have been new sections added to the system and if so then make sure we add them to the permissions object so that we can set them
      * @param $roles
      * @return mixed
      */
@@ -112,8 +120,9 @@ class adminroleModel
     }
 
     /**
-     * Summary getRoles - Get all the roles in the user_roles collection
-     * @param $args
+     * @method  getRoles
+     * Get all the roles in the user_roles collection
+     * @params array $args
      * @return \MongoCursor
      * @throws \Exception
      */
@@ -134,8 +143,9 @@ class adminroleModel
     }
 
     /**
-     * Summary addRole - Add new role to the user_roles collection
-     * @param $args
+     * @method  addRole
+     * Add new role to the user_roles collection
+     * @params array $args
      * @throws \ReflectionException
      */
     public function addRole($args)
@@ -175,8 +185,9 @@ class adminroleModel
     }
 
     /**
-     * Summary updateRole - Update selected role
-     * @param $args
+     * @method  updateRole
+     * Update selected role
+     * @params array $args
      * @throws \ReflectionException
      */
     public function updateRole($args)
@@ -190,7 +201,7 @@ class adminroleModel
                 ['multi' => false, 'upsert' => false]
             );
 
-            $res = $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->roleCollection, $updateRole);
+            $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->roleCollection, $updateRole);
 
             $statusMsg = statusmsg::getStatusMsg("roleupdated", (new \ReflectionClass(self::class))->getShortName());
             $statusMsg = utilities::replaceStatusMsg($statusMsg, "::ROLENAME::", $args['request']['rolename']);
@@ -202,8 +213,9 @@ class adminroleModel
     }
 
     /**
-     * Summary deleteRole - Remove selected role from the DB
-     * @param $args
+     * @method  deleteRole
+     * Remove selected role from the DB
+     * @params array $args
      * @throws \ReflectionException
      */
     public function deleteRole($args)
@@ -229,8 +241,8 @@ class adminroleModel
     }
 
     /**
-     * Summary processPermissions - Add all the passed permissions to an array and return it
-     * @param $args
+     * @method  processPermissions - Add all the passed permissions to an array and return it
+     * @params array $args
      * @return array
      */
     private function processesPermissions($args)

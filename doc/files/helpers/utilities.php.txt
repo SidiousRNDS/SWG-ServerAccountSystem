@@ -13,10 +13,14 @@
 
 namespace swgAS\helpers;
 
+/**
+ * Class utilities
+ * @package swgAS\helpers
+ */
 class utilities
 {
 	/**
-	 * Summary of getClientIp
+	 * @method getClientIp
 	 * @return mixed
 	 */
 	public static function getClientIp() {
@@ -53,7 +57,7 @@ class utilities
 	}
 
 	/**
-	 * Summary of replaceStatusMsg
+	 * @method replaceStatusMsg
 	 * @param string $msg
 	 * @param string $lookFor
 	 * @param string $replaceWith
@@ -65,6 +69,7 @@ class utilities
 	}
 
     /**
+	 * @method obscureData
      * @param string $data
      * @return string
      */
@@ -74,6 +79,7 @@ class utilities
     }
 
     /**
+	 * @method unobscureData
 	* @param string $data
 	* @return string
 	*/
@@ -83,9 +89,10 @@ class utilities
     }
 
     /**
-	 * Summary in_array_r  check to see if the item is in the multi dimensional array
-     * @param $item
-     * @param $array
+	 * @method in_array_r
+	 * check to see if the item is in the multi dimensional array
+     * @param string $item
+     * @param array $array
      * @return false|int
      */
     public function in_array_r($item , $array){
@@ -94,7 +101,8 @@ class utilities
 
 
     /**
-	 * Summary sanitizeFormData - Sanitize the form data before it gets passed to a DB
+	 * @method sanitizeFormData
+	 * Sanitize the form data before it gets passed to a DB
      * @param $data
      * @param $filter
      * @return mixed
@@ -106,8 +114,9 @@ class utilities
 	}
     
     /**
-	 * Summary md5CehckSum - Create a md5 Checksum where needed
-     * @param $filePath
+	 * @method md5CehckSum
+	 * Create a md5 Checksum where needed
+     * @param string $filePath
      * @return string
      */
 	public static function md5CheckSum($filePath)

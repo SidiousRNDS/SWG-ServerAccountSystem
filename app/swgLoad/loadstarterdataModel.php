@@ -14,9 +14,17 @@ namespace swgAS\swgLoad;
 
 use swgAS\swgAdmin\models\adminmd5Model;
 
-
+/**
+ * Class loadstarterdataModel
+ * @package swgAS\swgLoad
+ */
 class loadstarterdataModel
 {
+    /**
+     * @method initloadTreMD5
+     * @param array $args
+     * @return array
+     */
     public static function initloadTreMD5($args)
     {
         $md5Model = new adminmd5Model();

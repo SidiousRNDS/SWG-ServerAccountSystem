@@ -22,12 +22,15 @@ use swgAS\swgAPI\models\authcodeModel;
 use swgAS\config\settings;
 use swgAS\helpers\security;
 
-
+/**
+ * Class admindashboardController
+ * @package swgAS\swgAdmin\controllers
+ */
 class admindashboardController extends baseController
 {
 
     /**
-     * Summary adminDashboardIndex - Default location
+     * @method adminDashboardIndex
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
      * @return mixed

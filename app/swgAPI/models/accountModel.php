@@ -26,42 +26,43 @@ use swgAS\helpers\station;
 use swgAS\helpers\utilities;
 
 /**
- * Summary of accountModel
+ * Class accountModel
+ * @package swgAS\swgAPI\models
  */
 class accountModel extends Model
 {
 	/**
-	 * Summary of $accountsTable
+	 * @method  of $accountsTable
 	 * @var string
 	 */
 	protected static $accountsTable = "accounts";
 
 	/**
-	 * Summary of $usernameMaxLength
+	 * @method  of $usernameMaxLength
 	 * @var int
 	 */
 	public static $usernameMaxLength = 32;
 
 	/**
-	 * Summary of $usernameMinLength
+	 * @method  of $usernameMinLength
 	 * @var int
 	 */
 	public static $usernameMinLength = 4;
 
 	/**
-	 * Summary of $usernameRegEx
+	 * @method  of $usernameRegEx
 	 * @var mixed
 	 */
 	public static $usernameRegEx = "/^[a-zA-Z0-9@.\-]*$/";
 
 	/**
-	 * Summary of $passwordMaxLength
+	 * @method  of $passwordMaxLength
 	 * @var int
 	 */
 	public static $passwordMaxLength = 32;
 
 	/**
-	 * Summary of $passwordMinLength
+	 * @method  of $passwordMinLength
 	 * @var int
 	 */
 	public static $passwordMinLength = 5;
@@ -71,7 +72,7 @@ class accountModel extends Model
 	 */
 
 	/**
-	 * Summary of getTableName
+	 * @method  of getTableName
 	 * @return string
 	 */
 	public static function getTableName()
@@ -80,7 +81,7 @@ class accountModel extends Model
 	}
 
     /**
-	 * Summary - checkUsername check to see if a username already exists in the system
+	 * @method  - checkUsername check to see if a username already exists in the system
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -102,12 +103,13 @@ class accountModel extends Model
             return $results;
 
         } catch (Error $ex) {
-            $args['errorLogger']->error('accountModel::getAccount',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
+            //$args['errorLogger']->error('accountModel::getAccount',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
 			throw new \Error (errormsg::getErrorMsg("getaccount",(new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
 		}
 	}
 
     /**
+     * @method getAccount
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -131,7 +133,7 @@ class accountModel extends Model
 			return $results;
 
 		} catch (Error $ex) {
-			$args['errorLogger']->error('accountModel::getAccount',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
+			//$args['errorLogger']->error('accountModel::getAccount',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
 			throw new \Error (errormsg::getErrorMsg("getaccount",(new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
 		}
 	}
@@ -158,12 +160,13 @@ class accountModel extends Model
 
 		}
 		catch (Error $ex) {
-			$args['errorLogger']->error('accountModel::getAccounts',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
+			//$args['errorLogger']->error('accountModel::getAccounts',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
 			throw new \Error (errormsg::getErrorMsg("getaccounts", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
 		}
 	}
 
     /**
+     * @method addAccount
      * @param array $args
      * @return array|bool|mixed|null|string
      * @throws \ReflectionException
@@ -229,7 +232,6 @@ class accountModel extends Model
 				if($addResults !== false)
 				{
 					// Log helper was created
-					//$args['apiLogger']->info('APITOKEN Given',array("clientIP"=>$client_ip,"Token"=>$token, "Expires"=>$future->getTimestamp()));
 					$args['userLogger']->info('USER: ' . $args['username'] .' has been created');
 
 					// Update the Authcode to used
@@ -258,16 +260,8 @@ class accountModel extends Model
 		return $validate;
 	}
 
-	public function updateAccount()
-	{
-
-	}
-
-	/**
-	 *  Private Methods
-	 */
-
     /**
+     * @method processNewAccountData
      * @param array $args
      * @return array|string
      * @throws \ReflectionException
@@ -308,6 +302,7 @@ class accountModel extends Model
 	}
 
     /**
+     * @method getAccountEmail
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -328,12 +323,13 @@ class accountModel extends Model
 			return $results;
 
 		} catch (Error $ex) {
-			$args['errorLogger']->error('accountModel::getAccountEmail',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
+			//$args['errorLogger']->error('accountModel::getAccountEmail',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
 			throw new \Error (errormsg::getErrorMsg("getaccountemail", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
 		}
 	}
 
     /**
+     * @method getAccountUsername
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -355,12 +351,13 @@ class accountModel extends Model
 
 		}
 		catch (Error $ex) {
-			$args['errorLogger']->error('accountModel::getAccountUsername',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
+			//$args['errorLogger']->error('accountModel::getAccountUsername',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
 			throw new \Error (errormsg::getErrorMsg("getaccountusername", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
 		}
 	}
 
     /**
+     * @method getAccountIp
      * @param array $args
      * @return string
      * @throws \ReflectionException
@@ -382,10 +379,8 @@ class accountModel extends Model
 
 		}
 		catch (Error $ex) {
-			$args['errorLogger']->error('accountModel::getAccountIp',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
+			//$args['errorLogger']->error('accountModel::getAccountIp',array("error"=>new \ReflectionClass(self::class))->getShortName() . " " . $ex->getMessage());
 			throw new \Error (errormsg::getErrorMsg("getaccountip", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
 		}
 	}
 }
-
-?>
