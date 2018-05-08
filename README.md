@@ -61,19 +61,25 @@ $ sudo chmod 755 storage/logs
 
 Install MongoDb
 ``` bash
-$sudo apt-get install mongodb
-$sudo apt-get install php-pear
-$sudo pecl install mongodb
+$ sudo apt-get install mongodb
+$ sudo apt-get install php-pear
+$ sudo pecl install mongodb
 ```
 
 If you are running apache
 ``` bash
-$sudo vi /etc/php/7.1/apache2/php.ini
+$ sudo vi /etc/php/7.1/apache2/php.ini
 ```
 Add extension=mongodb.so in the extension section of the ini file and restart apache.
 
 ``` bash
-$sudo serivce apache2 restart
+$ sudo serivce apache2 restart
+```
+
+To load the intial user and role and MD5 TRE data run the following script
+``` bash
+$ cd setup
+$ php setup.php
 ```
 ### app/configs/settings_dist.php
 After you have got everything setup on your server you are going to want to update this file with all your information.

@@ -21,12 +21,4 @@
     $args = [];
     $args['md5Data'] = $md5Data;
     $args['mongodb'] = $ci['mongodb'];
-
-    // Load Up intial MD5 Data
-    echo"Loading MD5 Entries\n";
-    echo"**********************************************************\n";
-    $loaded = loadstarterdataModel::initloadTreMD5($args);
-    if($loaded[0] == $loaded[1])
-    {
-        echo $loaded[0] ." out of ". $loaded[1] ." MD5 Entries were loaded.\n";
-    }
+    loadstarterdataModel::initloadMongo($args);

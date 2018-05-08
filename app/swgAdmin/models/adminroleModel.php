@@ -223,7 +223,6 @@ class adminroleModel
         $roleData = json_decode($this->getRole($args));
         $roleName = $roleData->role_name;
 
-
         try {
             $deleteRole = new MongoBulkWrite();
             $deleteRole->delete(['_id' => new MongoID($args['id'])], ['limit' => 1]);
@@ -262,5 +261,27 @@ class adminroleModel
         }
 
         return $permissions;
+    }
+
+    /**
+     * @method loadRoleData
+     * Load initial role data
+     * @param array $args
+     */
+    public function loadRoleData($args)
+    {
+        $permissions = [];
+        $args['rolename'] = "Owner";
+        $sections = settings::ADMIN_SECTIONS;
+
+        foreach($sections as $sectionkey => $section)
+        {
+            $permissions[$section] = ['create'=>'c', 'read'=>'r', 'update'=>'u', 'delete'=>'d'];
+        }
+
+        $role = ['_id' => new MongoID, 'role_name' => $args['rolename'], 'role_permissions' => $permissions];
+        $createRole = new MongoBulkWrite();
+        $createRole->insert($role);
+        $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->roleCollection, $createRole);
     }
 }

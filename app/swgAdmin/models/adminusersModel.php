@@ -81,7 +81,7 @@ class adminusersModel
     // TODO finish this method so we can check to make sure we don't duplicate the user
     public function checkUser($args)
     {
-        $checkUser = ['usernme' => $args['username']];
+        //$checkUser = ['usernme' => $args['username']];
 
     }
 
@@ -253,5 +253,31 @@ class adminusersModel
 
             return;
         }
+    }
+
+    /**
+     * @method loadUserData
+     * Load inital User Data
+     * @param array $args
+     */
+    public function loadUserData($args)
+    {
+        $args['username'] = "admin";
+        $args['email'] = "admin@yourdomain.com";
+        $args['password'] = "123456";
+        $args['role'] = "Owner";
+
+        $pass = new password();
+        $args['salt'] = settings::ADMIN_PASSWORD_SALT;
+
+        $encryptedPassword = $pass->generateEncryptedPassword($args);
+
+        //print_r($args);
+        $user = ['_id' => new MongoID, 'username' => $args['username'], 'password' => $encryptedPassword['passwordHash'], 'email' => $args['email'], 'avatar' => '', 'role'=>$args['role']];
+        $createUser = new MongoBulkWrite();
+        $createUser->insert($user);
+
+
+        $args['mongodb']->executeBulkWrite(settings::MONGO_ADMIN . "." . $this->usersCollection, $createUser);
     }
 }
