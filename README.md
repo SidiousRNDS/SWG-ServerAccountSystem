@@ -25,8 +25,8 @@ Still to come items include:
 
 If you would like to see what the layout looks like for either the client or Admin sections you can use the links below to check them out
 ### Example
-* [SWG Server System - Client](http://swguser.rnds.io)
-* [SWG Server System - Admin](http://swguser.rnds.io/admin)
+* [SWG Server System - Client](http://swgusers.rnds.io)
+* [SWG Server System - Admin](http://swgusers.rnds.io/admin)
 
 In the Admin section there are three different roles you can login as
 * Admin
