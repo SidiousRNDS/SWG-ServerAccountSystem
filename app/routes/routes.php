@@ -15,7 +15,13 @@ use swgAS\swgAdmin\middelware\adminauthmiddleware;
  */
 
 $swgAS->get('/', function ($request, $response, $args) use ($swgAS) {
-    return $this->views->render($response, 'clients.twig',['uIP'=>$this->get('userIP'),'captchakey'=>settings::G_CAPTCHA_KEY,'useAuth'=>settings::USE_AUTHCODES]);
+    return $this->views->render($response, 'clients.twig',[
+        'uIP'=>$this->get('userIP'),
+        'captchakey'=>settings::G_CAPTCHA_KEY,
+        'useAuth'=>settings::USE_AUTHCODES,
+        'baseurl' => settings::BASE_URL,
+        'token' => settings::TOKEN_URL,
+        'acc' => settings::ACCOUNT_URL]);
 })->setName('home');
 
 

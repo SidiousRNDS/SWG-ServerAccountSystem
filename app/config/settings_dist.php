@@ -29,10 +29,14 @@ class settings
      * Server Time Zone
      * @var SERER_TIME_ZONE
      * @example America/New_York
+     * Account API Endpoint
+     * @var ACCOUNT_URL
+     * @example /api/v1/account/addaccount
      */
     const BASE_URL = "SETME";
     const TOKEN_URL = "/api/token";
     const STATUS_URL = "/api/v1/status";
+    const ACCOUNT_URL = "/api/v1/account/addaccount";
 
     const SERVER_TIME_ZONE = "America/New_York";
     /**

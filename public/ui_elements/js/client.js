@@ -7,10 +7,6 @@ var defaultBorderColor = "#CCCCCC";
 var validationParams = {usernameMinLength : 4, usernameMaxLength : 32, passwordMinLength : 5, passwordMaxLength : 20};
 var validation = {username : false, email : false, password : false, password2 : false, authcode : false};
 
-// TODO Have to rewrite this part to use tokens and point to the correct location
-var tokenURL = "http://swgusers.rnds.io/api/token";
-var newaccountURL = "http://swgusers.rnds.io/api/v1/account/addaccount";
-
 if (checkMobile.any()) {
     $('#main').html("<div class='moduleHeader' style='text-align:center;'><p><strong>Required to play here, a pc is</strong></p></div><div class='module'>");
     $('.module').append("<div class='moduleMSG'><p><i class='fas fa-minus-circle moduleError' aria-hidden='true'></i> You can only sign up for a new account with a desktop or laptop seeing you can not play SWG on a mobile device.</p></div>");

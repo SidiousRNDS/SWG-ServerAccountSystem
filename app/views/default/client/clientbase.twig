@@ -43,7 +43,10 @@
         <script src="https://www.google.com/recaptcha/api.js"></script>
         <script src="{{ base_url() }}/ui_elements/js/utils.js"></script>
         <script src="{{ base_url() }}/ui_elements/js/client.js"></script>
-
+        <script>
+            var tokenURL = "{{ baseurl }}{{ token }}";
+            var newaccountURL = "{{ baseurl }}{{ acc }}";
+        </script>
 
     </body>
 </html>
