@@ -191,7 +191,7 @@ namespace swgAS\config;
  	const AUTHCODE_GENERATE = true;
  	const AUTHCODE_GENERATE_USER = "DarthVaderIsTheTrueSithLord";
  	const AUTHCODE_GENERATE_SALT = "$17hRul37h3Galaxy";
-
+ 
  	/**
  	* Jwt Auth
  	* @var bool JWTSECURR
