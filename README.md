@@ -12,7 +12,8 @@ All these settings are editable in the api/swgAPI/config/settings.php file you c
 The only requirements for the front end if you choose not to use the default front end is that you can get and pass a bearer token back to the API with out being able to do that it will always fail. (see default front end for examples).
 
 ### Example
-[SWGRO Account System](http://clientaccess.swgrogueone.com)
+* [SWG Server System - Client](http://swguser.rnds.io)
+* [SWG Server System - Admin](http://swguser.rnds.io/admin)
 
 ### Install
 Clone the repository
