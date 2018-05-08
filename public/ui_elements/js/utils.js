@@ -28,6 +28,14 @@ $(document).ready(function(){
         columnDefs: [
             {responsivePriority: 1, targets: 0},
             {responsivePriority: 2, targets: -1},
+        ]
+    });
+
+    $('#authCodeListNotUsed').DataTable({
+        responsive: true,
+        columnDefs: [
+            {responsivePriority: 1, targets: 0},
+            {responsivePriority: 2, targets: -1},
         ],
         "columns": [
             null,
@@ -35,6 +43,14 @@ $(document).ready(function(){
             null,
             null,
             {"orderable":false}
+        ]
+    });
+
+    $('#authCodeListUsed').DataTable({
+        responsive: true,
+        columnDefs: [
+            {responsivePriority: 1, targets: 0},
+            {responsivePriority: 2, targets: -1},
         ]
     });
 

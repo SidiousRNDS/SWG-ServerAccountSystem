@@ -138,9 +138,6 @@
          */
         public function adminGameUpdateServerPatchUpdateAction(ServerRequestInterface $request, ResponseInterface $response)
         {
-            //$route = $request->getAttribute('route');
-            //$args= $route->getArguments();
-
             $serverPatch = new adminserverupdatesModel();
             $serverPatch->updateServerPatch([
                 'mongodb' => $this->getCIElement('mongodb'),

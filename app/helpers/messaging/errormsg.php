@@ -71,7 +71,9 @@ class errormsg
 		"validateauth" => "Could not access the db for validateAuth",
 		"updateauthcode" => "Could not access the db for updateAuthCode",
 		"getactiveauthcodes" => "Could not access the db for getActiveAuthcodes",
-		"authnotgenerated" => "No authcode created account already exists - Please change the username and/or email to generate an authcode"
+		"authnotgenerated" => "No authcode created account already exists - Please change the username and/or email to generate an authcode",
+		"codechars" => "Code chars were not set in the settings file in config",
+		"issuegeneratingauthcode" => "There was an issue generation the authcode it either did not match the length or there is a bigger issue"
 	];
 
 	/**
@@ -133,6 +135,8 @@ class errormsg
 					$error = self::$accountbanErrorMsg[$code];
 					break;
 				case "authcodeModel":
+				case "processauthcodes":
+				case "adminauthcodeModel":
 					$error = self::$authcodeErrorMsg[$code];
 					break;
 				case "characterbanModel":

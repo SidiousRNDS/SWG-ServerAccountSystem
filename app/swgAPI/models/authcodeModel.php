@@ -65,6 +65,30 @@ class authcodeModel extends \Illuminate\Database\Eloquent\Model
 		}
 	}
 
+	public static function getAuthcodeById($args)
+    {
+        try {
+            $results = $args['db']::table(self::$authTable)
+                ->select('')
+                ->where('username', '=', $args['username'])
+                ->where(function($query) {
+                    $query->where('auth_code_used', '!=', 1);
+                })
+                ->first();
+
+            if ($results === null)
+            {
+                return errormsg::getErrorMsg("authnotfound", (new \ReflectionClass(self::class))->getShortName());
+            }
+
+            return $results;
+
+        }
+        catch (Error $ex) {
+            throw new \Error (errormsg::getErrorMsg("getauthid", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
+        }
+    }
+
     /**
 	 * Summary of getAuthcodeUser
      * @param array $args

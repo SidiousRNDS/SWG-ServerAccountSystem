@@ -2,36 +2,36 @@
 
 namespace swgAS\config;
 
-/*****************************************************************
+/**
  * RNDS SWG Server System
  * @author: Sidious <sidious@rnds.io>
  * @since: 16 March 2018
  * @link https://github.com/SidiousRNDS/SWGRO-AccountSystem
  * @version 1.0.0
- * ****************************************************************
+ *
  * NAMESPACE: config
  * CLASS: settings
- ******************************************************************/
+ */
 
 /**
- * Summary of config
+ * This holds all the constants that can be modified for use in the SWG Server System
  */
  class settings
  {
 
      /**
       * Base site URL
-      * @example http://rnds.io
       * @var BASE_URL
+      * @example http://rnds.io
       * Token API Endpoint
-      * @example /api/token
       * @var TOKEN_URL
+      * @example /api/token
       * Status API Endpoint
-      * @examle /api/v1/status
       * @var STATUS_URL
+      * @examle /api/v1/status
       * Server Time Zone
-      * @example America/New_York
       * @var SERER_TIME_ZONE
+      * @example America/New_York
       */
      const BASE_URL = "http://swgusers.rnds.io";
      const TOKEN_URL = "/api/token";
@@ -43,7 +43,8 @@ namespace swgAS\config;
    * This is the active templates directory you want to use for both admin and client
    * if you want to add your own templates you can just add them to the views directory in the client and admin section
    * and change the templates var below to reflect the new folder location. (the directory must be named the same for both locations)
-  * @var string TEMPLATES
+   * @var string TEMPLATES
+   * @example default
   */
   const TEMPLATES = "default";
 

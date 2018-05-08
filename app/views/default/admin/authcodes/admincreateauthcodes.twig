@@ -3,12 +3,16 @@
 {% block content %}
     <div id="adminmain">
         <div id="newAuthcode">
-            <h2><i class="fas fa-user" aria-hidden="true"></i> Create New User Authentication Code</h2>
+            <h2><i class="fas fa-barcode" aria-hidden="true"></i> Create New User Authentication Code</h2>
             <hr class="hspacer">
 
             {% include 'messaging.twig' %}
 
-            <form id="nAuthcode" name="newAuthcode" method="post" action={{path_for('genauthcode')}}>
+            {% set authId = "" %}
+
+            <form id="nAuthcode" name="updateAuthcode" method="post" action="{{ path_for('createauthaction') }}">
+                <input type="hidden" name="aaid" value="">
+
                 <div class="row">
                     <div class="form-group">
                         <div class="col-xs-6">
@@ -40,7 +44,7 @@
                 <div class="row sgroup">
                     <div class="form-group">
                         <div class="col-xs-6">
-                            <button type="submit" class="btn btn-default" id="accCreate"><i class="fas fa-user-plus" aria-hidden="true"></i> Create Authcode</button>
+                            <button type="submit" class="btn btn-default" id="accCreate"><i class="fas fa-barcode" aria-hidden="true"></i> Create Authcode</button>
                         </div>
                     </div>
                 </div>
@@ -55,17 +59,18 @@
                         <th>Email</th>
                         <th>Active Authentication Code</th>
                         <th>Issue Date</th>
-                        <th style="text-align:center;">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for auth in authlist %}
+                        {% for id in auth._id|cast_to_array %}
+                            {% set authId = id %}
+                        {% endfor %}
                         <tr>
                             <td>{{ auth.username }}</td>
                             <td>{{ auth.email }}</td>
                             <td>{{ auth.auth_code }}</td>
-                            <td>{{ auth.created_at }}</td>
-                            <td style="text-align:center"><a href="{{ path_for('genauthcode')}}/delete/{{ auth.aaid }}" title="Delete authentication code for {{ auth.username }}"><i class="fas fa-times-circle fa-lg"></i></a></td>
+                            <td>{{ auth.issued_date }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

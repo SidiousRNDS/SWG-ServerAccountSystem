@@ -30,7 +30,9 @@ class statusmsg
 
     protected static $authcodeStatus = [
         "authcreated" => "Authcode ::AUTHCODE:: for ::USERNAME:: was created",
-		"accountnotfound" => "Account not found"
+		"accountnotfound" => "Account not found",
+		"authcodeupdated" => "Authcode for ::USERNAME:: has been updated",
+		"authcodedeleted" => "Authcode for ::USERNAME:: has been deleted"
     ];
 
     protected static $roleStatus = [
@@ -71,6 +73,7 @@ class statusmsg
                     $status = self::$security[$code];
                     break;
 				case "authcodeModel":
+                case "adminauthcodeModel":
 					$status = self::$authcodeStatus[$code];
 					break;
                 case "adminroleModel":

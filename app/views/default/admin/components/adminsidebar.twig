@@ -12,11 +12,11 @@
 
                 <ul class="sub-menu collapse {{ 'authcodes' in route ? 'in' }}" id="authcodes" {{ 'authcodes' in route ? 'aria-expanded="true"': null}}>
                     {%  if userPerms.authcodes.create == "c"%}
-                        <li {{ 'createauth' in route ? 'class="active"' }}><a href="{{path_for('createauth')}}">Create Authcode</a></li>
+                        <li {{ 'createauthview' in route ? 'class="active"' }}><a href="{{path_for('createauthview')}}">Create Authcode</a></li>
                     {% endif %}
                     {%  if userPerms.authcodes.read == "r"%}
-                        <li {{ 'viewallused' in route ? 'class="active"' }}><a href="{{path_for('viewallused')}}">View Used Authcodes</a></li>
-                        <li><a href="#">View Not Used Authcodes</a></li>
+                        <li {{ 'viewnotused' in route ? 'class="active"' }}><a href="{{  path_for('viewnotused') }}">View Not Used Authcodes</a></li>
+                        <li {{ 'viewused' in route ? 'class="active"' }}><a href="{{  path_for('viewused') }}">View Used Authcodes</a></li>
                     {% endif %}
                 </ul>
             {% endif %}
