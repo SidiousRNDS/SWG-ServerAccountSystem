@@ -21,4 +21,5 @@
     $args = [];
     $args['md5Data'] = $md5Data;
     $args['mongodb'] = $ci['mongodb'];
-    loadstarterdataModel::initloadMongo($args);
+    $args['db'] = $ci['db'];
+    loadstarterdataModel::initload($args);

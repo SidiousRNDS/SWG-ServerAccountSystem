@@ -261,7 +261,23 @@ class accountModel extends Model
 
 		return $validate;
 	}
-
+    
+    /**
+     * @method alterAccountsTable
+     * @param array $args
+     * @return mixed
+     */
+	public static function alterAccountsTable($args)
+    {
+        $schema = $args['db']::statement('ALTER TABLE ' . self::$accountsTable .
+            ' ADD COLUMN email varchar(255) not null,
+	          ADD COLUMN create_ip varchar(45) not null,
+	          ADD COLUMN admin_auth tinyint(1) not null default 0;');
+        
+        
+        return $schema;
+    }
+    
     /**
      * @method processNewAccountData
      * @param array $args
@@ -385,4 +401,6 @@ class accountModel extends Model
 			throw new \Error (errormsg::getErrorMsg("getaccountip", (new \ReflectionClass(self::class))->getShortName()) . " " . $ex->getMessage());
 		}
 	}
+	
+	
 }
